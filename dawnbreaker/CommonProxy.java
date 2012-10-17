@@ -4,5 +4,7 @@ import net.minecraft.src.*;
 
 public class CommonProxy
 {
-	// NOOP
+	public void regiseterTextures()
+	{
+	}
 }

@@ -23,7 +23,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "DawnBreaker", name = "Dawn Breaker", version = "1.0.0")
+@Mod(modid = "DawnBreaker", name = "Dawn Breaker", version = "1.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class DawnBreaker
 {

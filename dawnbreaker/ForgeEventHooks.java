@@ -26,7 +26,7 @@ public class ForgeEventHooks
 		
 		EntityLiving target = null;
 		
-		if (event.target instanceof EntityLiving)
+		if (event != null && event.target != null && event.target instanceof EntityLiving)
 		{
 			target = (EntityLiving)event.target;
 		}
@@ -35,7 +35,7 @@ public class ForgeEventHooks
 			return ;
 		}
 		
-		if (player.inventory.getCurrentItem().itemID == DawnBreaker.itemDawnBreaker.shiftedIndex)
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == DawnBreaker.itemDawnBreaker.shiftedIndex)
 		{
 			if (target instanceof EntityMob)
 			{

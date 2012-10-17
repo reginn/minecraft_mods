@@ -14,7 +14,7 @@ import cpw.mods.fml.common.Mod;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "Lamp", name = "Lamp", version = "2.3.1")
+@Mod(modid = "Lamp", name = "Lamp", version = "2.3.2")
 @NetworkMod(channels = { "lamp" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class Lamp
 {
@@ -31,6 +31,8 @@ public class Lamp
 	
 	private int blockIdLamp;
 	private int blockIdLight;
+	private int[] gen = new int[]{1, 4, 16};
+	private int number;
 	
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -41,6 +43,9 @@ public class Lamp
 			cfg.load();
 			blockIdLamp  = cfg.getOrCreateIntProperty("Lamp",  Configuration.CATEGORY_BLOCK, 1613).getInt();
 			blockIdLight = cfg.getOrCreateIntProperty("Light", Configuration.CATEGORY_BLOCK, 1614).getInt();
+			Property prop = cfg.getOrCreateIntProperty("number.of.lamp", Configuration.CATEGORY_GENERAL, 1);
+			prop.comment = "crafting number of lamp, 0 is easy: 16 lamps, 1 is normal: 4 lamps, 2 is hardcore: 1 lamp";
+			number = prop.getInt();
 		}
 		catch (Exception e)
 		{
@@ -80,8 +85,14 @@ public class Lamp
 	
 	private void addLanternRecipe()
 	{
+		int craftingNum = 1;
+		if (this.number >= 0 && this.number <= 2)
+		{
+			craftingNum = this.gen[this.number];
+		}
+		
 		GameRegistry.addRecipe(
-			new ItemStack(blockLamp, 16, 0),
+			new ItemStack(blockLamp, craftingNum, 0),
 				new Object[]
 				{
 					"ITI", "TCT", "ITI",
@@ -91,7 +102,7 @@ public class Lamp
 				});
 				
 		GameRegistry.addRecipe(
-			new ItemStack(blockLamp, 16, 1),
+			new ItemStack(blockLamp, craftingNum, 1),
 				new Object[]
 				{
 					"ITI", "TLT", "ITI",
@@ -101,7 +112,7 @@ public class Lamp
 				});
 							
 		GameRegistry.addRecipe(
-			new ItemStack(blockLamp, 16, 2),
+			new ItemStack(blockLamp, craftingNum, 2),
 				new Object[]
 				{
 					"IGI", "GLG", "IGI",
@@ -111,7 +122,7 @@ public class Lamp
 				});
 							
 		GameRegistry.addRecipe(
-			new ItemStack(blockLamp, 16, 3),
+			new ItemStack(blockLamp, craftingNum, 3),
 				new Object[]
 				{
 					"IDI", "DLD", "IDI",

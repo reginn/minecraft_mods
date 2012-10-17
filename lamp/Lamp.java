@@ -14,7 +14,7 @@ import cpw.mods.fml.common.Mod;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "Lamp", name = "Lamp", version = "2.3.2")
+@Mod(modid = "Lamp", name = "Lamp", version = "2.3.3")
 @NetworkMod(channels = { "lamp" }, clientSideRequired = true, serverSideRequired = false, packetHandler = PacketHandler.class)
 public class Lamp
 {
@@ -31,7 +31,7 @@ public class Lamp
 	
 	private int blockIdLamp;
 	private int blockIdLight;
-	private int[] gen = new int[]{1, 4, 16};
+	private int[] gen = new int[]{16, 4, 1};
 	private int number;
 	
 	@Mod.PreInit

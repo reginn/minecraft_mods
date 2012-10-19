@@ -17,7 +17,7 @@ public class BlockGlowFlower extends BlockFlower
 	public BlockGlowFlower(int blockId, int terrainId)
 	{
 		super(blockId, terrainId);
-		this.setLightValue(12.0F/16.0F);
+		this.setLightValue(10.0F/16.0F);
 		this.setHardness(0.0F);
 		this.setStepSound(soundGrassFootstep);
 		this.setCreativeTab(CreativeTabs.tabDeco);

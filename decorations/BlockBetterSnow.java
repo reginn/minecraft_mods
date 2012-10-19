@@ -76,7 +76,7 @@ public class BlockBetterSnow extends Block
 		}
 		else
 		{
-			return 12;
+			return 10;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package rgn.mods.decorations.client;
+package rgn.mods.ozen.client;
 
 import net.minecraft.src.*;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -10,8 +10,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import rgn.mods.decorations.CommonProxy;
-import rgn.mods.decorations.TileEntityOzen;
+import rgn.mods.ozen.CommonProxy;
+import rgn.mods.ozen.TileEntityOzen;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
@@ -20,12 +20,6 @@ public class ClientProxy extends CommonProxy
 	public int getUniqueRenderID()
 	{
 		return RenderingRegistry.getNextAvailableRenderId();
-	}
-	
-	@Override
-	public void registerTextures()
-	{
-		MinecraftForgeClient.preloadTexture("/rgn/sprites/decorations/blocks.png");
 	}
 	
 	@Override

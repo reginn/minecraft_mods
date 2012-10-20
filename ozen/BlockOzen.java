@@ -1,4 +1,4 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class BlockOzen extends BlockContainer
 {
 	public final String[] names = new String[]
 		{
-			"oak", "birch", "spruce", "black", "red", "iron", "gold"
+			"oak", "spruce", "birch", "black", "red", "iron", "gold"
 		};
 	
 	public final String[] types = new String[]
@@ -110,7 +110,7 @@ public class BlockOzen extends BlockContainer
 	@Override
 	public int getRenderType()
 	{
-		return Decorations.ozenRenderID;
+		return Ozen.ozenRenderID;
 	}
 	
 	@Override
@@ -201,7 +201,7 @@ public class BlockOzen extends BlockContainer
 			return true;
 		}
 		
-		entityPlayer.openGui(Decorations.instance, Decorations.guiIdOzen, world, x, y, z);
+		entityPlayer.openGui(Ozen.instance, Ozen.guiIdOzen, world, x, y, z);
 		
 		return true;
 	}

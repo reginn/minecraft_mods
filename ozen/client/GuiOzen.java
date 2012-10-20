@@ -1,4 +1,4 @@
-package rgn.mods.decorations.client;
+package rgn.mods.ozen.client;
 
 import org.lwjgl.opengl.GL11;
 
@@ -6,8 +6,8 @@ import net.minecraft.client.Minecraft;
 
 import net.minecraft.src.*;
 
-import rgn.mods.decorations.ContainerOzen;
-import rgn.mods.decorations.TileEntityOzen;
+import rgn.mods.ozen.ContainerOzen;
+import rgn.mods.ozen.TileEntityOzen;
 
 public class GuiOzen extends GuiContainer
 {
@@ -17,9 +17,9 @@ public class GuiOzen extends GuiContainer
 	public GuiOzen(IInventory iinventory, TileEntityOzen tileEntityOzen)
 	{
 		super(new ContainerOzen(iinventory, tileEntityOzen));
-		inventory = iinventory;
-		ozen = tileEntityOzen;
-		allowUserInput = false;
+		this.inventory = iinventory;
+		this.ozen = tileEntityOzen;
+		this.allowUserInput = false;
 	}
 	
 	protected void drawGuiContainerForegroundLayer()
@@ -30,7 +30,7 @@ public class GuiOzen extends GuiContainer
 	
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int k = mc.renderEngine.getTexture("/rgn/sprites/decorations/gui/ozen.png");
+		int k = mc.renderEngine.getTexture("/rgn/sprites/ozen/gui/ozen.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(k);
 		int l = width - xSize >> 1;

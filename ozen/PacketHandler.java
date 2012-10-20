@@ -1,4 +1,4 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import net.minecraft.src.*;
 
@@ -39,7 +39,7 @@ public class PacketHandler implements IPacketHandler
 			return;
 		}
 		
-		World world = Decorations.proxy.getClientWorld();
+		World world = Ozen.proxy.getClientWorld();
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityOzen)
 		{

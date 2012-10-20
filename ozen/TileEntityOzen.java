@@ -1,4 +1,4 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import net.minecraft.src.*;
 
@@ -137,7 +137,7 @@ public class TileEntityOzen extends TileEntity implements IInventory
 		super.onInventoryChanged();
 		if (this.worldObj != null)
 		{
-			this.worldObj.addBlockEvent(xCoord, yCoord, zCoord, Decorations.blockOzen.blockID, 0, 0);
+			this.worldObj.addBlockEvent(xCoord, yCoord, zCoord, Ozen.blockOzen.blockID, 0, 0);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package rgn.mods.decorations.client;
+package rgn.mods.ozen.client;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -11,7 +11,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import rgn.mods.decorations.TileEntityOzen;
+import rgn.mods.ozen.TileEntityOzen;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityOzenRenderer extends TileEntitySpecialRenderer

@@ -1,4 +1,4 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import net.minecraft.src.*;
 
@@ -21,7 +21,7 @@ public class ItemOzen extends ItemBlock
 		int type     = itemstack.getItemDamage() >>> 3;
 		int k = 0;
 		int l = 0;
-		if (material >= 0 && material < ((BlockOzen)Decorations.blockOzen).names.length)
+		if (material >= 0 && material < ((BlockOzen)Ozen.blockOzen).names.length)
 		{
 			k = material;
 		}
@@ -31,8 +31,8 @@ public class ItemOzen extends ItemBlock
 			l = type;
 		}
 		
-		String mat = ((BlockOzen)Decorations.blockOzen).names[k];
-		String typ = ((BlockOzen)Decorations.blockOzen).types[l];
+		String mat = ((BlockOzen)Ozen.blockOzen).names[k];
+		String typ = ((BlockOzen)Ozen.blockOzen).types[l];
 		
 		return (new StringBuilder()).append(getItemName()).append(".").append(typ).append(".").append(mat).toString();
 	}
@@ -46,6 +46,6 @@ public class ItemOzen extends ItemBlock
 	@SideOnly(Side.CLIENT)
 	public int getColorFromDamage(int par1, int par2)
 	{
-		return Decorations.blockOzen.getRenderColor(par1);
+		return Ozen.blockOzen.getRenderColor(par1);
 	}
 }

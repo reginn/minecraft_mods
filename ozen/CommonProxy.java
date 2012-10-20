@@ -1,20 +1,16 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import net.minecraft.src.*;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
-import rgn.mods.decorations.client.GuiOzen;
+import rgn.mods.ozen.client.GuiOzen;
 
 public class CommonProxy implements IGuiHandler
 {
 	public int getUniqueRenderID()
 	{
 		return -1;
-	}
-	
-	public void registerTextures()
-	{
 	}
 	
 	public void registerRenderers()
@@ -31,7 +27,7 @@ public class CommonProxy implements IGuiHandler
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-		if (tileentity != null && tileentity instanceof TileEntityOzen && ID == Decorations.guiIdOzen)
+		if (tileentity != null && tileentity instanceof TileEntityOzen && ID == Ozen.guiIdOzen)
 		{
 			return new GuiOzen(player.inventory, (TileEntityOzen)tileentity);
 		}
@@ -45,7 +41,7 @@ public class CommonProxy implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-		if (tileentity != null && tileentity instanceof TileEntityOzen && ID == Decorations.guiIdOzen)
+		if (tileentity != null && tileentity instanceof TileEntityOzen && ID == Ozen.guiIdOzen)
 		{
 			return new ContainerOzen(player.inventory, (TileEntityOzen)tileentity);
 		}

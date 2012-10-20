@@ -1,4 +1,4 @@
-package rgn.mods.decorations;
+package rgn.mods.ozen;
 
 import net.minecraft.src.*;
 

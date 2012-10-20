@@ -1,4 +1,4 @@
-package rgn.mods.decorations.client;
+package rgn.mods.ozen.client;
 
 import org.lwjgl.opengl.GL11;
 
@@ -9,7 +9,7 @@ import cpw.mods.fml.common.asm.SideOnly;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-import rgn.mods.decorations.Decorations;
+import rgn.mods.ozen.Ozen;
 
 @SideOnly(Side.CLIENT)
 public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
@@ -137,7 +137,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 	
 	public int getRenderId()
 	{
-		return Decorations.ozenRenderID;
+		return Ozen.ozenRenderID;
 	}
 	
 	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)

@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "Decorations", name = "Decorations", version = "1.0.0")
+@Mod(modid = "Decorations", name = "Decorations", version = "1.0.1")
 @NetworkMod(
 	clientSideRequired = true,
 	serverSideRequired = false,

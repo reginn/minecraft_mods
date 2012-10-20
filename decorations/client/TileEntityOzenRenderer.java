@@ -58,21 +58,36 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		
 		int type = tileEntityOzen.getBlockMetadata() >>> 3;
-		float bias = type == 0 ? -0.6F : -0.35F;
+		float bias = type == 0 ? -0.66F : -0.4F;
 		for (int j = 0; j < tileEntityOzen.getSizeInventory(); j++)
 		{
-			if (j == 0)
+			switch (j)
 			{
-				GL11.glTranslatef(-1.0F/3.0F, bias, -1.0F/5.0F);
+				case 0 :
+					GL11.glTranslatef(-0.25F, bias, -0.125F);
+					break;
+					
+				case 1 :
+					GL11.glTranslatef(0.25F, 0.0F, 0.0F);
+					break;
+					
+				case 2 :
+					GL11.glTranslatef(0.25F, 0.0F, 0.0F);
+					break;
+					
+				case 3 :
+					GL11.glTranslatef(-0.5F, 0.0F, 0.25F);
+					break;
+					
+				case 4 :
+					GL11.glTranslatef(0.25F, 0.0F, 0.0F);
+					break;
+					
+				case 5 :
+					GL11.glTranslatef(0.25F, 0.0F, 0.0F);
+					break;
 			}
-			else if (j % 3 != 0)
-			{
-				GL11.glTranslatef(1.0F/3.0F, 0.0F, 0.0F);
-			}
-			else
-			{
-				GL11.glTranslatef(-2.0F/3.0F, 0.0F, 1.0F/3.0F);
-			}
+			
 			ItemStack itemstack = tileEntityOzen.getStackInSlot(j);
 			if (itemstack == null || Item.itemsList[itemstack.itemID] == null)
 			{
@@ -80,13 +95,13 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 			}
 			
 			EntityItem customitem = new EntityItem(tileEntityRenderer.worldObj);
-			IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemstack, IItemRenderer.ItemRenderType.ENTITY);
+			IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemstack, IItemRenderer.ItemRenderType.INVENTORY);
 			int iconIndex;
 			
 			if (customRenderer != null)
 			{
 				customitem.item = itemstack;
-				customRenderer.renderItem(IItemRenderer.ItemRenderType.ENTITY, itemstack, blockrender, customitem);
+				customRenderer.renderItem(IItemRenderer.ItemRenderType.INVENTORY, itemstack, blockrender, customitem);
 			}
 			else if (this.isBlock(itemstack))
 			{

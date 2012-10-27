@@ -16,41 +16,48 @@ public class BlockLight extends Block
 		this.setLightValue(1.0F);
 	}
 	
-	public int getMobilityFlag()
-	{
-		return 2;
-	}
-	
+	@Override
 	public String getTextureFile()
 	{
 		return "/rgn/sprites/lamp/blocks.png";
 	}
 	
+	@Override
+	public int getMobilityFlag()
+	{
+		return 2;
+	}
+	
+	@Override
 	public boolean isCollidable()
 	{
 		return false;
 	}
 	
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 	
+	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float probability, int par7)
 	{
-		// NOOP
 	}
-	
+	/*
+	@Override
 	public boolean getIsBlockSolid(IBlockAccess iblockaccess, int i, int j, int k, int l)
 	{
 		return false;
 	}
-	
+	*/
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{
 		return null;
 	}
-		
+	
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborBlockId)
 	{
 		int meta = world.getBlockMetadata(x, y, z) & 3;
@@ -65,20 +72,11 @@ public class BlockLight extends Block
 		}
 		
 	}
-	
+	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		int meta = world.getBlockMetadata(x, y, z)   & 3;
-		/*
-		if (meta == 0 || meta == 1)
-		{
-			return this.isLightSource(world, x, y, z);
-		}
-		*/
-		return world.getBlockId(x, y + 1, z) == Lamp.blockLight.blockID || this.isLightSource(world, x, y, z);
-		
+		return world.getBlockId(x, y + 1, z) == Lamp.blockLight.blockID || this.isLightSource(world, x, y, z);		
 	}
-	
 	
 	private void setBlockLight(World world, int x, int y, int z)
 	{
@@ -110,8 +108,6 @@ public class BlockLight extends Block
 		int dx = dir == 0 ? 1 : 0;
 		int dz = dir == 1 ? 1 : 0;
 		int dy = dir == 2 ? 1 : 0;
-		
-		//return world.getBlockId(x - dx, y - dy, z - dz) == Lamp.blockLamp.blockID || world.getBlockId(x + dx, y + dy, z + dz) == Lamp.blockLamp.blockID;
 		
 		Map<Integer, Coord> map = Maps.newHashMap();
 		
@@ -159,22 +155,6 @@ public class BlockLight extends Block
 		}
 		return false;
 		
-		/*
-		Set<Integer> set = Sets.newHashSet();
-		
-		for (int i = -1; i < 2; i++)
-		{
-			for (int j = -1; j < 2; j++)
-			{
-				for (int k = -1; k < 2; k++)
-				{
-					set.add(new Integer(world.getBlockId(x + i, y + j, z + k)));
-				}
-			}
-		}
-		
-		return set.contains(Lamp.blockLamp.blockID);
-		*/
 	}
 	
 }

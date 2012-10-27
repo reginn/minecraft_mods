@@ -23,8 +23,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "DawnBreaker", name = "Dawn Breaker", version = "1.0.1")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+@Mod
+(
+	modid   = "DawnBreaker",
+	name    = "Dawn Breaker",
+	version = "2.0.0"
+)
+@NetworkMod
+(
+	clientSideRequired = true,
+	serverSideRequired = false
+)
 public class DawnBreaker
 {
 	@SidedProxy(clientSide = "rgn.mods.dawnbreaker.client.ClientProxy", serverSide = "rgn.mods.dawnbreaker.CommonProxy")
@@ -34,6 +43,7 @@ public class DawnBreaker
 	private int itemIdDawnBreaker;
 	
 	public static int explodePower;
+	public static boolean isBlockDestroy;
 	
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -42,10 +52,14 @@ public class DawnBreaker
 		try
 		{
 			cfg.load();
-			itemIdDawnBreaker = cfg.getOrCreateIntProperty("DawnBreaker", Configuration.CATEGORY_ITEM, 28000).getInt();
-			Property exploadPowerProperty = cfg.getOrCreateIntProperty("ExplodePower", Configuration.CATEGORY_GENERAL, 1);
+			itemIdDawnBreaker = cfg.getItem("DawnBreaker", 28000).getInt();
+			Property exploadPowerProperty = cfg.get(Configuration.CATEGORY_GENERAL, "ExplodePower", 1);
 			exploadPowerProperty.comment = "Explosion Power (0 = very weak explosion, 1 = ghast's fireball, 2 = crepper's explosion, 3 = powered creeper's explosion";
 			explodePower = exploadPowerProperty.getInt();
+			
+			Property isBlockDestroyProperty = cfg.get(Configuration.CATEGORY_GENERAL, "isBlockDestroy", false);
+			isBlockDestroyProperty.comment = "Explosion can destroy block? true : can destroy, false : can't";
+			isBlockDestroy = isBlockDestroyProperty.getBoolean(false);
 		}
 		catch (Exception e)
 		{
@@ -60,7 +74,7 @@ public class DawnBreaker
 	@Mod.Init
 	public void init(FMLInitializationEvent event)
 	{
-		itemDawnBreaker = (new ItemDawnBreaker(itemIdDawnBreaker - 256, EnumToolMaterial.IRON)).setIconCoord(0, 0).setItemName("dawnbreaker");
+		itemDawnBreaker = (new ItemDawnBreaker(itemIdDawnBreaker, EnumToolMaterial.IRON)).setIconCoord(0, 0).setItemName("dawnbreaker");
 		
 		TranslationRegistry.addLocalization(itemDawnBreaker, "DawnBreaker", "ドーンブレイカー");
 		

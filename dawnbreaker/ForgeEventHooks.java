@@ -79,9 +79,9 @@ public class ForgeEventHooks
 			{
 				this.targetSet.remove(new Integer(target.entityId));
 				
-				if (DawnBreaker.explodePower >= 0 && DawnBreaker.explodePower <= 2)
+				if (DawnBreaker.explodePower >= 0 && DawnBreaker.explodePower <= 3)
 				{
-					world.createExplosion(target, target.posX, target.posY, target.posZ, powers[DawnBreaker.explodePower]);
+					world.createExplosion(target, target.posX, target.posY, target.posZ, powers[DawnBreaker.explodePower], DawnBreaker.isBlockDestroy);
 				}
 			}
 		}

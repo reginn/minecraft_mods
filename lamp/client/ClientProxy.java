@@ -10,7 +10,7 @@ import rgn.mods.lamp.CommonProxy;
 public class ClientProxy extends CommonProxy
 {
 	@Override
-	public int getNewRenderType()
+	public int getUniqueRenderType()
 	{
 		return RenderingRegistry.getNextAvailableRenderId();
 	}

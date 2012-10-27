@@ -12,7 +12,7 @@ public class BlockLamp extends Block
 	{
 		super(blockId, terrainId, Material.glass);
 		this.setLightValue(1.0F);
-		this.setCreativeTab(CreativeTabs.tabDeco);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
 	@Override
@@ -24,6 +24,7 @@ public class BlockLamp extends Block
 		}
 	}
 	
+	@Override
 	public int getMobilityFlag()
 	{
 		return 2;
@@ -36,26 +37,30 @@ public class BlockLamp extends Block
 	}
 	
 	@Override
-	protected int damageDropped(int i)
+	public int damageDropped(int i)
 	{
 		return i;
 	}
 	
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
 	
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
 	
+	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
 	
+	@Override
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
@@ -71,6 +76,7 @@ public class BlockLamp extends Block
 		}
 	}
 	
+	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		int meta = world.getBlockMetadata(x, y, z);
@@ -97,6 +103,7 @@ public class BlockLamp extends Block
 		}
 	}
 	
+	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborBlockId)
 	{
 		int meta = world.getBlockMetadata(x, y, z);

@@ -4,7 +4,7 @@ import net.minecraft.src.*;
 
 public class CommonProxy
 {
-	public int getNewRenderType()
+	public int getUniqueRenderType()
 	{
 		return -1;
 	}

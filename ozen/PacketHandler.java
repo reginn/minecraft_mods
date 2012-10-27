@@ -11,7 +11,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketHandler implements IPacketHandler
 {
 	@Override
-	public void onPacketData(NetworkManager network, Packet250CustomPayload packet, Player player)
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
 	{
 		DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 		int x, y, z;

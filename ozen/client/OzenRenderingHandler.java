@@ -66,22 +66,28 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float b = (float)(rgb       & 255) / 255.0F;
 				
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds(14.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+				renderer.func_83018_a(block);
 				
 				return false;
 			}
@@ -94,35 +100,44 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float b = (float)(rgb       & 255) / 255.0F;
 				
 				block.setBlockBounds( 2.0F/16.0F,  4.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 5.0F/16.0F, 14.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 2.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds(14.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
-				
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
+				renderer.func_83018_a(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 				
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+				renderer.func_83018_a(block);
 				
 				return false;
 			}
@@ -144,8 +159,10 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderer.func_83018_a(block);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		block.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+		renderer.func_83018_a(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
 		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
@@ -172,5 +189,6 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderer.func_83018_a(block);
 	}
 }

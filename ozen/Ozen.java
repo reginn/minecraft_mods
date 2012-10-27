@@ -19,13 +19,19 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 import rgn.util.TranslationRegistry;
 
-@Mod(modid = "Ozen", name = "Ozen", version = "1.0.0")
-@NetworkMod(
+@Mod
+(
+	modid   = "Ozen",
+	name    = "Ozen",
+	version = "2.0.0"
+)
+@NetworkMod
+(
 	clientSideRequired = true,
 	serverSideRequired = false,
 	channels = { "ozen" },
 	packetHandler = PacketHandler.class
-	)
+)
 public class Ozen
 {
 	@SidedProxy(clientSide = "rgn.mods.ozen.client.ClientProxy", serverSide = "rgn.mods.ozen.CommonProxy")
@@ -48,8 +54,7 @@ public class Ozen
 		try
 		{
 			cfg.load();
-			blockIdOzen = cfg.getOrCreateIntProperty("Ozen", Configuration.CATEGORY_BLOCK, 1700).getInt();
-		
+			blockIdOzen = cfg.getBlock("Ozen", 1700).getInt();
 		}
 		catch (Exception e)
 		{

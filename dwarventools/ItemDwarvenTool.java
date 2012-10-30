@@ -1,25 +1,36 @@
 package rgn.mods.dwarventools;
 
-import java.io.*;
-
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.HashSet;
+
+import com.google.common.collect.Sets;
 
 import net.minecraft.src.*;
+
 import net.minecraftforge.common.*;
 
 public class ItemDwarvenTool extends ItemTool
 {
-	private Block[] blocksEffectiveAgainst;
+	private int rangeLevel;
 	
-	protected int rangeLevel;
+	public class Coord
+	{
+		int x;
+		int y;
+		int z;
+		
+		public Coord(int i, int j, int k)
+		{
+			x = i;
+			y = j;
+			z = k;
+		}
+	}
 	
 	protected ItemDwarvenTool(int itemId, int baseDamage, EnumToolMaterial material, Block[] harvestBlocks)
 	{
 		super(itemId, 0, material, harvestBlocks);
-		this.rangeLevel = (material == DwarvenTools.enumToolMaterialMithril ? 1 : (material == DwarvenTools.enumToolMaterialEbony ? 1 : 0));
+		this.rangeLevel = (material == ConfigureEnum.enumToolMaterialMithril ? 1 : (material == ConfigureEnum.enumToolMaterialEbony ? 1 : 0));
 	}
 	
 	@Override
@@ -29,7 +40,7 @@ public class ItemDwarvenTool extends ItemTool
 	}
 	
 	@Override
-	public boolean func_77660_a(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 		int metadata = world.getBlockMetadata(x, y, z);
@@ -54,7 +65,7 @@ public class ItemDwarvenTool extends ItemTool
 	
 	private int destroy(int facing, World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
-		Set<ChunkPosition> targetsSet;
+		Set<Coord> targetsSet;
 		
 		switch (facing)
 		{
@@ -83,13 +94,13 @@ public class ItemDwarvenTool extends ItemTool
 		}
 		
 		Iterator iter = targetsSet.iterator();
-		ChunkPosition target;
+		Coord target;
 		int targetBlockId;
 		int targetBlockMetadata;
 		int damage = 0;
 		while(iter.hasNext())
 		{
-			target = (ChunkPosition)iter.next();
+			target = (Coord)iter.next();
 			targetBlockId = world.getBlockId(target.x, target.y, target.z);
 			targetBlockMetadata = world.getBlockMetadata(target.x, target.y, target.z);
 			
@@ -109,34 +120,30 @@ public class ItemDwarvenTool extends ItemTool
 		return damage;
 	}
 	
-	private Set<ChunkPosition> setPositionsConstantX(int x, int y, int z)
+	private Set<Coord> setPositionsConstantX(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = new HashSet<ChunkPosition>();
-		
-		int limit = this.rangeLevel;
-		
-		for (int i = -limit; i <= limit; i++)
+		Set<Coord> targets = Sets.newHashSet();
+				
+		for (int i = -1; i <= 1; ++i)
 		{
-			for (int j = -limit; j <= limit; j++)
+			for (int j = -1; j <= 1; ++j)
 			{
-				targets.add((new ChunkPosition(x, y + i, z + j)));
+				targets.add((new Coord(x, y + i, z + j)));
 			}
 		}
 		
 		return targets;
 	}
 	
-	private Set<ChunkPosition> setPositionsConstantY(int x, int y, int z)
+	private Set<Coord> setPositionsConstantY(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = new HashSet<ChunkPosition>();
-		
-		int limit = this.rangeLevel;
-		
-		for (int i = -limit; i <= limit; i++)
+		Set<Coord> targets = Sets.newHashSet();
+				
+		for (int i = -1; i <= 1; ++i)
 		{
-			for (int j = -limit; j <= limit; j++)
+			for (int j = -1; j <= 1; ++j)
 			{
-				targets.add((new ChunkPosition(x + i, y, z + j)));
+				targets.add((new Coord(x + i, y, z + j)));
 			}
 		}
 		
@@ -144,17 +151,15 @@ public class ItemDwarvenTool extends ItemTool
 	}
 	
 	
-	private Set<ChunkPosition> setPositionsConstantZ(int x, int y, int z)
+	private Set<Coord> setPositionsConstantZ(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = new HashSet<ChunkPosition>();
+		Set<Coord> targets = Sets.newHashSet();
 		
-		int limit = this.rangeLevel;
-		
-		for (int i = -limit; i <= limit; i++)
+		for (int i = -1; i <= 1; ++i)
 		{
-			for (int j = -limit; j <= limit; j++)
+			for (int j = -1; j <= 1; ++j)
 			{
-				targets.add((new ChunkPosition(x + i, y + j, z)));
+				targets.add((new Coord(x + i, y + j, z)));
 			}
 		}
 		

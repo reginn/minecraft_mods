@@ -21,13 +21,15 @@ public class ItemDwarvenOre extends ItemBlock
 	
 	public String getItemNameIS(ItemStack itemstack)
 	{
+		String str;
 		if (itemstack.getItemDamage() == 0)
 		{
-			return "Mithril Ore";
+			str = "oreMithril";
 		}
 		else
 		{
-			return "Ebony Ore";
+			str = "oreEbony";
 		}
+		return (new StringBuilder()).append(getItemName()).append(".").append(str).toString();
 	}
 }

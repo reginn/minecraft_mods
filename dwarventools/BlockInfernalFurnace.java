@@ -22,13 +22,25 @@ public class BlockInfernalFurnace extends BlockContainer
 		this.setHardness(3.5F);
 		this.setStepSound(soundStoneFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(CreativeTabs.tabDeco);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
 	@Override
 	public String getTextureFile()
 	{
 		return "/rgn/sprites/dwarventools/blocks.png";
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z)
+	{
+		int msb = world.getBlockMetadata(x, y, z) >>> 3;
+		
+		if (msb == 1)
+		{
+			return 15;
+		}
+		return 0;
 	}
 	
 	@Override
@@ -75,7 +87,32 @@ public class BlockInfernalFurnace extends BlockContainer
 				dir = 4;
 			}
 			
-			world.setBlockMetadataWithNotify(x, y, z, dir);
+			world.setBlockMetadataWithNotify(x, y, z, dir & 7);
+		}
+	}
+	
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving)
+	{
+		int playerdir = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		
+		if (playerdir == 0)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 2);
+		}
+		
+		if (playerdir == 1)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 5);
+		}
+		
+		if (playerdir == 2)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 3);
+		}
+		
+		if (playerdir == 3)
+		{
+			world.setBlockMetadataWithNotify(x, y, z, 4);
 		}
 	}
 	
@@ -92,43 +129,48 @@ public class BlockInfernalFurnace extends BlockContainer
 		}
 		else
 		{
-			int metadata = world.getBlockMetadata(x, y, z);
+			int metadata = world.getBlockMetadata(x, y, z) & 7;
+			int msb = world.getBlockMetadata(x, y, z) >>> 3;
 			TileEntity te = world.getBlockTileEntity(x, y, z);
 			TileEntityInfernalFurnace teif = (TileEntityInfernalFurnace)te;
-			return side != metadata ? this.blockIndexInTexture : (teif.isBurning() ? this.blockIndexInTexture + 1 : this.blockIndexInTexture - 1);
+			return side != metadata ? this.blockIndexInTexture : (msb == 1 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture - 1);
 		}
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
-		TileEntity te = world.getBlockTileEntity(x, y, z);
-		TileEntityInfernalFurnace teif = (TileEntityInfernalFurnace)te;
-		if (teif.isBurning())
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		TileEntityInfernalFurnace tileEntityInfernalFurnace = (TileEntityInfernalFurnace)tileEntity;
+		
+		int metadata = world.getBlockMetadata(x, y, z);
+		int msb = metadata >>> 3;
+		int dir = metadata & 7;
+		
+		if (tileEntityInfernalFurnace.isBurning() || msb == 1)
 		{
-			int var6 = world.getBlockMetadata(x, y, z);
 			float var7 = (float)x + 0.5F;
 			float var8 = (float)y + 0.0F + random.nextFloat() * 6.0F / 16.0F;
 			float var9 = (float)z + 0.5F;
 			float var10 = 0.52F;
 			float var11 = random.nextFloat() * 0.6F - 0.3F;
 			
-			if (var6 == 4)
+			if (dir == 4)
 			{
 				world.spawnParticle("smoke", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", (double)(var7 - var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
 			}
-			else if (var6 == 5)
+			else if (dir == 5)
 			{
 				world.spawnParticle("smoke", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", (double)(var7 + var10), (double)var8, (double)(var9 + var11), 0.0D, 0.0D, 0.0D);
 			}
-			else if (var6 == 2)
+			else if (dir == 2)
 			{
 				world.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 - var10), 0.0D, 0.0D, 0.0D);
 			}
-			else if (var6 == 3)
+			else if (dir == 3)
 			{
 				world.spawnParticle("smoke", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
 				world.spawnParticle("flame", (double)(var7 + var11), (double)var8, (double)(var9 + var10), 0.0D, 0.0D, 0.0D);
@@ -161,54 +203,20 @@ public class BlockInfernalFurnace extends BlockContainer
 			return true;
 		}
 	}
-		
-	@Override
-	public void onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
-	{
-		super.onBlockEventReceived(world, x, y, z, eventId, eventParam);
-		world.markBlockNeedsUpdate(x, y, z);
-	}
-	
-	public static void updateFurnaceBlockState(boolean par0, World world, int x, int y, int z)
+
+	public static void updateFurnaceBlockState(boolean isBurning, World world, int x, int y, int z)
 	{
 		int metadata          = world.getBlockMetadata(x, y, z);
-		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
-		keepFurnaceInventory  = true;
-		keepFurnaceInventory  = false;
-		world.notifyBlockChange(x, y, z, DwarvenTools.blockInfernalFurnace.blockID);
 		
-		if (tileentity != null)
+		if (isBurning)
 		{
-			tileentity.validate();
-			world.setBlockTileEntity(x, y, z, tileentity);
+			world.setBlockMetadataWithNotify(x, y, z, metadata + 8);
 		}
-	}
-	
+		else
+		{
+			world.setBlockMetadataWithNotify(x, y, z, metadata & 7);
+		}
 
-	
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving)
-	{
-		int playerdir = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		
-		if (playerdir == 0)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 2);
-		}
-		
-		if (playerdir == 1)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 5);
-		}
-		
-		if (playerdir == 2)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 3);
-		}
-		
-		if (playerdir == 3)
-		{
-			world.setBlockMetadataWithNotify(x, y, z, 4);
-		}
 	}
 	
 	@Override

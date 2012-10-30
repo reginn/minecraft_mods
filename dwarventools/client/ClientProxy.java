@@ -3,12 +3,13 @@ package rgn.mods.dwarventools.client;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.src.*;
-import net.minecraftforge.client.*;
 
-import cpw.mods.fml.client.*;
-import cpw.mods.fml.client.registry.*;
+import net.minecraftforge.client.MinecraftForgeClient;
 
-import rgn.mods.dwarventools.*;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
+import rgn.mods.dwarventools.CommonProxy;
 
 public class ClientProxy extends CommonProxy
 {
@@ -26,24 +27,8 @@ public class ClientProxy extends CommonProxy
 	}
 	
 	@Override
-	public void registerRenderers()
-	{
-	}
-	
-	@Override
-	public void registerTileEntitySpecialRenderer()
-	{
-	}
-	
-	@Override
 	public World getClientWorld()
 	{
 		return FMLClientHandler.instance().getClient().theWorld;
-	}
-	
-	@Override
-	public World getCurrentWorld()
-	{
-		return getClientWorld();
 	}
 }

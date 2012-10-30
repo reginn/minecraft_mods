@@ -1,7 +1,6 @@
 package rgn.mods.dwarventools;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
 import net.minecraft.src.*;
 
@@ -22,4 +21,39 @@ public class BlockDwarvenOreStorage extends Block
 		return "/rgn/sprites/dwarventools/blocks.png";
 	}
 	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z)
+	{
+		int meta = world.getBlockMetadata(x, y, z);
+		
+		if (meta == 0)
+		{
+			return 15;
+		}
+		return 0;
+	}
+	
+	@Override
+	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
+	{
+		if (blockID == DwarvenBlock.blockDwarvenOreStorage.blockID)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				list.add(new ItemStack(blockID, 1, i));
+			}
+		}
+	}
+	
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	{
+		return this.blockIndexInTexture + j;
+	}
+	
+	@Override
+	public int damageDropped(int i)
+	{
+		return i;
+	}
 }

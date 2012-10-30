@@ -14,11 +14,13 @@ public class SlotInfernalFurnace extends Slot
 		this.thePlayer = par1EntityPlayer;
 	}
 	
+	@Override
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
 		return false;
 	}
 	
+	@Override
 	public ItemStack decrStackSize(int par1)
 	{
 		if (this.getHasStack())
@@ -29,18 +31,23 @@ public class SlotInfernalFurnace extends Slot
 		return super.decrStackSize(par1);
 	}
 	
-	public void onPickupFromSlot(ItemStack par1ItemStack)
+	@Override
+	// public void onPickupFromSlot(ItemStack par1ItemStack)
+	public void func_82870_a(EntityPlayer par1EntityPlayer, ItemStack par1ItemStack)
 	{
 		this.onCrafting(par1ItemStack);
-		super.onPickupFromSlot(par1ItemStack);
+		// super.onPickupFromSlot(par1ItemStack);
+		super.func_82870_a(par1EntityPlayer, par1ItemStack);
 	}
 	
+	@Override
 	protected void onCrafting(ItemStack par1ItemStack, int par2)
 	{
 		this.field_75228_b += par2;
 		this.onCrafting(par1ItemStack);
 	}
 	
+	@Override
 	protected void onCrafting(ItemStack par1ItemStack)
 	{
 		par1ItemStack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_75228_b);
@@ -48,7 +55,7 @@ public class SlotInfernalFurnace extends Slot
 		if (!this.thePlayer.worldObj.isRemote)
 		{
 			int var2 = this.field_75228_b;
-			float var3 = FurnaceRecipes.smelting().func_77601_c(par1ItemStack.itemID);
+			float var3 = FurnaceRecipes.smelting().getExperience(par1ItemStack.itemID);
 			int var4;
 			
 			if (var3 == 0.0F)

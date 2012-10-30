@@ -3,7 +3,8 @@ package rgn.mods.dwarventools;
 import java.util.Random;
 
 import net.minecraft.src.*;
-import net.minecraftforge.common.*;
+
+import net.minecraftforge.common.IArmorTextureProvider;
 
 public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 {
@@ -25,26 +26,26 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	@Override
 	public String getArmorTextureFile(ItemStack itemstack)
 	{
-		if (itemstack.itemID == DwarvenTools.itemDwarvenHelmetMithril.shiftedIndex || 
-			itemstack.itemID == DwarvenTools.itemDwarvenPlateMithril.shiftedIndex || 
-			itemstack.itemID == DwarvenTools.itemDwarvenBootMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetMithril.shiftedIndex || 
+			itemstack.itemID == DwarvenItem.itemDwarvenPlateMithril.shiftedIndex || 
+			itemstack.itemID == DwarvenItem.itemDwarvenBootMithril.shiftedIndex)
 		{
 			return "/rgn/sprites/dwarventools/armor/mithril_1.png";
 		}
 		
-		if (itemstack.itemID == DwarvenTools.itemDwarvenLegsMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsMithril.shiftedIndex)
 		{
 			return "/rgn/sprites/dwarventools/armor/mithril_2.png";
 		}
 		
-		if (itemstack.itemID == DwarvenTools.itemDwarvenHelmetEbony.shiftedIndex || 
-			itemstack.itemID == DwarvenTools.itemDwarvenPlateEbony.shiftedIndex || 
-			itemstack.itemID == DwarvenTools.itemDwarvenBootEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetEbony.shiftedIndex || 
+			itemstack.itemID == DwarvenItem.itemDwarvenPlateEbony.shiftedIndex || 
+			itemstack.itemID == DwarvenItem.itemDwarvenBootEbony.shiftedIndex)
 		{
 			return "/rgn/sprites/dwarventools/armor/ebony_1.png";
 		}
 		
-		if (itemstack.itemID == DwarvenTools.itemDwarvenLegsEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsEbony.shiftedIndex)
 		{
 			return "/rgn/sprites/dwarventools/armor/ebony_2.png";
 		}
@@ -56,7 +57,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (this.material == DwarvenTools.enumArmorMaterialMithril)
+		if (this.material == ConfigureEnum.enumArmorMaterialMithril)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{
@@ -88,7 +89,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 			}
 		}
 		
-		if (this.material == DwarvenTools.enumArmorMaterialEbony)
+		if (this.material == ConfigureEnum.enumArmorMaterialEbony)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{
@@ -131,7 +132,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 			return ;
 		}
 		
-		if (this.material == DwarvenTools.enumArmorMaterialMithril)
+		if (this.material == ConfigureEnum.enumArmorMaterialMithril)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{
@@ -163,7 +164,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 			}
 		}
 		
-		if (this.material == DwarvenTools.enumArmorMaterialEbony)
+		if (this.material == ConfigureEnum.enumArmorMaterialEbony)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{

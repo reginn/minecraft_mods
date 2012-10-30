@@ -20,13 +20,13 @@ public class DwarvenEventHooks
 		}
 		
 		ItemStack dropItem = null;
-		if (itemstack.itemID == DwarvenTools.itemDwarvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.shiftedIndex)
 		{
-			dropItem = new ItemStack(DwarvenTools.itemDwarvenBrokenSwordMithril, 1);
+			dropItem = new ItemStack(DwarvenItem.itemDwarvenBrokenSwordMithril, 1);
 		}
-		else if(itemstack.itemID == DwarvenTools.itemDwarvenSwordEbony.shiftedIndex)
+		else if(itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.shiftedIndex)
 		{
-			dropItem = new ItemStack(DwarvenTools.itemDwarvenBrokenSwordEbony, 1);
+			dropItem = new ItemStack(DwarvenItem.itemDwarvenBrokenSwordEbony, 1);
 		}
 		
 		if (dropItem != null)

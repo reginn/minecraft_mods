@@ -30,11 +30,11 @@ public class ItemDwarvenBattleaxe extends ItemSword
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.getItem() == DwarvenTools.itemDwarvenBattleaxeMithril)
+		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeMithril)
 		{
 			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(2) + 1);
 		}
-		if (itemstack.getItem() == DwarvenTools.itemDwarvenBattleaxeEbony)
+		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeEbony)
 		{
 			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(4) + 1);
 		}
@@ -50,11 +50,11 @@ public class ItemDwarvenBattleaxe extends ItemSword
 			return ;
 		}
 		
-		if (itemstack.getItem() == DwarvenTools.itemDwarvenBattleaxeMithril)
+		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeMithril)
 		{
 			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(2) + 1);
 		}
-		if (itemstack.getItem() == DwarvenTools.itemDwarvenBattleaxeEbony)
+		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeEbony)
 		{
 			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(4) + 1);
 		}

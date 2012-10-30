@@ -18,12 +18,6 @@ public class BlockRedstone extends Block
 	}
 	
 	@Override
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
-	
-	@Override
 	public String getTextureFile()
 	{
 		return "/rgn/sprites/dwarventools/blocks.png";

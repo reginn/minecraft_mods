@@ -32,12 +32,14 @@ public class BlockDwarvenOre extends Block
 		return "/rgn/sprites/dwarventools/blocks.png";
 	}
 	
+	@Override
 	public int getBlockTextureFromSideAndMetadata(int i, int j)
 	{
 		return this.blockIndexInTexture + j;
 	}
 	
-	protected int damageDropped(int i)
+	@Override
+	public int damageDropped(int i)
 	{
 		return i;
 	}

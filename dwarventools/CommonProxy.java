@@ -2,12 +2,9 @@ package rgn.mods.dwarventools;
 
 import net.minecraft.src.*;
 
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.network.*;
+import cpw.mods.fml.common.network.IGuiHandler;
 
-import net.minecraftforge.common.DimensionManager;
-
-import rgn.mods.dwarventools.client.*;
+import rgn.mods.dwarventools.client.GuiInfernalFurnace;
 
 public class CommonProxy implements IGuiHandler
 {
@@ -20,27 +17,9 @@ public class CommonProxy implements IGuiHandler
 	{
 	}
 	
-	public void registerRenderers()
-	{
-	}
-	
-	public void registerTileEntitySpecialRenderer()
-	{
-	}
-	
 	public World getClientWorld()
 	{
 		return null;
-	}
-	
-	public World getServerWorld()
-	{
-		return DimensionManager.getWorld(0);
-	}
-	
-	public World getCurrentWorld()
-	{
-		return getServerWorld();
 	}
 	
 	// implements IGuiHandler

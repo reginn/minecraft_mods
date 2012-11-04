@@ -32,7 +32,7 @@ public class EntityTorchArrow extends EntityArrowBase
 	
 	public boolean addItemStackToInventory(EntityPlayer player)
 	{
-		return player.inventory.addItemStackToInventory(new ItemStack(ElvenTools.itemTorchArrow, 1));
+		return player.inventory.addItemStackToInventory(new ItemStack(ElvenItem.itemTorchArrow, 1));
 	}
 	
 	public boolean tryPlaceBlock()

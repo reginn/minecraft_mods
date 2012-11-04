@@ -111,7 +111,7 @@ public class EntityEbonyBoat extends Entity
 					this.riddenByEntity.mountEntity(this);
 				}
 				
-				this.dropItemWithOffset(ElvenTools.itemEbonyBoat.shiftedIndex, 1, 0.0F);
+				this.dropItemWithOffset(ElvenItem.itemEbonyBoat.shiftedIndex, 1, 0.0F);
 				this.setDead();
 			}
 			

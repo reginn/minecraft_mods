@@ -1,6 +1,5 @@
 package rgn.mods.elventools;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,10 +9,6 @@ import net.minecraft.src.*;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
 
 public class EntityArrowBase extends Entity
 {
@@ -36,17 +31,17 @@ public class EntityArrowBase extends Entity
 	
 	public int knockbackStrength;
 	
-	public EntityArrowBase(World par1World)
+	public EntityArrowBase(World world)
 	{
-		super(par1World);
+		super(world);
 		this.setSize(0.5F, 0.5F);
 	}
 	
-	public EntityArrowBase(World par1World, double par2, double par4, double par6)
+	public EntityArrowBase(World world, double x, double y, double z)
 	{
-		super(par1World);
+		super(world);
 		this.setSize(0.5F, 0.5F);
-		this.setPosition(par2, par4, par6);
+		this.setPosition(x, y, z);
 		this.yOffset = 0.0F;
 	}
 	
@@ -179,7 +174,7 @@ public class EntityArrowBase extends Entity
 			Block.blocksList[var16].setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 			AxisAlignedBB var2 = Block.blocksList[var16].getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 			
-			if (var2 != null && var2.isVecInside(Vec3.getVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
+			if (var2 != null && var2.isVecInside(this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ)))
 			{
 				this.inGround = true;
 			}
@@ -220,15 +215,15 @@ public class EntityArrowBase extends Entity
 		else
 		{
 			++this.ticksInAir;
-			Vec3 var17 = Vec3.getVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			Vec3 var3 = Vec3.getVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 var17 = this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ);
+			Vec3 var3 = this.worldObj.func_82732_R().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition var4 = this.worldObj.rayTraceBlocks_do_do(var17, var3, false, true);
-			var17 = Vec3.getVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
-			var3 = Vec3.getVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			var17 = this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ);
+			var3 = this.worldObj.func_82732_R().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			
 			if (var4 != null)
 			{
-				var3 = Vec3.getVec3Pool().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+				var3 = this.worldObj.func_82732_R().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
 			}
 			
 			Entity var5 = null;
@@ -274,7 +269,7 @@ public class EntityArrowBase extends Entity
 					var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
 					int var24 = MathHelper.ceiling_double_int((double)var20 * this.damage);
 					
-					if (this.func_70241_g())
+					if (this.getIsCritical())
 					{
 						var24 += this.rand.nextInt(var24 / 2 + 2);
 					}
@@ -347,7 +342,7 @@ public class EntityArrowBase extends Entity
 				}
 			}
 			
-			if (this.func_70241_g())
+			if (this.getIsCritical())
 			{
 				for (int var21 = 0; var21 < 4; ++var21)
 				{
@@ -511,7 +506,8 @@ public class EntityArrowBase extends Entity
 		}
 	}
 	
-	public boolean func_70241_g()
+	
+	public boolean getIsCritical()
 	{
 		byte var1 = this.dataWatcher.getWatchableObjectByte(16);
 		return (var1 & 1) != 0;

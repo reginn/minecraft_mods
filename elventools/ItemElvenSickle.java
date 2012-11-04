@@ -2,7 +2,8 @@ package rgn.mods.elventools;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.HashSet;
+
+import com.google.common.collect.Sets;
 
 import net.minecraft.src.*;
 
@@ -14,7 +15,21 @@ public class ItemElvenSickle extends ItemTool
 			Block.mushroomRed, Block.crops, Block.reed, Block.netherStalk
 		};
 	
-	private Set<Block> toolEffective = new HashSet<Block>();
+	private Set<Block> toolEffective = Sets.newHashSet();
+	
+	public class Coord
+	{
+		int x;
+		int y;
+		int z;
+		
+		public Coord(int i, int j, int k)
+		{
+			x = i;
+			y = j;
+			z = k;
+		}
+	}
 	
 	public ItemElvenSickle(int itemId, EnumToolMaterial toolMaterial)
 	{
@@ -33,7 +48,7 @@ public class ItemElvenSickle extends ItemTool
 	}
 	
 	@Override
-	public boolean func_77660_a(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 		
@@ -64,7 +79,7 @@ public class ItemElvenSickle extends ItemTool
 	
 	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
-		Set<ChunkPosition> targetsSet;
+		Set<Coord> targetsSet;
 		
 		targetsSet = setPositionsConstantY(x, y, z);
 		
@@ -74,13 +89,13 @@ public class ItemElvenSickle extends ItemTool
 		}
 		
 		Iterator iter = targetsSet.iterator();
-		ChunkPosition target;
+		Coord target;
 		int targetBlockId;
 		int targetBlockMetadata;
 		int damage = 0;
 		while(iter.hasNext())
 		{
-			target = (ChunkPosition)iter.next();
+			target = (Coord)iter.next();
 			targetBlockId = world.getBlockId(target.x, target.y, target.z);
 			targetBlockMetadata = world.getBlockMetadata(target.x, target.y, target.z);
 			
@@ -100,17 +115,15 @@ public class ItemElvenSickle extends ItemTool
 		return damage;
 	}
 	
-	private Set<ChunkPosition> setPositionsConstantY(int x, int y, int z)
+	private Set<Coord> setPositionsConstantY(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = new HashSet<ChunkPosition>();
+		Set<Coord> targets = Sets.newHashSet();
 		
-		int limit = 2;
-		
-		for (int i = -limit; i <= limit; i++)
+		for (int i = -2; i <= 2; ++i)
 		{
-			for (int j = -limit; j <= limit; j++)
+			for (int j = -2; j <= 2; ++j)
 			{
-				targets.add((new ChunkPosition(x + i, y, z + j)));
+				targets.add((new Coord(x + i, y, z + j)));
 			}
 		}
 		

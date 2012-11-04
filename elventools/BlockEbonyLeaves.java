@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.src.*;
-import net.minecraftforge.common.*;
+
+import net.minecraftforge.common.IShearable;
 
 public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 {
@@ -12,17 +13,12 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	
 	public BlockEbonyLeaves(int blockId, int terrainId)
 	{
-		super(blockId, terrainId, Material.leaves, false);
+		super(blockId, terrainId, Material.leaves, true);
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDeco);
-	}
-	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 	
 	@Override
@@ -183,7 +179,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public int idDropped(int i, Random random, int j)
 	{
-		return ElvenTools.blockEbonySapling.blockID;
+		return ElvenBlock.blockEbonySapling.blockID;
 	}
 	
 	@Override
@@ -233,7 +229,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	public ArrayList<ItemStack> onSheared(ItemStack item, World world, int X, int Y, int Z, int fortune)
 	{
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		ret.add(new ItemStack(ElvenTools.blockEbonyLeaves.blockID, 1, world.getBlockMetadata(X, Y, Z)));
+		ret.add(new ItemStack(ElvenBlock.blockEbonyLeaves.blockID, 1, world.getBlockMetadata(X, Y, Z)));
 		return ret;
 	}
 

@@ -1,23 +1,12 @@
 package rgn.mods.elventools;
 
-import java.util.Random;
-
 import net.minecraft.src.*;
 
-public class ItemElvenShovel extends ItemTool
-{
-	private static Block[] blocksEffectiveAgainst = 
-		new Block[]
-			{
-				Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, 
-				Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium
-			};
-	
-	private Random random = new Random();
-	
+public class ItemElvenShovel extends ItemSpade
+{			
 	public ItemElvenShovel(int itemId, EnumToolMaterial material)
 	{
-		super(itemId, 2, material, blocksEffectiveAgainst);
+		super(itemId, material);
 	}
 	
 	@Override
@@ -26,16 +15,11 @@ public class ItemElvenShovel extends ItemTool
 		return "/rgn/sprites/elventools/items.png";
 	}
 	
-	public boolean canHarvestBlock(Block par1Block)
-	{
-		return par1Block == Block.snow ? true : par1Block == Block.blockSnow;
-	}
-	
 	@Override
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenTools.itemElvenShovelMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.shiftedIndex)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}
@@ -51,7 +35,7 @@ public class ItemElvenShovel extends ItemTool
 			return ;
 		}
 		
-		if (itemstack.itemID == ElvenTools.itemElvenShovelMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.shiftedIndex)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}

@@ -7,7 +7,7 @@ public class ItemElvenParts extends Item
 	public ItemElvenParts(int itemId)
 	{
 		super(itemId);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
 	}
 	
 	@Override

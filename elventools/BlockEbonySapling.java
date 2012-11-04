@@ -23,11 +23,6 @@ public class BlockEbonySapling extends BlockFlower
 		return "/rgn/sprites/elventools/blocks.png";
 	}
 	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
-	
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		if (!world.isRemote)

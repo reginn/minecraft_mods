@@ -91,7 +91,7 @@ public class WorldGenEbonyTree extends WorldGenerator
 								if ((Math.abs(var13) != var11 || Math.abs(var15) != var11 || random.nextInt(2) != 0 && var10 != 0) && 
 								(block == null || block.canBeReplacedByLeaves(world, var12, var16, var14)))
 								{
-									this.setBlockAndMetadata(world, var12, var16, var14, ElvenTools.blockEbonyLeaves.blockID, 0);
+									this.setBlockAndMetadata(world, var12, var16, var14, ElvenBlock.blockEbonyLeaves.blockID, 0);
 								}
 							}
 						}
@@ -105,7 +105,7 @@ public class WorldGenEbonyTree extends WorldGenerator
 						
 						if (var10 == 0 || block == null || block.isLeaves(world, x, y + var16, z))
 						{
-							this.setBlockAndMetadata(world, x, y + var16, z, ElvenTools.blockEbonyLog.blockID, 0);
+							this.setBlockAndMetadata(world, x, y + var16, z, ElvenBlock.blockEbonyLog.blockID, 0);
 						}
 					}
 					

@@ -7,7 +7,7 @@ public class ItemRopeEstablisher extends Item
 	public ItemRopeEstablisher(int itemId)
 	{
 		super(itemId);
-		this.setTabToDisplayOn(CreativeTabs.tabTools);
+		this.setCreativeTab(CreativeTabs.tabTools);
 	}
 	
 	@Override
@@ -17,11 +17,11 @@ public class ItemRopeEstablisher extends Item
 	}
 	
 	@Override
-	public boolean tryPlaceIntoWorld(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int playerDir, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int playerDir, float par8, float par9, float par10)
 	{
 		if (playerDir == 0 && isEstablish(world, x, y, z))
 		{
-			world.setBlockWithNotify(x, y - 1, z, ElvenTools.blockRopeEstablisher.blockID);
+			world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			--itemstack.stackSize;
 			return true;
 		}

@@ -1,15 +1,11 @@
 package rgn.mods.elventools;
 
-import java.util.Random;
-
 import net.minecraft.src.*;
 
 public class ItemElvenSword extends ItemSword
 {
 	private int   weaponDamage;
 	private final EnumToolMaterial toolMaterial;
-	
-	private Random random = new Random();
 	
 	public ItemElvenSword(int itemId, EnumToolMaterial material)
 	{
@@ -30,7 +26,7 @@ public class ItemElvenSword extends ItemSword
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenTools.itemElvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.shiftedIndex)
 		{
 			itemstack.addEnchantment(Enchantment.smite, 2);
 		}
@@ -46,7 +42,7 @@ public class ItemElvenSword extends ItemSword
 			return ;
 		}
 		
-		if (itemstack.itemID == ElvenTools.itemElvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.shiftedIndex)
 		{
 			itemstack.addEnchantment(Enchantment.smite, 2);
 		}

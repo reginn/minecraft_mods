@@ -69,7 +69,7 @@ public class BlockRope extends Block
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
-		return world.getBlockId(x, y + 1, z) == ElvenTools.blockRope.blockID || world.getBlockId(x, y + 1, z) == ElvenTools.blockRopeEstablisher.blockID || !world.isAirBlock(x, y + 1, z);
+		return world.getBlockId(x, y + 1, z) == ElvenBlock.blockRope.blockID || world.getBlockId(x, y + 1, z) == ElvenBlock.blockRopeEstablisher.blockID || !world.isAirBlock(x, y + 1, z);
 	}
 	
 	@Override
@@ -89,7 +89,7 @@ public class BlockRope extends Block
 	{
 		for (; world.isAirBlock(x, y - 1, z) & y >= 0; y--)
 		{
-			world.setBlockWithNotify(x, y - 1, z, ElvenTools.blockRope.blockID);
+			world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
 		}
 	}
 }

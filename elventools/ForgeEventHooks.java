@@ -1,17 +1,16 @@
 package rgn.mods.elventools;
 
-import java.io.*;
 import java.util.Random;
 
 import net.minecraft.src.*;
-import net.minecraftforge.common.*;
 
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
-public class ElvenEventHooks
+public class ForgeEventHooks
 {
 	private Random random = new Random();
 	
@@ -22,8 +21,8 @@ public class ElvenEventHooks
 		ItemStack itemstack = event.result;
 		
 		if (player.capabilities.isCreativeMode
-		 || player.inventory.hasItem(ElvenTools.itemTorchArrow.shiftedIndex)
-		 || player.inventory.hasItem(ElvenTools.itemRopeArrow.shiftedIndex))
+		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex)
+		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
 		{
 			player.setItemInUse(itemstack, Item.bow.getMaxItemUseDuration(itemstack));
 			event.setCanceled(true);
@@ -37,10 +36,10 @@ public class ElvenEventHooks
 		EntityPlayer player = event.entityPlayer;
 		ItemStack itemstack = event.bow;
 		int heldTime        = event.charge;
-		World world         = player.worldObj;//ElvenTools.proxy.getServerWorld();
+		World world         = player.worldObj;
 		
 		boolean isInfinity = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemstack) > 0;
-		float damageRatio = itemstack.getItem() instanceof ItemEnhancedBows ? ((ItemEnhancedBows)itemstack.getItem()).getDamageRatio() : 1.0F;
+		float damageRatio = itemstack.getItem() instanceof ItemEnhancedBow ? ((ItemEnhancedBow)itemstack.getItem()).getDamageRatio() : 1.0F;
 		
 		float baseDamage = (float)heldTime / 20.0F;
 		baseDamage = (baseDamage * baseDamage + baseDamage * 2.0F) / 3.0F;
@@ -57,27 +56,22 @@ public class ElvenEventHooks
 		
 		EntityArrowBase entityArrow = null;
 		
-		//if (!world.isRemote)
-		//{
-			if (player.inventory.hasItem(ElvenTools.itemTorchArrow.shiftedIndex))
-			{
-				//entityArrow = new EntityTorchArrow(serverWorld, player, baseDamage * 2.0F * damageRatio);
-				entityArrow = new EntityTorchArrow(world, player, baseDamage * 2.0F * damageRatio);
-			}
-			else if (player.inventory.hasItem(ElvenTools.itemRopeArrow.shiftedIndex))
-			{
-				//entityArrow = new EntityRopeArrow(serverWorld, player, baseDamage * 2.0F * damageRatio);
-				entityArrow = new EntityRopeArrow(world, player, baseDamage * 2.0F * damageRatio);
-			}
-			else
-			{
-				return ;
-			}
-		//}
+		if (player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex))
+		{
+			entityArrow = new EntityTorchArrow(world, player, baseDamage * 2.0F * damageRatio);
+		}
+		else if (player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
+		{
+			entityArrow = new EntityRopeArrow(world, player, baseDamage * 2.0F * damageRatio);
+		}
+		else
+		{
+			return ;
+		}
 		
 		if (isInfinity
-		 || player.inventory.hasItem(ElvenTools.itemTorchArrow.shiftedIndex)
-		 || player.inventory.hasItem(ElvenTools.itemRopeArrow.shiftedIndex))
+		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex)
+		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
 		{
 			
 			if (baseDamage == 1.0F)
@@ -115,11 +109,11 @@ public class ElvenEventHooks
 			{
 				if (entityArrow instanceof EntityTorchArrow)
 				{
-					player.inventory.consumeInventoryItem(ElvenTools.itemTorchArrow.shiftedIndex);
+					player.inventory.consumeInventoryItem(ElvenItem.itemTorchArrow.shiftedIndex);
 				}
 				else if(entityArrow instanceof EntityRopeArrow)
 				{
-					player.inventory.consumeInventoryItem(ElvenTools.itemRopeArrow.shiftedIndex);
+					player.inventory.consumeInventoryItem(ElvenItem.itemRopeArrow.shiftedIndex);
 				}
 				else
 				{
@@ -157,13 +151,14 @@ public class ElvenEventHooks
 		int               z = event.Z;
 		
 		
-		if (blockID == ElvenTools.blockEbonySapling.blockID)
+		if (blockID == ElvenBlock.blockEbonySapling.blockID)
 		{
 			if (!world.isRemote)
 			{
-				((BlockEbonySapling)ElvenTools.blockEbonySapling).growTree(world, x, y, z, world.rand);
+				((BlockEbonySapling)ElvenBlock.blockEbonySapling).growTree(world, x, y, z, world.rand);
+				event.setResult(Event.Result.ALLOW);
 			}
-			event.setHandeled();
 		}
+		event.setResult(Event.Result.DENY);
 	}
 }

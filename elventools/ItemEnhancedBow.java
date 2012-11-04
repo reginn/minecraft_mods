@@ -3,16 +3,17 @@ package rgn.mods.elventools;
 import net.minecraft.src.*;
 
 import net.minecraftforge.common.MinecraftForge;
+
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
-public class ItemEnhancedBows extends ItemBow
+public class ItemEnhancedBow extends ItemBow
 {
 	private int[] animation = new int[3];
 	private float ratio;
 	private int   enchantability;
 	
-	public ItemEnhancedBows(int itemId, int spriteId, int maxDamage, float ratio, int enchantability)
+	public ItemEnhancedBow(int itemId, int spriteId, int maxDamage, float ratio, int enchantability)
 	{
 		super(itemId);
 		this.maxStackSize   = 1;
@@ -21,6 +22,7 @@ public class ItemEnhancedBows extends ItemBow
 		this.iconIndex      = spriteId;
 		
 		this.setMaxDamage(maxDamage);
+		this.setFull3D();
 		
 		for(int i = 0; i < 3; i++)
 		{
@@ -68,7 +70,7 @@ public class ItemEnhancedBows extends ItemBow
 			
 			if (var7 == 1.0F)
 			{
-				var8.func_70243_d(true);
+				var8.setIsCritical(true);
 			}
 			
 			int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);
@@ -109,6 +111,7 @@ public class ItemEnhancedBows extends ItemBow
 		}
 	}
 	
+	@Override
 	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
 		if (usingItem != null && usingItem.getItem().shiftedIndex == this.shiftedIndex)
@@ -122,6 +125,7 @@ public class ItemEnhancedBows extends ItemBow
 		return getIconIndex(stack);
 	}
 	
+	@Override
 	public int getItemEnchantability()
 	{
 		return this.enchantability;
@@ -130,11 +134,6 @@ public class ItemEnhancedBows extends ItemBow
 	public float getDamageRatio()
 	{
 		return ratio;
-	}
-	
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	{
-		return EnumAction.bow;
 	}
 
 }

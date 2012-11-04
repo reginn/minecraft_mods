@@ -29,7 +29,7 @@ public class EntityRopeArrow extends EntityArrowBase
 	
 	public boolean addItemStackToInventory(EntityPlayer player)
 	{
-		return player.inventory.addItemStackToInventory(new ItemStack(ElvenTools.itemRopeArrow, 1));
+		return player.inventory.addItemStackToInventory(new ItemStack(ElvenItem.itemRopeArrow, 1));
 	}
 	
 	public boolean tryPlaceBlock()
@@ -40,7 +40,7 @@ public class EntityRopeArrow extends EntityArrowBase
 		
 		if (this.mop.sideHit == 0 && this.worldObj.isAirBlock(x, y - 1, z) && this.isEstablish(x, y, z))
 		{
-			this.worldObj.setBlockWithNotify(x, y - 1, z, ElvenTools.blockRopeEstablisher.blockID);
+			this.worldObj.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			return true;
 		}
 		

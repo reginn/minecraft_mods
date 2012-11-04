@@ -3,6 +3,7 @@ package rgn.mods.elventools;
 import java.util.Random;
 
 import net.minecraft.src.*;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class ElvenWorldGenerator implements IWorldGenerator
@@ -10,20 +11,7 @@ public class ElvenWorldGenerator implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		switch (world.provider.worldType)
-		{
-			case -1 :
-				this.generateNether(world, random, chunkX << 4, chunkZ << 4);
-				break;
-			
-			case 0 :
-				this.generateSurface(world, random, chunkX << 4, chunkZ << 4);
-				break;
-			
-			default :
-			
-		}
-		
+		this.generateSurface(world, random, chunkX << 4, chunkZ << 4);		
 	}
 	
 	private void generateSurface(World world, Random random, int chunkX, int chunkZ)

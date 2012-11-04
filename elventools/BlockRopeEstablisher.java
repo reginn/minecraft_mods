@@ -50,13 +50,13 @@ public class BlockRopeEstablisher extends Block
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
-		return ElvenTools.itemRopeEstablisher.shiftedIndex;
+		return ElvenItem.itemRopeEstablisher.shiftedIndex;
 	}
 	
 	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int par5, float par6, int par7)
 	{
-		world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenTools.itemRopeEstablisher, 1)));
+		world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenItem.itemRopeEstablisher, 1)));
 	}
 	
 	@Override
@@ -66,7 +66,7 @@ public class BlockRopeEstablisher extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, ElvenTools.blockRope.blockID);
+				world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
 			}
 		}
 	}
@@ -76,14 +76,14 @@ public class BlockRopeEstablisher extends Block
 	{
 		if (world.isAirBlock(x, y + 1, z))
 		{
-			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenTools.itemRopeEstablisher, 1)));
+			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenItem.itemRopeEstablisher, 1)));
 			world.setBlockWithNotify(x, y, z, 0);
 		}
 		else if (world.isAirBlock(x, y - 1, z) && y - 1 >= 0)
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, ElvenTools.blockRope.blockID);
+				world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
 			}
 		}
 	}

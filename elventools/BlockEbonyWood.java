@@ -21,10 +21,5 @@ public class BlockEbonyWood extends Block
 	{
 		return "/rgn/sprites/elventools/blocks.png";
 	}
-	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
 
 }

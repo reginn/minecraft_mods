@@ -2,7 +2,8 @@ package rgn.mods.elventools;
 
 import java.util.Iterator;
 import java.util.Set;
-import java.util.HashSet;
+
+import com.google.common.collect.Sets;
 
 import net.minecraft.src.*;
 
@@ -10,10 +11,10 @@ public class ItemElvenLumberAxe extends ItemTool
 {
 	public static Block[] blocksEffectiveAgainst =
 		{
-			Block.wood, ElvenTools.blockEbonyLog
+			Block.wood, ElvenBlock.blockEbonyLog
 		};
 	
-	private Set<Block> toolEffective = new HashSet<Block>();
+	private Set<Block> toolEffective = Sets.newHashSet();
 	
 	public ItemElvenLumberAxe(int itemId, EnumToolMaterial toolMaterial)
 	{
@@ -32,7 +33,7 @@ public class ItemElvenLumberAxe extends ItemTool
 	}
 	
 	@Override
-	public boolean func_77660_a(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 		
@@ -101,7 +102,7 @@ public class ItemElvenLumberAxe extends ItemTool
 	
 	private Set<ChunkPosition> setPositions(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = new HashSet<ChunkPosition>();
+		Set<ChunkPosition> targets = Sets.newHashSet();
 		
 		for (int i = 0; i < 12; ++i)
 		{

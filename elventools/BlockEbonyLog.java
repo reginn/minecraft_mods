@@ -21,11 +21,6 @@ public class BlockEbonyLog extends Block
 		return "/rgn/sprites/elventools/blocks.png";
 	}
 	
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
-	
 	public int getBlockTextureFromSide(int side)
 	{
 		if (side == 1 || side == 0)

@@ -15,6 +15,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	{
 		super(itemId, enumArmorMaterial, renderIndex, armorType);
 		this.material = enumArmorMaterial;
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

@@ -18,6 +18,7 @@ public class ItemDwarvenSword extends ItemSword
 		this.maxStackSize = 1;
 		this.weaponDamage = 4 + material.getDamageVsEntity();
 		this.setMaxDamage(material.getMaxUses());
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

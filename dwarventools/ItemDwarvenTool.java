@@ -31,6 +31,7 @@ public class ItemDwarvenTool extends ItemTool
 	{
 		super(itemId, 0, material, harvestBlocks);
 		this.rangeLevel = (material == ConfigureEnum.enumToolMaterialMithril ? 1 : (material == ConfigureEnum.enumToolMaterialEbony ? 1 : 0));
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

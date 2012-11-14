@@ -296,7 +296,7 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 				}
 			}
 			
-			if (item instanceof ItemTool  && ((ItemTool) item).func_77861_e().equals("WOOD")) return 200;
+			if (item instanceof ItemTool  && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200;
 			if (item instanceof ItemSword && ((ItemSword)item).func_77825_f().equals("WOOD")) return 200;
 			if (item instanceof ItemHoe   && ((ItemHoe)  item).func_77842_f().equals("WOOD")) return 200;
 			if (var1 == Item.stick.shiftedIndex) return 100;

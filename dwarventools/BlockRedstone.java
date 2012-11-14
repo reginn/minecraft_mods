@@ -14,7 +14,7 @@ public class BlockRedstone extends Block
 		this.setResistance(10.0F);
 		this.setLightValue(1.0F);
 		this.setStepSound(soundStoneFootstep);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

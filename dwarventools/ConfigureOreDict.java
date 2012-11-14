@@ -13,7 +13,7 @@ public class ConfigureOreDict
 		OreDictionary.registerOre("ingotMithril", DwarvenItem.itemMithrilIngot);
 		OreDictionary.registerOre("ingotEbony",   DwarvenItem.itemEbonyIngot);
 		
-		FurnaceRecipes.smelting().addSmelting(DwarvenBlock.blockDwarvenOre.blockID, 0, new ItemStack(DwarvenItem.itemMithrilIngot));
-		FurnaceRecipes.smelting().addSmelting(DwarvenBlock.blockDwarvenOre.blockID, 1, new ItemStack(DwarvenItem.itemEbonyIngot));
+		FurnaceRecipes.smelting().addSmelting(DwarvenBlock.blockDwarvenOre.blockID, 0, new ItemStack(DwarvenItem.itemMithrilIngot), 1.0F);
+		FurnaceRecipes.smelting().addSmelting(DwarvenBlock.blockDwarvenOre.blockID, 1, new ItemStack(DwarvenItem.itemEbonyIngot), 1.0F);
 	}
 }

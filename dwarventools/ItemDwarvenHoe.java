@@ -7,6 +7,7 @@ public class ItemDwarvenHoe extends ItemHoe
 	public ItemDwarvenHoe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

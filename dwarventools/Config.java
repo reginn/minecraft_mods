@@ -62,6 +62,8 @@ public class Config
 	public static int itemIdDwarvenBootEbony;
 	public static int itemIdDwarvenLegsEbony;	
 	
+	public static final CreativeTabs tabDwarvenTools = new CreativeTabDwarvenTools("dwarventools");
+	
 	public static void buildConfiguration(File cfgFile)
 	{
 		Configuration cfg = new Configuration(cfgFile);

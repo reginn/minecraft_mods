@@ -33,11 +33,11 @@ public class SlotInfernalFurnace extends Slot
 	
 	@Override
 	// public void onPickupFromSlot(ItemStack par1ItemStack)
-	public void func_82870_a(EntityPlayer par1EntityPlayer, ItemStack par1ItemStack)
+	public void onPickupFromSlot(EntityPlayer par1EntityPlayer, ItemStack par1ItemStack)
 	{
 		this.onCrafting(par1ItemStack);
 		// super.onPickupFromSlot(par1ItemStack);
-		super.func_82870_a(par1EntityPlayer, par1ItemStack);
+		super.onPickupFromSlot(par1EntityPlayer, par1ItemStack);
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class SlotInfernalFurnace extends Slot
 		if (!this.thePlayer.worldObj.isRemote)
 		{
 			int var2 = this.field_75228_b;
-			float var3 = FurnaceRecipes.smelting().getExperience(par1ItemStack.itemID);
+			float var3 = FurnaceRecipes.smelting().getExperience(par1ItemStack);
 			int var4;
 			
 			if (var3 == 0.0F)

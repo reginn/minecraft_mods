@@ -22,7 +22,7 @@ public class BlockInfernalFurnace extends BlockContainer
 		this.setHardness(3.5F);
 		this.setStepSound(soundStoneFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ public class ItemDwarvenParts extends Item
 	public ItemDwarvenParts(int itemId)
 	{
 		super(itemId);
-		this.setCreativeTab(CreativeTabs.tabMaterials);
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

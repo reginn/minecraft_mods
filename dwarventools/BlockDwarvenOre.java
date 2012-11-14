@@ -14,7 +14,7 @@ public class BlockDwarvenOre extends Block
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setStepSound(soundStoneFootstep);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 	
 	@Override

@@ -16,8 +16,8 @@ public class ConfigureItem
 		
 		ElvenItem.itemEbonyBoat = (new ItemEbonyBoat(Config.itemIdEbonyBoat)).setIconCoord(0, 4).setItemName("itemEbonyBoat");
 		
-		ElvenItem.itemTorchArrow = (new ItemElvenParts(Config.itemIdTorchArrow )).setIconCoord(0, 5).setItemName("itemTorchArrow").setCreativeTab(CreativeTabs.tabCombat);
-		ElvenItem.itemRopeArrow  = (new ItemElvenParts(Config.itemIdRopeArrow  )).setIconCoord(1, 5).setItemName("itemRopeArrow").setCreativeTab(CreativeTabs.tabCombat);
+		ElvenItem.itemTorchArrow = (new ItemElvenParts(Config.itemIdTorchArrow )).setIconCoord(0, 5).setItemName("itemTorchArrow");
+		ElvenItem.itemRopeArrow  = (new ItemElvenParts(Config.itemIdRopeArrow  )).setIconCoord(1, 5).setItemName("itemRopeArrow");
 		
 		ElvenItem.itemRopeEstablisher = (new ItemRopeEstablisher(Config.itemIdRopeEstablisher)).setIconCoord(2, 5).setItemName("itemRopeEstablisher");
 		

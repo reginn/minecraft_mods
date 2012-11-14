@@ -13,7 +13,7 @@ public class BlockEbonyWood extends Block
 		this.setResistance(5.0F);
 		this.setStepSound(soundWoodFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

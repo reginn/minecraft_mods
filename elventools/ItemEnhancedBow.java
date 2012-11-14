@@ -23,6 +23,7 @@ public class ItemEnhancedBow extends ItemBow
 		
 		this.setMaxDamage(maxDamage);
 		this.setFull3D();
+		this.setCreativeTab(Config.tabElvenTools);
 		
 		for(int i = 0; i < 3; i++)
 		{

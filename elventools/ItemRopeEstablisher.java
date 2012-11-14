@@ -7,7 +7,7 @@ public class ItemRopeEstablisher extends Item
 	public ItemRopeEstablisher(int itemId)
 	{
 		super(itemId);
-		this.setCreativeTab(CreativeTabs.tabTools);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

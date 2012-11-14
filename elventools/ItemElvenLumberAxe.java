@@ -16,9 +16,25 @@ public class ItemElvenLumberAxe extends ItemTool
 	
 	private Set<Block> toolEffective = Sets.newHashSet();
 	
+	public class Coord
+	{
+		int x;
+		int y;
+		int z;
+		
+		public Coord(int i, int j, int k)
+		{
+			x = i;
+			y = j;
+			z = k;
+		}
+	}
+	
+	
 	public ItemElvenLumberAxe(int itemId, EnumToolMaterial toolMaterial)
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
+		this.setCreativeTab(Config.tabElvenTools);
 		
 		for (int i = 0; i < blocksEffectiveAgainst.length; ++i)
 		{
@@ -64,7 +80,7 @@ public class ItemElvenLumberAxe extends ItemTool
 	
 	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
-		Set<ChunkPosition> targetsSet;
+		Set<Coord> targetsSet;
 		
 		targetsSet = setPositions(x, y, z);
 		
@@ -74,13 +90,13 @@ public class ItemElvenLumberAxe extends ItemTool
 		}
 		
 		Iterator iter = targetsSet.iterator();
-		ChunkPosition target;
+		Coord target;
 		int targetBlockId;
 		int targetBlockMetadata;
 		int damage = 0;
 		while(iter.hasNext())
 		{
-			target = (ChunkPosition)iter.next();
+			target = (Coord)iter.next();
 			targetBlockId = world.getBlockId(target.x, target.y, target.z);
 			targetBlockMetadata = world.getBlockMetadata(target.x, target.y, target.z);
 			
@@ -100,13 +116,13 @@ public class ItemElvenLumberAxe extends ItemTool
 		return damage;
 	}
 	
-	private Set<ChunkPosition> setPositions(int x, int y, int z)
+	private Set<Coord> setPositions(int x, int y, int z)
 	{
-		Set<ChunkPosition> targets = Sets.newHashSet();
+		Set<Coord> targets = Sets.newHashSet();
 		
 		for (int i = 0; i < 12; ++i)
 		{
-			targets.add((new ChunkPosition(x, y + i, z)));
+			targets.add((new Coord(x, y + i, z)));
 		}
 		
 		return targets;

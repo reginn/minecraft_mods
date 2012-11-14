@@ -174,7 +174,7 @@ public class EntityArrowBase extends Entity
 			Block.blocksList[var16].setBlockBoundsBasedOnState(this.worldObj, this.xTile, this.yTile, this.zTile);
 			AxisAlignedBB var2 = Block.blocksList[var16].getCollisionBoundingBoxFromPool(this.worldObj, this.xTile, this.yTile, this.zTile);
 			
-			if (var2 != null && var2.isVecInside(this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ)))
+			if (var2 != null && var2.isVecInside(this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ)))
 			{
 				this.inGround = true;
 			}
@@ -215,15 +215,15 @@ public class EntityArrowBase extends Entity
 		else
 		{
 			++this.ticksInAir;
-			Vec3 var17 = this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ);
-			Vec3 var3 = this.worldObj.func_82732_R().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			Vec3 var17 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+			Vec3 var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition var4 = this.worldObj.rayTraceBlocks_do_do(var17, var3, false, true);
-			var17 = this.worldObj.func_82732_R().getVecFromPool(this.posX, this.posY, this.posZ);
-			var3 = this.worldObj.func_82732_R().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+			var17 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+			var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			
 			if (var4 != null)
 			{
-				var3 = this.worldObj.func_82732_R().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
+				var3 = this.worldObj.getWorldVec3Pool().getVecFromPool(var4.hitVec.xCoord, var4.hitVec.yCoord, var4.hitVec.zCoord);
 			}
 			
 			Entity var5 = null;
@@ -294,7 +294,13 @@ public class EntityArrowBase extends Entity
 					{
 						if (var4.entityHit instanceof EntityLiving)
 						{
-							++((EntityLiving)var4.entityHit).arrowHitTempCounter;
+							// ++((EntityLiving)var4.entityHit).arrowHitTempCounter;
+							
+							if (!this.worldObj.isRemote)
+                            {
+                                EntityLiving var242 = (EntityLiving)var4.entityHit;
+                                var242.func_85034_r(var242.func_85035_bI() + 1);
+                            }
 							
 							if (this.knockbackStrength > 0)
 							{
@@ -305,6 +311,7 @@ public class EntityArrowBase extends Entity
 									var4.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)var25);
 								}
 							}
+							
 						}
 						
 						this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
@@ -337,7 +344,7 @@ public class EntityArrowBase extends Entity
 					this.worldObj.playSoundAtEntity(this, "random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 					this.inGround = true;
 					this.arrowShake = 7;
-					this.func_70243_d(false);
+					this.setIsCritical(false);
 					this.mop = var4;
 				}
 			}
@@ -491,7 +498,10 @@ public class EntityArrowBase extends Entity
 		return false;
 	}
 	
-	public void func_70243_d(boolean par1)
+	/**
+	 * Whether the arrow has a stream of critical hit particles flying behind it.
+	 */
+	public void setIsCritical(boolean par1)
 	{
 		
 		byte var2 = this.dataWatcher.getWatchableObjectByte(16);

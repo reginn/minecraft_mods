@@ -2,6 +2,8 @@ package rgn.mods.elventools;
 
 import net.minecraft.src.*;
 
+import cpw.mods.fml.common.SidedProxy;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.network.NetworkMod;
 

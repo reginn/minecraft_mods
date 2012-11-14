@@ -7,6 +7,7 @@ public class ItemElvenShovel extends ItemSpade
 	public ItemElvenShovel(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

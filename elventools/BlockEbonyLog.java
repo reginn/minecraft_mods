@@ -12,7 +12,7 @@ public class BlockEbonyLog extends Block
 		this.setHardness(3.0F);
 		this.setStepSound(soundWoodFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

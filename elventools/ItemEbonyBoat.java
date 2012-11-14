@@ -11,7 +11,7 @@ public class ItemEbonyBoat extends Item
 	{
 		super(itemId);
 		this.maxStackSize = 3;
-		this.setCreativeTab(CreativeTabs.tabTransport);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class ItemEbonyBoat extends Item
 		double var7 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double)var4;
 		double var9 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * (double)var4 + 1.62D - (double)par3EntityPlayer.yOffset;
 		double var11 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * (double)var4;
-		Vec3 var13 = par2World.func_82732_R().getVecFromPool(var7, var9, var11);
+		Vec3 var13 = par2World.getWorldVec3Pool().getVecFromPool(var7, var9, var11);
 		float var14 = MathHelper.cos(-var6 * 0.017453292F - (float)Math.PI);
 		float var15 = MathHelper.sin(-var6 * 0.017453292F - (float)Math.PI);
 		float var16 = -MathHelper.cos(-var5 * 0.017453292F);

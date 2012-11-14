@@ -7,6 +7,7 @@ public class ItemElvenAxe extends ItemAxe
 	public ItemElvenAxe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

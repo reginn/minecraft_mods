@@ -47,6 +47,8 @@ public class Config
 	public static int itemIdElvenSickle;
 	public static int itemIdElvenLumberAxe;
 	
+	public static final CreativeTabs tabElvenTools = new CreativeTabElvenTools("elventools");
+	
 	public static void buildConfiguration(File cfgFile)
 	{
 		Configuration cfg = new Configuration(cfgFile);

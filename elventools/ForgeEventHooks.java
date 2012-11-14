@@ -76,7 +76,7 @@ public class ForgeEventHooks
 			
 			if (baseDamage == 1.0F)
 			{
-				entityArrow.func_70243_d(true);
+				entityArrow.setIsCritical(true);
 			}
 			
 			int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, itemstack);

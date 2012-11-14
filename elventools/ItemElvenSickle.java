@@ -34,6 +34,7 @@ public class ItemElvenSickle extends ItemTool
 	public ItemElvenSickle(int itemId, EnumToolMaterial toolMaterial)
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
+		this.setCreativeTab(Config.tabElvenTools);
 		
 		for (int i = 0; i < blocksEffectiveAgainst.length; ++i)
 		{

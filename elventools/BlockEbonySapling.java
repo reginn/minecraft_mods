@@ -15,6 +15,7 @@ public class BlockEbonySapling extends BlockFlower
 		this.setHardness(0.0F);
 		this.setStepSound(soundGrassFootstep);
 		this.setRequiresSelfNotify();
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

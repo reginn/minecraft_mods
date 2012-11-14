@@ -18,7 +18,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 		this.setLightOpacity(1);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(Config.tabElvenTools);
 	}
 	
 	@Override

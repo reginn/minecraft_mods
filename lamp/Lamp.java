@@ -1,7 +1,5 @@
 package rgn.mods.lamp;
 
-import java.io.*;
-
 import java.util.logging.Level;
 
 import net.minecraft.src.*;
@@ -42,6 +40,8 @@ public class Lamp
 	public static int[] gen = new int[]{16, 4, 1};
 	public static int number;
 	
+	public static final CreativeTabs tabLamp = new CreativeTabLamp("lamp");
+	
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -66,11 +66,10 @@ public class Lamp
 	}
 	
 	@Mod.Init
-	public void Init(FMLInitializationEvent event)
+	public void init(FMLInitializationEvent event)
 	{
 		lampRenderType = proxy.getUniqueRenderType();
 		
-		System.out.println(this.lampRenderType);
 		blockLamp  = (new BlockLamp(blockIdLamp,  139)).setBlockName("blocklamp");
 		blockLight = (new BlockLight(blockIdLight, 0)).setBlockName("dontuse");
 		

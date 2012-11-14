@@ -12,7 +12,8 @@ public class BlockLamp extends Block
 	{
 		super(blockId, terrainId, Material.glass);
 		this.setLightValue(1.0F);
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		// this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(Lamp.tabLamp);
 	}
 	
 	@Override

@@ -1,20 +1,19 @@
 package rgn.mods.mabicraft;
 
 import java.io.*;
-import java.util.logging.Level;
-
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteStreams;
+import com.google.common.io.*;
 
 import net.minecraft.src.*;
 
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.network.*;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
+
+import rgn.mods.mabicraft.enchant.*;
 
 public class PacketHandler implements IPacketHandler
 {
 	@Override
-	public void onPacketData(NetworkManager network, Packet250CustomPayload packet, Player player)
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
 	{
 		if (packet.channel.equals("Bonfire"))
 		{

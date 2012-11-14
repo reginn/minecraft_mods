@@ -1,25 +1,22 @@
 package rgn.mods.mabicraft.client;
 
-import org.lwjgl.opengl.GL11;
+import net.minecraft.src.*;
+
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
-import cpw.mods.fml.client.*;
-import cpw.mods.fml.client.registry.*;
-
-import net.minecraft.src.*;
-import net.minecraftforge.client.*;
-
-import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.CommonProxy;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
 	@Override
-	public int getNewRenderType()
+	public int getUniqueRenderType()
 	{
 		return RenderingRegistry.getNextAvailableRenderId();
 	}
@@ -34,7 +31,6 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers()
 	{
 		RenderingRegistry.registerBlockHandler(new BonfireRenderingHandler());
-		RenderingRegistry.registerBlockHandler(new EnchanterRenderingHandler());
 	}
 	
 	@Override

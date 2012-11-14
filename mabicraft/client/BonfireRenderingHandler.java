@@ -12,6 +12,7 @@ import net.minecraft.src.*;
 import net.minecraftforge.client.*;
 
 import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.config.Config;
 
 @SideOnly(Side.CLIENT)
 public class BonfireRenderingHandler implements ISimpleBlockRenderingHandler
@@ -118,35 +119,56 @@ public class BonfireRenderingHandler implements ISimpleBlockRenderingHandler
 		
 		renderer.overrideBlockTexture = 20;
 		block.setBlockBounds(13.0F/16.0F, 0.0F/16.0F, 0.0F, 14.0F/16.0F, 1.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds(13.0F/16.0F, 3.0F/16.0F, 0.0F, 14.0F/16.0F, 4.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds(13.0F/16.0F, 6.0F/16.0F, 0.0F, 14.0F/16.0F, 7.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		block.setBlockBounds(1.0F/16.0F, 0.0F/16.0F, 0.0F, 2.0F/16.0F, 1.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds(1.0F/16.0F, 3.0F/16.0F, 0.0F, 2.0F/16.0F, 4.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds(1.0F/16.0F, 6.0F/16.0F, 0.0F, 2.0F/16.0F, 7.0F/16.0F, 16.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		block.setBlockBounds( 0.0F/16.0F, 1.0F/16.0F, 13.0F/16.0F, 16.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds( 0.0F/16.0F, 4.0F/16.0F, 13.0F/16.0F, 16.0F/16.0F, 5.0F/16.0F, 14.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds( 0.0F/16.0F, 7.0F/16.0F, 13.0F/16.0F, 16.0F/16.0F, 8.0F/16.0F, 14.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		block.setBlockBounds( 0.0F/16.0F, 1.0F/16.0F, 1.0F/16.0F, 16.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+		
 		block.setBlockBounds( 0.0F/16.0F, 4.0F/16.0F, 1.0F/16.0F, 16.0F/16.0F, 5.0F/16.0F, 2.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
+
 		block.setBlockBounds( 0.0F/16.0F, 7.0F/16.0F, 1.0F/16.0F, 16.0F/16.0F, 8.0F/16.0F, 2.0F/16.0F);
+		renderer.func_83018_a(block);
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		renderer.overrideBlockTexture = -1;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderer.func_83018_a(block);
 		return true;
 	}
 	
@@ -157,7 +179,7 @@ public class BonfireRenderingHandler implements ISimpleBlockRenderingHandler
 	
 	public int getRenderId()
 	{
-		return MabiCraft.bonfireRenderType;
+		return Config.RENDER_TYPE_BONFIRE;
 	}
 	
 	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)

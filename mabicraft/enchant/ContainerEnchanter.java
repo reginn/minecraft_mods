@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.enchant;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +20,10 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.src.*;
 import net.minecraftforge.common.*;
+
+import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.common.*;
+import rgn.mods.mabicraft.config.*;
 
 public class ContainerEnchanter extends Container
 {
@@ -45,8 +49,8 @@ public class ContainerEnchanter extends Container
 		this.playerInventory = player.inventory;
 		
 		addSlotToContainer(new            Slot(inventoryEnchanter, 0,  26, 12));
-		addSlotToContainer(new  SlotRestricted(inventoryEnchanter, 1,  26, 12 + 18, MabiCraft.itemEnchantScroll.shiftedIndex));
-		addSlotToContainer(new  SlotRestricted(inventoryEnchanter, 2,  26, 12 + 36, MabiCraft.itemMagicPowder.shiftedIndex));
+		addSlotToContainer(new  SlotRestricted(inventoryEnchanter, 1,  26, 12 + 18, MabiCraftItem.itemEnchantScroll.shiftedIndex));
+		addSlotToContainer(new  SlotRestricted(inventoryEnchanter, 2,  26, 12 + 36, MabiCraftItem.itemMagicPowder.shiftedIndex));
 		addSlotToContainer(new      SlotResult(inventoryEnchanter, 3, 134, 12 + 18));
 				
 		for (int rows = 0; rows < 3; rows++)
@@ -66,7 +70,7 @@ public class ContainerEnchanter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer)
 	{
-		return this.world.getBlockId(this.xCoord, this.yCoord, this.zCoord) != MabiCraft.blockEnchanter.blockID ? false 
+		return this.world.getBlockId(this.xCoord, this.yCoord, this.zCoord) != MabiCraftBlock.blockEnchanter.blockID ? false 
 			: entityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 	
@@ -95,7 +99,12 @@ public class ContainerEnchanter extends Container
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(int slotIndex)
+	// public ItemStack transferStackInSlot(int slotIndex)
+
+	/**
+	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
+	 */
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotIndex);
@@ -123,14 +132,14 @@ public class ContainerEnchanter extends Container
 						return null;
 					}
 				}
-				else if (temp.itemID == MabiCraft.itemEnchantScroll.shiftedIndex)
+				else if (temp.itemID == MabiCraftItem.itemEnchantScroll.shiftedIndex)
 				{
 					if (!this.mergeItemStack(temp, 1, 2, false))
 					{
 						return null;
 					}
 				}
-				else if (temp.itemID == MabiCraft.itemMagicPowder.shiftedIndex)
+				else if (temp.itemID == MabiCraftItem.itemMagicPowder.shiftedIndex)
 				{
 					if (!this.mergeItemStack(temp, 2, 3, false))
 					{
@@ -168,7 +177,8 @@ public class ContainerEnchanter extends Container
 				return null;
 			}
 			
-			slot.onPickupFromSlot(temp);
+			// slot.onPickupFromSlot(temp);
+			slot.onPickupFromSlot(par1EntityPlayer, temp);
 		}
 		
 		return itemstack;
@@ -362,7 +372,7 @@ public class ContainerEnchanter extends Container
 		for (int i = 0; i < enchantList.tagCount(); i++)
 		{
 			NBTTagCompound nbtTagCompound = (NBTTagCompound)enchantList.tagAt(i);
-			isFit = isFit && EnchantmentMap.isFit((int)nbtTagCompound.getShort("id"), objectiveTool);
+			isFit = isFit && EnchantmentRegistry.instance().isFit((int)nbtTagCompound.getShort("id"), objectiveTool);
 		}
 		
 		if (objectiveTool.isItemEnchanted())
@@ -385,7 +395,7 @@ public class ContainerEnchanter extends Container
 			for (int i = 0; i < enchantmentList.tagCount(); ++i)
 			{
 				NBTTagCompound nbtTagCompound = (NBTTagCompound)enchantmentList.tagAt(i);
-				hasFortune = EnchantmentMap.getEnchantmentIdFromName("fortune") == (int)nbtTagCompound.getShort("id") ? true : false;
+				hasFortune = EnchantmentRegistry.instance().getEnchantmentIdFromName("fortune") == (int)nbtTagCompound.getShort("id") ? true : false;
 			}
 		}
 		
@@ -402,7 +412,7 @@ public class ContainerEnchanter extends Container
 			for (int i = 0; i < enchantmentList.tagCount(); ++i)
 			{
 				NBTTagCompound nbtTagCompound = (NBTTagCompound)enchantmentList.tagAt(i);
-				hasSilkTouch = EnchantmentMap.getEnchantmentIdFromName("silk touch") == (int)nbtTagCompound.getShort("id") ? true : false;
+				hasSilkTouch = EnchantmentRegistry.instance().getEnchantmentIdFromName("silk touch") == (int)nbtTagCompound.getShort("id") ? true : false;
 			}
 		}
 		
@@ -470,7 +480,7 @@ public class ContainerEnchanter extends Container
 			NBTTagCompound nbtTagCompound = (NBTTagCompound)enchantList.tagAt(i);
 			id  = nbtTagCompound.getShort("id");
 			lvl = nbtTagCompound.getShort("lvl");
-			weight += EnchantmentMap.getEnchantmentRarity(id, lvl);
+			weight += EnchantmentRegistry.instance().getEnchantmentRarity(id, lvl);
 		}
 		
 		return weight;

@@ -1,36 +1,22 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.common;
 
 import java.util.ArrayList;
-import java.util.Random;
+
+import net.minecraft.src.*;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import net.minecraft.src.*;
+import rgn.mods.mabicraft.MabiCraft;
+import rgn.mods.mabicraft.config.*;
 
 public class BlockEnchanter extends Block
-{
-	private Random random;
-	
+{	
 	public BlockEnchanter(int blockId, int terrainId)
 	{
-		super(blockId, Material.rock);
+		super(blockId, Material.wood);
 		this.blockIndexInTexture = terrainId;
-		this.setLightValue(1.0F);
-		this.setCreativeTab(CreativeTabs.tabDeco);
-		this.random = new Random();
-	}
-	
-	@Override
-	public void addCreativeItems(ArrayList itemList)
-	{
-		itemList.add(new ItemStack(this));
-	}
-	
-	@Override
-	public int getRenderType()
-	{
-		return 0;//MabiCraft.enchanterRenderType;
+		this.setCreativeTab(Config.tabMabiCraft);
 	}
 	
 	@Override
@@ -80,16 +66,11 @@ public class BlockEnchanter extends Block
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 	{
-		if (world.isRemote)
+		if (!world.isRemote)
 		{
-			return true;
+			entityPlayer.openGui(MabiCraft.instance, EnumGuiID.ENCHANTER.ordinal(), world, x, y, z);
 		}
-		else
-		{
-			entityPlayer.openGui(MabiCraft.instance, MabiCraft.guiIdEnchanter, world, x, y, z);
-			return true;
-		}
-		
+		return true;	
 	}
 	
 }

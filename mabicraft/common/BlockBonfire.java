@@ -1,29 +1,30 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.common;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.minecraft.src.*;
+
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
-import net.minecraft.src.*;
+import rgn.mods.mabicraft.MabiCraft;
+import rgn.mods.mabicraft.config.*;
 
 public class BlockBonfire extends Block
-{
-	private Random random;
-	
+{	
 	public BlockBonfire(int blockId, int terrainId)
 	{
-		super(blockId, Material.rock);
+		super(blockId, Material.fire);
 		this.blockIndexInTexture = terrainId;
 		this.setLightValue(1.0F);
-		this.random = new Random();
+		// this.setCreativeTab(Config.tabMabiCraft);
 	}
 	
 	@Override
 	public int getRenderType()
 	{
-		return MabiCraft.bonfireRenderType;
+		return Config.RENDER_TYPE_BONFIRE;
 	}
 	
 	@Override
@@ -56,16 +57,11 @@ public class BlockBonfire extends Block
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 	{
-		if (world.isRemote)
+		if (!world.isRemote)
 		{
-			return true;
+			entityPlayer.openGui(MabiCraft.instance, EnumGuiID.BONFIRE.ordinal(), world, x, y, z);
 		}
-		else
-		{
-			entityPlayer.openGui(MabiCraft.instance, MabiCraft.guiIdBonfire, world, x, y, z);
-			return true;
-		}
-		
+		return true;
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -76,9 +72,9 @@ public class BlockBonfire extends Block
 			world.playSound((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F),
 							"fire.fire", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F);
 		}
-		double X = (double)((float)x + random.nextFloat());
-		double Y = (double)((float)y + random.nextFloat() * 0.5F + 0.5F);
-		double Z = (double)((float)z + random.nextFloat());
+		double X = (double)((float)x + world.rand.nextFloat());
+		double Y = (double)((float)y + world.rand.nextFloat() * 0.5F + 0.5F);
+		double Z = (double)((float)z + world.rand.nextFloat());
 		
 		world.spawnParticle("largesmoke", X, Y, Z, 0.0D, 0.0D, 0.0D);
 	}

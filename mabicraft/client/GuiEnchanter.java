@@ -9,6 +9,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.enchant.ContainerEnchanter;
 
 @SideOnly(Side.CLIENT)
 public class GuiEnchanter extends GuiContainer
@@ -35,7 +36,7 @@ public class GuiEnchanter extends GuiContainer
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer()
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString("Enchanter", 61, 6, 0x404040);
 		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);

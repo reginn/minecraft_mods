@@ -1,17 +1,15 @@
-package rgn.mods.mabicraft;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+package rgn.mods.mabicraft.common;
 
 import net.minecraft.src.*;
-import net.minecraftforge.common.*;
+
+import rgn.mods.mabicraft.config.*;
 
 public class ItemMabiCraftParts extends Item
 {
 	public ItemMabiCraftParts(int itemId)
 	{
 		super(itemId);
-		this.setTabToDisplayOn(CreativeTabs.tabMaterials);
+		this.setCreativeTab(Config.tabMabiCraft);
 	}
 	
 	public String getTextureFile()

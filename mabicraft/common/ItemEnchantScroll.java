@@ -1,6 +1,4 @@
-package rgn.mods.mabicraft;
-
-import java.io.*;
+package rgn.mods.mabicraft.common;
 
 import net.minecraft.src.*;
 
@@ -50,12 +48,5 @@ public class ItemEnchantScroll extends Item
 	{
 		return renderPass > 0 ? super.getIconFromDamageForRenderPass(damage, renderPass) + 1 : super.getIconFromDamageForRenderPass(damage, renderPass);
 	}
-	
-	/*
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack itemstack)
-	{
-		return true;
-	}
-	*/
+
 }

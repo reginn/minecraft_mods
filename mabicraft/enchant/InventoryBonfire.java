@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.enchant;
 
 import net.minecraft.src.*;
 

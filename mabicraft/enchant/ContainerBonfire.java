@@ -1,6 +1,4 @@
-package rgn.mods.mabicraft;
-
-import java.io.*;
+package rgn.mods.mabicraft.enchant;
 
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +17,10 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 import net.minecraft.src.*;
 import net.minecraftforge.common.*;
+
+import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.common.*;
+import rgn.mods.mabicraft.config.*;
 
 public class ContainerBonfire extends Container
 {
@@ -45,8 +47,8 @@ public class ContainerBonfire extends Container
 		this.playerInventory = player.inventory;
 		
 		addSlotToContainer(new           Slot(inventoryBonfire, 0, 26, 17));
-		addSlotToContainer(new SlotRestricted(inventoryBonfire, 1, 26, 17 + 18, MabiCraft.itemManaHerb.shiftedIndex));
-		addSlotToContainer(new SlotRestricted(inventoryBonfire, 2, 26, 17 + 36, MabiCraft.itemBlessedPotion.shiftedIndex));
+		addSlotToContainer(new SlotRestricted(inventoryBonfire, 1, 26, 17 + 18, MabiCraftItem.itemManaHerb.shiftedIndex));
+		addSlotToContainer(new SlotRestricted(inventoryBonfire, 2, 26, 17 + 36, MabiCraftItem.itemBlessedPotion.shiftedIndex));
 		
 		addSlotToContainer(new SlotResult(inventoryBonfire, 3, 134, 17));
 		addSlotToContainer(new SlotResult(inventoryBonfire, 4, 134, 17 + 36));
@@ -68,7 +70,7 @@ public class ContainerBonfire extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer)
 	{
-		return this.world.getBlockId(this.xCoord, this.yCoord, this.zCoord) != MabiCraft.blockBonfire.blockID ? false 
+		return this.world.getBlockId(this.xCoord, this.yCoord, this.zCoord) != MabiCraftBlock.blockBonfire.blockID ? false 
 			: entityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 	
@@ -97,7 +99,12 @@ public class ContainerBonfire extends Container
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(int slotIndex)
+	// public ItemStack transferStackInSlot(int slotIndex)
+
+	/**
+	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
+	 */
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)this.inventorySlots.get(slotIndex);
@@ -125,14 +132,14 @@ public class ContainerBonfire extends Container
 						return null;
 					}
 				}
-				else if (temp.itemID == MabiCraft.itemManaHerb.shiftedIndex)
+				else if (temp.itemID == MabiCraftItem.itemManaHerb.shiftedIndex)
 				{
 					if (!this.mergeItemStack(temp, 1, 2, false))
 					{
 						return null;
 					}
 				}
-				else if (temp.itemID == MabiCraft.itemBlessedPotion.shiftedIndex)
+				else if (temp.itemID == MabiCraftItem.itemBlessedPotion.shiftedIndex)
 				{
 					if (!this.mergeItemStack(temp, 2, 3, false))
 					{
@@ -170,7 +177,8 @@ public class ContainerBonfire extends Container
 				return null;
 			}
 			
-			slot.onPickupFromSlot(temp);
+			// slot.onPickupFromSlot(temp);
+			slot.onPickupFromSlot(par1EntityPlayer, temp);
 		}
 		
 		return itemstack;
@@ -248,7 +256,7 @@ public class ContainerBonfire extends Container
 					}
 					
 					int color = random.nextInt(32767);
-					ItemStack enchantScroll = new ItemStack(MabiCraft.itemEnchantScroll, 1, (int)color);
+					ItemStack enchantScroll = new ItemStack(MabiCraftItem.itemEnchantScroll, 1, (int)color);
 					
 					NBTTagList enchantList = enchantedTool.getEnchantmentTagList();
 					
@@ -285,11 +293,11 @@ public class ContainerBonfire extends Container
 					
 					if (this.getSlot(4) == null)
 					{
-						this.putStackInSlot(4, new ItemStack(MabiCraft.itemMagicPowder));
+						this.putStackInSlot(4, new ItemStack(MabiCraftItem.itemMagicPowder));
 					}
 					else
 					{
-						this.mergeItemStack(new ItemStack(MabiCraft.itemMagicPowder), 4, 5, false);
+						this.mergeItemStack(new ItemStack(MabiCraftItem.itemMagicPowder), 4, 5, false);
 					}
 					
 					this.updateCraftingResults();
@@ -400,7 +408,7 @@ public class ContainerBonfire extends Container
 			NBTTagCompound nbtTagCompound = (NBTTagCompound)enchantList.tagAt(i);
 			id  = nbtTagCompound.getShort("id");
 			lvl = nbtTagCompound.getShort("lvl");
-			weight += EnchantmentMap.getEnchantmentRarity(id, lvl);
+			weight += EnchantmentRegistry.instance().getEnchantmentRarity(id, lvl);
 		}
 		
 		return weight;

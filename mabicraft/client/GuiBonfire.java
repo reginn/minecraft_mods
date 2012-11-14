@@ -9,6 +9,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import rgn.mods.mabicraft.*;
+import rgn.mods.mabicraft.enchant.ContainerBonfire;
 
 @SideOnly(Side.CLIENT)
 public class GuiBonfire extends GuiContainer
@@ -38,7 +39,7 @@ public class GuiBonfire extends GuiContainer
 	}
 	
 	@Override
-	protected void drawGuiContainerForegroundLayer()
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString("Bonfire", 70, 6, 0x404040);
 		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);

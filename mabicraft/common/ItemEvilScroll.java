@@ -1,11 +1,15 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.common;
 
-import java.io.*;
+import java.util.List;
 
 import net.minecraft.src.*;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+
+import rgn.mods.mabicraft.config.*;
+
+import rgn.mods.mabicraft.registry.EvilScrollRegistry;
 
 public class ItemEvilScroll extends Item
 {
@@ -14,6 +18,7 @@ public class ItemEvilScroll extends Item
 		super(itemId);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
+		this.setCreativeTab(Config.tabMabiCraft);
 	}
 	
 	@Override
@@ -23,10 +28,21 @@ public class ItemEvilScroll extends Item
 	}
 	
 	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubItems(int itemID, CreativeTabs creativeTabs, List list)
+	{
+		for (int i = 0; i < EvilScrollRegistry.instance().getMetadataListSize(); i++)
+		{
+			list.add(new ItemStack(itemID, 1, EvilScrollRegistry.instance().getMetadata(i)));
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack)
 	{
 		String var2 = ("" + StatCollector.translateToLocal(this.getItemName() + ".name")).trim();
-		String var3 = EntityList.getStringFromID(par1ItemStack.getItemDamage());
+		String var3 = EvilScrollRegistry.instance().getEntityNameFromMetadata(par1ItemStack.getItemDamage());
 		
 		if (var3 != null)
 		{
@@ -37,10 +53,13 @@ public class ItemEvilScroll extends Item
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public int getColorFromDamage(int damage, int renderPass)
+	@Override
+	public int getColorFromItemStack(ItemStack itemstack, int renderPass)
 	{
-		EntityEggInfo var3 = (EntityEggInfo)EntityList.entityEggs.get(Integer.valueOf(damage));
-		return var3 != null ? (renderPass > 0 ? var3.secondaryColor : var3.primaryColor) : 0xEEEEEE;
+		int damage = itemstack.getItemDamage();
+		int primaryColor = EvilScrollRegistry.instance().getPrimaryColorFromMetadata(damage);
+		int secondaryColor = EvilScrollRegistry.instance().getSecondaryColorFromMetadata(damage);
+		return renderPass > 0 ? secondaryColor : primaryColor;
 	}
 	
 	@SideOnly(Side.CLIENT)

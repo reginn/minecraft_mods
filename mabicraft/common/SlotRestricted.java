@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.common;
 
 import net.minecraft.src.*;
 

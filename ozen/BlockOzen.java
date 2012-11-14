@@ -28,7 +28,7 @@ public class BlockOzen extends BlockContainer
 	{
 		super(blockId, 4, Material.wood);
 		this.blockHardness = 0.3F;
-		this.setCreativeTab(CreativeTabs.tabDecorations);
+		this.setCreativeTab(Ozen.tabOzen);
 	}
 	
 	@Override

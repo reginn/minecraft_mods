@@ -38,8 +38,7 @@ public class ContainerOzen extends Container
 	}
 	
 	@Override
-	//public ItemStack transferStackInSlot(int i)
-	public ItemStack func_82846_b(EntityPlayer par1EntityPlayer, int slotIndex)
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex)
 	{
 		ItemStack itemstack = null;
 		Slot slot = (Slot)inventorySlots.get(slotIndex);

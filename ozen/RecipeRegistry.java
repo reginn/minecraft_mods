@@ -6,10 +6,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeRegistry
 {
-	public RecipeRegistry()
-	{
-	}
-	
 	public void addRecipe()
 	{
 		for (int i = 0; i < 3; ++i)

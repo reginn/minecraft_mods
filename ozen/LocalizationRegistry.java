@@ -8,10 +8,6 @@ import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry
 {
-	public LocalizationRegistry()
-	{
-	}
-	
 	public void addLocalization()
 	{
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  0), "Oak Oshiki",    "オークの折敷");

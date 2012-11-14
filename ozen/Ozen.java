@@ -47,6 +47,8 @@ public class Ozen
 	public static int ozenRenderID;
 	public static int guiIdOzen = 1;
 	
+	public static final CreativeTabs tabOzen = new CreativeTabOzen("ozen");
+	
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{

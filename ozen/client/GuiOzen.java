@@ -22,12 +22,14 @@ public class GuiOzen extends GuiContainer
 		this.allowUserInput = false;
 	}
 	
-	protected void drawGuiContainerForegroundLayer()
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString(ozen.getInvName(), 76, 6, 0x404040);
 		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
 	}
 	
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		int k = mc.renderEngine.getTexture("/rgn/sprites/ozen/gui/ozen.png");

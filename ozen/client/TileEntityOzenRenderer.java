@@ -172,8 +172,7 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 	
 	private void renderColor(ItemStack itemstack, int i)
 	{
-		// int colorFromDamage = itemstack.getItem().getColorFromDamage(itemstack.getItemDamage(), i);
-		int colorFromDamage = itemstack.getItem().func_82790_a(itemstack, i);
+		int colorFromDamage = itemstack.getItem().getColorFromItemStack(itemstack, i);
 		float red   = (float)(colorFromDamage >> 16 & 0xff) / 255.0F;
 		float green = (float)(colorFromDamage >>  8 & 0xff) / 255.0F;
 		float blue  = (float)(colorFromDamage       & 0xff) / 255.0F;

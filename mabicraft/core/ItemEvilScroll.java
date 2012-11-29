@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft.common;
+package rgn.mods.mabicraft.core;
 
 import java.util.List;
 

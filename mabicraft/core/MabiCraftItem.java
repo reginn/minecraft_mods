@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft.config;
+package rgn.mods.mabicraft.core;
 
 import net.minecraft.src.*;
 
@@ -18,4 +18,6 @@ public class MabiCraftItem
 	public static Item itemBonfireKit;
 	
 	public static Item itemEvilScroll;
+	
+	public static Item itemCookingFood;
 }

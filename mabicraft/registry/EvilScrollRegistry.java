@@ -172,19 +172,19 @@ public final class EvilScrollRegistry
 	
 	static
 	{
-		registerEvilScroll(EntityZombie.class,   10, 5);
-		registerEvilScroll(EntitySkeleton.class, 10, 5);
-		registerEvilScroll(EntityCreeper.class,  10, 5);
-		registerEvilScroll(EntitySpider.class,   10, 5);
+		registerEvilScroll(EntityZombie.class,   20, 4);
+		registerEvilScroll(EntitySkeleton.class, 20, 4);
+		registerEvilScroll(EntityCreeper.class,  20, 4);
+		registerEvilScroll(EntitySpider.class,   20, 4);
 		
-		registerEvilScroll(EntitySlime.class,      10, 5);
-		registerEvilScroll(EntityEnderman.class,   10, 5);
-		registerEvilScroll(EntitySilverfish.class, 10, 5);
-		registerEvilScroll(EntityCaveSpider.class, 10, 5);
+		registerEvilScroll(EntitySlime.class,      20, 4);
+		registerEvilScroll(EntityEnderman.class,   20, 4);
+		registerEvilScroll(EntitySilverfish.class, 20, 4);
+		registerEvilScroll(EntityCaveSpider.class, 20, 4);
 		
-		registerEvilScroll(EntityPigZombie.class, 10, 5);
-		registerEvilScroll(EntityGhast.class,     10, 5);
-		registerEvilScroll(EntityMagmaCube.class, 10, 5);
-		registerEvilScroll(EntityBlaze.class,     10, 5);
+		registerEvilScroll(EntityPigZombie.class, 20, 4);
+		registerEvilScroll(EntityGhast.class,     20, 4);
+		registerEvilScroll(EntityMagmaCube.class, 20, 4);
+		registerEvilScroll(EntityBlaze.class,     20, 4);
 	}
 }

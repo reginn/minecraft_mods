@@ -1,8 +1,7 @@
-package rgn.mods.mabicraft.client;
+package rgn.mods.mabicraft.enchant.client;
 
 import org.lwjgl.opengl.GL11;
 
-import java.io.*;
 import net.minecraft.src.*;
 
 import cpw.mods.fml.common.Side;
@@ -58,8 +57,8 @@ public class GuiEnchanter extends GuiContainer
 		int slotBackGound = mc.renderEngine.getTexture("/rgn/sprites/mabicraft/items.png");
 		mc.renderEngine.bindTexture(slotBackGound);
 		
-		drawTexturedModalRect(l + 26, i1 + 30, 224, 224, 16, 16);
-		drawTexturedModalRect(l + 26, i1 + 48, 224, 240, 16, 16);
+		drawTexturedModalRect(l + 26, i1 + 30, 224,  0, 16, 16);
+		drawTexturedModalRect(l + 26, i1 + 48, 224, 16, 16, 16);
 	}
 	
 	@Override

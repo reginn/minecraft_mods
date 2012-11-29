@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft.client;
+package rgn.mods.mabicraft.core.client;
 
 import net.minecraft.src.*;
 
@@ -10,7 +10,9 @@ import cpw.mods.fml.common.asm.SideOnly;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-import rgn.mods.mabicraft.CommonProxy;
+import rgn.mods.mabicraft.core.CommonProxy;
+import rgn.mods.mabicraft.enchant.client.BonfireRenderingHandler;
+import rgn.mods.mabicraft.cook.client.CookwareRenderingHandler;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
@@ -31,6 +33,7 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers()
 	{
 		RenderingRegistry.registerBlockHandler(new BonfireRenderingHandler());
+		RenderingRegistry.registerBlockHandler(new CookwareRenderingHandler());
 	}
 	
 	@Override

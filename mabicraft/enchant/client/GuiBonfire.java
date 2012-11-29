@@ -1,8 +1,7 @@
-package rgn.mods.mabicraft.client;
+package rgn.mods.mabicraft.enchant.client;
 
 import org.lwjgl.opengl.GL11;
 
-import java.io.*;
 import net.minecraft.src.*;
 
 import cpw.mods.fml.common.Side;
@@ -61,8 +60,8 @@ public class GuiBonfire extends GuiContainer
 		int slotBackGound = mc.renderEngine.getTexture("/rgn/sprites/mabicraft/items.png");
 		mc.renderEngine.bindTexture(slotBackGound);
 		
-		drawTexturedModalRect(l + 26, i1 + 35, 240, 240, 16, 16);
-		drawTexturedModalRect(l + 26, i1 + 53, 240, 224, 16, 16);
+		drawTexturedModalRect(l + 26, i1 + 35, 240, 16, 16, 16);
+		drawTexturedModalRect(l + 26, i1 + 53, 240,  0, 16, 16);
 	}
 	
 	@Override

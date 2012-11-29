@@ -1,10 +1,9 @@
-package rgn.mods.mabicraft.client;
+package rgn.mods.mabicraft.enchant.client;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
-import static net.minecraftforge.common.ForgeDirection.*;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
@@ -61,13 +60,13 @@ public class BonfireRenderingHandler implements ISimpleBlockRenderingHandler
 		var32 = (double)z + 0.5D + 0.3D;
 		tessellator.addVertexWithUV(var26, (double)((float)y + 1.2F), (double)((float)z + 0.8F), maxU, minV);
 		tessellator.addVertexWithUV(var18, (double)((float)y + 0.1F), (double)((float)z + 0.8F), maxU, maxV);
-		tessellator.addVertexWithUV(var18, (double)((float)y + 0.1F), (double)((float)z + 0.2F), minU,  maxV);
-		tessellator.addVertexWithUV(var26, (double)((float)y + 1.2F), (double)((float)z + 0.2F), minU,  minV);
+		tessellator.addVertexWithUV(var18, (double)((float)y + 0.1F), (double)((float)z + 0.2F), minU, maxV);
+		tessellator.addVertexWithUV(var26, (double)((float)y + 1.2F), (double)((float)z + 0.2F), minU, minV);
 		
 		tessellator.addVertexWithUV(var28, (double)((float)y + 1.2F), (double)((float)z + 0.2F), maxU, minV);
 		tessellator.addVertexWithUV(var20, (double)((float)y + 0.1F), (double)((float)z + 0.2F), maxU, maxV);
-		tessellator.addVertexWithUV(var20, (double)((float)y + 0.1F), (double)((float)z + 0.8F), minU,  maxV);
-		tessellator.addVertexWithUV(var28, (double)((float)y + 1.2F), (double)((float)z + 0.8F), minU,  minV);
+		tessellator.addVertexWithUV(var20, (double)((float)y + 0.1F), (double)((float)z + 0.8F), minU, maxV);
+		tessellator.addVertexWithUV(var28, (double)((float)y + 1.2F), (double)((float)z + 0.8F), minU, minV);
 		
 		
 		minU = (double)( (float)textureU           / 256.0F);

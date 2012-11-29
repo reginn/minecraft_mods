@@ -21,8 +21,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.src.*;
 import net.minecraftforge.common.*;
 
-import rgn.mods.mabicraft.*;
-import rgn.mods.mabicraft.common.*;
+import rgn.mods.mabicraft.core.*;
 import rgn.mods.mabicraft.config.*;
 
 public class ContainerEnchanter extends Container
@@ -196,7 +195,7 @@ public class ContainerEnchanter extends Container
 			ICrafting var2 = (ICrafting)var1.next();
 			for (int i = 0; i < this.inventoryEnchanter.getSizeInventory(); ++i)
 			{
-				var2.updateCraftingInventorySlot(this, i, this.getSlot(i).getStack());
+				var2.sendSlotContents(this, i, this.getSlot(i).getStack());
 			}
 		}
 	}

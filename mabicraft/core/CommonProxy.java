@@ -1,14 +1,18 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.core;
 
 import net.minecraft.src.*;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 
-import rgn.mods.mabicraft.config.*;
+import rgn.mods.mabicraft.core.EnumGuiID;
 
-import rgn.mods.mabicraft.client.*;
-import rgn.mods.mabicraft.enchant.*;
+import rgn.mods.mabicraft.enchant.ContainerBonfire;
+import rgn.mods.mabicraft.enchant.ContainerEnchanter;
+import rgn.mods.mabicraft.enchant.client.GuiBonfire;
+import rgn.mods.mabicraft.enchant.client.GuiEnchanter;
 
+import rgn.mods.mabicraft.cook.ContainerCookware;
+import rgn.mods.mabicraft.cook.client.GuiCookware;
 
 public class CommonProxy implements IGuiHandler
 {
@@ -45,6 +49,18 @@ public class CommonProxy implements IGuiHandler
 		else if (ID == EnumGuiID.ENCHANTER.ordinal())
 		{
 			return new GuiEnchanter(player, world, x, y, z);
+		}	
+		else if (ID == EnumGuiID.COOKING_TABLE.ordinal())
+		{
+			return new GuiCookware(player, world, x, y, z);
+		}
+		else if (ID == EnumGuiID.COOKING_OVEN.ordinal())
+		{
+			return new GuiCookware(player, world, x, y, z);
+		}
+		else if (ID == EnumGuiID.COOKING_POT.ordinal())
+		{
+			return new GuiCookware(player, world, x, y, z);		
 		}
 		return null;
 	}
@@ -59,6 +75,18 @@ public class CommonProxy implements IGuiHandler
 		else if (ID == EnumGuiID.ENCHANTER.ordinal())
 		{
 			return new ContainerEnchanter(player, world, x, y, z);
+		}	
+		else if (ID == EnumGuiID.COOKING_TABLE.ordinal())
+		{
+			return new ContainerCookware(player, world, x, y, z);
+		}
+		else if (ID == EnumGuiID.COOKING_OVEN.ordinal())
+		{
+			return new ContainerCookware(player, world, x, y, z);
+		}
+		else if (ID == EnumGuiID.COOKING_POT.ordinal())
+		{
+			return new ContainerCookware(player, world, x, y, z);		
 		}
 		return null;
 	}

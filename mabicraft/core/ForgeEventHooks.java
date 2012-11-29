@@ -1,11 +1,11 @@
-package rgn.mods.mabicraft;
+package rgn.mods.mabicraft.core;
 
 import net.minecraft.src.*;
 
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-import rgn.mods.mabicraft.config.MabiCraftItem;
+import rgn.mods.mabicraft.core.MabiCraftItem;
 import rgn.mods.mabicraft.registry.EvilScrollRegistry;
 
 public class ForgeEventHooks

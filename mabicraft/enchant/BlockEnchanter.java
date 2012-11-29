@@ -1,4 +1,4 @@
-package rgn.mods.mabicraft.common;
+package rgn.mods.mabicraft.enchant;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,9 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 
 import rgn.mods.mabicraft.MabiCraft;
-import rgn.mods.mabicraft.config.*;
+
+import rgn.mods.mabicraft.config.Config;
+import rgn.mods.mabicraft.core.EnumGuiID;
 
 public class BlockEnchanter extends Block
 {	
@@ -52,7 +54,7 @@ public class BlockEnchanter extends Block
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 	}
 	
 	@Override

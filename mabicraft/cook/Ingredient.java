@@ -1,24 +1,36 @@
 package rgn.mods.mabicraft.cook;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
+import net.minecraft.src.*;
+import net.minecraftforge.oredict.OreDictionary;
+
 public class Ingredient
 {
-	private String name;
+	private List<ItemStack> items = Lists.newArrayList();
 	private int ratio;
 	
-	public Ingredient(String _name, int _ratio)
+	public Ingredient(ItemStack _itemstack, int _ratio)
 	{
-		this.name  = _name;
+		this.items.add(_itemstack);
 		this.ratio = _ratio;
 	}
 	
-	public String getName()
+	public Ingredient(String name, int _ratio)
 	{
-		return this.name;
+		this.items = OreDictionary.getOres(name);
+		this.ratio = _ratio;
+	}
+		
+	public List<ItemStack> getItems()
+	{
+		return this.items;
 	}
 	
 	public int getRatio()
 	{
-		return this.ratio;
+		return ratio;
 	}
 }
-	

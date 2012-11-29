@@ -1,8 +1,10 @@
-package rgn.mods.mabicraft.common;
+package rgn.mods.mabicraft.enchant;
 
 import net.minecraft.src.*;
 
-import rgn.mods.mabicraft.config.*;
+import rgn.mods.mabicraft.core.MabiCraftBlock;
+
+import rgn.mods.mabicraft.config.Config;
 
 public class ItemBonfireKit extends Item
 {

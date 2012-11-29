@@ -10,6 +10,7 @@ import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.FMLLog;
 
 import rgn.mods.mabicraft.MabiCraft;
+import rgn.mods.mabicraft.core.CreativeTabMabiCraft;
 
 public class Config
 {
@@ -33,9 +34,12 @@ public class Config
 	
 	public static int itemIdEvilScroll;
 	
-	public static int villagerIdStarts;
+	public static int itemIdCookingFood;
+	
+	public static int startVillagerID;
 	
 	public static final int RENDER_TYPE_BONFIRE = MabiCraft.proxy.getUniqueRenderType();
+	public static final int RENDER_TYPE_COOKWARE = MabiCraft.proxy.getUniqueRenderType();
 	
 	public static final CreativeTabs tabMabiCraft = new CreativeTabMabiCraft("mabicraft");
 	
@@ -63,6 +67,10 @@ public class Config
 			itemIdBlessedPotion = cfg.getItem("BlessedPotion", 13008).getInt();
 			itemIdBonfireKit    = cfg.getItem("BonfireKit",    13009).getInt();
 			itemIdEvilScroll    = cfg.getItem("EvilScroll",    13010).getInt();	
+			
+			itemIdCookingFood   = cfg.getItem("CookingFood",   13011).getInt();
+			
+			startVillagerID = cfg.get(Configuration.CATEGORY_GENERAL, "StartVillagerID", 100).getInt();
 		}
 		catch (Exception e)
 		{

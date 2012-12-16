@@ -41,17 +41,17 @@ public class ContainerInfernalFurnace extends Container
 			
 			if (this.lastCookTime != this.furnace.furnaceCookTime)
 			{
-				player.updateCraftingInventoryInfo(this, 0, this.furnace.furnaceCookTime);
+				player.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
 			}
 			
 			if (this.lastBurnTime != this.furnace.furnaceBurnTime)
 			{
-				player.updateCraftingInventoryInfo(this, 1, this.furnace.furnaceBurnTime);
+				player.sendProgressBarUpdate(this, 1, this.furnace.furnaceBurnTime);
 			}
 			
 			if (this.lastItemBurnTime != this.furnace.currentItemBurnTime)
 			{
-				player.updateCraftingInventoryInfo(this, 2, this.furnace.currentItemBurnTime);
+				player.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
 			}
 		}
 		

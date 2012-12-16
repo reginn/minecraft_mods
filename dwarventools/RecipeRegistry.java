@@ -1,12 +1,12 @@
 package rgn.mods.dwarventools;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.src.*;
-
+import net.minecraft.src.Block;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeRegistry
@@ -18,15 +18,15 @@ public class RecipeRegistry
 		this.addRecipeUsedOreDictForNewTools();
 		this.addRecipeOthers();
 	}
-	
+
 	private void addRecipeUsedOreDict()
 	{
 		Item[]   unstorageItemList = new Item[] {DwarvenItem.itemMithrilIngot, DwarvenItem.itemEbonyIngot};
 		String[] unstorageNameList = new String[] {"ingotMithril", "ingotEbony"};
 		Block[]        storageList = new Block[] {DwarvenBlock.blockMithril, DwarvenBlock.blockEbony};
-		
+
 		for (int i = 0; i < storageList.length; i++)
-		{	
+		{
 			// compatiblity for old ver
 			GameRegistry.addShapelessRecipe(
 				new ItemStack(unstorageItemList[i], 9),
@@ -34,7 +34,7 @@ public class RecipeRegistry
 					{
 						storageList[i]
 					 });
-		
+
 			GameRegistry.addRecipe(
 				new ShapedOreRecipe(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, i),
 					new Object[]
@@ -42,15 +42,15 @@ public class RecipeRegistry
 							"XXX", "XXX", "XXX",
 							Character.valueOf('X'), unstorageNameList[i]
 						}));
-			
+
 			GameRegistry.addShapelessRecipe(
 				new ItemStack(unstorageItemList[i], 9),
 					new Object[]
 					{
-						new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, i)
+						new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, i + 1)
 					 });
 		}
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenItem.itemIronBar, 4),
 				new Object[]
@@ -60,7 +60,7 @@ public class RecipeRegistry
 					Character.valueOf('B'), Item.blazeRod
 				});
 	}
-	
+
 	private void addRecipeOthers()
 	{
 		GameRegistry.addRecipe(
@@ -70,7 +70,7 @@ public class RecipeRegistry
 					"NN","NN",
 					Character.valueOf('N'), Block.netherrack
 				});
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenBlock.blockInfernalFurnace, 1),
 				new Object[]
@@ -78,7 +78,7 @@ public class RecipeRegistry
 					"NNN", "N N", "NNN",
 					Character.valueOf('N'), Block.netherBrick
 				});
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0),
 				new Object[]
@@ -86,7 +86,7 @@ public class RecipeRegistry
 					"XXX", "XXX", "XXX",
 					Character.valueOf('X'), Item.redstone
 				});
-		
+
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(Item.redstone, 9),
 				 new Object[]
@@ -94,7 +94,7 @@ public class RecipeRegistry
 					new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0)
 				 });
 	}
-	
+
 	private void addRecipeNewMaterialTools()
 	{
 		final Item[] shovelList  = new Item[] {DwarvenItem.itemDwarvenShovelObsidian,  DwarvenItem.itemDwarvenShovelLapislazuli,  DwarvenItem.itemDwarvenShovelRedstone};
@@ -102,29 +102,29 @@ public class RecipeRegistry
 		final Item[] axeList     = new Item[] {DwarvenItem.itemDwarvenAxeObsidian,     DwarvenItem.itemDwarvenAxeLapislazuli,     DwarvenItem.itemDwarvenAxeRedstone};
 		final Item[] hoeList     = new Item[] {DwarvenItem.itemDwarvenHoeObsidian,     DwarvenItem.itemDwarvenHoeLapislazuli,     DwarvenItem.itemDwarvenHoeRedstone};
 		final Item[] swordList   = new Item[] {DwarvenItem.itemDwarvenSwordObsidian,   DwarvenItem.itemDwarvenSwordLapislazuli,   DwarvenItem.itemDwarvenSwordRedstone};
-		
+
 		final String[] shovelRecipe  = new String[] {  "M",   "S",   "S"};
 		final String[] pickaxeRecipe = new String[] {"MMM", " S ", " S "};
 		final String[] axeRecipe     = new String[] { "MM",  "MS",  " S"};
 		final String[] hoeRecipe     = new String[] { "MM",  " S",  " S"};
 		final String[] swordRecipe   = new String[] {  "M",   "M",   "S"};
-		
+
 		ItemStack[] materialList = new ItemStack[] {new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0)};
-		
+
 		List<Item[]> itemList = new ArrayList<Item[]>();
 		itemList.add(shovelList);
 		itemList.add(pickaxeList);
 		itemList.add(axeList);
 		itemList.add(hoeList);
 		itemList.add(swordList);
-		
+
 		List<String[]> recipeList = new ArrayList<String[]>();
 		recipeList.add(shovelRecipe);
 		recipeList.add(pickaxeRecipe);
 		recipeList.add(axeRecipe);
 		recipeList.add(hoeRecipe);
 		recipeList.add(swordRecipe);
-		
+
 		for (int i = 0; i < itemList.size(); i++)
 		{
 			for (int j = 0; j < materialList.length; j++ )
@@ -140,41 +140,41 @@ public class RecipeRegistry
 			}
 		}
 	}
-	
+
 	private void addRecipeUsedOreDictForNewTools()
 	{
 		final Item[] shovelList    = new Item[] {DwarvenItem.itemDwarvenShovelMithril,    DwarvenItem.itemDwarvenShovelEbony};
 		final Item[] pickaxeList   = new Item[] {DwarvenItem.itemDwarvenPickaxeMithril,   DwarvenItem.itemDwarvenPickaxeEbony};
 		final Item[] battleaxeList = new Item[] {DwarvenItem.itemDwarvenBattleaxeMithril, DwarvenItem.itemDwarvenBattleaxeEbony};
-		
+
 		final Item[] swordList     = new Item[] {DwarvenItem.itemDwarvenSwordMithril,     DwarvenItem.itemDwarvenSwordEbony};
-		
+
 		final Item[] helmetList    = new Item[] {DwarvenItem.itemDwarvenHelmetMithril,    DwarvenItem.itemDwarvenHelmetEbony};
 		final Item[] plateList     = new Item[] {DwarvenItem.itemDwarvenPlateMithril,     DwarvenItem.itemDwarvenPlateEbony};
 		final Item[] legsList      = new Item[] {DwarvenItem.itemDwarvenLegsMithril,      DwarvenItem.itemDwarvenLegsEbony};
 		final Item[] bootList      = new Item[] {DwarvenItem.itemDwarvenBootMithril,      DwarvenItem.itemDwarvenBootEbony};
-		
+
 		final String[] shovelRecipe    = new String[] {  "M",   "S",   "S"};
 		final String[] pickaxeRecipe   = new String[] {"MMM", " S ", " S "};
 		final String[] battleaxeRecipe = new String[] {"MMM", "MSM", " S "};
-	
+
 		final String[] helmetRecipe = new String[] {"MMM", "M M"};
 		final String[] plateRecipe  = new String[] {"M M", "MMM", "MMM"};
 		final String[] legsRecipe   = new String[] {"MMM", "M M", "M M"};
 		final String[] bootRecipe   = new String[] {"M M", "M M"};
-		
+
 		List<Item[]> itemList = new ArrayList<Item[]>();
 		itemList.add(shovelList);
 		itemList.add(pickaxeList);
 		itemList.add(battleaxeList);
-			
+
 		List<String[]> recipeList = new ArrayList<String[]>();
 		recipeList.add(shovelRecipe);
 		recipeList.add(pickaxeRecipe);
 		recipeList.add(battleaxeRecipe);
-		
+
 		String[] materialList = {"ingotMithril", "ingotEbony"};
-		
+
 		for (int i = 0; i < itemList.size(); i++)
 		{
 			for (int j = 0; j < materialList.length; j++ )
@@ -190,9 +190,9 @@ public class RecipeRegistry
 							}));
 			}
 		}
-		
+
 		Item[] brokenSword = new Item[] {DwarvenItem.itemDwarvenBrokenSwordMithril, DwarvenItem.itemDwarvenBrokenSwordEbony};
-		
+
 		for (int i = 0; i < materialList.length; i++)
 		{
 			GameRegistry.addRecipe(
@@ -205,23 +205,23 @@ public class RecipeRegistry
 							Character.valueOf('B'), brokenSword[i]
 						}));
 		}
-		
+
 		List<Item[]> helmetBootList = new ArrayList<Item[]>();
 		helmetBootList.add(helmetList);
 		helmetBootList.add(bootList);
-		
+
 		List<Item[]> plateLegsList = new ArrayList<Item[]>();
 		plateLegsList.add(plateList);
 		plateLegsList.add(legsList);
-		
+
 		List<String[]> helmetBootRecipeList = new ArrayList<String[]>();
 		helmetBootRecipeList.add(helmetRecipe);
 		helmetBootRecipeList.add(bootRecipe);
-		
+
 		List<String[]> plateLegsRecipeList = new ArrayList<String[]>();
 		plateLegsRecipeList.add(plateRecipe);
 		plateLegsRecipeList.add(legsRecipe);
-		
+
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < materialList.length; j++)
@@ -234,7 +234,7 @@ public class RecipeRegistry
 								(helmetBootRecipeList.get(i))[0], (helmetBootRecipeList.get(i))[1],
 								Character.valueOf('M'), materialList[j],
 							}));
-				
+
 				GameRegistry.addRecipe(
 					new ShapedOreRecipe(
 						new ItemStack((plateLegsList.get(i))[j], 1),
@@ -245,7 +245,7 @@ public class RecipeRegistry
 							}));
 			}
 		}
-		
+
 	}
 
 }

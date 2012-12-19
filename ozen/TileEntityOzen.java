@@ -1,27 +1,33 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityOzen extends TileEntity implements IInventory
 {
 	private ItemStack items[];
 	private byte facing;
-	
+
 	public TileEntityOzen()
 	{
 		items = new ItemStack[6];
 	}
-	
+
 	public byte getFacing()
 	{
 		return facing;
 	}
-	
+
 	public void setFacing(byte _facing)
 	{
 		this.facing = _facing;
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbttagcompound)
 	{
@@ -39,7 +45,7 @@ public class TileEntityOzen extends TileEntity implements IInventory
 		}
 		facing = nbttagcompound.getByte("facing");
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbttagcompound)
 	{
@@ -55,23 +61,23 @@ public class TileEntityOzen extends TileEntity implements IInventory
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		
+
 		nbttagcompound.setTag("Items", nbttaglist);
 		nbttagcompound.setByte("facing", facing);
 	}
-	
+
 	@Override
 	public int getSizeInventory()
 	{
 		return items.length;
 	}
-	
+
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
 		return items[i];
 	}
-	
+
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
@@ -84,16 +90,16 @@ public class TileEntityOzen extends TileEntity implements IInventory
 				onInventoryChanged();
 				return itemstack;
 			}
-			
+
 			ItemStack itemstack1 = items[i].splitStack(j);
-			
+
 			if (items[i].stackSize == 0)
 			{
 				items[i] = null;
 			}
-			
+
 			onInventoryChanged();
-			
+
 			return itemstack1;
 		}
 		else
@@ -101,13 +107,13 @@ public class TileEntityOzen extends TileEntity implements IInventory
 			return null;
 		}
 	}
-	
+
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
 		return items[i];
 	}
-	
+
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
@@ -118,19 +124,19 @@ public class TileEntityOzen extends TileEntity implements IInventory
 		}
 		onInventoryChanged();
 	}
-	
+
 	@Override
 	public String getInvName()
 	{
 		return "Ozen";
 	}
-	
+
 	@Override
 	public int getInventoryStackLimit()
 	{
 		return 64;
 	}
-	
+
 	@Override
 	public void onInventoryChanged()
 	{
@@ -140,7 +146,7 @@ public class TileEntityOzen extends TileEntity implements IInventory
 			this.worldObj.addBlockEvent(xCoord, yCoord, zCoord, Ozen.blockOzen.blockID, 0, 0);
 		}
 	}
-	
+
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
@@ -150,18 +156,18 @@ public class TileEntityOzen extends TileEntity implements IInventory
 		}
 		return entityplayer.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
 	}
-	
+
 	@Override
 	public void openChest()
 	{
 	}
-	
+
 	@Override
 	public void closeChest()
 	{
 	}
-	
-	// custom packet 
+
+	// custom packet
 	public void handlePacketData(int[] intData)
 	{
 		if (intData != null)
@@ -186,7 +192,7 @@ public class TileEntityOzen extends TileEntity implements IInventory
 			}
 		}
 	}
-	
+
 	public int[] buildIntDataList()
 	{
 		int[] sortList = new int[this.items.length * 3];
@@ -208,7 +214,7 @@ public class TileEntityOzen extends TileEntity implements IInventory
 		}
 		return sortList;
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket()
 	{

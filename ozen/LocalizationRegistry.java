@@ -1,9 +1,6 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
+import net.minecraft.item.ItemStack;
 import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry
@@ -17,7 +14,7 @@ public class LocalizationRegistry
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  4), "Red Oshiki",    "赤い折敷");
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  5), "White Oshiki",  "白色の折敷");
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  6), "Gold Oshiki",   "金色の折敷");
-		
+
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  8), "Oak Ozen",    "オークのお膳");
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1, 10), "Spruce Ozen", "松のお膳");
 		TranslationRegistry.addLocalization(new ItemStack(Ozen.blockOzen, 1,  9), "Birch Ozen",  "白樺のお膳");

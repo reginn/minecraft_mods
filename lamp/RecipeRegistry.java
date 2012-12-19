@@ -1,7 +1,8 @@
 package rgn.mods.lamp;
 
-import net.minecraft.src.*;
-
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RecipeRegistry
@@ -13,7 +14,7 @@ public class RecipeRegistry
 		{
 			craftingNum = Lamp.gen[Lamp.number];
 		}
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(Lamp.blockLamp, craftingNum, 0),
 				new Object[]
@@ -23,7 +24,7 @@ public class RecipeRegistry
 					Character.valueOf('T'), Block.thinGlass,
 					Character.valueOf('C'), new ItemStack(Item.coal, 1, 0)
 				});
-				
+
 		GameRegistry.addRecipe(
 			new ItemStack(Lamp.blockLamp, craftingNum, 1),
 				new Object[]
@@ -33,7 +34,7 @@ public class RecipeRegistry
 					Character.valueOf('T'), Block.thinGlass,
 					Character.valueOf('L'), Block.glowStone
 				});
-							
+
 		GameRegistry.addRecipe(
 			new ItemStack(Lamp.blockLamp, craftingNum, 2),
 				new Object[]
@@ -43,7 +44,7 @@ public class RecipeRegistry
 					Character.valueOf('G'), Item.ingotGold,
 					Character.valueOf('L'), Block.glowStone
 				});
-							
+
 		GameRegistry.addRecipe(
 			new ItemStack(Lamp.blockLamp, craftingNum, 3),
 				new Object[]

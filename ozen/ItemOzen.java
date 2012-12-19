@@ -1,9 +1,9 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemOzen extends ItemBlock
 {
@@ -13,7 +13,7 @@ public class ItemOzen extends ItemBlock
 		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
-	
+
 	@Override
 	public String getItemNameIS(ItemStack itemstack)
 	{
@@ -25,24 +25,24 @@ public class ItemOzen extends ItemBlock
 		{
 			k = material;
 		}
-		
+
 		if (type == 0 || type == 1)
 		{
 			l = type;
 		}
-		
+
 		String mat = ((BlockOzen)Ozen.blockOzen).names[k];
 		String typ = ((BlockOzen)Ozen.blockOzen).types[l];
-		
+
 		return (new StringBuilder()).append(getItemName()).append(".").append(typ).append(".").append(mat).toString();
 	}
-	
+
 	@Override
 	public int getMetadata(int par1)
 	{
 		return par1;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public int getColorFromDamage(int par1, int par2)
 	{

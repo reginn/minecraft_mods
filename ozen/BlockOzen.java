@@ -2,10 +2,22 @@ package rgn.mods.ozen;
 
 import java.util.List;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockOzen extends BlockContainer
 {
@@ -13,30 +25,30 @@ public class BlockOzen extends BlockContainer
 		{
 			"oak", "spruce", "birch", "black", "red", "iron", "gold"
 		};
-	
+
 	public final String[] types = new String[]
 		{
 			"oshiki", "ozen",
 		};
-	
+
 	public final int[] textureIndex = new int[]
 		{
 			4, 198, 214, 22, 22, 22, 23
 		};
-	
+
 	public BlockOzen(int blockId)
 	{
 		super(blockId, 4, Material.wood);
 		this.blockHardness = 0.3F;
 		this.setCreativeTab(Ozen.tabOzen);
 	}
-	
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
 	{
 		return null;
 	}
-	
+
 	@Override
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
 	{
@@ -44,33 +56,33 @@ public class BlockOzen extends BlockContainer
 		{
 			list.add(new ItemStack(blockID, 1, i));
 		}
-		
+
 		for (int i = 0; i < 7; i++)
 		{
 			list.add(new ItemStack(blockID, 1, 8 + i));
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return this.getBlockTextureFromSideAndMetadata(side, world.getBlockMetadata(x, y, z));
 	}
-	
+
 	@Override
 	public int getBlockTextureFromSideAndMetadata(int side, int meta)
 	{
 		this.blockIndexInTexture = this.textureIndex[meta & 7];
 		return this.blockIndexInTexture;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderColor(int metadata)
 	{
 		int texture = metadata & 7;
-		
+
 		if (texture == 3)
 		{
 			return 0x222222;
@@ -84,15 +96,15 @@ public class BlockOzen extends BlockContainer
 			return 0xFFFFFF;
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
 	{
 		int metadata = world.getBlockMetadata(x, y, z);
-		
+
 		int texture = metadata & 7;
-		
+
 		if (texture == 3)
 		{
 			return 0x222222;
@@ -106,43 +118,43 @@ public class BlockOzen extends BlockContainer
 			return 0xFFFFFF;
 		}
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
 		return Ozen.ozenRenderID;
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World var1)
 	{
 		return new TileEntityOzen();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int getMobilityFlag()
 	{
 		return 2;
 	}
-	
+
 	@Override
 	public int damageDropped(int damage)
 	{
 		return damage;
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player)
 	{
@@ -164,29 +176,29 @@ public class BlockOzen extends BlockContainer
 		{
 			facing = 4;
 		}
-		
+
 		TileEntity tileentity = world.getBlockTileEntity(x, y, z);
 		if (tileentity != null && tileentity instanceof TileEntityOzen)
 		{
 			((TileEntityOzen)tileentity).setFacing(facing);
-			world.markBlockNeedsUpdate(x, y, z);
+			world.markBlockForUpdate(x, y, z);
 		}
 	}
-	
+
 	@Override
 	public void onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
 	{
 		super.onBlockEventReceived(world, x, y, z, eventId, eventParam);
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 	}
-	
+
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		super.onBlockAdded(world, x, y, z);
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 	{
@@ -195,17 +207,17 @@ public class BlockOzen extends BlockContainer
 		{
 			return true;
 		}
-		
+
 		if (world.isRemote)
 		{
 			return true;
 		}
-		
+
 		entityPlayer.openGui(Ozen.instance, Ozen.guiIdOzen, world, x, y, z);
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6)
 	{
@@ -216,7 +228,7 @@ public class BlockOzen extends BlockContainer
 		}
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
-	
+
 	private void dropItem(IInventory iinventory, World world, int xCoord, int yCoord, int zCoord)
 	{
 		for (int i = 0; i < iinventory.getSizeInventory(); i++)
@@ -226,11 +238,11 @@ public class BlockOzen extends BlockContainer
 			{
 				continue ;
 			}
-			
+
 			float xf = world.rand.nextFloat() * 0.8F + 0.1F;
 			float yf = world.rand.nextFloat() * 0.8F + 0.1F;
 			float zf = world.rand.nextFloat() * 0.8F + 0.1F;
-			
+
 			while (itemstack.stackSize > 0)
 			{
 				int dropnum = world.rand.nextInt(21) + 10;
@@ -239,17 +251,17 @@ public class BlockOzen extends BlockContainer
 					dropnum = itemstack.stackSize;
 				}
 				itemstack.stackSize -= dropnum;
-				
-				EntityItem entityitem = new EntityItem(world, (float)xCoord + xf, (float)yCoord + yf, (float) zCoord + zf, 
+
+				EntityItem entityitem = new EntityItem(world, (float)xCoord + xf, (float)yCoord + yf, (float) zCoord + zf,
 													   new ItemStack(itemstack.itemID, dropnum, itemstack.getItemDamage()));
 				float bias = 0.05F;
 				entityitem.motionX = (float)world.rand.nextGaussian() * bias;
 				entityitem.motionY = (float)world.rand.nextGaussian() * bias + 0.2F;
 				entityitem.motionZ = (float)world.rand.nextGaussian() * bias;
-				
+
 				if (itemstack.hasTagCompound())
 				{
-					entityitem.item.setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+					entityitem.func_92014_d().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
 				}
 				world.spawnEntityInWorld(entityitem);
 			}

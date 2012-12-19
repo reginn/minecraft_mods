@@ -2,23 +2,23 @@ package rgn.mods.lamp;
 
 import java.util.logging.Level;
 
-import net.minecraft.src.*;
-import net.minecraftforge.common.*;
-
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.*;
-import cpw.mods.fml.common.registry.*;
-
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.Property;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
-
-import rgn.util.TranslationRegistry;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod
 (
-	modid   = "Lamp", 
-	name    = "Lamp", 
-	version = "3.0.0"
+	modid   = "Lamp",
+	name    = "Lamp",
+	version = "3.1.0"
 )
 @NetworkMod
 (
@@ -29,19 +29,19 @@ public class Lamp
 {
 	@SidedProxy(clientSide = "rgn.mods.lamp.client.ClientProxy", serverSide = "rgn.mods.lamp.CommonProxy")
 	public static CommonProxy proxy;
-	
+
 	public static Block blockLamp;
 	public static Block blockLight;
-	
+
 	public static int lampRenderType;
-	
+
 	private int blockIdLamp;
 	private int blockIdLight;
 	public static int[] gen = new int[]{16, 4, 1};
 	public static int number;
-	
+
 	public static final CreativeTabs tabLamp = new CreativeTabLamp("lamp");
-	
+
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -64,21 +64,21 @@ public class Lamp
 			cfg.save();
 		}
 	}
-	
+
 	@Mod.Init
 	public void init(FMLInitializationEvent event)
 	{
 		lampRenderType = proxy.getUniqueRenderType();
-		
+
 		blockLamp  = (new BlockLamp(blockIdLamp,  139)).setBlockName("blocklamp");
 		blockLight = (new BlockLight(blockIdLight, 0)).setBlockName("dontuse");
-		
+
 		GameRegistry.registerBlock(blockLamp, ItemLamp.class);
 		GameRegistry.registerBlock(blockLight);
-		
+
 		proxy.registerTextures();
 		proxy.registerRenderers();
-		
+
 		(new RecipeRegistry()).addRecipe();
 		(new LocalizationRegistry()).addLocalization();
 	}

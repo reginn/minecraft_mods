@@ -1,11 +1,8 @@
 package rgn.mods.lamp.client;
 
-import net.minecraft.src.*;
 import net.minecraftforge.client.MinecraftForgeClient;
-
-import cpw.mods.fml.client.registry.RenderingRegistry;
-
 import rgn.mods.lamp.CommonProxy;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -14,17 +11,17 @@ public class ClientProxy extends CommonProxy
 	{
 		return RenderingRegistry.getNextAvailableRenderId();
 	}
-	
+
 	@Override
 	public void registerTextures()
 	{
 		MinecraftForgeClient.preloadTexture("/rgn/sprites/lamp/blocks.png");
 	}
-	
+
 	@Override
 	public void registerRenderers()
 	{
 		RenderingRegistry.registerBlockHandler(new LampRenderingHandler());
 	}
-	
+
 }

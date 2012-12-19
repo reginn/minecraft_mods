@@ -1,10 +1,10 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.network.IGuiHandler;
-
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import rgn.mods.ozen.client.GuiOzen;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler
 {
@@ -12,16 +12,16 @@ public class CommonProxy implements IGuiHandler
 	{
 		return -1;
 	}
-	
+
 	public void registerRenderers()
 	{
 	}
-	
+
 	public World getClientWorld()
 	{
 		return null;
 	}
-	
+
 	// implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

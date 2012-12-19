@@ -1,10 +1,16 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-import java.io.*;
-import com.google.common.io.*;
-
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -38,7 +44,7 @@ public class PacketHandler implements IPacketHandler
 		{
 			return;
 		}
-		
+
 		World world = Ozen.proxy.getClientWorld();
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 		if (tileEntity instanceof TileEntityOzen)
@@ -48,20 +54,20 @@ public class PacketHandler implements IPacketHandler
 			tileEntityOzen.setFacing(facing);
 		}
 	}
-	
+
 	public static Packet getPacket(TileEntityOzen tileEntityOzen)
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos      = new DataOutputStream(bos);
-		
+
 		int x = tileEntityOzen.xCoord;
 		int y = tileEntityOzen.yCoord;
 		int z = tileEntityOzen.zCoord;
 		byte facing = tileEntityOzen.getFacing();
-		
+
 		int[] items = tileEntityOzen.buildIntDataList();
 		boolean hasStacks = (items != null);
-		
+
 		try
 		{
 			dos.writeInt(x);
@@ -81,13 +87,13 @@ public class PacketHandler implements IPacketHandler
 		{
 			e.printStackTrace();
 		}
-		
+
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		packet.channel                = "ozen";
 		packet.data                   = bos.toByteArray();
 		packet.length                 = bos.size();
 		packet.isChunkDataPacket      = true;
-		
+
 		return packet;
 	}
 

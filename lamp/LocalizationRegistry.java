@@ -1,7 +1,6 @@
 package rgn.mods.lamp;
 
-import net.minecraft.src.*;
-
+import net.minecraft.item.ItemStack;
 import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry

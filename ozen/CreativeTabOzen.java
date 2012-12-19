@@ -1,9 +1,8 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraft.creativetab.CreativeTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class CreativeTabOzen extends CreativeTabs
 {
@@ -11,14 +10,14 @@ public class CreativeTabOzen extends CreativeTabs
 	{
 		super(type);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
     {
         return Ozen.blockOzen.blockID;
     }
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()

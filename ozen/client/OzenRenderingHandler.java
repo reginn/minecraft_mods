@@ -1,15 +1,16 @@
 package rgn.mods.ozen.client;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 import rgn.mods.ozen.Ozen;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
@@ -18,14 +19,14 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		{
 			4, 198, 214, 22, 22, 22, 23
 		};
-		
+
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
 		if (modelID == this.getRenderId())
 		{
 			int modelType = metadata >>> 3;
 			int texture   = metadata & 7;
-			
+
 			if (modelType == 0)
 			{
 				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
@@ -41,7 +42,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F,  2.0F/16.0F,  this.textureIndex[texture]);
 				renderInvCuboid(renderer, block,  14.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
 				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
-				
+
 				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.textureIndex[texture]);
 				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F, 11.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
 				renderInvCuboid(renderer, block,  11.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.textureIndex[texture]);
@@ -49,14 +50,14 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 			}
 		}
 	}
-	
+
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
 		if (modelId == this.getRenderId())
 		{
 			int modelType = world.getBlockMetadata(x, y, z) >>> 3;
 			int texture   = world.getBlockMetadata(x, y, z) & 7;
-			
+
 			if (modelType == 0)
 			{
 				renderer.overrideBlockTexture = this.textureIndex[texture];
@@ -64,31 +65,31 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float r = (float)(rgb >> 16 & 255) / 255.0F;
 				float g = (float)(rgb >>  8 & 255) / 255.0F;
 				float b = (float)(rgb       & 255) / 255.0F;
-				
+
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds(14.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.func_83018_a(block);
-				
+				renderer.updateCustomBlockBounds(block);
+
 				return false;
 			}
 			else if (modelType == 1)
@@ -98,71 +99,71 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float r = (float)(rgb >> 16 & 255) / 255.0F;
 				float g = (float)(rgb >>  8 & 255) / 255.0F;
 				float b = (float)(rgb       & 255) / 255.0F;
-				
+
 				block.setBlockBounds( 2.0F/16.0F,  4.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 5.0F/16.0F, 14.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 2.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds(14.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
-				renderer.func_83018_a(block);
+				renderer.updateCustomBlockBounds(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
-				
+
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.func_83018_a(block);
-				
+				renderer.updateCustomBlockBounds(block);
+
 				return false;
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean shouldRender3DInInventory()
 	{
 		return true;
 	}
-	
+
 	public int getRenderId()
 	{
 		return Ozen.ozenRenderID;
 	}
-	
+
 	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.func_83018_a(block);
+		renderer.updateCustomBlockBounds(block);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		block.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-		renderer.func_83018_a(block);
+		renderer.updateCustomBlockBounds(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
 		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
@@ -189,6 +190,6 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.func_83018_a(block);
+		renderer.updateCustomBlockBounds(block);
 	}
 }

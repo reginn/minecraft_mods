@@ -1,11 +1,15 @@
 package rgn.mods.ozen;
 
-import net.minecraft.src.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerOzen extends Container
 {
 	private TileEntityOzen entity;
-	
+
 	public ContainerOzen(IInventory iinventory, TileEntityOzen tileEntityOzen)
 	{
 		entity = tileEntityOzen;
@@ -16,7 +20,7 @@ public class ContainerOzen extends Container
 				addSlotToContainer(new Slot(tileEntityOzen, l + i * 3, 62 + l * 18, 25 + i * 18));
 			}
 		}
-		
+
 		for (int j = 0; j < 3; j++)
 		{
 			for (int i1 = 0; i1 < 9; i1++)
@@ -24,19 +28,19 @@ public class ContainerOzen extends Container
 				addSlotToContainer(new Slot(iinventory, i1 + j * 9 + 9, 8 + i1 * 18, 84 + j * 18));
 			}
 		}
-		
+
 		for (int k = 0; k < 9; k++)
 		{
 			addSlotToContainer(new Slot(iinventory, k, 8 + k * 18, 142));
 		}
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
 		return entity.isUseableByPlayer(entityplayer);
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex)
 	{
@@ -66,7 +70,7 @@ public class ContainerOzen extends Container
 				slot.onSlotChanged();
 			}
 		}
-		
+
 		return itemstack;
 	}
 }

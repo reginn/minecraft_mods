@@ -1,13 +1,9 @@
 package rgn.mods.dawnbreaker.client;
 
-import net.minecraft.src.*;
-
 import net.minecraftforge.client.MinecraftForgeClient;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
 import rgn.mods.dawnbreaker.CommonProxy;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy

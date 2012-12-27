@@ -1,21 +1,25 @@
 package rgn.mods.elventools.client;
 
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBoat;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.src.*;
-
-import rgn.mods.elventools.*;
+import rgn.mods.elventools.entity.EntityEbonyBoat;
 
 public class RenderEbonyBoat extends Render
-{	
+{
 	protected ModelBase modelBoat;
-	
+
 	public RenderEbonyBoat()
 	{
 		shadowSize = 0.5F;
 		modelBoat = new ModelBoat();
 	}
-	
+
 	private void renderBoat(EntityEbonyBoat entity, double d, double d1, double d2, float f, float f1)
 	{
 		GL11.glPushMatrix();
@@ -37,7 +41,7 @@ public class RenderEbonyBoat extends Render
 		modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 	}
-	
+
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
 		this.renderBoat((EntityEbonyBoat)entity, d, d1, d2, f, f1);
 	}

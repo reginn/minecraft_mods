@@ -1,11 +1,14 @@
 package rgn.mods.elventools.client;
 
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import net.minecraft.src.*;
-
-import rgn.mods.elventools.*;
+import rgn.mods.elventools.entity.EntityRopeArrow;
 
 public class RenderRopeArrow extends Render
 {

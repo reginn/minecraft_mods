@@ -1,49 +1,51 @@
 package rgn.mods.elventools;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.SidedProxy;
-
+import net.minecraftforge.common.MinecraftForge;
+import rgn.mods.elventools.config.Config;
+import rgn.mods.elventools.config.ConfigureBlock;
+import rgn.mods.elventools.config.ConfigureEntity;
+import rgn.mods.elventools.config.ConfigureItem;
+import rgn.mods.elventools.config.ConfigureOreDict;
+import rgn.mods.elventools.core.CommonProxy;
+import rgn.mods.elventools.core.ForgeEventHooks;
+import rgn.mods.elventools.core.FuelHandler;
+import rgn.mods.elventools.core.LocalizationRegistry;
+import rgn.mods.elventools.core.RecipeRegistry;
+import rgn.mods.elventools.generate.ElvenWorldGenerator;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.network.NetworkMod;
-
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-
+import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.minecraftforge.common.MinecraftForge;
-
-import rgn.util.TranslationRegistry;
 
 @Mod
 (
-	modid   = "ElvenTools", 
-	name    = "ElvenTools", 
-	version = "3.0.0"
+	modid   = "ElvenTools",
+	name    = "ElvenTools",
+	version = "3.1.2"
 )
 @NetworkMod
-( 
-	clientSideRequired = true, 
-	serverSideRequired = false, 
-	channels           = { "ElvenTools" },
-	packetHandler      = PacketHandler.class
+(
+	clientSideRequired = true,
+	serverSideRequired = false
 )
 public class ElvenTools
 {
 	@SidedProxy(clientSide = "rgn.mods.elventools.client.ClientProxy", serverSide = "rgn.mods.elventools.CommonProxy")
 	public static CommonProxy proxy;
-	
+
 	@Mod.Instance("ElvenTools")
 	public static ElvenTools instance;
-	
-	
+
+
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Config.buildConfiguration(event.getSuggestedConfigurationFile());
 	}
-		
+
 	@Mod.Init
 	public void init(FMLInitializationEvent event)
 	{
@@ -58,12 +60,11 @@ public class ElvenTools
 
 		proxy.registerTextures();
 		proxy.registerRenderers();
-		
+
 		(new RecipeRegistry()).addRecipe();
 		(new LocalizationRegistry()).addLocalization();
 
 	}
 
-	
+
 }
- 

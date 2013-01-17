@@ -16,7 +16,7 @@ public class CreativeTabElvenTools extends CreativeTabs
 	@SideOnly(Side.CLIENT)
 	public int getTabIconItemIndex()
     {
-        return ElvenItem.itemLeatherLongbow.shiftedIndex;
+        return ElvenItem.itemLeatherLongbow.itemID;
     }
 
 	@Override

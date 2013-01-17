@@ -56,7 +56,7 @@ public class BlockRopeEstablisher extends Block
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3)
 	{
-		return ElvenItem.itemRopeEstablisher.shiftedIndex;
+		return ElvenItem.itemRopeEstablisher.itemID;
 	}
 
 	@Override

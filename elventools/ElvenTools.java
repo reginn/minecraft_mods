@@ -24,7 +24,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "ElvenTools",
 	name    = "ElvenTools",
-	version = "3.1.2"
+	version = "3.2.3"
 )
 @NetworkMod
 (
@@ -33,7 +33,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 )
 public class ElvenTools
 {
-	@SidedProxy(clientSide = "rgn.mods.elventools.client.ClientProxy", serverSide = "rgn.mods.elventools.CommonProxy")
+	@SidedProxy(clientSide = "rgn.mods.elventools.client.ClientProxy", serverSide = "rgn.mods.elventools.core.CommonProxy")
 	public static CommonProxy proxy;
 
 	@Mod.Instance("ElvenTools")

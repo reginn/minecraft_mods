@@ -8,11 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+
 import rgn.mods.elventools.block.BlockEbonySapling;
 import rgn.mods.elventools.entity.EntityArrowBase;
 import rgn.mods.elventools.entity.EntityRopeArrow;
@@ -30,8 +32,8 @@ public class ForgeEventHooks
 		ItemStack itemstack = event.result;
 
 		if (player.capabilities.isCreativeMode
-		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex)
-		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
+		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.itemID)
+		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.itemID))
 		{
 			player.setItemInUse(itemstack, Item.bow.getMaxItemUseDuration(itemstack));
 			event.setCanceled(true);
@@ -65,11 +67,11 @@ public class ForgeEventHooks
 
 		EntityArrowBase entityArrow = null;
 
-		if (player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex))
+		if (player.inventory.hasItem(ElvenItem.itemTorchArrow.itemID))
 		{
 			entityArrow = new EntityTorchArrow(world, player, baseDamage * 2.0F * damageRatio);
 		}
-		else if (player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
+		else if (player.inventory.hasItem(ElvenItem.itemRopeArrow.itemID))
 		{
 			entityArrow = new EntityRopeArrow(world, player, baseDamage * 2.0F * damageRatio);
 		}
@@ -79,8 +81,8 @@ public class ForgeEventHooks
 		}
 
 		if (isInfinity
-		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.shiftedIndex)
-		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.shiftedIndex))
+		 || player.inventory.hasItem(ElvenItem.itemTorchArrow.itemID)
+		 || player.inventory.hasItem(ElvenItem.itemRopeArrow.itemID))
 		{
 
 			if (baseDamage == 1.0F)
@@ -118,11 +120,11 @@ public class ForgeEventHooks
 			{
 				if (entityArrow instanceof EntityTorchArrow)
 				{
-					player.inventory.consumeInventoryItem(ElvenItem.itemTorchArrow.shiftedIndex);
+					player.inventory.consumeInventoryItem(ElvenItem.itemTorchArrow.itemID);
 				}
 				else if(entityArrow instanceof EntityRopeArrow)
 				{
-					player.inventory.consumeInventoryItem(ElvenItem.itemRopeArrow.shiftedIndex);
+					player.inventory.consumeInventoryItem(ElvenItem.itemRopeArrow.itemID);
 				}
 				else
 				{

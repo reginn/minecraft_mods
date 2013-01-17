@@ -112,7 +112,7 @@ public class EntityEbonyBoat extends Entity
 					this.riddenByEntity.mountEntity(this);
 				}
 
-				this.dropItemWithOffset(ElvenItem.itemEbonyBoat.shiftedIndex, 1, 0.0F);
+				this.dropItemWithOffset(ElvenItem.itemEbonyBoat.itemID, 1, 0.0F);
 				this.setDead();
 			}
 
@@ -352,7 +352,7 @@ public class EntityEbonyBoat extends Entity
 
 					for (var25 = 0; var25 < 2; ++var25)
 					{
-						this.dropItemWithOffset(Item.stick.shiftedIndex, 1, 0.0F);
+						this.dropItemWithOffset(Item.stick.itemID, 1, 0.0F);
 					}
 				}
 				*/

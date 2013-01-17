@@ -28,7 +28,7 @@ public class ItemElvenAxe extends ItemAxe
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenItem.itemElvenAxeMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenAxeMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}
@@ -44,7 +44,7 @@ public class ItemElvenAxe extends ItemAxe
 			return ;
 		}
 
-		if (itemstack.itemID == ElvenItem.itemElvenAxeMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenAxeMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}

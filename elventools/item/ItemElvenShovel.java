@@ -28,7 +28,7 @@ public class ItemElvenShovel extends ItemSpade
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}
@@ -44,7 +44,7 @@ public class ItemElvenShovel extends ItemSpade
 			return ;
 		}
 
-		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenShovelMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}

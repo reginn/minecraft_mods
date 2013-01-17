@@ -28,12 +28,12 @@ public class ConfigureBlock
 		MinecraftForge.setBlockHarvestLevel(ElvenBlock.blockEbonyWood,   "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(ElvenBlock.blockEbonyLeaves, "axe", 0);
 
-		GameRegistry.registerBlock(ElvenBlock.blockEbonyLog);
-		GameRegistry.registerBlock(ElvenBlock.blockEbonyLeaves);
-		GameRegistry.registerBlock(ElvenBlock.blockEbonySapling);
-		GameRegistry.registerBlock(ElvenBlock.blockEbonyWood);
-		GameRegistry.registerBlock(ElvenBlock.blockRope);
-		GameRegistry.registerBlock(ElvenBlock.blockRopeEstablisher);
+		GameRegistry.registerBlock(ElvenBlock.blockEbonyLog,        "EbonyLog");
+		GameRegistry.registerBlock(ElvenBlock.blockEbonyLeaves,     "EbonyLeaves");
+		GameRegistry.registerBlock(ElvenBlock.blockEbonySapling,    "EbonySapling");
+		GameRegistry.registerBlock(ElvenBlock.blockEbonyWood,       "EbonyWood");
+		GameRegistry.registerBlock(ElvenBlock.blockRope,            "Rope");
+		GameRegistry.registerBlock(ElvenBlock.blockRopeEstablisher, "RopeEstablisher");
 
 		GameRegistry.addSmelting(ElvenBlock.blockEbonyLog.blockID, new ItemStack(Item.coal, 2, 1), 1.0F);
 	}

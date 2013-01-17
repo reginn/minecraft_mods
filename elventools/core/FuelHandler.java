@@ -12,6 +12,6 @@ public class FuelHandler implements IFuelHandler
 			fuel.itemID == ElvenBlock.blockEbonyLog.blockID      ? 1000 :
 			fuel.itemID == ElvenBlock.blockEbonyWood.blockID     ? 800 :
 			fuel.itemID == ElvenBlock.blockEbonySapling.blockID  ? 400 :
-			fuel.itemID == ElvenItem.itemEbonyStick.shiftedIndex ? 400 : 0;
+			fuel.itemID == ElvenItem.itemEbonyStick.itemID ? 400 : 0;
 	}
 }

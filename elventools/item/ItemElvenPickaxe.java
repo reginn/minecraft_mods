@@ -28,7 +28,7 @@ public class ItemElvenPickaxe extends ItemPickaxe
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenItem.itemElvenPickaxeMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenPickaxeMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}
@@ -44,7 +44,7 @@ public class ItemElvenPickaxe extends ItemPickaxe
 			return ;
 		}
 
-		if (itemstack.itemID == ElvenItem.itemElvenPickaxeMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenPickaxeMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.efficiency, 2);
 		}

@@ -1,12 +1,17 @@
 package rgn.mods.elventools.client;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraftforge.client.MinecraftForgeClient;
+
 import rgn.mods.elventools.core.CommonProxy;
 import rgn.mods.elventools.entity.EntityEbonyBoat;
 import rgn.mods.elventools.entity.EntityRopeArrow;
 import rgn.mods.elventools.entity.EntityTorchArrow;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
 	@Override

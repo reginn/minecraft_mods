@@ -35,7 +35,7 @@ public class ItemElvenSword extends ItemSword
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.smite, 2);
 		}
@@ -51,7 +51,7 @@ public class ItemElvenSword extends ItemSword
 			return ;
 		}
 
-		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == ElvenItem.itemElvenSwordMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.smite, 2);
 		}

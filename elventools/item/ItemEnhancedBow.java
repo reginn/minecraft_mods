@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
@@ -58,7 +59,7 @@ public class ItemEnhancedBow extends ItemBow
 
 		boolean var5 = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemstack) > 0;
 
-		if (var5 || player.inventory.hasItem(Item.arrow.shiftedIndex))
+		if (var5 || player.inventory.hasItem(Item.arrow.itemID))
 		{
 			float var7 = (float)var6 / 20.0F;
 			var7 = (var7 * var7 + var7 * 2.0F) / 3.0F;
@@ -108,7 +109,7 @@ public class ItemEnhancedBow extends ItemBow
 			}
 			else
 			{
-				player.inventory.consumeInventoryItem(Item.arrow.shiftedIndex);
+				player.inventory.consumeInventoryItem(Item.arrow.itemID);
 			}
 
 			if (!world.isRemote)
@@ -121,7 +122,7 @@ public class ItemEnhancedBow extends ItemBow
 	@Override
 	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
-		if (usingItem != null && usingItem.getItem().shiftedIndex == this.shiftedIndex)
+		if (usingItem != null && usingItem.getItem().itemID == this.itemID)
 		{
 			int k = usingItem.getMaxItemUseDuration() - useRemaining;
 			if (k >= 18) return animation[2];

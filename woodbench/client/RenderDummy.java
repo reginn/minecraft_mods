@@ -1,12 +1,9 @@
 package rgn.mods.woodbench.client;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDummy extends Render

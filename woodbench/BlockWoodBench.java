@@ -1,28 +1,40 @@
 package rgn.mods.woodbench;
 
-import java.util.*;
-import net.minecraft.src.*;
+import java.util.Iterator;
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockWoodBench extends BlockContainer
 {
 	private final AxisAlignedBB boundingBox = AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-	
+
 	public BlockWoodBench(int blockId)
 	{
 		super(blockId, Block.planks.blockIndexInTexture , Block.planks.blockMaterial);
 		this.setHardness(2.0F);
 		this.setBlockName("WoodBench");
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(CreativeTabs.tabDeco);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
-	
+
 	@Override
 	public void onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
 	{
 		super.onBlockEventReceived(world, x, y, z, eventId, eventParam);
-		world.markBlockNeedsUpdate(x, y, z);
+		world.markBlockForUpdate(x, y, z);
 	}
-	
+
 	@Override
 	public int getRenderBlockPass()
 	{
@@ -53,23 +65,23 @@ public class BlockWoodBench extends BlockContainer
 		if(entity instanceof EntityPlayer) return;
 		if(entity instanceof EntityDummy) return;
 		if(!(entity instanceof EntityLiving)) return;
-		
+
 		EntityLiving entityLiving = (EntityLiving)entity;
-		
+
 		TileEntityWoodBench tileentity = (TileEntityWoodBench)world.getBlockTileEntity(i, j, k);
 		tileentity.mountEntity(entityLiving);
-		
+
 		/*
 		if(tileentity.getEntityId() == 0){
 			EntityDummy entityDummy = new EntityDummy(world, i+0.5D, j, k+0.5D);
 			world.spawnEntityInWorld(entityDummy);
 			entity.mountEntity(entityDummy);
-			
+
 			tileentity.setEntityId(entityDummy.entityId);
 		}
 		*/
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{

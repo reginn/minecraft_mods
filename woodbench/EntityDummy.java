@@ -2,20 +2,29 @@ package rgn.mods.woodbench;
 
 import java.util.List;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
-import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.ModLoader;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 
 public class EntityDummy extends Entity
 {
 	private double field_9388_j;
 	private double field_9387_k;
 	private double field_9386_l;
-	
+
 	private TileEntityWoodBench tileEntity;
 	private int dimensionID;
-	
+
 	public EntityDummy(World world)
 	{
 		super(world);
@@ -23,7 +32,7 @@ public class EntityDummy extends Entity
 		yOffset = 0.0F;
 		preventEntitySpawning = true;
 	}
-	
+
 	public EntityDummy(World world, double x, double y, double z, TileEntityWoodBench _tileEntity)
 	{
 		this(world);
@@ -82,12 +91,12 @@ public class EntityDummy extends Entity
 		{
 			return (double)height * 0.0D - 0.4D;
 		}
-		
+
 		if (riddenByEntity.getClass().getSimpleName().compareTo("Melo_e") == 0)
 		{
 			return (double)height * 0.0D - 0.4D;
 		}
-		
+
 		return (double)height * 0.0D + 0.1D;
 	}
 
@@ -138,7 +147,7 @@ public class EntityDummy extends Entity
 	public void onUpdate()
 	{
 		super.onUpdate();
-		
+
 		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(1.0D, 0.0D, 1.0D));
 		if(list != null && list.size() > 0)
 		{
@@ -151,7 +160,7 @@ public class EntityDummy extends Entity
 				}
 			}
 		}
-		
+
 		if (riddenByEntity != null)
 		{
 			if (riddenByEntity instanceof EntityLiving)
@@ -159,8 +168,9 @@ public class EntityDummy extends Entity
 				EntityLiving entity = ((EntityLiving)riddenByEntity);
 				try
 				{
-					//ReflectionHelper.setPrivateValue(EntityLiving.class, entity, 0, "lastDamage");
-					ModLoader.setPrivateValue(EntityLiving.class, entity, 71, 0);
+					String fieldName = ObfuscationReflectionHelper.obfuscation ? "bI" : "numTicksToChaseTarget";
+					ObfuscationReflectionHelper.setPrivateValue(EntityLiving.class, entity, Integer.valueOf(0), new String[]{fieldName});
+					// ModLoader.setPrivateValue(EntityLiving.class, entity, 71, 0);
 				}
 				catch (Exception e)
 				{
@@ -177,7 +187,6 @@ public class EntityDummy extends Entity
 		{
 			setDead();
 		}
-		this.sendPacketToServer();
 	}
 
 	@Override
@@ -187,12 +196,12 @@ public class EntityDummy extends Entity
 		{
 			return;
 		}
-		
+
 		if(entity == riddenByEntity)
 		{
 			return;
 		}
-		
+
 		if((entity instanceof EntityLiving) && !(entity instanceof EntityPlayer) && riddenByEntity == null && entity.ridingEntity == null)
 		{
 			entity.mountEntity(this);
@@ -220,19 +229,4 @@ public class EntityDummy extends Entity
 	protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
 	{
 	}
-	
-	// add
-	private void sendPacketToServer()
-	{
-		if (!this.worldObj.isRemote)
-		{
-			this.dimensionID = this.worldObj.getWorldInfo().getDimension();
-			if (this.ridingEntity != null)
-			{
-				PacketDispatcher.sendPacketToAllAround(posX, posY, posZ, 16.0D, this.dimensionID, PacketHandler.getPacket(this.tileEntity, (EntityLiving)this.ridingEntity));
-			}
-		}
-	}
-	
-
 }

@@ -1,17 +1,16 @@
 package rgn.mods.woodbench.client;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import java.util.*;
-
-import net.minecraft.src.*;
-import net.minecraft.client.Minecraft;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
 
 import rgn.mods.woodbench.BlockWoodBench;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderWoodBench extends RenderBlocks
@@ -81,7 +80,7 @@ public class RenderWoodBench extends RenderBlocks
 		}
 		return renderObliqueGBlockWithColorMultiplier(par1Block, par2, par3, par4, f, f1, f2);
 	}
-	
+
 	public boolean renderObliqueGBlockWithColorMultiplier(Block par1Block, int par2, int par3, int par4, float par5, float par6, float par7)
 	{
 		enableAO = false;
@@ -123,7 +122,7 @@ public class RenderWoodBench extends RenderBlocks
 		int side = meta & 1;
 
 		if(par1Block.shouldSideBeRendered(blockAccess, par2, par3 - 1, par4, 0)){
-			tessellator.setBrightness(par1Block.minY <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3 - 1, par4) : i);
+			tessellator.setBrightness(par1Block.getBlockBoundsMinY() <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3 - 1, par4) : i);
 			tessellator.setColorOpaque_F(f7, f10, f13);
 			renderBottomFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0));
 		}
@@ -137,11 +136,11 @@ public class RenderWoodBench extends RenderBlocks
 			tessellator.setColorOpaque_F(f4, f5, f6);
 			renderObliqueGTopFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), 1);
 
-			tessellator.setBrightness(par1Block.minZ <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4 - 1) : i);
+			tessellator.setBrightness(par1Block.getBlockBoundsMinZ() <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4 - 1) : i);
 			tessellator.setColorOpaque_F(f8, f11, f14);
 			renderObliqueEWFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), false);
 
-			tessellator.setBrightness(par1Block.maxZ >= 1.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4 + 1) : i);
+			tessellator.setBrightness(par1Block.getBlockBoundsMaxX() >= 1.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2, par3, par4 + 1) : i);
 			tessellator.setColorOpaque_F(f8, f11, f14);
 			renderObliqueEWFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), true);
 		}else{
@@ -153,11 +152,11 @@ public class RenderWoodBench extends RenderBlocks
 			tessellator.setColorOpaque_F(f4, f5, f6);
 			renderObliqueGTopFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), 3);
 
-			tessellator.setBrightness(par1Block.minX <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2 - 1, par3, par4) : i);
+			tessellator.setBrightness(par1Block.getBlockBoundsMinX() <= 0.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2 - 1, par3, par4) : i);
 			tessellator.setColorOpaque_F(f9, f12, f15);
 			renderObliqueNSFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), false);
 
-			tessellator.setBrightness(par1Block.maxX >= 1.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2 + 1, par3, par4) : i);
+			tessellator.setBrightness(par1Block.getBlockBoundsMaxX() >= 1.0D ? par1Block.getMixedBrightnessForBlock(blockAccess, par2 + 1, par3, par4) : i);
 			tessellator.setColorOpaque_F(f9, f12, f15);
 			renderObliqueNSFace(par1Block, par2, par3, par4, par1Block.getBlockTexture(blockAccess, par2, par3, par4, 0), true);
 		}
@@ -175,18 +174,18 @@ public class RenderWoodBench extends RenderBlocks
 
 		int i = (par8 & 0xf) << 4;
 		int j = par8 & 0xf0;
-		double d = ((double)i + par1Block.minZ * 16D) / 256D;
-		double d1 = (((double)i + par1Block.maxZ * 16D) - 0.01D) / 256D;
-		double d2 = ((double)(j + 16) - par1Block.maxY * 16D) / 256D;
-		double d3 = ((double)(j + 16) - par1Block.minY * 16D - 0.01D) / 256D;
+		double d = ((double)i + par1Block.getBlockBoundsMinZ() * 16D) / 256D;
+		double d1 = (((double)i + par1Block.getBlockBoundsMaxZ() * 16D) - 0.01D) / 256D;
+		double d2 = ((double)(j + 16) - par1Block.getBlockBoundsMaxY() * 16D) / 256D;
+		double d3 = ((double)(j + 16) - par1Block.getBlockBoundsMinY() * 16D - 0.01D) / 256D;
 
-		if (par1Block.minX < 0.0D || par1Block.maxX > 1.0D)
+		if (par1Block.getBlockBoundsMinX() < 0.0D || par1Block.getBlockBoundsMaxX() > 1.0D)
 		{
 			d = ((float)i + 0.0F);
 			d1 = ((float)i + 15.99F);
 		}
 
-		if (par1Block.minZ < 0.0D || par1Block.maxZ > 1.0D)
+		if (par1Block.getBlockBoundsMinZ() < 0.0D || par1Block.getBlockBoundsMaxZ() > 1.0D)
 		{
 			d2 = ((float)j + 0.0F);
 			d3 = ((float)j + 15.99F);
@@ -199,10 +198,10 @@ public class RenderWoodBench extends RenderBlocks
 
 		if (side == 0)
 		{
-			d = ((double)i + par1Block.minZ * 16D) / 256D;
-			d2 = ((double)(j + 16) - par1Block.maxX * 16D) / 256D;
-			d1 = ((double)i + par1Block.maxZ * 16D) / 256D;
-			d3 = ((double)(j + 16) - par1Block.minX * 16D) / 256D;
+			d = ((double)i + par1Block.getBlockBoundsMinZ() * 16D) / 256D;
+			d2 = ((double)(j + 16) - par1Block.getBlockBoundsMaxX() * 16D) / 256D;
+			d1 = ((double)i + par1Block.getBlockBoundsMaxZ() * 16D) / 256D;
+			d3 = ((double)(j + 16) - par1Block.getBlockBoundsMinX() * 16D) / 256D;
 			d6 = d2;
 			d7 = d3;
 			d4 = d;
@@ -212,10 +211,10 @@ public class RenderWoodBench extends RenderBlocks
 		}
 		else if (side == 1)
 		{
-			d = ((double)(i + 16) - par1Block.maxZ * 16D) / 256D;
-			d2 = ((double)j + par1Block.minX * 16D) / 256D;
-			d1 = ((double)(i + 16) - par1Block.minZ * 16D) / 256D;
-			d3 = ((double)j + par1Block.maxX * 16D) / 256D;
+			d = ((double)(i + 16) - par1Block.getBlockBoundsMaxZ() * 16D) / 256D;
+			d2 = ((double)j + par1Block.getBlockBoundsMinX() * 16D) / 256D;
+			d1 = ((double)(i + 16) - par1Block.getBlockBoundsMinZ() * 16D) / 256D;
+			d3 = ((double)j + par1Block.getBlockBoundsMaxX() * 16D) / 256D;
 			d4 = d1;
 			d5 = d;
 			d = d1;
@@ -225,23 +224,23 @@ public class RenderWoodBench extends RenderBlocks
 		}
 		else if (side == 2)
 		{
-			d = ((double)(i + 16) - par1Block.minX * 16D) / 256D;
-			d1 = ((double)(i + 16) - par1Block.maxX * 16D - 0.01D) / 256D;
-			d2 = ((double)(j + 16) - par1Block.minZ * 16D) / 256D;
-			d3 = ((double)(j + 16) - par1Block.maxZ * 16D - 0.01D) / 256D;
+			d = ((double)(i + 16) - par1Block.getBlockBoundsMinX() * 16D) / 256D;
+			d1 = ((double)(i + 16) - par1Block.getBlockBoundsMaxX() * 16D - 0.01D) / 256D;
+			d2 = ((double)(j + 16) - par1Block.getBlockBoundsMinZ() * 16D) / 256D;
+			d3 = ((double)(j + 16) - par1Block.getBlockBoundsMaxZ() * 16D - 0.01D) / 256D;
 			d4 = d1;
 			d5 = d;
 			d6 = d2;
 			d7 = d3;
 		}
 
-		double d8 = par2 + par1Block.minX;
-		double d9 = par2 + par1Block.maxX;
-		double d10 = par4 + par1Block.minY;
-		double d11 = par6 + par1Block.minZ;
-		double d12 = par6 + par1Block.maxZ;
+		double d8 = par2 + par1Block.getBlockBoundsMinX();
+		double d9 = par2 + par1Block.getBlockBoundsMaxX();
+		double d10 = par4 + par1Block.getBlockBoundsMinY();
+		double d11 = par6 + par1Block.getBlockBoundsMinZ();
+		double d12 = par6 + par1Block.getBlockBoundsMaxZ();
 
-		double addside = (par1Block.maxY - par1Block.minY);
+		double addside = (par1Block.getBlockBoundsMaxY() - par1Block.getBlockBoundsMinY());
 		double side1 = addside;
 		double side2 = addside;
 		double side3 = addside;
@@ -250,19 +249,19 @@ public class RenderWoodBench extends RenderBlocks
 		if(side == 0){
 			side1 = 0;
 			side2 = 0;
-			d8 += (par1Block.maxX - par1Block.minX)/2F;
+			d8 += (par1Block.getBlockBoundsMaxX() - par1Block.getBlockBoundsMinX())/2F;
 		}else if(side == 1){
 			side3 = 0;
 			side4 = 0;
-			d9 -= (par1Block.maxX - par1Block.minX)/2F;
+			d9 -= (par1Block.getBlockBoundsMaxX() - par1Block.getBlockBoundsMinX())/2F;
 		}else if(side == 2){
 			side1 = 0;
 			side4 = 0;
-			d11 += (par1Block.maxZ - par1Block.minZ)/2F;
+			d11 += (par1Block.getBlockBoundsMaxZ() - par1Block.getBlockBoundsMinZ())/2F;
 		}else if(side == 3){
 			side2 = 0;
 			side3 = 0;
-			d12 -= (par1Block.maxZ - par1Block.minZ)/2F;
+			d12 -= (par1Block.getBlockBoundsMaxZ() - par1Block.getBlockBoundsMinZ())/2F;
 		}
 
 		if (enableAO)
@@ -300,19 +299,19 @@ public class RenderWoodBench extends RenderBlocks
 
 		int i = (par8 & 0xf) << 4;
 		int j = par8 & 0xf0;
-		double d = ((double)i + par1Block.minX * 16D) / 256D;
-		double d1 = (((double)i + par1Block.maxX * 16D) - 0.01D) / 256D;
-		double d2 = ((double)(j + 16) - par1Block.maxY * 16D) / 256D;
-		double d3 = ((double)(j + 16) - par1Block.minY * 16D - 0.01D) / 256D;
-		double x0 = ((double)i + (par1Block.maxX - par1Block.minX) * 8D - 0.01D) / 256D;
+		double d = ((double)i + par1Block.getBlockBoundsMinX() * 16D) / 256D;
+		double d1 = (((double)i + par1Block.getBlockBoundsMaxX() * 16D) - 0.01D) / 256D;
+		double d2 = ((double)(j + 16) - par1Block.getBlockBoundsMaxY() * 16D) / 256D;
+		double d3 = ((double)(j + 16) - par1Block.getBlockBoundsMinY() * 16D - 0.01D) / 256D;
+		double x0 = ((double)i + (par1Block.getBlockBoundsMaxX() - par1Block.getBlockBoundsMinX()) * 8D - 0.01D) / 256D;
 
-		if (par1Block.minX < 0.0D || par1Block.maxX > 1.0D)
+		if (par1Block.getBlockBoundsMinX() < 0.0D || par1Block.getBlockBoundsMaxX() > 1.0D)
 		{
 			d = ((float)i + 0.0F);
 			d1 = ((float)i + 15.99F);
 		}
 
-		if (par1Block.minZ < 0.0D || par1Block.maxZ > 1.0D)
+		if (par1Block.getBlockBoundsMinZ() < 0.0D || par1Block.getBlockBoundsMaxZ() > 1.0D)
 		{
 			d2 = ((float)j + 0.0F);
 			d3 = ((float)j + 15.99F);
@@ -322,15 +321,15 @@ public class RenderWoodBench extends RenderBlocks
 		double d5 = d;
 		double d6 = d2;
 		double d7 = d3;
-		double minX = par2 + par1Block.minX;
-		double maxX = par2 + par1Block.maxX;
-		double minY = par4 + par1Block.minY;
-		double maxY = par4 + par1Block.maxY;
-		double minZ = par6 + par1Block.minZ;
-		double maxZ = par6 + par1Block.maxZ;
+		double minX = par2 + par1Block.getBlockBoundsMinX();
+		double maxX = par2 + par1Block.getBlockBoundsMaxX();
+		double minY = par4 + par1Block.getBlockBoundsMinY();
+		double maxY = par4 + par1Block.getBlockBoundsMaxY();
+		double minZ = par6 + par1Block.getBlockBoundsMinZ();
+		double maxZ = par6 + par1Block.getBlockBoundsMaxZ();
 
 		double posX = minX+((maxX-minX)/2F);
-		double posY = minY + (par1Block.maxY - par1Block.minY);
+		double posY = minY+ (par1Block.getBlockBoundsMaxY() - par1Block.getBlockBoundsMinY());
 
 		if(side){
 			tessellator.addVertexWithUV(minX, minY, maxZ, d, d3);
@@ -356,19 +355,19 @@ public class RenderWoodBench extends RenderBlocks
 
 		int i = (par8 & 0xf) << 4;
 		int j = par8 & 0xf0;
-		double d = ((double)i + par1Block.minZ * 16D) / 256D;
-		double d1 = (((double)i + par1Block.maxZ * 16D) - 0.01D) / 256D;
-		double d2 = ((double)(j + 16) - par1Block.maxY * 16D) / 256D;
-		double d3 = ((double)(j + 16) - par1Block.minY * 16D - 0.01D) / 256D;
-		double x0 = ((double)i + (par1Block.maxZ - par1Block.minZ) * 8D - 0.01D) / 256D;
+		double d = ((double)i + par1Block.getBlockBoundsMinZ() * 16D) / 256D;
+		double d1 = (((double)i + par1Block.getBlockBoundsMaxZ() * 16D) - 0.01D) / 256D;
+		double d2 = ((double)(j + 16) - par1Block.getBlockBoundsMaxY() * 16D) / 256D;
+		double d3 = ((double)(j + 16) - par1Block.getBlockBoundsMinY() * 16D - 0.01D) / 256D;
+		double x0 = ((double)i + (par1Block.getBlockBoundsMaxZ() - par1Block.getBlockBoundsMinZ()) * 8D - 0.01D) / 256D;
 
-		if (par1Block.minX < 0.0D || par1Block.maxX > 1.0D)
+		if (par1Block.getBlockBoundsMinX() < 0.0D || par1Block.getBlockBoundsMaxX() > 1.0D)
 		{
 			d = ((float)i + 0.0F);
 			d1 = ((float)i + 15.99F);
 		}
 
-		if (par1Block.minZ < 0.0D || par1Block.maxZ > 1.0D)
+		if (par1Block.getBlockBoundsMinZ() < 0.0D || par1Block.getBlockBoundsMaxZ() > 1.0D)
 		{
 			d2 = ((float)j + 0.0F);
 			d3 = ((float)j + 15.99F);
@@ -378,15 +377,15 @@ public class RenderWoodBench extends RenderBlocks
 		double d5 = d;
 		double d6 = d2;
 		double d7 = d3;
-		double minX = par2 + par1Block.minX;
-		double maxX = par2 + par1Block.maxX;
-		double minY = par4 + par1Block.minY;
-		double maxY = par4 + par1Block.maxY;
-		double minZ = par6 + par1Block.minZ;
-		double maxZ = par6 + par1Block.maxZ;
+		double minX = par2 + par1Block.getBlockBoundsMinX();
+		double maxX = par2 + par1Block.getBlockBoundsMaxX();
+		double minY = par4 + par1Block.getBlockBoundsMinY();
+		double maxY = par4 + par1Block.getBlockBoundsMaxY();
+		double minZ = par6 + par1Block.getBlockBoundsMinZ();
+		double maxZ = par6 + par1Block.getBlockBoundsMaxZ();
 
 		double posZ = minZ+((maxZ-minZ)/2F);
-		double posY = minY + (par1Block.maxY - par1Block.minY);
+		double posY = minY + (par1Block.getBlockBoundsMaxY() - par1Block.getBlockBoundsMinY());
 
 		if(side){
 			tessellator.addVertexWithUV(maxX, minY, minZ, d, d3);

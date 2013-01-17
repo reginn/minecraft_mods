@@ -35,26 +35,26 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	@Override
 	public String getArmorTextureFile(ItemStack itemstack)
 	{
-		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetMithril.shiftedIndex ||
-			itemstack.itemID == DwarvenItem.itemDwarvenPlateMithril.shiftedIndex ||
-			itemstack.itemID == DwarvenItem.itemDwarvenBootMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetMithril.itemID ||
+			itemstack.itemID == DwarvenItem.itemDwarvenPlateMithril.itemID ||
+			itemstack.itemID == DwarvenItem.itemDwarvenBootMithril.itemID)
 		{
 			return "/rgn/sprites/dwarventools/armor/mithril_1.png";
 		}
 
-		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsMithril.itemID)
 		{
 			return "/rgn/sprites/dwarventools/armor/mithril_2.png";
 		}
 
-		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetEbony.shiftedIndex ||
-			itemstack.itemID == DwarvenItem.itemDwarvenPlateEbony.shiftedIndex ||
-			itemstack.itemID == DwarvenItem.itemDwarvenBootEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetEbony.itemID ||
+			itemstack.itemID == DwarvenItem.itemDwarvenPlateEbony.itemID ||
+			itemstack.itemID == DwarvenItem.itemDwarvenBootEbony.itemID)
 		{
 			return "/rgn/sprites/dwarventools/armor/ebony_1.png";
 		}
 
-		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsEbony.itemID)
 		{
 			return "/rgn/sprites/dwarventools/armor/ebony_2.png";
 		}

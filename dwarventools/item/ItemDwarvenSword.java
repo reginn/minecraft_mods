@@ -39,12 +39,12 @@ public class ItemDwarvenSword extends ItemSword
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.smite,   3);
 			itemstack.addEnchantment(Enchantment.looting, 1);
 		}
-		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.sharpness,        3);
 			itemstack.addEnchantment(Enchantment.smite,            3);
@@ -63,12 +63,12 @@ public class ItemDwarvenSword extends ItemSword
 			return ;
 		}
 
-		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.smite,   3);
 			itemstack.addEnchantment(Enchantment.looting, 1);
 		}
-		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.itemID)
 		{
 			itemstack.addEnchantment(Enchantment.sharpness,        3);
 			itemstack.addEnchantment(Enchantment.smite,            3);

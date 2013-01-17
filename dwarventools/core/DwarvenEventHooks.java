@@ -22,11 +22,11 @@ public class DwarvenEventHooks
 		}
 
 		ItemStack dropItem = null;
-		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.shiftedIndex)
+		if (itemstack.itemID == DwarvenItem.itemDwarvenSwordMithril.itemID)
 		{
 			dropItem = new ItemStack(DwarvenItem.itemDwarvenBrokenSwordMithril, 1);
 		}
-		else if(itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.shiftedIndex)
+		else if(itemstack.itemID == DwarvenItem.itemDwarvenSwordEbony.itemID)
 		{
 			dropItem = new ItemStack(DwarvenItem.itemDwarvenBrokenSwordEbony, 1);
 		}

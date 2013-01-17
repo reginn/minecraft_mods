@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.common.ChestGenHooks;
 import rgn.mods.dwarventools.core.DwarvenItem;
 
 public class ForgeChestHooks
@@ -15,7 +15,9 @@ public class ForgeChestHooks
 	private final static String STRONGHOLD_LIBRARY  = ChestGenHooks.STRONGHOLD_LIBRARY;
 
 	private final static String MINESHAFT_CORRIDOR = ChestGenHooks.MINESHAFT_CORRIDOR;
-
+	
+	public static final String DUNGEON_CHEST = ChestGenHooks.DUNGEON_CHEST;
+	
 	public void addLoot()
 	{
 		this.addDungeonLoot();
@@ -50,25 +52,26 @@ public class ForgeChestHooks
 
 	public void addDungeonLoot()
 	{
-		if (DungeonHooks.getDungeonLootTries() < 12)
+		if (ChestGenHooks.getInfo(DUNGEON_CHEST).getMax() < 12)
 		{
-			DungeonHooks.setDungeonLootTries(12);
+			ChestGenHooks.getInfo(DUNGEON_CHEST).setMax(12);
+			ChestGenHooks.getInfo(DUNGEON_CHEST).setMin(12);
 		}
 
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.expBottle),     50, 1, 5);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordBlocks),  3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordChirp),   3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordFar),     3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordMall),    3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordMellohi), 3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordStal),    3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordStrad),   3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.recordWard),    3);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.record11),      3);
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.expBottle),     1, 5, 50));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordBlocks),  1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordChirp),   1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordFar),     1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordMall),    1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordMellohi), 1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordStal),    1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordStrad),   1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordWard),    1, 1, 3));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.record11),      1, 1, 3));
 
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.lightStoneDust),   30, 4, 32);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.netherStalkSeeds), 20, 1,  4);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.emerald),           5, 1,  4);
-		DungeonHooks.addDungeonLoot(new ItemStack(Item.diamond),           5, 1,  2);
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.lightStoneDust),   4, 32, 30));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.netherStalkSeeds), 1,  4, 20));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.emerald),          1,  4,  5));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.diamond),          1,  2,  5));
 	}
 }

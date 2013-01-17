@@ -1,5 +1,8 @@
 package rgn.mods.dwarventools.client;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
@@ -9,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import rgn.mods.dwarventools.inventory.ContainerInfernalFurnace;
 import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
 
+@SideOnly(Side.CLIENT)
 public class GuiInfernalFurnace extends GuiContainer
 {
 	private TileEntityInfernalFurnace furnaceInventory;

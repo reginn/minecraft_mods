@@ -23,7 +23,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "DwarvenTools",
 	name    = "DwarvenTools",
-	version = "3.1.2"
+	version = "3.2.5"
 )
 @NetworkMod
 (
@@ -32,7 +32,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 )
 public class DwarvenTools
 {
-	@SidedProxy(clientSide = "rgn.mods.dwarventools.client.ClientProxy", serverSide = "rgn.mods.dwarventools.CommonProxy")
+	@SidedProxy(clientSide = "rgn.mods.dwarventools.client.ClientProxy", serverSide = "rgn.mods.dwarventools.core.CommonProxy")
 	public static CommonProxy proxy;
 
 	@Mod.Instance("DwarvenTools")

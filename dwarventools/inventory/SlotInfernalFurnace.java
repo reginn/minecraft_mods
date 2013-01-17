@@ -94,12 +94,12 @@ public class SlotInfernalFurnace extends Slot
 
 		GameRegistry.onItemSmelted(thePlayer, par1ItemStack);
 
-		if (par1ItemStack.itemID == Item.ingotIron.shiftedIndex)
+		if (par1ItemStack.itemID == Item.ingotIron.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.acquireIron, 1);
 		}
 
-		if (par1ItemStack.itemID == Item.fishCooked.shiftedIndex)
+		if (par1ItemStack.itemID == Item.fishCooked.itemID)
 		{
 			this.thePlayer.addStat(AchievementList.cookFish, 1);
 		}

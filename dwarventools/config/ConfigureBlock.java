@@ -19,8 +19,8 @@ public class ConfigureBlock
 		DwarvenBlock.blockDwarvenOre        = (new BlockDwarvenOre(Config.blockIdBlockDwarvenOre, 1)).setBlockName("blockDwarvenOre");
 		DwarvenBlock.blockDwarvenOreStorage = (new BlockDwarvenOreStorage(Config.blockIdBlockDwarvenOreStorage, 16)).setBlockName("blockDwarvenOreStorage");
 
-		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOre, ItemDwarvenOre.class);
-		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOreStorage, ItemDwarvenOreStorage.class);
+		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOre, ItemDwarvenOre.class, "DwarvenOre");
+		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOreStorage, ItemDwarvenOreStorage.class, "DwarvenOreStorage");
 
 		GameRegistry.registerBlock(DwarvenBlock.blockInfernalFurnace);
 

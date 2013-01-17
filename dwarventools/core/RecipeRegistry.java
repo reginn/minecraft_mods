@@ -30,7 +30,7 @@ public class RecipeRegistry
 		{
 
 			GameRegistry.addRecipe(
-				new ShapedOreRecipe(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, i),
+				new ShapedOreRecipe(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, i + 1),
 					new Object[]
 						{
 							"XXX", "XXX", "XXX",

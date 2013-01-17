@@ -1,5 +1,8 @@
 package rgn.mods.dwarventools.inventory;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -7,6 +10,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+
 import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
 
 public class ContainerInfernalFurnace extends Container
@@ -37,10 +41,11 @@ public class ContainerInfernalFurnace extends Container
 			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
 		}
 	}
-
-	public void updateCraftingResults()
+	
+	@Override
+	public void detectAndSendChanges()
 	{
-		super.updateCraftingResults();
+		super.detectAndSendChanges();
 
 		for (int var1 = 0; var1 < this.crafters.size(); ++var1)
 		{
@@ -66,7 +71,9 @@ public class ContainerInfernalFurnace extends Container
 		this.lastBurnTime = this.furnace.furnaceBurnTime;
 		this.lastItemBurnTime = this.furnace.currentItemBurnTime;
 	}
-
+	
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int par1, int par2)
 	{
 		if (par1 == 0)
@@ -84,17 +91,14 @@ public class ContainerInfernalFurnace extends Container
 			this.furnace.currentItemBurnTime = par2;
 		}
 	}
-
+	
+	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
 		return this.furnace.isUseableByPlayer(par1EntityPlayer);
 	}
 
-	// public ItemStack transferStackInSlot(int par1)
-
-	/**
-	 * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
-	 */
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1)
 	{
 		ItemStack var2 = null;
@@ -161,7 +165,6 @@ public class ContainerInfernalFurnace extends Container
 				return null;
 			}
 
-			// var3.onPickupFromSlot(var4);
 			var3.onPickupFromSlot(par1EntityPlayer, var4);
 		}
 

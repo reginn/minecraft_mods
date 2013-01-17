@@ -1,16 +1,27 @@
 package rgn.mods.ozen.client;
 
+import java.lang.reflect.Method;
+
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
+
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -18,14 +29,34 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import rgn.mods.ozen.TileEntityOzen;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 {
-	private RenderBlocks blockrender;
-
+	private Minecraft     mc = FMLClientHandler.instance().getClient();
+	private RenderBlocks  blockrender;
+	private static Method method;
+	
+	static
+	{
+		try
+		{
+			String methodName = ObfuscationReflectionHelper.obfuscation ? "a" : "renderItemIn2D";
+			method = 
+				(net.minecraft.client.renderer.ItemRenderer.class).getDeclaredMethod(
+					methodName, 
+					new Class[]
+					{
+						net.minecraft.client.renderer.Tessellator.class, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE
+					});
+			method.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public TileEntityOzenRenderer()
 	{
 		blockrender = new RenderBlocks();
@@ -41,25 +72,13 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)x + 0.5F, (float)y + 0.8F, (float)z + 0.5F);
 
-		int facing = tileEntityOzen.getFacing();
+		ForgeDirection dir = ForgeDirection.getOrientation(tileEntityOzen.getFacing());
 
 		float rot = 0.0F;
-		if (facing == 2)
-		{
-			rot = 180.0F;
-		}
-		if (facing == 5)
-		{
-			rot = 90.0F;
-		}
-		if (facing == 3)
-		{
-			rot = 0.0F;
-		}
-		if (facing == 4)
-		{
-			rot = 270.0F;
-		}
+		if (dir == ForgeDirection.EAST)	{ rot = 90.0F; }
+		if (dir == ForgeDirection.WEST)	{ rot = 270.0F;}
+		if (dir == ForgeDirection.SOUTH){ rot = 0.0F;  }
+		if (dir == ForgeDirection.NORTH){ rot = 180.0F;}
 
 		GL11.glRotatef(rot, 0.0F, 1.0F, 0.0F);
 
@@ -168,25 +187,33 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 
 	private boolean isBlock(ItemStack itemstack)
 	{
-		return itemstack.itemID < Block.blocksList.length && Block.blocksList[itemstack.itemID] != null && Block.blocksList[itemstack.itemID].blockMaterial != Material.air
+		return itemstack.itemID < Block.blocksList.length 
+			&& Block.blocksList[itemstack.itemID] != null 
+			&& Block.blocksList[itemstack.itemID].blockMaterial != Material.air
 			&& RenderBlocks.renderItemIn3d(Block.blocksList[itemstack.itemID].getRenderType());
 	}
 
 	private boolean isItemBlock(ItemStack itemstack)
 	{
 		return (ItemBlock.class).isAssignableFrom(itemstack.getItem().getClass())
-				&& RenderBlocks.renderItemIn3d(Block.blocksList[((ItemBlock)itemstack.getItem()).getBlockID()].getRenderType());
+			&& RenderBlocks.renderItemIn3d(Block.blocksList[((ItemBlock)itemstack.getItem()).getBlockID()].getRenderType());
 	}
 
 	private void renderColor(ItemStack itemstack, int i)
 	{
 		int colorFromDamage = itemstack.getItem().getColorFromItemStack(itemstack, i);
+		float lightingRatio = this.isFancyGraphics() ? 1.5F : 0.6F; 
 		float red   = (float)(colorFromDamage >> 16 & 0xff) / 255.0F;
 		float green = (float)(colorFromDamage >>  8 & 0xff) / 255.0F;
 		float blue  = (float)(colorFromDamage       & 0xff) / 255.0F;
-		GL11.glColor4f(red * 0.8F, green  * 0.8F, blue * 0.8F, 1.0F);
+		GL11.glColor4f(red * lightingRatio, green * lightingRatio, blue * lightingRatio, 1.0F);
 	}
-
+	
+	private boolean isFancyGraphics()
+	{
+		return this.mc.gameSettings.fancyGraphics;
+	}
+	
 	private void renderIcon(int iconIndex)
 	{
 		Tessellator tessellator = Tessellator.instance;
@@ -198,16 +225,39 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 		float f8 = 0.5F;
 		float f9 = 0.25F;
 
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		tessellator.addVertexWithUV(0.0F - f8, 0.0F - f9, 0.0D, f3, f6);
-		tessellator.addVertexWithUV(  f7 - f8, 0.0F - f9, 0.0D, f4, f6);
-		tessellator.addVertexWithUV(  f7 - f8, 1.0F - f9, 0.0D, f4, f5);
-		tessellator.addVertexWithUV(0.0F - f8, 1.0F - f9, 0.0D, f3, f5);
-		tessellator.addVertexWithUV(0.0F - f8, 1.0F - f9, 0.0D, f3, f5);
-		tessellator.addVertexWithUV(  f7 - f8, 1.0F - f9, 0.0D, f4, f5);
-		tessellator.addVertexWithUV(  f7 - f8, 0.0F - f9, 0.0D, f4, f6);
-		tessellator.addVertexWithUV(0.0F - f8, 0.0F - f9, 0.0D, f3, f6);
-		tessellator.draw();
+		if (this.isFancyGraphics())
+		{
+			GL11.glPushMatrix();
+			GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+			GL11.glTranslatef(-0.5F, -0.3F, 0.03125F);
+			try
+			{
+				method.invoke(
+					RenderManager.instance.itemRenderer, 
+						new Object[]
+						{
+							tessellator, Float.valueOf(f4), Float.valueOf(f5), Float.valueOf(f3), Float.valueOf(f6), Float.valueOf(0.0625F)
+						});
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			GL11.glPopMatrix();
+		}
+		else
+		{
+			tessellator.startDrawingQuads();
+			tessellator.setNormal(0.0F, 1.0F, 0.0F);
+			tessellator.addVertexWithUV(0.0F - f8, 0.0F - f9, 0.0D, f3, f6);
+			tessellator.addVertexWithUV(  f7 - f8, 0.0F - f9, 0.0D, f4, f6);
+			tessellator.addVertexWithUV(  f7 - f8, 1.0F - f9, 0.0D, f4, f5);
+			tessellator.addVertexWithUV(0.0F - f8, 1.0F - f9, 0.0D, f3, f5);
+			tessellator.addVertexWithUV(0.0F - f8, 1.0F - f9, 0.0D, f3, f5);
+			tessellator.addVertexWithUV(  f7 - f8, 1.0F - f9, 0.0D, f4, f5);
+			tessellator.addVertexWithUV(  f7 - f8, 0.0F - f9, 0.0D, f4, f6);
+			tessellator.addVertexWithUV(0.0F - f8, 0.0F - f9, 0.0D, f3, f6);
+			tessellator.draw();
+		}
 	}
 }

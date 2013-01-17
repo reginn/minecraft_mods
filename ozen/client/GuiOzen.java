@@ -1,5 +1,8 @@
 package rgn.mods.ozen.client;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
 
@@ -8,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import rgn.mods.ozen.ContainerOzen;
 import rgn.mods.ozen.TileEntityOzen;
 
+@SideOnly(Side.CLIENT)
 public class GuiOzen extends GuiContainer
 {
 	private IInventory inventory;

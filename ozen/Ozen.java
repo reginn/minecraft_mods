@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Ozen",
 	name    = "Ozen",
-	version = "2.1.0"
+	version = "2.2.0"
 )
 @NetworkMod
 (
@@ -42,7 +42,7 @@ public class Ozen
 	public static int ozenRenderID;
 	public static int guiIdOzen = 1;
 
-	public static final CreativeTabs tabOzen = new CreativeTabOzen("ozen");
+	public static final CreativeTabs tabOzen = new CreativeTabOzen("Ozen");
 
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -70,8 +70,8 @@ public class Ozen
 
 		blockOzen = (new BlockOzen(blockIdOzen)).setBlockName("blockozen");
 
-		GameRegistry.registerBlock(blockOzen, ItemOzen.class);
-		GameRegistry.registerTileEntity(TileEntityOzen.class, "ozen");
+		GameRegistry.registerBlock(blockOzen, ItemOzen.class, "Ozen");
+		GameRegistry.registerTileEntity(TileEntityOzen.class, "Ozen");
 
 		proxy.registerRenderers();
 

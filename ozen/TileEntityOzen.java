@@ -168,51 +168,27 @@ public class TileEntityOzen extends TileEntity implements IInventory
 	}
 
 	// custom packet
-	public void handlePacketData(int[] intData)
+	public void setItems(ItemStack[] _items)
 	{
-		if (intData != null)
+		if (_items != null)
 		{
-			int pos = 0;
-			if (intData.length < this.items.length * 3)
+			for (int i = 0; i < this.getSizeInventory(); ++i)
 			{
-				return;
-			}
-			for (int i = 0; i < this.items.length; i++)
-			{
-				if (intData[pos + 2] != 0)
+				if (_items[i] != null)
 				{
-					ItemStack is = new ItemStack(intData[pos], intData[pos + 2], intData[pos + 1]);
-					this.items[i] = is;
+					this.items[i] = _items[i].copy();
 				}
 				else
 				{
 					this.items[i] = null;
 				}
-				pos += 3;
 			}
 		}
 	}
 
-	public int[] buildIntDataList()
+	public ItemStack[] getItems()
 	{
-		int[] sortList = new int[this.items.length * 3];
-		int pos = 0;
-		for (ItemStack is : this.items)
-		{
-			if (is != null)
-			{
-				sortList[pos++] = is.itemID;
-				sortList[pos++] = is.getItemDamage();
-				sortList[pos++] = is.stackSize;
-			}
-			else
-			{
-				sortList[pos++] = 0;
-				sortList[pos++] = 0;
-				sortList[pos++] = 0;
-			}
-		}
-		return sortList;
+		return this.items;
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -23,7 +24,7 @@ public class PacketHandler implements IPacketHandler
 		int x, y, z;
 		byte facing;
 		boolean hasStacks;
-		int[] items = null;
+		ItemStack[] items = null;
 		try
 		{
 			x = dis.readInt();
@@ -33,10 +34,10 @@ public class PacketHandler implements IPacketHandler
 			hasStacks = dis.readByte() != 0;
 			if (hasStacks)
 			{
-				items = new int[18];
-				for (int i = 0; i < items.length; i++)
+				items = new ItemStack[6];
+				for (int i = 0; i < items.length; ++i)
 				{
-					items[i] = dis.readInt();
+					items[i] = Packet.readItemStack(dis);
 				}
 			}
 		}
@@ -50,7 +51,7 @@ public class PacketHandler implements IPacketHandler
 		if (tileEntity instanceof TileEntityOzen)
 		{
 			TileEntityOzen tileEntityOzen = (TileEntityOzen)tileEntity;
-			tileEntityOzen.handlePacketData(items);
+			tileEntityOzen.setItems(items);
 			tileEntityOzen.setFacing(facing);
 		}
 	}
@@ -65,7 +66,7 @@ public class PacketHandler implements IPacketHandler
 		int z = tileEntityOzen.zCoord;
 		byte facing = tileEntityOzen.getFacing();
 
-		int[] items = tileEntityOzen.buildIntDataList();
+		ItemStack[] items = tileEntityOzen.getItems();
 		boolean hasStacks = (items != null);
 
 		try
@@ -77,9 +78,9 @@ public class PacketHandler implements IPacketHandler
 			dos.writeByte(hasStacks? 1 : 0);
 			if (hasStacks)
 			{
-				for (int i = 0; i < 18; i++)
+				for (int i = 0; i < items.length; i++)
 				{
-					dos.writeInt(items[i]);
+					Packet.writeItemStack(items[i], dos);
 				}
 			}
 		}

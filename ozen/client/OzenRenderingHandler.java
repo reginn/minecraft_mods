@@ -1,5 +1,9 @@
 package rgn.mods.ozen.client;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -8,9 +12,6 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import rgn.mods.ozen.Ozen;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
@@ -67,28 +68,28 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float b = (float)(rgb       & 255) / 255.0F;
 
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 2.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds(14.0F/16.0F, 0.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F, 0.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 
 				return false;
 			}
@@ -101,44 +102,44 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				float b = (float)(rgb       & 255) / 255.0F;
 
 				block.setBlockBounds( 2.0F/16.0F,  4.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 5.0F/16.0F, 14.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 2.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 2.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds(14.0F/16.0F,  4.0F/16.0F, 1.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 15.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 2.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 5.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 2.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				block.setBlockBounds( 11.0F/16.0F, 0.0F/16.0F, 11.0F/16.0F, 14.0F/16.0F, 4.0F/16.0F, 14.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 
 				return false;
 			}
@@ -160,10 +161,10 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		block.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
 		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
@@ -190,6 +191,6 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 	}
 }

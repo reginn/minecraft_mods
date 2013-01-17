@@ -35,7 +35,7 @@ public class ForgeEventHooks
 			return ;
 		}
 
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == DawnBreaker.itemDawnBreaker.shiftedIndex)
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == DawnBreaker.itemDawnBreaker.itemID)
 		{
 			if (target instanceof EntityMob)
 			{

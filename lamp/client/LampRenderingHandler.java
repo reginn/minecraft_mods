@@ -1,5 +1,9 @@
 package rgn.mods.lamp.client;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -8,8 +12,8 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import rgn.mods.lamp.Lamp;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
+@SideOnly(Side.CLIENT)
 public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 {
 	private final int glassTextureIndex    = 49;
@@ -75,7 +79,7 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.overrideBlockTexture = torchTextureIndex;
 				/*
 				block.setBlockBounds(7.2F/16.0F, 1.0F/16.0F, 7.2F/16.0F, 8.8F/16.0F, 9.0F/16.0F, 8.8F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 				*/
 				renderer.renderBlockTorch(block, x, y, z);
@@ -83,48 +87,48 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				// glass
 				renderer.overrideBlockTexture = glassTextureIndex;
 				block.setBlockBounds(5.0F/16.0F, 3.0F/16.0F, 5.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 11.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// bottom
 				renderer.overrideBlockTexture = frameTextureIndex;
 				block.setBlockBounds(4.0F/16.0F, -0.1F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 3.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// coulumn
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 11.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(11.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(11.0F/16.0F, 1.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// top
 				block.setBlockBounds(4.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 13.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(6.0F/16.0F, 13.0F/16.0F, 6.0F/16.0F, 10.0F/16.0F, 14.0F/16.0F, 10.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(7.0F/16.0F, 14.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 16.0F/16.0F, 9.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 
 				return true;
 			}
@@ -133,60 +137,60 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				// cover
 				renderer.overrideBlockTexture = meta == 1 ? glowTextureIndex : meta == 2 ? goldTextureIndex : diamondTextureIndex;
 				block.setBlockBounds(5.0F/16.0F, 1.0F/16.0F, 5.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 11.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// bottom
 				renderer.overrideBlockTexture = frameTextureIndex;
 				block.setBlockBounds( 4.0F/16.0F, 0.0F,  4.0F/16.0F,  5.0F/16.0F, 1.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds( 4.0F/16.0F, 0.0F,  4.0F/16.0F, 12.0F/16.0F, 1.0F/16.0F,  5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(11.0F/16.0F, 0.0F,  4.0F/16.0F, 12.0F/16.0F, 1.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds( 4.0F/16.0F, 0.0F, 11.0F/16.0F, 12.0F/16.0F, 1.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// coulumn
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 11.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(11.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(11.0F/16.0F, 1.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// top
 				block.setBlockBounds(4.0F/16.0F, 12.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 13.0F/16.0F, 12.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(6.0F/16.0F, 13.0F/16.0F, 6.0F/16.0F, 10.0F/16.0F, 14.0F/16.0F, 10.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				block.setBlockBounds(7.0F/16.0F, 14.0F/16.0F, 7.0F/16.0F, 9.0F/16.0F, 16.0F/16.0F, 9.0F/16.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				renderer.overrideBlockTexture = -1;
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-				renderer.updateCustomBlockBounds(block);
+				renderer.setRenderBoundsFromBlock(block);
 
 				return true;
 			}
@@ -211,10 +215,10 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		block.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
 		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
@@ -241,7 +245,7 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.updateCustomBlockBounds(block);
+		renderer.setRenderBoundsFromBlock(block);
 	}
 
 }

@@ -1,9 +1,14 @@
 package rgn.mods.lamp.client;
 
-import net.minecraftforge.client.MinecraftForgeClient;
-import rgn.mods.lamp.CommonProxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+import net.minecraftforge.client.MinecraftForgeClient;
+
+import rgn.mods.lamp.CommonProxy;
+
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
 	@Override

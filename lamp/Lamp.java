@@ -18,7 +18,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Lamp",
 	name    = "Lamp",
-	version = "3.1.0"
+	version = "3.2.0"
 )
 @NetworkMod
 (
@@ -73,7 +73,7 @@ public class Lamp
 		blockLamp  = (new BlockLamp(blockIdLamp,  139)).setBlockName("blocklamp");
 		blockLight = (new BlockLight(blockIdLight, 0)).setBlockName("dontuse");
 
-		GameRegistry.registerBlock(blockLamp, ItemLamp.class);
+		GameRegistry.registerBlock(blockLamp, ItemLamp.class, "Lamp");
 		GameRegistry.registerBlock(blockLight);
 
 		proxy.registerTextures();

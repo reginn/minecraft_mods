@@ -1,7 +1,5 @@
 package rgn.mods.mabicraft;
 
-import net.minecraft.src.*;
-
 import net.minecraftforge.common.MinecraftForge;
 
 import cpw.mods.fml.common.SidedProxy;
@@ -26,7 +24,7 @@ import rgn.mods.mabicraft.registry.*;
 (
 	modid   = "MabiCraft",
 	name    = "MabiCraft",
-	version = "2.0.0"
+	version = "2.2.2"
 )
 @NetworkMod
 (
@@ -46,29 +44,29 @@ public class MabiCraft
 
 	@Mod.Instance("MabiCraft")
 	public static MabiCraft instance;
-	
+
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Config.buildConfiguration(event.getSuggestedConfigurationFile());
 	}
-	
+
 	@Mod.Init
 	public void load(FMLInitializationEvent event)
 	{
 		ConfigureBlock.init();
 		ConfigureItem.init();
-		
+
 		NetworkRegistry.instance().registerGuiHandler(this, proxy);
-		
+
 		MinecraftForge.EVENT_BUS.register(new ForgeEventHooks());
-		
+
 		proxy.registerTextures();
 		proxy.registerRenderers();
-		
+
 		(new VillageTradeHandler()).addTradeHandler();
 		(new LocalizationRegistry()).addLocalization();
 		(new RecipeRegistry()).addRecipe();
 	}
-	
+
 }

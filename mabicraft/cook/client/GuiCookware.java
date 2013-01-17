@@ -1,15 +1,15 @@
 package rgn.mods.mabicraft.cook.client;
 
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.input.Mouse;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
-
-import rgn.mods.mabicraft.*;
 import rgn.mods.mabicraft.cook.ContainerCookware;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiCookware extends GuiContainer
@@ -20,7 +20,7 @@ public class GuiCookware extends GuiContainer
 	private int               type;
 	private int[]             ticks;
 	private boolean[]         isInputed;
-	
+
 	public GuiCookware(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerCookware(player, world, x, y, z));
@@ -31,28 +31,28 @@ public class GuiCookware extends GuiContainer
 		this.ticks              = new int[]{0, 0, 0};
 		this.isInputed          = new boolean[]{false, false, false};
 	}
-	
+
 	@Override
 	public void initGui()
 	{
 		super.initGui();
 		int i = width  - xSize >> 1;
 		int j = height - ySize >> 1;
-		
+
 		controlList.add(new GuiAddButton(0, i + 14, j + 38, 24, 20 , "Add"));
 		controlList.add(new GuiAddButton(1, i + 50, j + 38, 24, 20 , "Add"));
 		controlList.add(new GuiAddButton(2, i + 86, j + 38, 24, 20 , "Add"));
 		controlList.add(new GuiButton(3, i + 122, j + 50, 40, 20 , "Cook"));
-		
+
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString(this.titles[this.type], 52, 6, 0x404040);
 		fontRenderer.drawString("Inventory", 8, (ySize - 96) + 2, 0x404040);
 	}
-	
+
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
@@ -64,7 +64,7 @@ public class GuiCookware extends GuiContainer
 		this.drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
 		int progress = 0;
-		
+
 		for (int idx = 0; idx < controlList.size() - 1; ++idx)
 		{
 			GuiButton button = (GuiButton)controlList.get(idx);
@@ -76,12 +76,12 @@ public class GuiCookware extends GuiContainer
 		progress = progress >= 100 ? 100 : progress;
         this.drawTexturedModalRect(l + 11, i1 + 64, 0, 166, progress + 1, 6);
 	}
-	
+
 	@Override
 	public void updateScreen()
 	{
 		super.updateScreen();
-		
+
 		for (int idx = 0; idx < this.controlList.size() - 1; ++idx)
 		{
 			GuiButton button = (GuiButton)controlList.get(idx);
@@ -93,36 +93,36 @@ public class GuiCookware extends GuiContainer
 			}
 		}
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton)
 	{
 		super.actionPerformed(par1GuiButton);
-		
+
 		if (!par1GuiButton.enabled)
 		{
 			return ;
 		}
-		
+
 		if (par1GuiButton.enabled && par1GuiButton.id == 3)
 		{
 			containerCookware.onClicked(par1GuiButton.id, this.ticks);
 			this.reset();
 		}
 	}
-	
+
 	private void reset()
 	{
 		for (int tick : this.ticks)
 		{
 			tick = 0;
 		}
-		
+
 		for (boolean b : this.isInputed)
 		{
 			b = false;
 		}
-		
+
 		for (int idx = 0; idx < this.controlList.size() - 1; ++idx)
 		{
 			GuiButton button = (GuiButton)controlList.get(idx);

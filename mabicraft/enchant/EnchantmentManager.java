@@ -1,6 +1,5 @@
 package rgn.mods.mabicraft.enchant;
 
-import net.minecraft.src.*;
 
 public class EnchantmentManager
 {
@@ -10,18 +9,18 @@ public class EnchantmentManager
 	{
 		return null;
 	}
-	
+
 	public ItemStack getMagicPowder()
 	{
 		return null;
 	}
-	
+
 	// for enchanter interface
 	public ItemStack getEnchantedItem(IInventory inputInventory)
 	{
 		return null;
 	}
-	
+
 
 	*/
 }

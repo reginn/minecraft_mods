@@ -1,9 +1,8 @@
 package rgn.mods.mabicraft.enchant;
 
-import net.minecraft.src.*;
-
-import cpw.mods.fml.common.Side;
-import cpw.mods.fml.common.asm.SideOnly;
+import net.minecraft.item.Item;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemEnchantScroll extends Item
 {
@@ -12,19 +11,19 @@ public class ItemEnchantScroll extends Item
 		super(itemId);
 		this.setMaxStackSize(1);
 	}
-	
+
 	@Override
 	public String getTextureFile()
 	{
 		return "/rgn/sprites/mabicraft/items.png";
 	}
-	
+
 	@Override
 	public boolean getShareTag()
 	{
 		return true;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public int getColorFromDamage(int damage, int renderPass)
 	{
@@ -34,14 +33,14 @@ public class ItemEnchantScroll extends Item
 		int color = (red << 16) + (green << 8) + blue;
 		return renderPass > 0 ? color : 0xEEEEEE;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean requiresMultipleRenderPasses()
 	{
 		return true;
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getIconFromDamageForRenderPass(int damage, int renderPass)

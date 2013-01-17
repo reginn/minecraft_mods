@@ -1,12 +1,9 @@
 package rgn.mods.mabicraft.registry;
 
-import net.minecraft.src.*;
-import net.minecraftforge.oredict.OreDictionary;
-
+import net.minecraft.item.ItemStack;
+import rgn.mods.mabicraft.core.MabiCraftBlock;
+import rgn.mods.mabicraft.core.MabiCraftItem;
 import rgn.util.TranslationRegistry;
-
-import rgn.mods.mabicraft.config.*;
-import rgn.mods.mabicraft.core.*;
 
 public final class LocalizationRegistry
 {
@@ -18,14 +15,14 @@ public final class LocalizationRegistry
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftBlock.blockCookware, 1, 0), "Cooking Table", "調理用テーブル");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftBlock.blockCookware, 1, 1), "Cooking Oven",  "調理用かまど");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftBlock.blockCookware, 1, 2), "Cooking Pot",   "万能鍋");
-		
-		
+
+
 		TranslationRegistry.addLocalization(MabiCraftItem.itemBaseHerb,     "Base Herb",     "ベースハーブ");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemManaHerb,     "Mana Herb",     "マナハーブ");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemBloodyHerb,   "Bloody Herb",   "ブラッディハーブ");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemSunlightHerb, "Sunlight Herb", "サンライトハーブ");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemPoisonHerb,   "Poison Herb",   "ポイズンハーブ");
-		TranslationRegistry.addLocalization(MabiCraftItem.itemIvoryHerb,    "Ivory Herb",    "アイボリーハーブ");	
+		TranslationRegistry.addLocalization(MabiCraftItem.itemIvoryHerb,    "Ivory Herb",    "アイボリーハーブ");
 
 		TranslationRegistry.addLocalization(MabiCraftItem.itemBlessedPotion, "Blessed Potion", "祝福ポーション");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemEnchantScroll, "Enchant Scroll", "エンチャントスクロール");
@@ -33,8 +30,8 @@ public final class LocalizationRegistry
 
 		TranslationRegistry.addLocalization(MabiCraftItem.itemBonfireKit, "Bonfire Kit", "たき火キット");
 		TranslationRegistry.addLocalization(MabiCraftItem.itemEvilScroll, "EvilScroll",  "魔符");
-		
-		
+
+
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  0), "Chocolate Milk", "チョコレートミルク");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  1), "Strawberry Milk", "イチゴ牛乳");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  2), "Orange Juice", "オレンジジュース");
@@ -43,7 +40,7 @@ public final class LocalizationRegistry
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  5), "Cappuccino", "カプチーノ");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  6), "CafeMocha", "カフェモカ");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  7), "Macchiato", "マキアート");
-		
+
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  8), "Ice CafeMocha", "アイスカフェモカ");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1,  9), "Ice Macchiato", "アイスマキアート");
 		TranslationRegistry.addLocalization(new ItemStack(MabiCraftItem.itemCookingFood, 1, 10), "BnR", "BnR");

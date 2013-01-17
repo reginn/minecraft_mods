@@ -1,11 +1,11 @@
 package rgn.mods.mabicraft.core;
 
-import net.minecraft.src.*;
-
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-
-import rgn.mods.mabicraft.core.MabiCraftItem;
 import rgn.mods.mabicraft.registry.EvilScrollRegistry;
 
 public class ForgeEventHooks
@@ -16,7 +16,7 @@ public class ForgeEventHooks
 		EntityLiving target = event.entityLiving;
 		World         world = target.worldObj;
 		int    lootingLevel = event.lootingLevel;
-		
+
 		/*
 		 public final DamageSource source;
 		 public final ArrayList<EntityItem> drops;
@@ -27,7 +27,7 @@ public class ForgeEventHooks
 
 		for (int i = 0; i < EvilScrollRegistry.instance().getClassListSize(); ++i)
 		{
-			if (target.getClass() == EvilScrollRegistry.instance().getEntityClass(i) 
+			if (target.getClass() == EvilScrollRegistry.instance().getEntityClass(i)
 				&& (event.source.getDamageType().equals("player") || event.source.getDamageType().equals("arrow")))
 			{
 				if (event.specialDropValue > 5 &&
@@ -35,14 +35,14 @@ public class ForgeEventHooks
 				{
 					event.drops.add(
 						new EntityItem(
-							world, target.posX, target.posY, target.posZ, 
+							world, target.posX, target.posY, target.posZ,
 							new ItemStack(MabiCraftItem.itemEvilScroll, 1, EvilScrollRegistry.instance().getMetadataFromClass(target.getClass()))
 						));
 				}
 			}
 		}
-		
+
 	}
-	
-	
+
+
 }

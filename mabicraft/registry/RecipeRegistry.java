@@ -1,13 +1,12 @@
 package rgn.mods.mabicraft.registry;
 
-import net.minecraft.src.*;
-
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-
+import rgn.mods.mabicraft.core.MabiCraftBlock;
+import rgn.mods.mabicraft.core.MabiCraftItem;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import rgn.mods.mabicraft.config.*;
-import rgn.mods.mabicraft.core.*;
 
 public final class RecipeRegistry
 {
@@ -34,7 +33,7 @@ public final class RecipeRegistry
 						Character.valueOf('B'), Item.book,
 						Character.valueOf('W'), "plankWood"
 					}));
-		
+
 		GameRegistry.addRecipe(
 			new ShapedOreRecipe(
 				new ItemStack(MabiCraftBlock.blockCookware, 1, 0),
@@ -45,5 +44,5 @@ public final class RecipeRegistry
 						Character.valueOf('I'), Item.ingotIron
 					}));
 	}
-	
+
 }

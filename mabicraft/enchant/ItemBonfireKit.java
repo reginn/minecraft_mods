@@ -1,10 +1,11 @@
 package rgn.mods.mabicraft.enchant;
 
-import net.minecraft.src.*;
-
-import rgn.mods.mabicraft.core.MabiCraftBlock;
-
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import rgn.mods.mabicraft.config.Config;
+import rgn.mods.mabicraft.core.MabiCraftBlock;
 
 public class ItemBonfireKit extends Item
 {
@@ -13,13 +14,13 @@ public class ItemBonfireKit extends Item
 		super(itemId);
 		this.setCreativeTab(Config.tabMabiCraft);
 	}
-	
+
 	@Override
 	public String getTextureFile()
 	{
 		return "/rgn/sprites/mabicraft/items.png";
 	}
-	
+
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int playerDir, float par8, float par9, float par10)
 	{

@@ -1,6 +1,8 @@
 package rgn.mods.mabicraft.core;
 
-import net.minecraft.src.*;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class SlotResult extends Slot
 {
@@ -8,11 +10,11 @@ public class SlotResult extends Slot
 	{
 		super(iinventory, par3, par4, par5);
 	}
-	
+
 	@Override
 	public boolean isItemValid(ItemStack itemstack)
 	{
 		return false;
 	}
-	
+
 }

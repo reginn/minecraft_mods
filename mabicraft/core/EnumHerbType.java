@@ -1,6 +1,6 @@
 package rgn.mods.mabicraft.core;
 
-import net.minecraft.src.*;
+import net.minecraft.potion.PotionHelper;
 
 public enum EnumHerbType
 {
@@ -10,14 +10,14 @@ public enum EnumHerbType
 	MANA("+4"),
 	POISON(PotionHelper.spiderEyeEffect),
 	IVORY("+4");
-	
+
 	private String potionEffect;
-	
+
 	private EnumHerbType(String _potionEffect)
 	{
 		this.potionEffect = _potionEffect;
 	}
-	
+
 	public String getPotionEffect()
 	{
 		return this.potionEffect;

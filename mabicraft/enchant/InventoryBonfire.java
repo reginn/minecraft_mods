@@ -1,6 +1,6 @@
 package rgn.mods.mabicraft.enchant;
 
-import net.minecraft.src.*;
+import net.minecraft.inventory.InventoryBasic;
 
 public class InventoryBonfire extends InventoryBasic
 {

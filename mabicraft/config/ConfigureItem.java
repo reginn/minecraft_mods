@@ -1,50 +1,50 @@
 package rgn.mods.mabicraft.config;
 
-import com.google.common.collect.Lists;
-
-import net.minecraft.src.*;
-
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.oredict.OreDictionary;
-
+import rgn.mods.mabicraft.cook.CookingFoodDictionary;
+import rgn.mods.mabicraft.cook.FoodProperty;
+import rgn.mods.mabicraft.cook.ItemCookingFood;
 import rgn.mods.mabicraft.core.EnumHerbType;
-import rgn.mods.mabicraft.core.MabiCraftItem;
 import rgn.mods.mabicraft.core.ItemEvilScroll;
 import rgn.mods.mabicraft.core.ItemHerb;
 import rgn.mods.mabicraft.core.ItemMabiCraftParts;
-
+import rgn.mods.mabicraft.core.MabiCraftItem;
 import rgn.mods.mabicraft.enchant.ItemBonfireKit;
 import rgn.mods.mabicraft.enchant.ItemEnchantScroll;
 
-import rgn.mods.mabicraft.cook.CookingFoodDictionary;
-import rgn.mods.mabicraft.cook.ItemCookingFood;
-import rgn.mods.mabicraft.cook.FoodProperty;
+import com.google.common.collect.Lists;
 
 public class ConfigureItem
 {
 	public static void init()
 	{
-		MabiCraftItem.itemBaseHerb     = (new ItemHerb(Config.itemIdBaseHerb    ,EnumHerbType.BASE    )).setIconCoord(0, 0).setItemName("baseherb");
-		MabiCraftItem.itemManaHerb     = (new ItemHerb(Config.itemIdManaHerb    ,EnumHerbType.MANA    )).setIconCoord(1, 0).setItemName("manaherb");
-		MabiCraftItem.itemBloodyHerb   = (new ItemHerb(Config.itemIdBloodyHerb  ,EnumHerbType.BLOODY  )).setIconCoord(2, 0).setItemName("bloodyherb");
-		MabiCraftItem.itemSunlightHerb = (new ItemHerb(Config.itemIdSunlightHerb,EnumHerbType.SUNLIGHT)).setIconCoord(3, 0).setItemName("sunlightherb");
-		MabiCraftItem.itemPoisonHerb   = (new ItemHerb(Config.itemIdPoisonHerb  ,EnumHerbType.POISON  )).setIconCoord(4, 0).setItemName("poisonherb");
-		MabiCraftItem.itemIvoryHerb    = (new ItemHerb(Config.itemIdIvoryHerb   ,EnumHerbType.IVORY   )).setIconCoord(5, 0).setItemName("iboryherb");
-		
-		MabiCraftItem.itemBlessedPotion = (new ItemMabiCraftParts(Config.itemIdBlessedPotion)).setIconCoord(1, 1).setItemName("blessdpotion");
-		MabiCraftItem.itemMagicPowder   = (new ItemMabiCraftParts(Config.itemIdMagicPowder  )).setIconCoord(0, 1).setItemName("magicpowder");
-		
-		MabiCraftItem.itemEnchantScroll = (new ItemEnchantScroll(Config.itemIdEnchantScroll)).setIconCoord(0, 3).setItemName("enchantscroll");
-		MabiCraftItem.itemBonfireKit    = (new ItemBonfireKit(Config.itemIdBonfireKit)).setIconCoord(0, 4).setItemName("bonfirekit");
-		MabiCraftItem.itemEvilScroll    = (new ItemEvilScroll(Config.itemIdEvilScroll)).setIconCoord(0, 2).setItemName("evilscroll");
-		
-		MabiCraftItem.itemCookingFood   = (new ItemCookingFood(Config.itemIdCookingFood)).setIconCoord(0, 6).setItemName("cookingfood");
-		
+		MabiCraftItem.itemBaseHerb     = (new ItemHerb(Config.itemIdBaseHerb     - 256,EnumHerbType.BASE    )).setIconCoord(0, 0).setItemName("baseherb");
+		MabiCraftItem.itemManaHerb     = (new ItemHerb(Config.itemIdManaHerb     - 256,EnumHerbType.MANA    )).setIconCoord(1, 0).setItemName("manaherb");
+		MabiCraftItem.itemBloodyHerb   = (new ItemHerb(Config.itemIdBloodyHerb   - 256,EnumHerbType.BLOODY  )).setIconCoord(2, 0).setItemName("bloodyherb");
+		MabiCraftItem.itemSunlightHerb = (new ItemHerb(Config.itemIdSunlightHerb - 256,EnumHerbType.SUNLIGHT)).setIconCoord(3, 0).setItemName("sunlightherb");
+		MabiCraftItem.itemPoisonHerb   = (new ItemHerb(Config.itemIdPoisonHerb   - 256,EnumHerbType.POISON  )).setIconCoord(4, 0).setItemName("poisonherb");
+		MabiCraftItem.itemIvoryHerb    = (new ItemHerb(Config.itemIdIvoryHerb    - 256,EnumHerbType.IVORY   )).setIconCoord(5, 0).setItemName("iboryherb");
+
+		MabiCraftItem.itemBlessedPotion = (new ItemMabiCraftParts(Config.itemIdBlessedPotion - 256)).setIconCoord(1, 1).setItemName("blessdpotion");
+		MabiCraftItem.itemMagicPowder   = (new ItemMabiCraftParts(Config.itemIdMagicPowder   - 256)).setIconCoord(0, 1).setItemName("magicpowder");
+
+		MabiCraftItem.itemEnchantScroll = (new ItemEnchantScroll(Config.itemIdEnchantScroll - 256)).setIconCoord(0, 3).setItemName("enchantscroll");
+		MabiCraftItem.itemBonfireKit    = (new ItemBonfireKit(Config.itemIdBonfireKit - 256)).setIconCoord(0, 4).setItemName("bonfirekit");
+		MabiCraftItem.itemEvilScroll    = (new ItemEvilScroll(Config.itemIdEvilScroll - 256)).setIconCoord(0, 2).setItemName("evilscroll");
+
+		MabiCraftItem.itemCookingFood   = (new ItemCookingFood(Config.itemIdCookingFood - 256)).setIconCoord(0, 6).setItemName("cookingfood");
+
 		OreDictionary.registerOre("milk",  new ItemStack(Item.bucketMilk));
 		OreDictionary.registerOre("cocoa", new ItemStack(Item.dyePowder, 1, 3));
 		OreDictionary.registerOre("sugar", new ItemStack(Item.sugar));
 		OreDictionary.registerOre("apple", new ItemStack(Item.appleRed));
 		OreDictionary.registerOre("ice",   new ItemStack(Block.ice));
-		
+
 		CookingFoodDictionary.registerCookingFood
 			(
 				"foodChocolateMilk",  new ItemStack(MabiCraftItem.itemCookingFood, 1, 0), new FoodProperty(1, 0.05F)
@@ -118,13 +118,13 @@ public class ConfigureItem
 				"foodValesFire", new ItemStack(MabiCraftItem.itemCookingFood, 1, 16), new FoodProperty(1, 0.05F),
 				Lists.newArrayList(new PotionEffect(Potion.damageBoost.id, 60, 1), new PotionEffect(Potion.hunger.id, 60, 1))
 			);
-		
+
 		//----------------
 		CookingFoodDictionary.registerCookingFood
 			(
 				"plantStrawberry", new ItemStack(MabiCraftItem.itemCookingFood, 1, 144), new FoodProperty(1, 0.05F)
 			);
-		
+
 		CookingFoodDictionary.registerCookingFood
 			(
 				"plantNuts", new ItemStack(MabiCraftItem.itemCookingFood, 1, 145), new FoodProperty(1, 0.05F)
@@ -145,8 +145,8 @@ public class ConfigureItem
 			(
 				"liqueurValesWhisky", new ItemStack(MabiCraftItem.itemCookingFood, 1, 149), new FoodProperty(1, 0.05F)
 			);
-		
-		
+
+
 	}
 
 }

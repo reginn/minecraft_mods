@@ -1,6 +1,6 @@
 package rgn.mods.mabicraft.core;
 
-import net.minecraft.src.*;
+import net.minecraft.block.Block;
 
 public class MabiCraftBlock
 {

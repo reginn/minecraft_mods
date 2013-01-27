@@ -10,9 +10,11 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IArmorTextureProvider;
+
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.config.ConfigureEnum;
 import rgn.mods.dwarventools.core.DwarvenItem;
+import rgn.mods.dwarventools.core.DwarvenEnchantment;
 
 public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 {
@@ -76,10 +78,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 					break;
 
 				case 1 :
-					itemstack.addEnchantment(Enchantment.protection,           1);
-					itemstack.addEnchantment(Enchantment.fireProtection,       1);
-					itemstack.addEnchantment(Enchantment.blastProtection,      1);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 1);
+					itemstack.addEnchantment(DwarvenEnchantment.enchantmentVitalize, 1);
 					break;
 
 				case 2 :
@@ -108,85 +107,8 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 					break;
 
 				case 1 :
-					itemstack.addEnchantment(Enchantment.protection,           3);
-					itemstack.addEnchantment(Enchantment.fireProtection,       3);
-					itemstack.addEnchantment(Enchantment.blastProtection,      3);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 3);
-					break;
+					itemstack.addEnchantment(DwarvenEnchantment.enchantmentVitalize, 2);
 
-				case 2 :
-					itemstack.addEnchantment(Enchantment.protection,           3);
-					itemstack.addEnchantment(Enchantment.fireProtection,       3);
-					itemstack.addEnchantment(Enchantment.blastProtection,      3);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 3);
-					break;
-
-				case 3 :
-					itemstack.addEnchantment(Enchantment.featherFalling, 3);
-					break;
-
-				default :
-					break;
-			}
-		}
-	}
-
-	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5)
-	{
-		super.onUpdate(itemstack, world, entity, par4, par5);
-
-		if (itemstack.isItemEnchanted())
-		{
-			return ;
-		}
-
-		if (this.material == ConfigureEnum.enumArmorMaterialMithril)
-		{
-			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
-			{
-				case 0 :
-					itemstack.addEnchantment(Enchantment.respiration,  1);
-					itemstack.addEnchantment(Enchantment.aquaAffinity, 1);
-					break;
-
-				case 1 :
-					itemstack.addEnchantment(Enchantment.protection,           1);
-					itemstack.addEnchantment(Enchantment.fireProtection,       1);
-					itemstack.addEnchantment(Enchantment.blastProtection,      1);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 1);
-					break;
-
-				case 2 :
-					itemstack.addEnchantment(Enchantment.protection,           1);
-					itemstack.addEnchantment(Enchantment.fireProtection,       1);
-					itemstack.addEnchantment(Enchantment.blastProtection,      1);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 1);
-					break;
-
-				case 3 :
-					itemstack.addEnchantment(Enchantment.featherFalling, 1);
-					break;
-
-				default :
-					break;
-			}
-		}
-
-		if (this.material == ConfigureEnum.enumArmorMaterialEbony)
-		{
-			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
-			{
-				case 0 :
-					itemstack.addEnchantment(Enchantment.respiration,  3);
-					itemstack.addEnchantment(Enchantment.aquaAffinity, 1);
-					break;
-
-				case 1 :
-					itemstack.addEnchantment(Enchantment.protection,           3);
-					itemstack.addEnchantment(Enchantment.fireProtection,       3);
-					itemstack.addEnchantment(Enchantment.blastProtection,      3);
-					itemstack.addEnchantment(Enchantment.projectileProtection, 3);
 					break;
 
 				case 2 :

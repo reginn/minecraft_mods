@@ -2,7 +2,6 @@ package rgn.mods.dwarventools.item;
 
 import java.util.Random;
 
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
@@ -10,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.core.DwarvenItem;
+import rgn.mods.dwarventools.core.DwarvenEnchantment;
 
 public class ItemDwarvenBattleaxe extends ItemSword
 {
@@ -39,33 +38,7 @@ public class ItemDwarvenBattleaxe extends ItemSword
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeMithril)
-		{
-			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(2) + 1);
-		}
-		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeEbony)
-		{
-			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(4) + 1);
-		}
+		itemstack.addEnchantment(DwarvenEnchantment.enchantmentExecutioner, 1);
 	}
-
-	@Override
-	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5)
-	{
-		super.onUpdate(itemstack, world, entity, par4, par5);
-
-		if (itemstack.isItemEnchanted())
-		{
-			return ;
-		}
-
-		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeMithril)
-		{
-			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(2) + 1);
-		}
-		if (itemstack.getItem() == DwarvenItem.itemDwarvenBattleaxeEbony)
-		{
-			itemstack.addEnchantment(Enchantment.knockback, random.nextInt(4) + 1);
-		}
-	}
+	
 }

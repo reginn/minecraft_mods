@@ -53,7 +53,7 @@ public class ItemDwarvenTool extends ItemTool
 		itemstack.damageItem(1, entityliving);
 		int metadata = world.getBlockMetadata(x, y, z);
 
-		if (this.rangeLevel == 0 || !this.canHarvestBlock(Block.blocksList[blockId]))
+		if (this.rangeLevel == 0 || (!this.canHarvestBlock(Block.blocksList[blockId]) && !this.canEffectiveAgainst(Block.blocksList[blockId])))
 		{
 			return true;
 		}
@@ -61,7 +61,12 @@ public class ItemDwarvenTool extends ItemTool
 		this.destroyAroundBlock(itemstack, world, blockId, x, y, z, entityliving);
 		return true;
 	}
-
+	
+	protected boolean canEffectiveAgainst(Block block)
+	{
+		return false;
+	}
+	
 	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
 		int facing = BlockPistonBase.determineOrientation(world, x, y, z, (EntityPlayer)entityliving);
@@ -117,9 +122,20 @@ public class ItemDwarvenTool extends ItemTool
 				continue ;
 			}
 
-			if (!world.isAirBlock(target.x, target.y, target.z) && this.canHarvestBlock(Block.blocksList[targetBlockId]))
+			if (!world.isAirBlock(target.x, target.y, target.z))
 			{
-				Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
+				if (this.canHarvestBlock(Block.blocksList[targetBlockId]) || this.canEffectiveAgainst(Block.blocksList[targetBlockId]))
+				{
+					if (Block.blocksList[targetBlockId] == Block.silverfish)
+					{
+						Block.blocksList[targetBlockId].onBlockDestroyedByPlayer(world, target.x, target.y, target.z, targetBlockMetadata);
+					}
+					else
+					{
+						Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
+					}
+				}
+				
 				world.setBlockWithNotify(target.x, target.y, target.z, 0);
 
 				++damage;

@@ -22,7 +22,7 @@ public class ConfigureBlock
 		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOre, ItemDwarvenOre.class, "DwarvenOre");
 		GameRegistry.registerBlock(DwarvenBlock.blockDwarvenOreStorage, ItemDwarvenOreStorage.class, "DwarvenOreStorage");
 
-		GameRegistry.registerBlock(DwarvenBlock.blockInfernalFurnace);
+		GameRegistry.registerBlock(DwarvenBlock.blockInfernalFurnace, "InfernalFurnace");
 
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockDwarvenOre, 0,   "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockDwarvenOre, 1,   "pickaxe", 3);

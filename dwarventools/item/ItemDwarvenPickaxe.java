@@ -1,5 +1,10 @@
 package rgn.mods.dwarventools.item;
 
+import java.io.*;
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumToolMaterial;
@@ -14,14 +19,24 @@ public class ItemDwarvenPickaxe extends ItemDwarvenTool
 			Block.cobblestoneMossy, Block.oreIron, Block.blockSteel, Block.oreCoal, Block.blockGold,
 			Block.oreGold, Block.oreDiamond, Block.blockDiamond, Block.ice, Block.netherrack,
 			Block.oreLapis, Block.blockLapis, Block.oreRedstone, Block.oreRedstoneGlowing,
-			Block.rail, Block.railDetector, Block.railPowered
+			Block.rail, Block.railDetector, Block.railPowered, Block.silverfish
 		};
-
+	
+	private Set<Block> blocksEffectiveAgainstSet;
+		
 	public ItemDwarvenPickaxe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, 2, material, blocksEffectiveAgainst);
+		blocksEffectiveAgainstSet = Sets.newHashSet(blocksEffectiveAgainst);
 	}
-
+	
+	@Override
+	protected boolean canEffectiveAgainst(Block block)
+	{
+		return blocksEffectiveAgainstSet.contains(block);
+	}
+	
+	@Override
 	public boolean canHarvestBlock(Block par1Block)
 	{
 		return par1Block == Block.obsidian ? this.toolMaterial.getHarvestLevel() == 3
@@ -38,6 +53,7 @@ public class ItemDwarvenPickaxe extends ItemDwarvenTool
 			: this.toolMaterial.getHarvestLevel() >= 2);
 	}
 
+	@Override
 	public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
 	{
 		return par2Block != null && (par2Block.blockMaterial == Material.iron || par2Block.blockMaterial == Material.rock)

@@ -73,6 +73,8 @@ public class RecipeRegistry
 					Character.valueOf('N'), Block.netherBrick
 				});
 
+		// delete recipe, for minecraft 1.5
+		/*
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0),
 				new Object[]
@@ -80,7 +82,7 @@ public class RecipeRegistry
 					"XXX", "XXX", "XXX",
 					Character.valueOf('X'), Item.redstone
 				});
-
+		*/
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(Item.redstone, 9),
 				 new Object[]
@@ -102,7 +104,8 @@ public class RecipeRegistry
 		final String[] axeRecipe     = new String[] { "MM",  "MS",  " S"};
 		final String[] hoeRecipe     = new String[] { "MM",  " S",  " S"};
 		final String[] swordRecipe   = new String[] {  "M",   "M",   "S"};
-
+		
+		// redstone block changes official redstone block in Minecraft 1.5
 		List<ItemStack> materialList = Lists.newArrayList(new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0));
 
 		List<Item[]> itemList = Lists.newArrayList(shovelList, pickaxeList, axeList, hoeList, swordList);

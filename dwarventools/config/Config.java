@@ -57,6 +57,10 @@ public class Config
 	public static int itemIdDwarvenPlateEbony;
 	public static int itemIdDwarvenBootEbony;
 	public static int itemIdDwarvenLegsEbony;
+	
+	public static int enchantmentIdExecutioner;
+	public static int enchantmentIdCriticalStrike;
+	public static int enchantmentIdVitalize;
 
 	public static final CreativeTabs tabDwarvenTools = new CreativeTabDwarvenTools("dwarventools");
 
@@ -68,8 +72,8 @@ public class Config
 			cfg.load();
 
 			blockIdBlockDwarvenOreStorage = cfg.getBlock("StrageBlock",        1500).getInt();
-			blockIdBlockDwarvenOre       = cfg.getBlock("Ore",                1501).getInt();
-			blockIdInfernalFurnace       = cfg.getBlock("InfernalFurnace",    1505).getInt();
+			blockIdBlockDwarvenOre        = cfg.getBlock("Ore",                1501).getInt();
+			blockIdInfernalFurnace        = cfg.getBlock("InfernalFurnace",    1505).getInt();
 
 			itemIdIronBar      = cfg.getItem("IronBar",      10500).getInt();
 			itemIdMithrilIngot = cfg.getItem("MithrilIngot", 10501).getInt();
@@ -114,6 +118,10 @@ public class Config
 			itemIdDwarvenPlateEbony  = cfg.getItem("DwarvenEbonyPlate",  11030).getInt();
 			itemIdDwarvenBootEbony   = cfg.getItem("DwarvenEbonyBoot",   11031).getInt();
 			itemIdDwarvenLegsEbony   = cfg.getItem("DwarvenEbonyLegs",   11032).getInt();
+			
+			enchantmentIdVitalize       = cfg.get("EnchantmentVitalize",       Configuration.CATEGORY_GENERAL, 10).getInt();
+			enchantmentIdExecutioner    = cfg.get("EnchantmentExecutionerID",  Configuration.CATEGORY_GENERAL, 26).getInt();
+			enchantmentIdCriticalStrike = cfg.get("EnchantmentCriticalStrike", Configuration.CATEGORY_GENERAL, 27).getInt();
 		}
 		catch (Exception e)
 		{

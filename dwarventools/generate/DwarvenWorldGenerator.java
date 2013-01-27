@@ -76,4 +76,8 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 	private void generateNether(World world, Random random, int chunkX, int chunkZ)
 	{
 	}
+	
+	private void generateEnd(World world, Random random, int chunkX, int chunkZ)
+	{
+	}
 }

@@ -9,7 +9,7 @@ public class LocalizationRegistry
 	{
 		TranslationRegistry.addLocalization(DwarvenBlock.blockInfernalFurnace, "Infernal Furnace", "地獄かまど");
 
-		TranslationRegistry.addLocalization(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0), "Block of Redstone", "レッドストーンブロック");
+		TranslationRegistry.addLocalization(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0), "Old Block of Redstone", "旧レッドストーンブロック");
 		TranslationRegistry.addLocalization(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 1), "Block of Mithril",  "ミスリルブロック");
 		TranslationRegistry.addLocalization(new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 2), "Block of Ebony",    "エボニーブロック");
 
@@ -61,5 +61,9 @@ public class LocalizationRegistry
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenAxeRedstone,     "Redstone Axe",     "レッドストーンの斧");
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenHoeRedstone,     "Redstone Hoe",     "レッドストーンのクワ");
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenSwordRedstone,   "Redstone Sword",   "レッドストーンの剣");
+		
+		TranslationRegistry.addLocalization("enchantment.vitalize",       "Vitalize",        "活性化");
+		TranslationRegistry.addLocalization("enchantment.executioner",    "Executioner",     "処刑人");
+		TranslationRegistry.addLocalization("enchantment.criticalStrike", "Critical Strike", "クリティカルストライク");
 	}
 }

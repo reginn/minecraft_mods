@@ -5,36 +5,32 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.core.ElvenItem;
 
-public class EntityTorchArrow extends EntityArrowBase
+import rgn.mods.elventools.item.ElvenItem;
+
+public class EntityTorchArrow extends EntityElvenArrow
 {
 	public EntityTorchArrow(World world)
 	{
 		super(world);
 	}
-
+	
 	public EntityTorchArrow(World world, double x, double y, double z)
 	{
 		super(world, x, y, z);
 	}
-
-	public EntityTorchArrow(World world, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving, float par4, float par5)
-	{
-		super(world, par2EntityLiving, par3EntityLiving, par4, par5);
-	}
-
+	
 	public EntityTorchArrow(World world, EntityLiving player, float par3)
 	{
 		super(world, player, par3);
 	}
 
-	public boolean addItemStackToInventory(EntityPlayer player)
+	protected boolean addItemStackToInventory(EntityPlayer player)
 	{
 		return player.inventory.addItemStackToInventory(new ItemStack(ElvenItem.itemTorchArrow, 1));
 	}
 
-	public boolean tryPlaceBlock()
+	protected boolean tryPlaceBlock()
 	{
 		int side = this.mop.sideHit;
 		Block block = Block.torchWood;

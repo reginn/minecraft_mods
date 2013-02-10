@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.core.ElvenBlock;
+import rgn.mods.elventools.block.ElvenBlock;
 
 import com.google.common.collect.Sets;
 
@@ -21,7 +21,7 @@ public class ItemElvenLumberAxe extends ItemTool
 			Block.wood, ElvenBlock.blockEbonyLog
 		};
 
-	private Set<Block> toolEffective = Sets.newHashSet();
+	private Set<Block> toolEffective = Sets.newHashSet(blocksEffectiveAgainst);
 
 	public class Coord
 	{
@@ -42,11 +42,6 @@ public class ItemElvenLumberAxe extends ItemTool
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
 		this.setCreativeTab(Config.tabElvenTools);
-
-		for (int i = 0; i < blocksEffectiveAgainst.length; ++i)
-		{
-			this.toolEffective.add(blocksEffectiveAgainst[i]);
-		}
 	}
 
 	@Override
@@ -60,7 +55,7 @@ public class ItemElvenLumberAxe extends ItemTool
 	{
 		itemstack.damageItem(1, entityliving);
 
-		if (!this.isToolEffective(Block.blocksList[blockId]))
+		if (!this.isToolEffective(Block.blocksList[blockId], world, x, y, z))
 		{
 			return true;
 		}
@@ -69,13 +64,9 @@ public class ItemElvenLumberAxe extends ItemTool
 		return true;
 	}
 
-	private boolean isToolEffective(Block block)
+	private boolean isToolEffective(Block block, World world, int x, int y, int z)
 	{
-		if (!this.toolEffective.isEmpty())
-		{
-			return this.toolEffective.contains(block);
-		}
-		return false;
+		return this.toolEffective.contains(block) || block.isWood(world, x, y, z);
 	}
 
 	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
@@ -112,7 +103,7 @@ public class ItemElvenLumberAxe extends ItemTool
 				continue ;
 			}
 
-			if (!world.isAirBlock(target.x, target.y, target.z) && this.isToolEffective(Block.blocksList[targetBlockId]))
+			if (!world.isAirBlock(target.x, target.y, target.z)	&& this.isToolEffective(Block.blocksList[targetBlockId], world, x, y, z))
 			{
 				Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
 				world.setBlockWithNotify(target.x, target.y, target.z, 0);

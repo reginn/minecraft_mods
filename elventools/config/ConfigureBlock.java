@@ -1,16 +1,19 @@
 package rgn.mods.elventools.config;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.common.MinecraftForge;
+
 import rgn.mods.elventools.block.BlockEbonyLeaves;
 import rgn.mods.elventools.block.BlockEbonyLog;
 import rgn.mods.elventools.block.BlockEbonySapling;
 import rgn.mods.elventools.block.BlockEbonyWood;
 import rgn.mods.elventools.block.BlockRope;
 import rgn.mods.elventools.block.BlockRopeEstablisher;
-import rgn.mods.elventools.core.ElvenBlock;
-import cpw.mods.fml.common.registry.GameRegistry;
+import rgn.mods.elventools.block.ElvenBlock;
 
 public class ConfigureBlock
 {

@@ -1,9 +1,11 @@
 package rgn.mods.elventools.creativetab;
 
-import net.minecraft.creativetab.CreativeTabs;
-import rgn.mods.elventools.core.ElvenItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.creativetab.CreativeTabs;
+
+import rgn.mods.elventools.item.ElvenItem;
 
 public class CreativeTabElvenTools extends CreativeTabs
 {

@@ -5,7 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import rgn.mods.elventools.core.ElvenBlock;
+
+import rgn.mods.elventools.block.ElvenBlock;
 
 public class WorldGenEbonyTree extends WorldGenerator
 {

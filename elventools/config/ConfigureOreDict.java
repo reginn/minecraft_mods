@@ -1,8 +1,8 @@
 package rgn.mods.elventools.config;
 
 import net.minecraftforge.oredict.OreDictionary;
-import rgn.mods.elventools.core.ElvenBlock;
-import rgn.mods.elventools.core.ElvenItem;
+import rgn.mods.elventools.block.ElvenBlock;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class ConfigureOreDict
 {

@@ -1,7 +1,11 @@
 package rgn.mods.elventools.core;
 
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
+
+import net.minecraft.item.ItemStack;
+
+import rgn.mods.elventools.block.ElvenBlock;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class FuelHandler implements IFuelHandler
 {

@@ -2,11 +2,12 @@ package rgn.mods.elventools.generate;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.IWorldGenerator;
+
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenForest;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
 
 public class ElvenWorldGenerator implements IWorldGenerator
 {
@@ -35,6 +36,10 @@ public class ElvenWorldGenerator implements IWorldGenerator
 	}
 
 	private void generateNether(World world, Random random, int chunkX, int chunkZ)
+	{
+	}
+	
+	private void generateEnd(World world, Random random, int chunkX, int chunkZ)
 	{
 	}
 }

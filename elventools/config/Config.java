@@ -22,6 +22,12 @@ public class Config
 	public static int itemIdLeatherLongbow;
 	public static int itemIdCompositeLongbow;
 	public static int itemIdEnhancedLongbow;
+	public static int itemIdBoneCompositeBow;
+	public static int itemIdShadowBow;
+	public static int itemIdEndBow;
+	public static int itemIdFeatherBow;
+	public static int itemIdSteelBow;
+	public static int itemIdElvenBow;
 
 	public static int itemIdEbonyStick;
 
@@ -36,11 +42,6 @@ public class Config
 	public static int itemIdElvenPickaxeMithril;
 	public static int itemIdElvenAxeMithril;
 	public static int itemIdElvenSwordMithril;
-
-	public static int itemIdElvenShovelSilver;
-	public static int itemIdElvenPickaxeSilver;
-	public static int itemIdElvenAxeSilver;
-	public static int itemIdElvenSwordSilver;
 
 	public static int itemIdElvenSickle;
 	public static int itemIdElvenLumberAxe;
@@ -65,6 +66,12 @@ public class Config
 			itemIdLeatherLongbow   = cfg.getItem("LetherLongbow",    21001).getInt();
 			itemIdCompositeLongbow = cfg.getItem("CompositeLongbow", 21002).getInt();
 			itemIdEnhancedLongbow  = cfg.getItem("EnhancedLongbow",  21003).getInt();
+			itemIdBoneCompositeBow = cfg.getItem("BoneCompositeBow", 21004).getInt();
+			itemIdShadowBow        = cfg.getItem("ShadowBow",        21005).getInt();
+			itemIdEndBow           = cfg.getItem("EndBow",           21006).getInt();
+			itemIdFeatherBow       = cfg.getItem("FeatherBow",       21007).getInt();
+			itemIdSteelBow         = cfg.getItem("SteelBow",         21008).getInt();
+			itemIdElvenBow         = cfg.getItem("ElvenBow",         21009).getInt();
 
 			itemIdEbonyStick = cfg.getItem("EbonyStick", 23004).getInt();
 

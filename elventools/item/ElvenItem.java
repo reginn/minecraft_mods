@@ -1,4 +1,4 @@
-package rgn.mods.elventools.core;
+package rgn.mods.elventools.item;
 
 import net.minecraft.item.Item;
 
@@ -7,6 +7,12 @@ public class ElvenItem
 	public static Item itemLeatherLongbow;
 	public static Item itemCompositeLongbow;
 	public static Item itemEnhancedLongbow;
+	public static Item itemBoneCompositeBow;
+	public static Item itemShadowBow;
+	public static Item itemEndBow;
+	public static Item itemFeatherBow;
+	public static Item itemSteelBow;
+	public static Item itemElvenBow;
 
 	public static Item itemEbonyStick;
 

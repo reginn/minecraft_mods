@@ -1,7 +1,8 @@
 package rgn.mods.elventools.config;
 
 import net.minecraftforge.common.MinecraftForge;
-import rgn.mods.elventools.core.ElvenItem;
+
+import rgn.mods.elventools.item.ElvenItem;
 import rgn.mods.elventools.item.ItemEbonyBoat;
 import rgn.mods.elventools.item.ItemElvenAxe;
 import rgn.mods.elventools.item.ItemElvenLumberAxe;
@@ -10,17 +11,27 @@ import rgn.mods.elventools.item.ItemElvenPickaxe;
 import rgn.mods.elventools.item.ItemElvenShovel;
 import rgn.mods.elventools.item.ItemElvenSickle;
 import rgn.mods.elventools.item.ItemElvenSword;
-import rgn.mods.elventools.item.ItemEnhancedBow;
+import rgn.mods.elventools.item.ItemElvenBow;
+import rgn.mods.elventools.item.ItemElvishBow;
+import rgn.mods.elventools.item.ItemShadowBow;
+import rgn.mods.elventools.item.ItemSteelBow;
 import rgn.mods.elventools.item.ItemRopeEstablisher;
+import rgn.mods.elventools.item.EnumElvenBowType;
 
 public class ConfigureItem
 {
 	public static void init()
 	{
-		ElvenItem.itemLeatherLongbow   = (new ItemEnhancedBow(Config.itemIdLeatherLongbow   - 256,  0,  512, 1.0F, 15)).setItemName("itemLeatherLongbow");
-		ElvenItem.itemCompositeLongbow = (new ItemEnhancedBow(Config.itemIdCompositeLongbow - 256, 16,  768, 1.5F, 10)).setItemName("itemCompositeLongbow");
-		ElvenItem.itemEnhancedLongbow  = (new ItemEnhancedBow(Config.itemIdEnhancedLongbow  - 256, 32, 4096, 2.0F,  1)).setItemName("itemEnhancedLongbow");
-
+		ElvenItem.itemLeatherLongbow   = (new ItemElvenBow(Config.itemIdLeatherLongbow   - 256, EnumElvenBowType.LEATHER  )).setItemName("itemLeatherLongbow");
+		ElvenItem.itemCompositeLongbow = (new ItemElvenBow(Config.itemIdCompositeLongbow - 256, EnumElvenBowType.COMPOSITE)).setItemName("itemCompositeLongbow");
+		ElvenItem.itemEnhancedLongbow  = (new ItemElvenBow(Config.itemIdEnhancedLongbow  - 256, EnumElvenBowType.ENHANCED )).setItemName("itemEnhancedLongbow");
+		ElvenItem.itemBoneCompositeBow = (new ItemElvenBow(Config.itemIdBoneCompositeBow - 256, EnumElvenBowType.BONE     )).disableCallEvent().setItemName("itemBoneCompositeBow");
+		ElvenItem.itemShadowBow        = (new ItemShadowBow(Config.itemIdShadowBow       - 256, EnumElvenBowType.SHADOW   )).disableCallEvent().setItemName("itemShadowBow");
+		ElvenItem.itemEndBow           = (new ItemElvenBow(Config.itemIdEndBow           - 256, EnumElvenBowType.END      )).disableCallEvent().setItemName("itemEndBow");
+		ElvenItem.itemFeatherBow       = (new ItemElvenBow(Config.itemIdFeatherBow       - 256, EnumElvenBowType.FEATHER  )).disableCallEvent().setChargeSpeedRatio(2.0F).setItemName("itemFeatherBow");
+		ElvenItem.itemSteelBow         = (new ItemSteelBow(Config.itemIdSteelBow         - 256, EnumElvenBowType.STEEL    )).disableCallEvent().setChargeSpeedRatio(0.5F).setItemName("itemSteelBow");
+		ElvenItem.itemElvenBow         = (new ItemElvishBow(Config.itemIdElvenBow        - 256, EnumElvenBowType.ELVEN    )).disableCallEvent().setChargeSpeedRatio(2.0F).setItemName("itemElvenBow");
+		
 		ElvenItem.itemEbonyStick = (new ItemElvenParts(Config.itemIdEbonyStick - 256)).setIconCoord(1, 4).setItemName("itemEbonyStick");
 
 		ElvenItem.itemEbonyBoat = (new ItemEbonyBoat(Config.itemIdEbonyBoat - 256)).setIconCoord(0, 4).setItemName("itemEbonyBoat");

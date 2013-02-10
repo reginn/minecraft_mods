@@ -1,4 +1,4 @@
-package rgn.mods.elventools.core;
+package rgn.mods.elventools.block;
 
 import net.minecraft.block.Block;
 
@@ -11,5 +11,4 @@ public class ElvenBlock
 
 	public static Block blockRope;
 	public static Block blockRopeEstablisher;
-
 }

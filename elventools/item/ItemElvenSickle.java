@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
+import net.minecraftforge.common.IPlantable;
+
 import rgn.mods.elventools.config.Config;
 import com.google.common.collect.Sets;
 
@@ -21,7 +23,7 @@ public class ItemElvenSickle extends ItemTool
 			Block.mushroomRed, Block.crops, Block.reed, Block.netherStalk
 		};
 
-	private Set<Block> toolEffective = Sets.newHashSet();
+	private Set<Block> toolEffective = Sets.newHashSet(blocksEffectiveAgainst);
 
 	public class Coord
 	{
@@ -41,11 +43,6 @@ public class ItemElvenSickle extends ItemTool
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
 		this.setCreativeTab(Config.tabElvenTools);
-
-		for (int i = 0; i < blocksEffectiveAgainst.length; ++i)
-		{
-			this.toolEffective.add(blocksEffectiveAgainst[i]);
-		}
 	}
 
 	@Override
@@ -70,11 +67,7 @@ public class ItemElvenSickle extends ItemTool
 
 	private boolean isToolEffective(Block block)
 	{
-		if (!this.toolEffective.isEmpty())
-		{
-			return this.toolEffective.contains(block);
-		}
-		return false;
+		return this.toolEffective.contains(block) || block instanceof IPlantable;
 	}
 
 	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)

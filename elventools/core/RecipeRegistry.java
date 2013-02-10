@@ -2,6 +2,8 @@ package rgn.mods.elventools.core;
 
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,7 +12,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.google.common.collect.Lists;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import rgn.mods.elventools.block.ElvenBlock;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class RecipeRegistry
 {
@@ -55,6 +58,74 @@ public class RecipeRegistry
 					Character.valueOf('G'), Item.ingotGold,
 					Character.valueOf('O'), Block.obsidian
 				});
+		
+		GameRegistry.addRecipe(
+			new ShapedOreRecipe(
+				new ItemStack(ElvenItem.itemBoneCompositeBow, 1),
+					new Object[]
+					{
+						" BS", "E S", " BS",
+						Character.valueOf('B'), Item.bone,
+						Character.valueOf('S'), Item.silk,
+						Character.valueOf('E'), "stickEbony"
+					}));
+		
+		GameRegistry.addRecipe(
+			new ShapedOreRecipe(
+				new ItemStack(ElvenItem.itemShadowBow, 1),
+					new Object[]
+					{
+						" PS", "EBS", " PS",
+						Character.valueOf('P'), Item.enderPearl,
+						Character.valueOf('S'), Item.silk,
+						Character.valueOf('B'), ElvenItem.itemBoneCompositeBow,
+						Character.valueOf('E'), "stickEbony"
+					}));
+		
+		GameRegistry.addRecipe(
+			new ItemStack(ElvenItem.itemEndBow, 1),
+				new Object[]
+				{
+					" EE", "EBS", "ES ",
+					Character.valueOf('E'), Item.eyeOfEnder,
+					Character.valueOf('S'), Item.silk,
+					Character.valueOf('B'), ElvenItem.itemShadowBow
+				});
+		
+		GameRegistry.addRecipe(
+			new ItemStack(ElvenItem.itemFeatherBow, 1),
+				new Object[]
+				{
+					" FS", "GBS", " FS",
+					Character.valueOf('S'), Item.silk,
+					Character.valueOf('F'), Item.feather,
+					Character.valueOf('G'), Item.ingotGold,
+					Character.valueOf('B'), ElvenItem.itemBoneCompositeBow
+				});
+		
+		GameRegistry.addRecipe(
+			new ShapedOreRecipe(
+				new ItemStack(ElvenItem.itemSteelBow, 1),
+					new Object[]
+					{
+						"　IS", "EBS", " IS",
+						Character.valueOf('I'), Item.ingotIron,
+						Character.valueOf('S'), Item.silk,
+						Character.valueOf('B'), ElvenItem.itemCompositeLongbow,
+						Character.valueOf('E'), "stickEbony"
+					}));
+		
+		GameRegistry.addRecipe(
+			new ShapedOreRecipe(
+				new ItemStack(ElvenItem.itemElvenBow, 1),
+					new Object[]
+					{
+						" GS", "EBS", " GS",
+						Character.valueOf('G'), Item.ingotGold,
+						Character.valueOf('S'), Item.silk,
+						Character.valueOf('B'), ElvenItem.itemCompositeLongbow,
+						Character.valueOf('E'), "stickEbony"
+					}));
 	}
 
 	private void addRecipeEbony()

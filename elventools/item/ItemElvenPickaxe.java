@@ -8,7 +8,7 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.core.ElvenItem;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class ItemElvenPickaxe extends ItemPickaxe
 {

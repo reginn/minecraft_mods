@@ -1,14 +1,22 @@
 package rgn.mods.elventools.core;
 
 import rgn.util.TranslationRegistry;
+import rgn.mods.elventools.block.ElvenBlock;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class LocalizationRegistry
 {
 	public void addLocalization()
 	{
-		TranslationRegistry.addLocalization(ElvenItem.itemLeatherLongbow,   "Leather Longbow",   "レザーロングボウ");
-		TranslationRegistry.addLocalization(ElvenItem.itemCompositeLongbow, "Composite Longbow", "複合ロングボウ");
-		TranslationRegistry.addLocalization(ElvenItem.itemEnhancedLongbow,  "Enhanced Longbow",  "エンハンスドロングボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemLeatherLongbow,   "Leather Longbow",    "レザーロングボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemCompositeLongbow, "Composite Longbow",  "複合ロングボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemEnhancedLongbow,  "Enhanced Longbow",   "エンハンスドロングボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemBoneCompositeBow, "Bone Composite Bow", "ボーンコンポジットボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemShadowBow,        "Shadow Bow",         "影の弓");
+		TranslationRegistry.addLocalization(ElvenItem.itemEndBow,           "End Bow",            "エンドボウ");
+		TranslationRegistry.addLocalization(ElvenItem.itemFeatherBow,       "Feather Bow",        "羽弓");
+		TranslationRegistry.addLocalization(ElvenItem.itemSteelBow,         "Steel Bow",          "鋼鉄の弓");
+		TranslationRegistry.addLocalization(ElvenItem.itemElvenBow,         "Elven Bow",          "エルフの弓");
 
 		TranslationRegistry.addLocalization(ElvenBlock.blockEbonyLog,     "Ebony Log",           "黒檀の原木");
 		TranslationRegistry.addLocalization(ElvenBlock.blockEbonyLeaves,  "Ebony Leaves",        "黒檀の葉");

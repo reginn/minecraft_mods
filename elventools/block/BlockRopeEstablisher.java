@@ -7,8 +7,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.core.ElvenBlock;
-import rgn.mods.elventools.core.ElvenItem;
+import rgn.mods.elventools.block.ElvenBlock;
+import rgn.mods.elventools.item.ElvenItem;
 
 public class BlockRopeEstablisher extends Block
 {

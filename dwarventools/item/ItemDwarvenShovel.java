@@ -1,9 +1,10 @@
 package rgn.mods.dwarventools.item;
 
-import net.minecraft.item.Item;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.common.ForgeHooks;
 
 public class ItemDwarvenShovel extends ItemDwarvenTool

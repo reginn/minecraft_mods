@@ -2,6 +2,7 @@ package rgn.mods.dwarventools.item;
 
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemHoe;
+
 import rgn.mods.dwarventools.config.Config;
 
 public class ItemDwarvenHoe extends ItemHoe

@@ -1,14 +1,16 @@
 package rgn.mods.dwarventools.config;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import net.minecraftforge.common.MinecraftForge;
+
 import rgn.mods.dwarventools.block.BlockDwarvenOre;
 import rgn.mods.dwarventools.block.BlockDwarvenOreStorage;
 import rgn.mods.dwarventools.block.BlockInfernalFurnace;
-import rgn.mods.dwarventools.core.DwarvenBlock;
+import rgn.mods.dwarventools.block.DwarvenBlock;
 import rgn.mods.dwarventools.item.ItemDwarvenOre;
 import rgn.mods.dwarventools.item.ItemDwarvenOreStorage;
 import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ConfigureBlock
 {
@@ -29,10 +31,7 @@ public class ConfigureBlock
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockDwarvenOreStorage, 0, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockDwarvenOreStorage, 1, "pickaxe", 2);
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockDwarvenOreStorage, 2, "pickaxe", 3);
-
-		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockMithril,         "pickaxe", 2);
-		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockEbony,           "pickaxe", 3);
-
+		
 		MinecraftForge.setBlockHarvestLevel(DwarvenBlock.blockInfernalFurnace, "pickaxe", 1);
 
 		GameRegistry.registerTileEntity(TileEntityInfernalFurnace.class, "InfernalFurnace");

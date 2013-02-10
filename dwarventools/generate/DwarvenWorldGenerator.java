@@ -11,7 +11,7 @@ import net.minecraft.world.biome.BiomeGenHills;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 
-import rgn.mods.dwarventools.core.DwarvenBlock;
+import rgn.mods.dwarventools.block.DwarvenBlock;
 
 public class DwarvenWorldGenerator implements IWorldGenerator
 {

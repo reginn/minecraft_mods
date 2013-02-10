@@ -1,6 +1,5 @@
 package rgn.mods.dwarventools.item;
 
-import java.io.*;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
@@ -22,18 +21,17 @@ public class ItemDwarvenPickaxe extends ItemDwarvenTool
 			Block.rail, Block.railDetector, Block.railPowered, Block.silverfish
 		};
 	
-	private Set<Block> blocksEffectiveAgainstSet;
+	private Set<Block> blocksEffectiveAgainstSet = Sets.newHashSet(blocksEffectiveAgainst);
 		
 	public ItemDwarvenPickaxe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, 2, material, blocksEffectiveAgainst);
-		blocksEffectiveAgainstSet = Sets.newHashSet(blocksEffectiveAgainst);
 	}
 	
 	@Override
 	protected boolean canEffectiveAgainst(Block block)
 	{
-		return blocksEffectiveAgainstSet.contains(block);
+		return this.canHarvestBlock(block) || this.blocksEffectiveAgainstSet.contains(block);
 	}
 	
 	@Override

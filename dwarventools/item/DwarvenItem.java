@@ -1,4 +1,4 @@
-package rgn.mods.dwarventools.core;
+package rgn.mods.dwarventools.item;
 
 import net.minecraft.item.Item;
 

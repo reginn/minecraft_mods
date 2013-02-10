@@ -1,4 +1,4 @@
-package rgn.mods.dwarventools.core;
+package rgn.mods.dwarventools.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 

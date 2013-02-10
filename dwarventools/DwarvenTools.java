@@ -15,23 +15,26 @@ import rgn.mods.dwarventools.config.ConfigureBlock;
 import rgn.mods.dwarventools.config.ConfigureItem;
 import rgn.mods.dwarventools.config.ConfigureOreDict;
 import rgn.mods.dwarventools.config.ConfigureEnchantment;
+import rgn.mods.dwarventools.event.ForgeEventRegistry;
 import rgn.mods.dwarventools.core.CommonProxy;
-import rgn.mods.dwarventools.core.DwarvenEventHooks;
 import rgn.mods.dwarventools.core.LocalizationRegistry;
 import rgn.mods.dwarventools.core.RecipeRegistry;
 import rgn.mods.dwarventools.generate.DwarvenWorldGenerator;
 import rgn.mods.dwarventools.generate.ForgeChestHooks;
+import rgn.mods.dwarventools.network.PacketHandler;
 
 @Mod
 (
 	modid   = "DwarvenTools",
 	name    = "DwarvenTools",
-	version = "4.0.0pre"
+	version = "1.1.1dev"
 )
 @NetworkMod
 (
 	clientSideRequired = true,
-	serverSideRequired = false
+	serverSideRequired = false,
+	channels = {"DwarvenTools"},
+	packetHandler = PacketHandler.class
 )
 public class DwarvenTools
 {
@@ -40,7 +43,7 @@ public class DwarvenTools
 
 	@Mod.Instance("DwarvenTools")
 	public static DwarvenTools instance;
-
+	
 	public static int guiIdInfernalFurnace = 0;
 
 	@Mod.PreInit
@@ -56,10 +59,12 @@ public class DwarvenTools
 		ConfigureItem.init();
 		ConfigureOreDict.init();
 		ConfigureEnchantment.init();
-
+		
+		(new ForgeEventRegistry()).registerEvent();
+		
 		proxy.registerTextures();
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
-		MinecraftForge.EVENT_BUS.register(new DwarvenEventHooks());
+		
 		GameRegistry.registerWorldGenerator(new DwarvenWorldGenerator());
 
 		(new ForgeChestHooks()).addLoot();

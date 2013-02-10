@@ -2,9 +2,11 @@ package rgn.mods.dwarventools.config;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+
 import net.minecraftforge.oredict.OreDictionary;
-import rgn.mods.dwarventools.core.DwarvenBlock;
-import rgn.mods.dwarventools.core.DwarvenItem;
+
+import rgn.mods.dwarventools.block.DwarvenBlock;
+import rgn.mods.dwarventools.item.DwarvenItem;
 
 public class ConfigureOreDict
 {

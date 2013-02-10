@@ -3,6 +3,8 @@ package rgn.mods.dwarventools.item;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.entity.EntityLiving;
@@ -11,10 +13,9 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
+
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.config.ConfigureEnum;
-
-import com.google.common.collect.Sets;
 
 public class ItemDwarvenTool extends ItemTool
 {
@@ -53,7 +54,7 @@ public class ItemDwarvenTool extends ItemTool
 		itemstack.damageItem(1, entityliving);
 		int metadata = world.getBlockMetadata(x, y, z);
 
-		if (this.rangeLevel == 0 || (!this.canHarvestBlock(Block.blocksList[blockId]) && !this.canEffectiveAgainst(Block.blocksList[blockId])))
+		if (this.rangeLevel == 0 || !this.canHarvestBlock(Block.blocksList[blockId]))
 		{
 			return true;
 		}
@@ -124,7 +125,7 @@ public class ItemDwarvenTool extends ItemTool
 
 			if (!world.isAirBlock(target.x, target.y, target.z))
 			{
-				if (this.canHarvestBlock(Block.blocksList[targetBlockId]) || this.canEffectiveAgainst(Block.blocksList[targetBlockId]))
+				if (this.canHarvestBlock(Block.blocksList[targetBlockId]))
 				{
 					if (Block.blocksList[targetBlockId] == Block.silverfish)
 					{

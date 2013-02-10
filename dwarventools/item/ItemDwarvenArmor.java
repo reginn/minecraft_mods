@@ -13,8 +13,8 @@ import net.minecraftforge.common.IArmorTextureProvider;
 
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.config.ConfigureEnum;
-import rgn.mods.dwarventools.core.DwarvenItem;
-import rgn.mods.dwarventools.core.DwarvenEnchantment;
+import rgn.mods.dwarventools.item.DwarvenItem;
+import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
 public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 {

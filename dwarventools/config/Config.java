@@ -3,10 +3,13 @@ package rgn.mods.dwarventools.config;
 import java.io.File;
 import java.util.logging.Level;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.Configuration;
-import rgn.mods.dwarventools.creativetab.CreativeTabDwarvenTools;
 import cpw.mods.fml.common.FMLLog;
+
+import net.minecraft.creativetab.CreativeTabs;
+
+import net.minecraftforge.common.Configuration;
+
+import rgn.mods.dwarventools.creativetab.CreativeTabDwarvenTools;
 
 public class Config
 {

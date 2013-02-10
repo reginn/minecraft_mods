@@ -1,9 +1,11 @@
 package rgn.mods.dwarventools.creativetab;
 
-import net.minecraft.creativetab.CreativeTabs;
-import rgn.mods.dwarventools.core.DwarvenBlock;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import net.minecraft.creativetab.CreativeTabs;
+
+import rgn.mods.dwarventools.block.DwarvenBlock;
 
 public class CreativeTabDwarvenTools extends CreativeTabs
 {

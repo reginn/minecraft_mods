@@ -7,8 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
+
 import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.core.DwarvenBlock;
+import rgn.mods.dwarventools.block.DwarvenBlock;
 
 public class BlockDwarvenOreStorage extends Block
 {

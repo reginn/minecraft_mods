@@ -1,7 +1,5 @@
 package rgn.mods.dwarventools.item;
 
-import java.util.Random;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,14 +10,12 @@ import net.minecraft.world.World;
 
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.config.ConfigureEnum;
-import rgn.mods.dwarventools.core.DwarvenItem;
+import rgn.mods.dwarventools.item.DwarvenItem;
 
 public class ItemDwarvenSword extends ItemSword
 {
 	private int   weaponDamage;
 	private final EnumToolMaterial toolMaterial;
-
-	private Random random = new Random();
 
 	public ItemDwarvenSword(int itemId, EnumToolMaterial material)
 	{

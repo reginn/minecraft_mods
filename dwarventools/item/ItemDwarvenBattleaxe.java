@@ -8,8 +8,9 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
+
 import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.core.DwarvenEnchantment;
+import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
 public class ItemDwarvenBattleaxe extends ItemSword
 {

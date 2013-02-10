@@ -1,8 +1,9 @@
 package rgn.mods.dwarventools.config;
 
 import net.minecraftforge.common.MinecraftForge;
+
 import rgn.mods.dwarventools.DwarvenTools;
-import rgn.mods.dwarventools.core.DwarvenItem;
+import rgn.mods.dwarventools.item.DwarvenItem;
 import rgn.mods.dwarventools.item.ItemDwarvenArmor;
 import rgn.mods.dwarventools.item.ItemDwarvenAxe;
 import rgn.mods.dwarventools.item.ItemDwarvenBattleaxe;

@@ -1,6 +1,9 @@
 package rgn.mods.dwarventools.core;
 
 import net.minecraft.item.ItemStack;
+
+import rgn.mods.dwarventools.block.DwarvenBlock;
+import rgn.mods.dwarventools.item.DwarvenItem;
 import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry

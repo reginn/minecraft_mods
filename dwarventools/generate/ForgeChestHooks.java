@@ -1,12 +1,14 @@
 package rgn.mods.dwarventools.generate;
 
-import net.minecraft.item.Item;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
+
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.ChestGenHooks;
-import rgn.mods.dwarventools.core.DwarvenItem;
+
+import rgn.mods.dwarventools.item.DwarvenItem;
 
 public class ForgeChestHooks
 {

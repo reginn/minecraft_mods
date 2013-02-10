@@ -2,14 +2,18 @@ package rgn.mods.dwarventools.core;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-
 import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import rgn.mods.dwarventools.block.DwarvenBlock;
+import rgn.mods.dwarventools.item.DwarvenItem;
 
 public class RecipeRegistry
 {

@@ -2,13 +2,16 @@ package rgn.mods.mabicraft.core;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import rgn.mods.mabicraft.cook.ContainerCookware;
-import rgn.mods.mabicraft.cook.client.GuiCookware;
-import rgn.mods.mabicraft.enchant.ContainerBonfire;
-import rgn.mods.mabicraft.enchant.ContainerEnchanter;
-import rgn.mods.mabicraft.enchant.client.GuiBonfire;
-import rgn.mods.mabicraft.enchant.client.GuiEnchanter;
+
 import cpw.mods.fml.common.network.IGuiHandler;
+
+import rgn.mods.mabicraft.client.gui.GuiBonfire;
+import rgn.mods.mabicraft.client.gui.GuiCookware;
+import rgn.mods.mabicraft.client.gui.GuiEnchanter;
+import rgn.mods.mabicraft.inventory.ContainerBonfire;
+import rgn.mods.mabicraft.inventory.ContainerCookware;
+import rgn.mods.mabicraft.inventory.ContainerEnchanter;
+import rgn.mods.mabicraft.inventory.EnumGuiID;
 
 public class CommonProxy implements IGuiHandler
 {
@@ -48,15 +51,11 @@ public class CommonProxy implements IGuiHandler
 		}
 		else if (ID == EnumGuiID.COOKING_TABLE.ordinal())
 		{
-			return new GuiCookware(player, world, x, y, z);
-		}
-		else if (ID == EnumGuiID.COOKING_OVEN.ordinal())
-		{
-			return new GuiCookware(player, world, x, y, z);
+			return new GuiCookware(player, world, x, y, z, 0);
 		}
 		else if (ID == EnumGuiID.COOKING_POT.ordinal())
 		{
-			return new GuiCookware(player, world, x, y, z);
+			return new GuiCookware(player, world, x, y, z, 1);
 		}
 		return null;
 	}
@@ -74,15 +73,11 @@ public class CommonProxy implements IGuiHandler
 		}
 		else if (ID == EnumGuiID.COOKING_TABLE.ordinal())
 		{
-			return new ContainerCookware(player, world, x, y, z);
-		}
-		else if (ID == EnumGuiID.COOKING_OVEN.ordinal())
-		{
-			return new ContainerCookware(player, world, x, y, z);
+			return new ContainerCookware(player, world, x, y, z, 0);
 		}
 		else if (ID == EnumGuiID.COOKING_POT.ordinal())
 		{
-			return new ContainerCookware(player, world, x, y, z);
+			return new ContainerCookware(player, world, x, y, z, 1);
 		}
 		return null;
 	}

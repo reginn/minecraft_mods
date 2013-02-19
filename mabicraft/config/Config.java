@@ -4,70 +4,78 @@ import java.io.File;
 import java.util.logging.Level;
 
 import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraftforge.common.Configuration;
-import rgn.mods.mabicraft.MabiCraft;
-import rgn.mods.mabicraft.core.CreativeTabMabiCraft;
+
 import cpw.mods.fml.common.FMLLog;
+
+import rgn.mods.mabicraft.MabiCraft;
+import rgn.mods.mabicraft.creativetab.CreativeTabMabiCraft;
 
 public class Config
 {
-	public static int blockIdBonfire;
-	public static int blockIdEnchanter;
+	public int blockIdBonfire;
+	public int blockIdEnchanter;
 
-	public static int blockIdCookware;
+	public int blockIdCookware;
 
-	public static int itemIdEnchantScroll;
+	public int itemIdEnchantScroll;
 
-	public static int itemIdBaseHerb;
-	public static int itemIdManaHerb;
-	public static int itemIdBloodyHerb;
-	public static int itemIdSunlightHerb;
-	public static int itemIdPoisonHerb;
-	public static int itemIdIvoryHerb;
+	public int itemIdBaseHerb;
+	public int itemIdManaHerb;
+	public int itemIdBloodyHerb;
+	public int itemIdSunlightHerb;
+	public int itemIdPoisonHerb;
+	public int itemIdIvoryHerb;
 
-	public static int itemIdMagicPowder;
-	public static int itemIdBlessedPotion;
-	public static int itemIdBonfireKit;
+	public int itemIdMagicPowder;
+	public int itemIdBlessedPotion;
+	public int itemIdBonfireKit;
 
-	public static int itemIdEvilScroll;
+	public int itemIdEvilScroll;
 
-	public static int itemIdCookingFood;
+	public int itemIdCookingFood;
+	public int itemIdCookingPot;
 
-	public static int startVillagerID;
+	public int itemIdMabiFishRod;
+
+	public int startVillagerID;
 
 	public static final int RENDER_TYPE_BONFIRE = MabiCraft.proxy.getUniqueRenderType();
 	public static final int RENDER_TYPE_COOKWARE = MabiCraft.proxy.getUniqueRenderType();
 
-	public static final CreativeTabs tabMabiCraft = new CreativeTabMabiCraft("mabicraft");
+	public static CreativeTabs tabMabiCraft = new CreativeTabMabiCraft("mabicraft");
 
-	public static void buildConfiguration(File cfgFile)
+	public void buildConfiguration(File cfgFile)
 	{
 		Configuration cfg = new Configuration(cfgFile);
 		try
 		{
 			cfg.load();
 
-			blockIdBonfire   = cfg.getBlock("Bonfire",   1900).getInt();
-			blockIdEnchanter = cfg.getBlock("Enchanter", 1901).getInt();
-			blockIdCookware  = cfg.getBlock("Cookware",  1902).getInt();
+			this.blockIdBonfire   = cfg.getBlock("Bonfire",   1900).getInt();
+			this.blockIdEnchanter = cfg.getBlock("Enchanter", 1901).getInt();
+			this.blockIdCookware  = cfg.getBlock("Cookware",  1902).getInt();
 
-			itemIdEnchantScroll = cfg.getItem("EnchantScroll", 13007).getInt();
+			this.itemIdEnchantScroll = cfg.getItem("EnchantScroll", 13007).getInt();
 
-			itemIdBaseHerb     = cfg.getItem("BaseHerb",     13000).getInt();
-			itemIdManaHerb     = cfg.getItem("ManaHerb",     13001).getInt();
-			itemIdBloodyHerb   = cfg.getItem("BloodyHerb",   13002).getInt();
-			itemIdSunlightHerb = cfg.getItem("SunlightHerb", 13003).getInt();
-			itemIdPoisonHerb   = cfg.getItem("PoisonHerb",   13004).getInt();
-			itemIdIvoryHerb    = cfg.getItem("IvoryHerb",    13005).getInt();
+			this.itemIdBaseHerb     = cfg.getItem("BaseHerb",     13000).getInt();
+			this.itemIdManaHerb     = cfg.getItem("ManaHerb",     13001).getInt();
+			this.itemIdBloodyHerb   = cfg.getItem("BloodyHerb",   13002).getInt();
+			this.itemIdSunlightHerb = cfg.getItem("SunlightHerb", 13003).getInt();
+			this.itemIdPoisonHerb   = cfg.getItem("PoisonHerb",   13004).getInt();
+			this.itemIdIvoryHerb    = cfg.getItem("IvoryHerb",    13005).getInt();
 
-			itemIdMagicPowder   = cfg.getItem("MagicPowder",   13006).getInt();
-			itemIdBlessedPotion = cfg.getItem("BlessedPotion", 13008).getInt();
-			itemIdBonfireKit    = cfg.getItem("BonfireKit",    13009).getInt();
-			itemIdEvilScroll    = cfg.getItem("EvilScroll",    13010).getInt();
+			this.itemIdMagicPowder   = cfg.getItem("MagicPowder",   13006).getInt();
+			this.itemIdBlessedPotion = cfg.getItem("BlessedPotion", 13008).getInt();
+			this.itemIdBonfireKit    = cfg.getItem("BonfireKit",    13009).getInt();
+			this.itemIdEvilScroll    = cfg.getItem("EvilScroll",    13010).getInt();
 
-			itemIdCookingFood   = cfg.getItem("CookingFood",   13011).getInt();
+			this.itemIdCookingFood   = cfg.getItem("CookingFood",   13011).getInt();
+			this.itemIdCookingPot    = cfg.getItem("CookingPot",    13012).getInt();
+			this.itemIdMabiFishRod   = cfg.getItem("MabiFishRod",   13013).getInt();
 
-			startVillagerID = cfg.get(Configuration.CATEGORY_GENERAL, "StartVillagerID", 100).getInt();
+			this.startVillagerID = cfg.get(Configuration.CATEGORY_GENERAL, "StartVillagerID", 100).getInt();
 		}
 		catch (Exception e)
 		{

@@ -1,20 +1,20 @@
 package rgn.mods.elventools.item;
 
+import java.util.List;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-
-import rgn.mods.elventools.config.Config;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 public class ItemElvenBow extends Item
 {
@@ -24,9 +24,11 @@ public class ItemElvenBow extends Item
 	protected int   enchantability;
 	protected boolean isCallEvent = true;
 	protected float chargeSpeedRatio = 1.0F;
-	
+	protected String information;
+	protected EnumRarity rarity = EnumRarity.common;
+
 	protected EnumElvenBowType bowType;
-	
+
 	public ItemElvenBow(int itemId, EnumElvenBowType type)
 	{
 		super(itemId);
@@ -38,7 +40,6 @@ public class ItemElvenBow extends Item
 
 		this.setMaxDamage(type.getDurability());
 		this.setFull3D();
-		this.setCreativeTab(Config.tabElvenTools);
 
 		for(int i = 0; i < 3; i++)
 		{
@@ -51,13 +52,13 @@ public class ItemElvenBow extends Item
 	{
 		return "/rgn/sprites/elventools/items.png";
 	}
-	
+
 	@Override
 	public int getMaxItemUseDuration(ItemStack bow)
 	{
 		return (int)((float)72000 / this.getChargeSpeedRatio());
 	}
-	
+
 	public ItemStack onFoodEaten(ItemStack itemstack, World world, EntityPlayer player)
 	{
 		return itemstack;
@@ -88,7 +89,7 @@ public class ItemElvenBow extends Item
 
 		return bow;
 	}
-	
+
 	@Override
 	public void onPlayerStoppedUsing(ItemStack itemstack, World world, EntityPlayer player, int par4)
 	{
@@ -105,7 +106,7 @@ public class ItemElvenBow extends Item
 			}
 			var6 = event.charge;
 		}
-		
+
 		if (this.isCanShot(player, itemstack))
 		{
 			float var7 = (float)var6 / 20.0F;
@@ -122,7 +123,7 @@ public class ItemElvenBow extends Item
 			}
 
 			EntityArrow entityArrow = new EntityArrow(world, player, var7 * 2.0F * this.velocityRatio);
-			
+
 			entityArrow.setDamage(this.baseDamage);
 
 			if (var7 == 1.0F)
@@ -148,7 +149,7 @@ public class ItemElvenBow extends Item
 			{
 				entityArrow.setFire(100);
 			}
-			
+
 			itemstack.damageItem(1, player);
 			world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + var7 * 0.5F);
 
@@ -167,7 +168,7 @@ public class ItemElvenBow extends Item
 			}
 		}
 	}
-	
+
 	@Override
 	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
@@ -187,53 +188,80 @@ public class ItemElvenBow extends Item
 	{
 		return this.enchantability;
 	}
-	
+
+	@Override
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
+	{
+		if (this.information != null)
+		{
+			list.add(this.information);
+		}
+	}
+
+	@Override
+	public EnumRarity getRarity(ItemStack itemtack)
+	{
+		return this.rarity;
+	}
+
 	public int getChargeValue(int base)
 	{
 		return (int)((float)base/this.getChargeSpeedRatio());
 	}
-	
+
 	public float getChargeSpeedRatio()
 	{
 		return this.chargeSpeedRatio;
 	}
-	
+
 	public float getVelocityRatio()
 	{
 		return this.velocityRatio;
 	}
-	
+
 	public float getBaseDamage()
 	{
 		return this.baseDamage;
 	}
-	
+
 	public boolean isCanShot(EntityPlayer player, ItemStack itemstack)
 	{
 		return this.isCreativeMode(player)
 			|| this.isInfinity(itemstack)
 			|| player.inventory.hasItem(Item.arrow.itemID);
 	}
-	
+
 	public boolean isCreativeMode(EntityPlayer player)
 	{
 		return player.capabilities.isCreativeMode;
 	}
-	
+
 	public boolean isInfinity(ItemStack itemstack)
 	{
 		return EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, itemstack) > 0;
 	}
-	
+
 	public ItemElvenBow disableCallEvent()
 	{
 		this.isCallEvent = false;
 		return this;
 	}
-	
+
 	public ItemElvenBow setChargeSpeedRatio(float chargeSpeedRatio)
 	{
 		this.chargeSpeedRatio = chargeSpeedRatio;
+		return this;
+	}
+
+	public ItemElvenBow setInfo(String info)
+	{
+		this.information = info;
+		return this;
+	}
+
+	public ItemElvenBow setRarity(EnumRarity rarity)
+	{
+		this.rarity = rarity;
 		return this;
 	}
 }

@@ -2,7 +2,6 @@ package rgn.mods.elventools.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import rgn.mods.elventools.config.Config;
 
 public class BlockEbonyWood extends Block
 {
@@ -13,7 +12,6 @@ public class BlockEbonyWood extends Block
 		this.setResistance(5.0F);
 		this.setStepSound(soundWoodFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

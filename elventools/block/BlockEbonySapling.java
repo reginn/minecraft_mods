@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import rgn.mods.elventools.config.Config;
+
 import rgn.mods.elventools.generate.WorldGenEbonyTree;
 
 public class BlockEbonySapling extends BlockFlower
@@ -17,7 +17,6 @@ public class BlockEbonySapling extends BlockFlower
 		this.setHardness(0.0F);
 		this.setStepSound(soundGrassFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

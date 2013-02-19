@@ -10,9 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IShearable;
-import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.block.ElvenBlock;
 
 public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 {
@@ -25,7 +24,6 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 		this.setLightOpacity(1);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

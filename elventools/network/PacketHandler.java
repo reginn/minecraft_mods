@@ -1,5 +1,6 @@
 package rgn.mods.elventools.network;
 
+import java.io.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -11,7 +12,11 @@ import cpw.mods.fml.common.network.Player;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -19,13 +24,15 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 import rgn.mods.elventools.ElvenTools;
+import rgn.mods.elventools.inventory.InventorySeedBag;
+import rgn.mods.elventools.item.ItemElvenSeedBag;
 
 public class PacketHandler implements IPacketHandler
 {
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
 	{
-		if (packet.channel.equals("ElvenTools"))
+		if (packet.channel.equals("ElvenPatricle"))
 		{
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int entityId;
@@ -49,7 +56,7 @@ public class PacketHandler implements IPacketHandler
 			
 			ElvenTools.proxy.spawnCustomParticle(world, entityPlayer, entity, typeId);
 		}
-		else if (packet.channel.equals("bind"))
+		else if (packet.channel.equals("BindInfo"))
 		{
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int entityId;
@@ -74,7 +81,32 @@ public class PacketHandler implements IPacketHandler
 			
 			ElvenTools.proxy.setBindInfo(entity);
 		}
-
+		else if (packet.channel.equals("SeedBag"))
+		{
+			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+			
+			ItemStack is;
+			
+			try
+			{
+				is = Packet.readItemStack(dis);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return ;
+			}
+			
+			World world = ElvenTools.proxy.getClientWorld();
+			
+			EntityPlayer entityPlayer = (EntityPlayer)player;
+			
+			ItemStack seedBag = entityPlayer.getCurrentEquippedItem();
+			if (seedBag != null && seedBag.getItem() instanceof ItemElvenSeedBag)
+			{
+				seedBag.setTagCompound(is.getTagCompound());
+			}
+		}
 	}
 	
 	public static Packet getPacketCustomAnimation(Entity target, int type)
@@ -96,7 +128,7 @@ public class PacketHandler implements IPacketHandler
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel                = "ElvenTools";
+		packet.channel                = "ElvenPatricle";
 		packet.data                   = bos.toByteArray();
 		packet.length                 = bos.size();
 		packet.isChunkDataPacket      = true;
@@ -127,12 +159,38 @@ public class PacketHandler implements IPacketHandler
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel                = "bind";
+		packet.channel                = "BindInfo";
 		packet.data                   = bos.toByteArray();
 		packet.length                 = bos.size();
 		packet.isChunkDataPacket      = true;
 
 		return packet;
 	}
+	
+	public static Packet getPacketSeedBagItems(InventorySeedBag inventory)
+	{
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		DataOutputStream dos      = new DataOutputStream(bos);
 
+		ItemStack is = inventory.getSeedBag();
+		
+		try
+		{
+			Packet.writeItemStack(is, dos);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel                = "SeedBag";
+		packet.data                   = bos.toByteArray();
+		packet.length                 = bos.size();
+		packet.isChunkDataPacket      = true;
+
+		return packet;
+	
+	}
+	
 }

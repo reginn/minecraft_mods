@@ -3,6 +3,8 @@ package rgn.mods.elventools.item;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumToolMaterial;
@@ -11,9 +13,6 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IPlantable;
-
-import rgn.mods.elventools.config.Config;
-import com.google.common.collect.Sets;
 
 public class ItemElvenSickle extends ItemTool
 {
@@ -42,7 +41,6 @@ public class ItemElvenSickle extends ItemTool
 	public ItemElvenSickle(int itemId, EnumToolMaterial toolMaterial)
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

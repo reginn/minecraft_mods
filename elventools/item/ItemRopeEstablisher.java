@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
+
 import rgn.mods.elventools.block.ElvenBlock;
 
 public class ItemRopeEstablisher extends Item
@@ -13,7 +13,6 @@ public class ItemRopeEstablisher extends Item
 	public ItemRopeEstablisher(int itemId)
 	{
 		super(itemId);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

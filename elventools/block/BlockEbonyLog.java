@@ -3,7 +3,6 @@ package rgn.mods.elventools.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
 
 public class BlockEbonyLog extends Block
 {
@@ -13,7 +12,6 @@ public class BlockEbonyLog extends Block
 		this.setHardness(3.0F);
 		this.setStepSound(soundWoodFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

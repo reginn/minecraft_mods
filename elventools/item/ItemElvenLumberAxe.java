@@ -3,16 +3,16 @@ package rgn.mods.elventools.item;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.google.common.collect.Sets;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.block.ElvenBlock;
 
-import com.google.common.collect.Sets;
+import rgn.mods.elventools.block.ElvenBlock;
 
 public class ItemElvenLumberAxe extends ItemTool
 {
@@ -41,7 +41,6 @@ public class ItemElvenLumberAxe extends ItemTool
 	public ItemElvenLumberAxe(int itemId, EnumToolMaterial toolMaterial)
 	{
 		super(itemId, 0, toolMaterial, blocksEffectiveAgainst);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

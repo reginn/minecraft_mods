@@ -7,15 +7,12 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.item.ElvenItem;
-import rgn.mods.elventools.config.Config;
 
 public class ItemElvenShovel extends ItemSpade
 {
 	public ItemElvenShovel(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

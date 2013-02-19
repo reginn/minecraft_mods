@@ -23,6 +23,7 @@ public class RecipeRegistry
 		this.addRecipeMithril();
 		this.addRecipeNewBows();
 		this.addRecipeArrow();
+		this.addRecipeOther();
 	}
 
 	private void addRecipeNewBows()
@@ -256,6 +257,17 @@ public class RecipeRegistry
 					" R", "A ",
 					Character.valueOf('R'), ElvenItem.itemRopeEstablisher,
 					Character.valueOf('A'), Item.arrow
+				});
+	}
+	
+	private void addRecipeOther()
+	{
+		GameRegistry.addRecipe(
+			new ItemStack(ElvenItem.itemElvenSeedBag, 1),
+				new Object[]
+				{
+					" P ", "P P", "PPP",
+					Character.valueOf('P'), Item.paper
 				});
 	}
 }

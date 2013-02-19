@@ -4,51 +4,58 @@ import java.io.File;
 import java.util.logging.Level;
 
 import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraftforge.common.Configuration;
-import rgn.mods.elventools.creativetab.CreativeTabElvenTools;
+
 import cpw.mods.fml.common.FMLLog;
+
+import rgn.mods.elventools.creativetab.CreativeTabElvenTools;
 
 public class Config
 {
-	public static int blockIdEbonyLog;
-	public static int blockIdEbonyLeaves;
-	public static int blockIdEbonySapling;
-	public static int blockIdEbonyWood;
+	public int blockIdEbonyLog;
+	public int blockIdEbonyLeaves;
+	public int blockIdEbonySapling;
+	public int blockIdEbonyWood;
 
-	public static int blockIdRope;
-	public static int blockIdRopeEstablisher;
+	public int blockIdRope;
+	public int blockIdRopeEstablisher;
 
 
-	public static int itemIdLeatherLongbow;
-	public static int itemIdCompositeLongbow;
-	public static int itemIdEnhancedLongbow;
-	public static int itemIdBoneCompositeBow;
-	public static int itemIdShadowBow;
-	public static int itemIdEndBow;
-	public static int itemIdFeatherBow;
-	public static int itemIdSteelBow;
-	public static int itemIdElvenBow;
+	public int itemIdLeatherLongbow;
+	public int itemIdCompositeLongbow;
+	public int itemIdEnhancedLongbow;
+	public int itemIdBoneCompositeBow;
+	public int itemIdShadowBow;
+	public int itemIdEndBow;
+	public int itemIdFeatherBow;
+	public int itemIdSteelBow;
+	public int itemIdElvenBow;
 
-	public static int itemIdEbonyStick;
+	public int itemIdEbonyStick;
 
-	public static int itemIdEbonyBoat;
+	public int itemIdEbonyBoat;
 
-	public static int itemIdTorchArrow;
-	public static int itemIdRopeArrow;
+	public int itemIdTorchArrow;
+	public int itemIdRopeArrow;
 
-	public static int itemIdRopeEstablisher;
+	public int itemIdRopeEstablisher;
 
-	public static int itemIdElvenShovelMithril;
-	public static int itemIdElvenPickaxeMithril;
-	public static int itemIdElvenAxeMithril;
-	public static int itemIdElvenSwordMithril;
+	public int itemIdElvenShovelMithril;
+	public int itemIdElvenPickaxeMithril;
+	public int itemIdElvenAxeMithril;
+	public int itemIdElvenSwordMithril;
 
-	public static int itemIdElvenSickle;
-	public static int itemIdElvenLumberAxe;
+	public int itemIdElvenSickle;
+	public int itemIdElvenLumberAxe;
+
+	public int itemIdElvenSeedBag;
+
+	public static final int guiIdSeedBag = 0;
 
 	public static final CreativeTabs tabElvenTools = new CreativeTabElvenTools("elventools");
 
-	public static void buildConfiguration(File cfgFile)
+	public void buildConfiguration(File cfgFile)
 	{
 		Configuration cfg = new Configuration(cfgFile);
 		try
@@ -89,6 +96,8 @@ public class Config
 
 			itemIdElvenSickle    = cfg.getItem("Sickle",    23017).getInt();
 			itemIdElvenLumberAxe = cfg.getItem("LumberAxe", 23018).getInt();
+
+			itemIdElvenSeedBag = cfg.getItem("Seedbag", 23019).getInt();
 		}
 		catch (Exception e)
 		{

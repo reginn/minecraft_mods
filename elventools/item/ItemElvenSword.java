@@ -7,8 +7,6 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.item.ElvenItem;
 
 public class ItemElvenSword extends ItemSword
 {
@@ -22,7 +20,6 @@ public class ItemElvenSword extends ItemSword
 		this.maxStackSize = 1;
 		this.weaponDamage = 4 + material.getDamageVsEntity();
 		this.setMaxDamage(material.getMaxUses());
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

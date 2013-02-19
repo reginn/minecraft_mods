@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
+
 import rgn.mods.elventools.entity.EntityEbonyBoat;
 
 public class ItemEbonyBoat extends Item
@@ -23,7 +23,6 @@ public class ItemEbonyBoat extends Item
 	{
 		super(itemId);
 		this.maxStackSize = 3;
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

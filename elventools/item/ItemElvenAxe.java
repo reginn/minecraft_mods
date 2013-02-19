@@ -7,15 +7,12 @@ import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.config.Config;
-import rgn.mods.elventools.item.ElvenItem;
 
 public class ItemElvenAxe extends ItemAxe
 {
 	public ItemElvenAxe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
-		this.setCreativeTab(Config.tabElvenTools);
 	}
 
 	@Override

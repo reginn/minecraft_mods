@@ -24,32 +24,32 @@ import rgn.mods.elventools.item.ItemElvenBow;
 public class ElvenArrowEvent implements IForgeEvent
 {
 	List<Integer> elvenArrowList = Lists.newArrayList(ElvenItem.itemTorchArrow.itemID, ElvenItem.itemRopeArrow.itemID);
-	
+
 	@ForgeSubscribe
 	public void onArrowNock(ArrowNockEvent event)
 	{
 		EntityPlayer player = event.entityPlayer;
 		ItemStack       bow = event.result;
 
-		if (((ItemElvenBow)bow.getItem()).isCreativeMode(player) || this.hasElvenArrow(player))
+		if (player.capabilities.isCreativeMode || this.hasElvenArrow(player))
 		{
 			player.setItemInUse(bow, bow.getItem().getMaxItemUseDuration(bow));
 			event.setCanceled(true);
 		}
 
 	}
-	
+
 	public boolean hasElvenArrow(EntityPlayer player)
 	{
 		boolean hasArrow = false;
-		
+
 		for (int itemId : this.elvenArrowList)
 		{
 			hasArrow |= player.inventory.hasItem(itemId);
 		}
 		return hasArrow;
 	}
-	
+
 	@ForgeSubscribe
 	public void onArrowLoose(ArrowLooseEvent event)
 	{
@@ -60,9 +60,9 @@ public class ElvenArrowEvent implements IForgeEvent
 
 		boolean isInfinity = this.isInfinity(player, bow);
 		float velocityRatio = bow.getItem() instanceof ItemElvenBow ? ((ItemElvenBow)bow.getItem()).getVelocityRatio() : 1.0F;
-		
+
 		heldTime *= bow.getItem() instanceof ItemElvenBow ? ((ItemElvenBow)bow.getItem()).getChargeSpeedRatio() : 1;
-		
+
 		float baseVelocity = (float)heldTime / 20.0F;
 		baseVelocity = (baseVelocity * baseVelocity + baseVelocity * 2.0F) / 3.0F;
 
@@ -84,7 +84,7 @@ public class ElvenArrowEvent implements IForgeEvent
 			{
 				entityArrow.setDamage(((ItemElvenBow)(bow.getItem())).getBaseDamage());
 			}
-			
+
 			if (baseVelocity == 1.0F)
 			{
 				entityArrow.setIsCritical(true);
@@ -137,7 +137,7 @@ public class ElvenArrowEvent implements IForgeEvent
 		}
 		return player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, bow) > 0;
 	}
-	
+
 	public EntityElvenArrow newEntityElvenArrow(World world, EntityPlayer player, float velocity)
 	{
 		if (player.inventory.hasItem(ElvenItem.itemTorchArrow.itemID))
@@ -150,7 +150,7 @@ public class ElvenArrowEvent implements IForgeEvent
 		}
 		return null;
 	}
-	
+
 	public int getConsumeItemID(EntityElvenArrow entityArrow)
 	{
 		if (entityArrow instanceof EntityTorchArrow)

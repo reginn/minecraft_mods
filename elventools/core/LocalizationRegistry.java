@@ -40,5 +40,7 @@ public class LocalizationRegistry
 
 		TranslationRegistry.addLocalization(ElvenItem.itemElvenSickle,    "Elven Sickle",     "エルフの草刈り鎌");
 		TranslationRegistry.addLocalization(ElvenItem.itemElvenLumberAxe, "Elven Lumber Axe", "エルフの伐採斧");
+		
+		TranslationRegistry.addLocalization(ElvenItem.itemElvenSeedBag, "Elven SeedBag", "種袋");
 	}
 }

@@ -31,15 +31,10 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 		int ratio = 1;
 		if (biomeGenBase instanceof BiomeGenHills)
 		{
-			ratio = 3;
-		}
-
-		if (biomeGenBase instanceof BiomeGenDesert)
-		{
 			ratio = 2;
 		}
 
-		for (int i = 0; i < 20 * ratio; i++)
+		for (int i = 0; i < 15 * ratio; i++)
 		{
 			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
 			int y = random.nextInt(40) + 10;
@@ -47,15 +42,14 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 0, 4)).generate(world, random, x, y, z);
 		}
 
-		for (int i = 0; i < 5 * ratio; i++)
+		for (int i = 0; i < 4 * ratio; i++)
 		{
 			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
-			int y = random.nextInt(10) + 10;
+			int y = random.nextInt(10) + 15;
 			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
 			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 1, 4)).generate(world, random, x, y, z);
 		}
 
-		for (int i = 0; i < 2; i++)
 		{
 			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
 			int y = random.nextInt(40);
@@ -64,7 +58,6 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 		}
 
 
-		for (int i = 0; i < 2; i++)
 		{
 			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
 			int y = random.nextInt(60);

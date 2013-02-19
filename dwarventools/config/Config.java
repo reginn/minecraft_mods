@@ -3,71 +3,74 @@ package rgn.mods.dwarventools.config;
 import java.io.File;
 import java.util.logging.Level;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.creativetab.CreativeTabs;
 
 import net.minecraftforge.common.Configuration;
+
+import cpw.mods.fml.common.FMLLog;
 
 import rgn.mods.dwarventools.creativetab.CreativeTabDwarvenTools;
 
 public class Config
 {
-	public static int blockIdBlockDwarvenOre;
-	public static int blockIdBlockDwarvenOreStorage;
-	public static int blockIdInfernalFurnace;
+	public int blockIdBlockDwarvenOre;
+	public int blockIdBlockDwarvenOreStorage;
+	public int blockIdInfernalFurnace;
 
-	public static int itemIdDwarvenShovelObsidian;
-	public static int itemIdDwarvenPickaxeObsidian;
-	public static int itemIdDwarvenAxeObsidian;
-	public static int itemIdDwarvenHoeObsidian;
-	public static int itemIdDwarvenSwordObsidian;
+	public int blockIdQuestBoard;
 
-	public static int itemIdDwarvenShovelLapislazuli;
-	public static int itemIdDwarvenPickaxeLapislazuli;
-	public static int itemIdDwarvenAxeLapislazuli;
-	public static int itemIdDwarvenHoeLapislazuli;
-	public static int itemIdDwarvenSwordLapislazuli;
+	public int itemIdDwarvenShovelObsidian;
+	public int itemIdDwarvenPickaxeObsidian;
+	public int itemIdDwarvenAxeObsidian;
+	public int itemIdDwarvenHoeObsidian;
+	public int itemIdDwarvenSwordObsidian;
 
-	public static int itemIdDwarvenShovelRedstone;
-	public static int itemIdDwarvenPickaxeRedstone;
-	public static int itemIdDwarvenAxeRedstone;
-	public static int itemIdDwarvenHoeRedstone;
-	public static int itemIdDwarvenSwordRedstone;
+	public int itemIdDwarvenShovelLapislazuli;
+	public int itemIdDwarvenPickaxeLapislazuli;
+	public int itemIdDwarvenAxeLapislazuli;
+	public int itemIdDwarvenHoeLapislazuli;
+	public int itemIdDwarvenSwordLapislazuli;
 
-	public static int itemIdDwarvenShovelMithril;
-	public static int itemIdDwarvenPickaxeMithril;
-	public static int itemIdDwarvenBattleaxeMithril;
-	public static int itemIdDwarvenBrokenSwordMithril;
-	public static int itemIdDwarvenSwordMithril;
+	public int itemIdDwarvenShovelRedstone;
+	public int itemIdDwarvenPickaxeRedstone;
+	public int itemIdDwarvenAxeRedstone;
+	public int itemIdDwarvenHoeRedstone;
+	public int itemIdDwarvenSwordRedstone;
 
-	public static int itemIdDwarvenShovelEbony;
-	public static int itemIdDwarvenPickaxeEbony;
-	public static int itemIdDwarvenBattleaxeEbony;
-	public static int itemIdDwarvenBrokenSwordEbony;
-	public static int itemIdDwarvenSwordEbony;
+	public int itemIdDwarvenShovelMithril;
+	public int itemIdDwarvenPickaxeMithril;
+	public int itemIdDwarvenBattleaxeMithril;
+	public int itemIdDwarvenBrokenSwordMithril;
+	public int itemIdDwarvenSwordMithril;
 
-	public static int itemIdIronBar;
-	public static int itemIdMithrilIngot;
-	public static int itemIdEbonyIngot;
+	public int itemIdDwarvenShovelEbony;
+	public int itemIdDwarvenPickaxeEbony;
+	public int itemIdDwarvenBattleaxeEbony;
+	public int itemIdDwarvenBrokenSwordEbony;
+	public int itemIdDwarvenSwordEbony;
 
-	public static int itemIdDwarvenHelmetMithril;
-	public static int itemIdDwarvenPlateMithril;
-	public static int itemIdDwarvenBootMithril;
-	public static int itemIdDwarvenLegsMithril;
+	public int itemIdIronBar;
+	public int itemIdMithrilIngot;
+	public int itemIdEbonyIngot;
 
-	public static int itemIdDwarvenHelmetEbony;
-	public static int itemIdDwarvenPlateEbony;
-	public static int itemIdDwarvenBootEbony;
-	public static int itemIdDwarvenLegsEbony;
-	
-	public static int enchantmentIdExecutioner;
-	public static int enchantmentIdCriticalStrike;
-	public static int enchantmentIdVitalize;
+	public int itemIdDwarvenHelmetMithril;
+	public int itemIdDwarvenPlateMithril;
+	public int itemIdDwarvenBootMithril;
+	public int itemIdDwarvenLegsMithril;
 
+	public int itemIdDwarvenHelmetEbony;
+	public int itemIdDwarvenPlateEbony;
+	public int itemIdDwarvenBootEbony;
+	public int itemIdDwarvenLegsEbony;
+
+	public int enchantmentIdExecutioner;
+	public int enchantmentIdCriticalStrike;
+	public int enchantmentIdVitalize;
+
+	public static int guiIdInfernalFurnace = 0;
 	public static final CreativeTabs tabDwarvenTools = new CreativeTabDwarvenTools("dwarventools");
 
-	public static void buildConfiguration(File cfgFile)
+	public void buildConfiguration(File cfgFile)
 	{
 		Configuration cfg = new Configuration(cfgFile);
 		try
@@ -121,7 +124,7 @@ public class Config
 			itemIdDwarvenPlateEbony  = cfg.getItem("DwarvenEbonyPlate",  11030).getInt();
 			itemIdDwarvenBootEbony   = cfg.getItem("DwarvenEbonyBoot",   11031).getInt();
 			itemIdDwarvenLegsEbony   = cfg.getItem("DwarvenEbonyLegs",   11032).getInt();
-			
+
 			enchantmentIdVitalize       = cfg.get("EnchantmentVitalize",       Configuration.CATEGORY_GENERAL, 10).getInt();
 			enchantmentIdExecutioner    = cfg.get("EnchantmentExecutionerID",  Configuration.CATEGORY_GENERAL, 26).getInt();
 			enchantmentIdCriticalStrike = cfg.get("EnchantmentCriticalStrike", Configuration.CATEGORY_GENERAL, 27).getInt();

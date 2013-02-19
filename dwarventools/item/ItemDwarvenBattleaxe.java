@@ -2,14 +2,12 @@ package rgn.mods.dwarventools.item;
 
 import java.util.Random;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
 public class ItemDwarvenBattleaxe extends ItemSword
@@ -26,7 +24,6 @@ public class ItemDwarvenBattleaxe extends ItemSword
 		this.maxStackSize = 1;
 		this.weaponDamage = 4 + material.getDamageVsEntity();
 		this.setMaxDamage(material.getMaxUses());
-		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 
 	@Override
@@ -41,5 +38,5 @@ public class ItemDwarvenBattleaxe extends ItemSword
 		super.onCreated(itemstack, world, entityplayer);
 		itemstack.addEnchantment(DwarvenEnchantment.enchantmentExecutioner, 1);
 	}
-	
+
 }

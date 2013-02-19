@@ -8,9 +8,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
-import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.block.DwarvenBlock;
-
 public class BlockDwarvenOreStorage extends Block
 {
 	public BlockDwarvenOreStorage(int blockId, int terrainId)
@@ -19,7 +16,18 @@ public class BlockDwarvenOreStorage extends Block
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setStepSound(soundMetalFootstep);
-		this.setCreativeTab(Config.tabDwarvenTools);
+	}
+
+	@Override
+	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
+	{
+		if (blockID == DwarvenBlock.blockDwarvenOreStorage.blockID)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				list.add(new ItemStack(blockID, 1, i));
+			}
+		}
 	}
 
 	@Override
@@ -38,18 +46,6 @@ public class BlockDwarvenOreStorage extends Block
 			return 15;
 		}
 		return 0;
-	}
-
-	@Override
-	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
-	{
-		if (blockID == DwarvenBlock.blockDwarvenOreStorage.blockID)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				list.add(new ItemStack(blockID, 1, i));
-			}
-		}
 	}
 
 	@Override

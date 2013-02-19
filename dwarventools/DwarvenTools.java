@@ -8,26 +8,24 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.minecraftforge.common.MinecraftForge;
-
+import rgn.mods.dwarventools.block.DwarvenBlock;
 import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.config.ConfigureBlock;
-import rgn.mods.dwarventools.config.ConfigureItem;
-import rgn.mods.dwarventools.config.ConfigureOreDict;
-import rgn.mods.dwarventools.config.ConfigureEnchantment;
-import rgn.mods.dwarventools.event.ForgeEventRegistry;
+import rgn.mods.dwarventools.config.OreDictRegistry;
 import rgn.mods.dwarventools.core.CommonProxy;
 import rgn.mods.dwarventools.core.LocalizationRegistry;
 import rgn.mods.dwarventools.core.RecipeRegistry;
+import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
+import rgn.mods.dwarventools.event.ForgeEventRegistry;
 import rgn.mods.dwarventools.generate.DwarvenWorldGenerator;
 import rgn.mods.dwarventools.generate.ForgeChestHooks;
+import rgn.mods.dwarventools.item.DwarvenItem;
 import rgn.mods.dwarventools.network.PacketHandler;
 
 @Mod
 (
 	modid   = "DwarvenTools",
 	name    = "DwarvenTools",
-	version = "1.1.1dev"
+	version = "4.0.0pre"
 )
 @NetworkMod
 (
@@ -43,30 +41,30 @@ public class DwarvenTools
 
 	@Mod.Instance("DwarvenTools")
 	public static DwarvenTools instance;
-	
-	public static int guiIdInfernalFurnace = 0;
+
+	Config config = new Config();
 
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Config.buildConfiguration(event.getSuggestedConfigurationFile());
+		config.buildConfiguration(event.getSuggestedConfigurationFile());
 	}
 
 	@Mod.Init
 	public void init(FMLInitializationEvent event)
 	{
-		ConfigureBlock.init();
-		ConfigureItem.init();
-		ConfigureOreDict.init();
-		ConfigureEnchantment.init();
-		
+		DwarvenBlock.configure(config);
+		DwarvenItem.configure(config);
+		DwarvenEnchantment.configure(config);
+
 		(new ForgeEventRegistry()).registerEvent();
-		
+
 		proxy.registerTextures();
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
-		
+
 		GameRegistry.registerWorldGenerator(new DwarvenWorldGenerator());
 
+		(new OreDictRegistry()).register();
 		(new ForgeChestHooks()).addLoot();
 		(new LocalizationRegistry()).addLocalization();
 		(new RecipeRegistry()).addRecipe();

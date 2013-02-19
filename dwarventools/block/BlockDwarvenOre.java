@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import rgn.mods.dwarventools.config.Config;
 
 public class BlockDwarvenOre extends Block
 {
@@ -16,7 +15,6 @@ public class BlockDwarvenOre extends Block
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setStepSound(soundStoneFootstep);
-		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 
 	@Override

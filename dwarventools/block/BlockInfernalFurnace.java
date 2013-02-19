@@ -15,11 +15,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import rgn.mods.dwarventools.DwarvenTools;
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockInfernalFurnace extends BlockContainer
 {
@@ -35,7 +37,6 @@ public class BlockInfernalFurnace extends BlockContainer
 		this.setHardness(3.5F);
 		this.setStepSound(soundStoneFootstep);
 		this.setRequiresSelfNotify();
-		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 
 	@Override
@@ -210,7 +211,7 @@ public class BlockInfernalFurnace extends BlockContainer
 
 			if (tileentity != null)
 			{
-				entityPlayer.openGui(DwarvenTools.instance, DwarvenTools.guiIdInfernalFurnace, world, x, y, z);
+				entityPlayer.openGui(DwarvenTools.instance, Config.guiIdInfernalFurnace, world, x, y, z);
 			}
 
 			return true;

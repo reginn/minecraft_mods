@@ -3,17 +3,14 @@ package rgn.mods.dwarventools.item;
 import java.util.Random;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IArmorTextureProvider;
 
-import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.config.ConfigureEnum;
-import rgn.mods.dwarventools.item.DwarvenItem;
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
 public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
@@ -25,7 +22,6 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	{
 		super(itemId, enumArmorMaterial, renderIndex, armorType);
 		this.material = enumArmorMaterial;
-		this.setCreativeTab(Config.tabDwarvenTools);
 	}
 
 	@Override
@@ -68,7 +64,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{
 		super.onCreated(itemstack, world, entityplayer);
-		if (this.material == ConfigureEnum.enumArmorMaterialMithril)
+		if (this.material == DwarvenItem.enumArmorMaterialMithril)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{
@@ -97,7 +93,7 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 			}
 		}
 
-		if (this.material == ConfigureEnum.enumArmorMaterialEbony)
+		if (this.material == DwarvenItem.enumArmorMaterialEbony)
 		{
 			switch (((ItemDwarvenArmor)itemstack.getItem()).armorType)
 			{

@@ -14,9 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
-import rgn.mods.dwarventools.config.Config;
-import rgn.mods.dwarventools.config.ConfigureEnum;
-
 public class ItemDwarvenTool extends ItemTool
 {
 	private int rangeLevel;
@@ -38,8 +35,7 @@ public class ItemDwarvenTool extends ItemTool
 	protected ItemDwarvenTool(int itemId, int baseDamage, EnumToolMaterial material, Block[] harvestBlocks)
 	{
 		super(itemId, 0, material, harvestBlocks);
-		this.rangeLevel = (material == ConfigureEnum.enumToolMaterialMithril ? 1 : (material == ConfigureEnum.enumToolMaterialEbony ? 1 : 0));
-		this.setCreativeTab(Config.tabDwarvenTools);
+		this.rangeLevel = (material == DwarvenItem.enumToolMaterialMithril ? 1 : (material == DwarvenItem.enumToolMaterialEbony ? 1 : 0));
 	}
 
 	@Override
@@ -62,12 +58,12 @@ public class ItemDwarvenTool extends ItemTool
 		this.destroyAroundBlock(itemstack, world, blockId, x, y, z, entityliving);
 		return true;
 	}
-	
+
 	protected boolean canEffectiveAgainst(Block block)
 	{
 		return false;
 	}
-	
+
 	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
 	{
 		int facing = BlockPistonBase.determineOrientation(world, x, y, z, (EntityPlayer)entityliving);
@@ -136,7 +132,7 @@ public class ItemDwarvenTool extends ItemTool
 						Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
 					}
 				}
-				
+
 				world.setBlockWithNotify(target.x, target.y, target.z, 0);
 
 				++damage;

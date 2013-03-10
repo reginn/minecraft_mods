@@ -4,8 +4,10 @@ import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -18,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Lamp",
 	name    = "Lamp",
-	version = "3.2.0"
+	version = "4.0.0pre"
 )
 @NetworkMod
 (
@@ -70,14 +72,13 @@ public class Lamp
 	{
 		lampRenderType = proxy.getUniqueRenderType();
 
-		blockLamp  = (new BlockLamp(blockIdLamp,  139)).setBlockName("blocklamp");
-		blockLight = (new BlockLight(blockIdLight, 0)).setBlockName("dontuse");
-
-		GameRegistry.registerBlock(blockLamp, ItemLamp.class, "Lamp");
-		GameRegistry.registerBlock(blockLight);
-
-		proxy.registerTextures();
 		proxy.registerRenderers();
+
+		blockLamp  = (new BlockLamp(blockIdLamp)).setUnlocalizedName("blockLamp");
+		blockLight = (new BlockLight(blockIdLight)).setUnlocalizedName("blockLight");
+
+		GameRegistry.registerBlock(blockLamp, ItemLamp.class, "blockLamp");
+		GameRegistry.registerBlock(blockLight, "blockLight");
 
 		(new RecipeRegistry()).addRecipe();
 		(new LocalizationRegistry()).addLocalization();

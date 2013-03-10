@@ -15,7 +15,7 @@ public class ItemLamp extends ItemBlock
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack)
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		String str = "";
 
@@ -42,7 +42,7 @@ public class ItemLamp extends ItemBlock
 				break;
 		}
 
-		return (new StringBuilder()).append(getItemName()).append(".").append(str).toString();
+		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(str).toString();
 	}
 
 	@Override

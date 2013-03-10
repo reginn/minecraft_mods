@@ -2,25 +2,36 @@ package rgn.mods.lamp;
 
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import com.google.common.collect.Maps;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLight extends Block
 {
-	public BlockLight(int blockId, int terrainId)
+	public BlockLight(int blockId)
 	{
-		super(blockId, terrainId, Material.air);
+		super(blockId, Material.air);
 		this.setLightValue(1.0F);
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/lamp/blocks.png";
+		this.field_94336_cN = null;
+	}
+
+	@Override
+	public int getRenderType()
+	{
+		return -1;
 	}
 
 	@Override
@@ -65,7 +76,7 @@ public class BlockLight extends Block
 
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlockWithNotify(x, y, z, 0);
+			world.func_94575_c(x, y, z, 0);
 		}
 		else if ((meta == 3 || meta == 2) && world.isAirBlock(x, y - 1, z))
 		{
@@ -84,8 +95,7 @@ public class BlockLight extends Block
 		int meta = world.getBlockMetadata(x, y, z) & 3;
 		for (; world.isAirBlock(x, y - 1, z) & y >= 0; y--)
 		{
-			world.setBlockWithNotify(x, y - 1, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y - 1, z, (2 << 2) + meta);
+			world.setBlockMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta);
 		}
 	}
 

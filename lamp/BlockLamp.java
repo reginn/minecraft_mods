@@ -5,18 +5,29 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockLamp extends Block
 {
-	public BlockLamp(int blockId, int terrainId)
+	public BlockLamp(int blockId)
 	{
-		super(blockId, terrainId, Material.glass);
+		super(blockId, Material.glass);
 		this.setLightValue(1.0F);
 		this.setCreativeTab(Lamp.tabLamp);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
+	{
+		this.field_94336_cN = Block.cauldron.func_94375_b("cauldron_inner");
 	}
 
 	@Override
@@ -141,24 +152,20 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockWithNotify(x - 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x - 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockWithNotify(x + 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x + 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockWithNotify(x, y, z - 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z - 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockWithNotify(x, y, z + 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z + 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 	}
 
@@ -168,35 +175,29 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockWithNotify(x - 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x - 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockWithNotify(x + 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x + 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockWithNotify(x, y, z - 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z - 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockWithNotify(x, y, z + 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z + 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 
 		if (world.isAirBlock(x, y - 1, z) && y - 1 >= 0)
 		{
-			world.setBlockWithNotify(x, y - 1, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y - 1, z, (2 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockWithNotify(x, y + 1, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y + 1, z, (2 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 
@@ -207,15 +208,13 @@ public class BlockLamp extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x, y - 1, z, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockWithNotify(x, y + 1, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y + 1, z, (2 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 
@@ -225,43 +224,35 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockWithNotify(x - 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x - 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			for (; world.isAirBlock(x - 1, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x - 1, y - 1, z, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x - 1, y - 1, z, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x - 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockWithNotify(x + 1, y, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x + 1, y, z, (0 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 			for (; world.isAirBlock(x + 1, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x + 1, y - 1, z, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x + 1, y - 1, z, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x + 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockWithNotify(x, y, z - 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z - 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 			for (; world.isAirBlock(x, y - 1, z - 1) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z - 1, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x, y - 1, z - 1, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x, y - 1, z - 1, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockWithNotify(x, y, z + 1, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y, z + 1, (1 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 			for (; world.isAirBlock(x, y - 1, z + 1) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z + 1, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x, y - 1, z + 1, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x, y - 1, z + 1, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
@@ -269,15 +260,13 @@ public class BlockLamp extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, Lamp.blockLight.blockID);
-				world.setBlockMetadataWithNotify(x, y - 1, z, (2 << 2) + meta);
+				world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockWithNotify(x, y + 1, z, Lamp.blockLight.blockID);
-			world.setBlockMetadataWithNotify(x, y + 1, z, (2 << 2) + meta);
+			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 

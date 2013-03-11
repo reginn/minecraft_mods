@@ -20,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Lamp",
 	name    = "Lamp",
-	version = "4.0.0pre"
+	version = "4.0.0"
 )
 @NetworkMod
 (
@@ -72,11 +72,10 @@ public class Lamp
 	{
 		lampRenderType = proxy.getUniqueRenderType();
 
-		proxy.registerRenderers();
-
 		blockLamp  = (new BlockLamp(blockIdLamp)).setUnlocalizedName("blockLamp");
 		blockLight = (new BlockLight(blockIdLight)).setUnlocalizedName("blockLight");
 
+		proxy.registerRenderers();
 		GameRegistry.registerBlock(blockLamp, ItemLamp.class, "blockLamp");
 		GameRegistry.registerBlock(blockLight, "blockLight");
 

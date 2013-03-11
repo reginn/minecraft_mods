@@ -56,13 +56,7 @@ public class BlockLight extends Block
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float probability, int par7)
 	{
 	}
-	/*
-	@Override
-	public boolean getIsBlockSolid(IBlockAccess iblockaccess, int i, int j, int k, int l)
-	{
-		return false;
-	}
-	*/
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k)
 	{

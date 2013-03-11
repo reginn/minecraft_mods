@@ -51,5 +51,4 @@ public class ItemLamp extends ItemBlock
 		return par1;
 	}
 
-
 }

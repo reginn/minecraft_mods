@@ -17,16 +17,27 @@ import rgn.mods.lamp.Lamp;
 @SideOnly(Side.CLIENT)
 public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 {
-	private final Icon frameIcon   = Block.cauldron.func_94375_b("cauldron_inner");
-	private final Icon torchIcon   = Block.torchWood.getBlockTextureFromSide(0);
-	private final Icon glassIcon   = Block.glass.getBlockTextureFromSide(0);
-	private final Icon steelIcon   = Block.blockSteel.getBlockTextureFromSide(0);
-	private final Icon goldIcon    = Block.blockGold.getBlockTextureFromSide(0);
-	private final Icon diamondIcon = Block.blockDiamond.getBlockTextureFromSide(0);
+	private Icon frameIcon;
+	private Icon torchIcon;
+	private Icon glassIcon;
+	private Icon steelIcon;
+	private Icon goldIcon;
+	private Icon diamondIcon;
+
+	private void refreshIcon()
+	{
+		this.frameIcon   = Block.cauldron.func_94375_b("cauldron_inner");
+		this.torchIcon   = Block.torchWood.getBlockTextureFromSide(0);
+		this.glassIcon   = Block.glass.getBlockTextureFromSide(0);
+		this.steelIcon   = Block.blockSteel.getBlockTextureFromSide(0);
+		this.goldIcon    = Block.blockGold.getBlockTextureFromSide(0);
+		this.diamondIcon = Block.blockDiamond.getBlockTextureFromSide(0);
+	}
 
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelID == this.getRenderId())
 		{
 			if (metadata == 0)
@@ -50,10 +61,7 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 			else if (metadata == 1 || metadata == 2 || metadata == 3)
 			{
 				// cover
-				Icon icon =
-						metadata == 1 ? this.steelIcon :
-						metadata == 2 ? this.goldIcon :
-						this.diamondIcon;
+				Icon icon = metadata == 1 ? this.steelIcon : metadata == 2 ? this.goldIcon : this.diamondIcon;
 				renderInvCuboid(renderer, block,  5.0F/16.0F,  3.0F/16.0F,  5.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 11.0F/16.0F,  icon);
 				//bottom
 				renderInvCuboid(renderer, block,  4.0F/16.0F,        0.0F,  4.0F/16.0F, 12.0F/16.0F,  3.0F/16.0F, 12.0F/16.0F,  this.frameIcon);
@@ -73,28 +81,29 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelID == this.getRenderId())
 		{
 			int meta = world.getBlockMetadata(x, y, z);
 			if (meta == 0)
 			{
 				// torch
-				renderer.overrideBlockTexture = this.torchIcon;
+				renderer.setOverrideBlockTexture(this.torchIcon);
 				renderer.renderBlockTorch(block, x, y, z);
 
 				// glass
-				renderer.overrideBlockTexture = this.glassIcon;
+				renderer.setOverrideBlockTexture(this.glassIcon);
 				block.setBlockBounds(5.0F/16.0F, 3.0F/16.0F, 5.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 11.0F/16.0F);
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
 				// bottom
-				renderer.overrideBlockTexture = this.frameIcon;
+				renderer.setOverrideBlockTexture(this.frameIcon);
 				block.setBlockBounds(4.0F/16.0F, -0.1F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 3.0F/16.0F, 12.0F/16.0F);
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
-				// coulumn
+				// column
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
@@ -124,19 +133,16 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
-				renderer.overrideBlockTexture = null;
+				renderer.clearOverrideBlockTexture();
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 				renderer.setRenderBoundsFromBlock(block);
 
-				return true;
+				return false;
 			}
 			else if (meta == 1 || meta == 2 || meta == 3)
 			{
 				// cover
-				renderer.overrideBlockTexture =
-						meta == 1 ? this.steelIcon :
-						meta == 2 ? this.goldIcon :
-									this.diamondIcon;
+				renderer.setOverrideBlockTexture(meta == 1 ? this.steelIcon : meta == 2 ? this.goldIcon : this.diamondIcon);
 				block.setBlockBounds(5.0F/16.0F, 1.0F/16.0F, 5.0F/16.0F, 11.0F/16.0F, 12.0F/16.0F, 11.0F/16.0F);
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
@@ -159,7 +165,7 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
-				// coulumn
+				// column
 				block.setBlockBounds(4.0F/16.0F, 1.0F/16.0F, 4.0F/16.0F, 5.0F/16.0F, 12.0F/16.0F, 5.0F/16.0F);
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
@@ -189,7 +195,7 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlock(block, x, y, z);
 
-				renderer.overrideBlockTexture = null;
+				renderer.clearOverrideBlockTexture();
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 				renderer.setRenderBoundsFromBlock(block);
 

@@ -31,6 +31,7 @@ public class BlockLamp extends Block
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
 	{
 		for (int i = 0; i < 4; i++)
@@ -76,6 +77,7 @@ public class BlockLamp extends Block
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random)
 	{
 		int meta = world.getBlockMetadata(x, y, z);

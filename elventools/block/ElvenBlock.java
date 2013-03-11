@@ -22,13 +22,13 @@ public class ElvenBlock
 
 	public static void configure(Config config)
 	{
-		blockEbonyLog     = (new BlockEbonyLog(config.blockIdEbonyLog,         0)).setBlockName("blockEbonyLog").setCreativeTab(Config.tabElvenTools);
-		blockEbonyLeaves  = (new BlockEbonyLeaves(config.blockIdEbonyLeaves,   3)).setBlockName("blockEbonyLeaves").setCreativeTab(Config.tabElvenTools);
-		blockEbonySapling = (new BlockEbonySapling(config.blockIdEbonySapling, 4)).setBlockName("blockEbonySapling").setCreativeTab(Config.tabElvenTools);
-		blockEbonyWood    = (new BlockEbonyWood(config.blockIdEbonyWood,       2)).setBlockName("blockEbonyWood").setCreativeTab(Config.tabElvenTools);
+		blockEbonyLog     = (new BlockEbonyLog(config.blockIdEbonyLog        )).setUnlocalizedName("blockEbonyLog").setCreativeTab(Config.tabElvenTools);
+		blockEbonyLeaves  = (new BlockEbonyLeaves(config.blockIdEbonyLeaves  )).setUnlocalizedName("blockEbonyLeaves").setCreativeTab(Config.tabElvenTools);
+		blockEbonySapling = (new BlockEbonySapling(config.blockIdEbonySapling)).setUnlocalizedName("blockEbonySapling").setCreativeTab(Config.tabElvenTools);
+		blockEbonyWood    = (new BlockEbonyWood(config.blockIdEbonyWood      )).setUnlocalizedName("blockEbonyWood").setCreativeTab(Config.tabElvenTools);
 
-		blockRope            = (new BlockRope(config.blockIdRope, 16)).setBlockName("blockRope.nouses");
-		blockRopeEstablisher = (new BlockRopeEstablisher(config.blockIdRopeEstablisher, 16)).setBlockName("blockRopeEstablisher");
+		blockRope            = (new BlockRope(config.blockIdRope)).setUnlocalizedName("blockRope.nouses");
+		blockRopeEstablisher = (new BlockRopeEstablisher(config.blockIdRopeEstablisher)).setUnlocalizedName("blockRopeEstablisher");
 
 		MinecraftForge.setBlockHarvestLevel(blockEbonyLog,    "axe", 0);
 		MinecraftForge.setBlockHarvestLevel(blockEbonyWood,   "axe", 0);

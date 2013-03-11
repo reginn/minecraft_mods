@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -13,6 +14,9 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IPlantable;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemElvenSickle extends ItemTool
 {
@@ -44,9 +48,10 @@ public class ItemElvenSickle extends ItemTool
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:elvenSickle");
 	}
 
 	@Override
@@ -105,7 +110,7 @@ public class ItemElvenSickle extends ItemTool
 			if (!world.isAirBlock(target.x, target.y, target.z) && this.isToolEffective(Block.blocksList[targetBlockId]))
 			{
 				Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
-				world.setBlockWithNotify(target.x, target.y, target.z, 0);
+				world.func_94575_c(target.x, target.y, target.z, 0);
 
 				++damage;
 			}

@@ -1,43 +1,36 @@
 package rgn.mods.elventools.core;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 
 import rgn.mods.elventools.client.GuiSeedBag;
 import rgn.mods.elventools.config.Config;
 import rgn.mods.elventools.inventory.ContainerSeedBag;
-import rgn.mods.elventools.inventory.InventorySeedBag;
 import rgn.mods.elventools.item.ItemElvenSeedBag;
 
 public class CommonProxy implements IGuiHandler
 {
-	public void registerTextures()
-	{
-	}
-
 	public void registerRenderers()
 	{
 	}
-	
+
 	public void spawnCustomParticle(World world, EntityPlayer player, Entity entity, int type)
 	{
 	}
-	
+
 	public World getClientWorld()
 	{
 		return null;
 	}
-	
+
 	public void setBindInfo(Entity entity)
 	{
 	}
-	
+
 	// implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)

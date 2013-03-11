@@ -25,7 +25,7 @@ import rgn.mods.elventools.network.PacketHandler;
 (
 	modid   = "ElvenTools",
 	name    = "ElvenTools",
-	version = "4.0.0pre"
+	version = "4.0.0"
 )
 @NetworkMod
 (
@@ -64,7 +64,6 @@ public class ElvenTools
 
 		(new ForgeEventRegistry()).registerEvent();
 
-		proxy.registerTextures();
 		proxy.registerRenderers();
 
 		(new OreDictRegistry()).register();

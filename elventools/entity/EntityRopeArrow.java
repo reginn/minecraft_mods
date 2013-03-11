@@ -15,12 +15,12 @@ public class EntityRopeArrow extends EntityElvenArrow
 	{
 		super(world);
 	}
-	
+
 	public EntityRopeArrow(World world, double x, double y, double z)
 	{
 		super(world, x, y, z);
 	}
-	
+
 	public EntityRopeArrow(World world, EntityLiving player, float par3)
 	{
 		super(world, player, par3);
@@ -41,7 +41,7 @@ public class EntityRopeArrow extends EntityElvenArrow
 
 		if (this.mop.sideHit == 0 && this.worldObj.isAirBlock(x, y - 1, z) && this.isEstablish(x, y, z))
 		{
-			this.worldObj.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
+			this.worldObj.func_94575_c(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			return true;
 		}
 

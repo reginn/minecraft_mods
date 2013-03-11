@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,23 +14,28 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 {
 	int[] adjacentTreeBlocks;
 
-	public BlockEbonyLeaves(int blockId, int terrainId)
+	public BlockEbonyLeaves(int blockId)
 	{
-		super(blockId, terrainId, Material.leaves, true);
+		super(blockId, Material.leaves, true);
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
 	}
 
+
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/blocks.png";
+		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:ebonyLeaves");
 	}
 
 	@Override
@@ -159,7 +165,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 
 				if (var12 >= 0)
 				{
-					world.setBlockMetadata(x, y, z, metadata & -9);
+					world.setBlockMetadataWithNotify(x, y, z, metadata & -9, 3);
 				}
 				else
 				{
@@ -172,7 +178,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	private void removeLeaves(World world, int x, int y, int z)
 	{
 		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.setBlockWithNotify(x, y, z, 0);
+		world.func_94571_i(x, y, z);
 	}
 
 	@Override
@@ -200,12 +206,6 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
-	{
-		return blockIndexInTexture;
-	}
-
-	@Override
 	public void onEntityWalking(World world, int x, int y, int z, Entity entity)
 	{
 		super.onEntityWalking(world, x, y, z, entity);
@@ -214,7 +214,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	@Override
 	public void beginLeavesDecay(World world, int x, int y, int z)
 	{
-		world.setBlockMetadata(x, y, z, world.getBlockMetadata(x, y, z) | 8);
+		world.setBlockMetadataWithNotify(x, y, z, world.getBlockMetadata(x, y, z) | 8, 3);
 	}
 
 	@Override

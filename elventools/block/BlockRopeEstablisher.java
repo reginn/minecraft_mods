@@ -4,17 +4,21 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import rgn.mods.elventools.block.ElvenBlock;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import rgn.mods.elventools.item.ElvenItem;
 
 public class BlockRopeEstablisher extends Block
 {
-	public BlockRopeEstablisher(int blockId, int terrainId)
+	public BlockRopeEstablisher(int blockId)
 	{
-		super(blockId, terrainId, Material.vine);
+		super(blockId, Material.vine);
 		this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 1.0F, 0.6F);
 	}
 
@@ -24,9 +28,10 @@ public class BlockRopeEstablisher extends Block
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/blocks.png";
+		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:rope");
 	}
 
 	@Override
@@ -72,7 +77,18 @@ public class BlockRopeEstablisher extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
+				world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
+				System.out.printf("g()=>%f, k()=>%d, e()=>%f, h()=>%f, a()=>%d, f()=>%f, j()=%d, b()=>%d\n",
+						this.field_94336_cN.func_94206_g(),
+						this.field_94336_cN.func_94208_k(),
+						this.field_94336_cN.func_94209_e(),
+						this.field_94336_cN.func_94210_h(),
+						this.field_94336_cN.func_94211_a(),
+						this.field_94336_cN.func_94212_f(),
+						this.field_94336_cN.func_94213_j(),
+						this.field_94336_cN.func_94216_b());
+
+				System.out.println(this.field_94336_cN.getClass().getName());
 			}
 		}
 	}
@@ -83,13 +99,13 @@ public class BlockRopeEstablisher extends Block
 		if (world.isAirBlock(x, y + 1, z))
 		{
 			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenItem.itemRopeEstablisher, 1)));
-			world.setBlockWithNotify(x, y, z, 0);
+			world.func_94571_i(x, y, z);
 		}
 		else if (world.isAirBlock(x, y - 1, z) && y - 1 >= 0)
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
+				world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
 			}
 		}
 	}

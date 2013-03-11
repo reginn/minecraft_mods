@@ -1,10 +1,14 @@
 package rgn.mods.elventools.item;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.block.ElvenBlock;
 
@@ -16,9 +20,10 @@ public class ItemRopeEstablisher extends Item
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:rope");
 	}
 
 	@Override
@@ -26,7 +31,7 @@ public class ItemRopeEstablisher extends Item
 	{
 		if (playerDir == 0 && isEstablish(world, x, y, z))
 		{
-			world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
+			world.func_94575_c(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			--itemstack.stackSize;
 			return true;
 		}

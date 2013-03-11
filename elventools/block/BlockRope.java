@@ -4,14 +4,17 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.World;
-import rgn.mods.elventools.block.ElvenBlock;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRope extends Block
 {
-	public BlockRope(int blockId, int terrainId)
+	public BlockRope(int blockId)
 	{
-		super(blockId, terrainId, Material.vine);
+		super(blockId, Material.vine);
 		this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 1.0F, 0.6F);
 	}
 
@@ -22,9 +25,10 @@ public class BlockRope extends Block
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/blocks.png";
+		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:rope");
 	}
 
 	@Override
@@ -79,7 +83,7 @@ public class BlockRope extends Block
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlockWithNotify(x, y, z, 0);
+			world.func_94571_i(x, y, z);
 		}
 		else if (world.isAirBlock(x, y - 1, z))
 		{
@@ -91,7 +95,7 @@ public class BlockRope extends Block
 	{
 		for (; world.isAirBlock(x, y - 1, z) & y >= 0; y--)
 		{
-			world.setBlockWithNotify(x, y - 1, z, ElvenBlock.blockRope.blockID);
+			world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
 		}
 	}
 }

@@ -26,10 +26,14 @@ public class EbonyTreeEvent implements IForgeEvent
 		{
 			if (!world.isRemote)
 			{
-				((BlockEbonySapling)ElvenBlock.blockEbonySapling).growTree(world, x, y, z, world.rand);
+				if ((double)world.rand.nextFloat() < 0.45D)
+				{
+					((BlockEbonySapling)ElvenBlock.blockEbonySapling).func_96477_c(world, x, y, z, world.rand);
+				}
+				world.playAuxSFX(2005, x, y, z, 0);
 				event.setResult(Event.Result.ALLOW);
 			}
 		}
 		event.setResult(Event.Result.DENY);
-	}	
+	}
 }

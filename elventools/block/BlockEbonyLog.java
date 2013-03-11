@@ -2,36 +2,51 @@ package rgn.mods.elventools.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEbonyLog extends Block
 {
-	public BlockEbonyLog(int blockId, int terrainId)
+	@SideOnly(Side.CLIENT)
+	protected Icon topIcon;
+	@SideOnly(Side.CLIENT)
+	protected Icon sideIcon;
+
+	public BlockEbonyLog(int blockId)
 	{
-		super(blockId, terrainId, Material.wood);
+		super(blockId, Material.wood);
 		this.setHardness(3.0F);
 		this.setStepSound(soundWoodFootstep);
-		this.setRequiresSelfNotify();
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/blocks.png";
+		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_Side");
+		this.topIcon  = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_top");
+		this.sideIcon = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_side");
 	}
 
-	public int getBlockTextureFromSide(int side)
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int metadata)
 	{
 		if (side == 1 || side == 0)
 		{
-			return this.blockIndexInTexture + 1;
+			return this.topIcon;
 		}
 		else
 		{
-			return this.blockIndexInTexture;
+			return this.sideIcon;
 		}
 	}
 
+	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6)
 	{
 		int sustainableRange = 4;

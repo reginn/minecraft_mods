@@ -2,6 +2,7 @@ package rgn.mods.elventools.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,22 +11,28 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemElvenBow extends Item
 {
-	protected int[] animation = new int[3];
-	protected float baseDamage;
-	protected float velocityRatio;
-	protected int   enchantability;
+	@SideOnly(Side.CLIENT)
+	protected Icon[] animation = new Icon[3];
+
+	protected float   baseDamage;
+	protected float   velocityRatio;
+	protected int     enchantability;
 	protected boolean isCallEvent = true;
-	protected float chargeSpeedRatio = 1.0F;
-	protected String information;
-	protected EnumRarity rarity = EnumRarity.common;
+	protected float   chargeSpeedRatio = 1.0F;
+	protected String  information;
+	protected boolean rarity;
 
 	protected EnumElvenBowType bowType;
 
@@ -33,24 +40,37 @@ public class ItemElvenBow extends Item
 	{
 		super(itemId);
 		this.maxStackSize   = 1;
-		this.iconIndex      = type.getSpriteId();
 		this.baseDamage     = type.getBaseDamage();
 		this.velocityRatio  = type.getVelocityRatio();
 		this.enchantability = type.getEnchantability();
+		this.bowType        = type;
 
 		this.setMaxDamage(type.getDurability());
 		this.setFull3D();
-
-		for(int i = 0; i < 3; i++)
-		{
-			animation[i] = this.iconIndex + i + 1;
-		}
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/elventools/items.png";
+		this.bowType.createIcon(par1IconRegister);
+		this.iconIndex = this.bowType.getBaseIcon();
+		this.animation = this.bowType.getAnimation();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+	{
+		if (usingItem != null && usingItem.getItem().itemID == this.itemID)
+		{
+			int k = usingItem.getMaxItemUseDuration() - useRemaining;
+			if (k >= this.getChargeValue(18)) return this.animation[2];
+			if (k >  this.getChargeValue(13)) return this.animation[1];
+			if (k >  this.getChargeValue(0))  return this.animation[0];
+		}
+
+		return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
 	}
 
 	@Override
@@ -170,20 +190,6 @@ public class ItemElvenBow extends Item
 	}
 
 	@Override
-	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
-	{
-		if (usingItem != null && usingItem.getItem().itemID == this.itemID)
-		{
-			int k = usingItem.getMaxItemUseDuration() - useRemaining;
-			if (k >= this.getChargeValue(18)) return animation[2];
-			if (k >  this.getChargeValue(13)) return animation[1];
-			if (k >  this.getChargeValue(0)) return animation[0];
-		}
-
-		return getIconIndex(stack);
-	}
-
-	@Override
 	public int getItemEnchantability()
 	{
 		return this.enchantability;
@@ -199,9 +205,10 @@ public class ItemElvenBow extends Item
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public EnumRarity getRarity(ItemStack itemtack)
 	{
-		return this.rarity;
+		return this.rarity ? EnumRarity.rare : EnumRarity.common;
 	}
 
 	public int getChargeValue(int base)
@@ -259,9 +266,9 @@ public class ItemElvenBow extends Item
 		return this;
 	}
 
-	public ItemElvenBow setRarity(EnumRarity rarity)
+	public ItemElvenBow setRare()
 	{
-		this.rarity = rarity;
+		this.rarity = true;
 		return this;
 	}
 }

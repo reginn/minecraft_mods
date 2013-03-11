@@ -1,14 +1,14 @@
 package rgn.mods.elventools.inventory;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.relauncher.Side;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.relauncher.Side;
 
 import rgn.mods.elventools.network.PacketHandler;
 
@@ -26,7 +26,7 @@ public class InventorySeedBag implements IInventory
 	public void readFromNBT(NBTTagCompound nbtTagCompound)
 	{
 		this.items = new ItemStack[this.getSizeInventory()];
-		
+
 		if (nbtTagCompound != null)
 		{
 			NBTTagList nbtTagList = nbtTagCompound.getTagList("Items");
@@ -55,10 +55,10 @@ public class InventorySeedBag implements IInventory
 				nbtTagList.appendTag(slotNbtTagCompound);
 			}
 		}
-		
+
 		nbtTagCompound.setTag("Items", nbtTagList);
 	}
-	
+
 	public void save()
 	{
 		NBTTagCompound nbtTagCompound = this.seedBag.getTagCompound();
@@ -73,7 +73,7 @@ public class InventorySeedBag implements IInventory
 			PacketDispatcher.sendPacketToServer(PacketHandler.getPacketSeedBagItems(this));
 		}
 	}
-	
+
 	// implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
@@ -151,7 +151,7 @@ public class InventorySeedBag implements IInventory
 		}
 		this.onInventoryChanged();
 	}
-	
+
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
@@ -166,12 +166,12 @@ public class InventorySeedBag implements IInventory
             return null;
         }
 	}
-	
+
 	public ItemStack getSeedBag()
 	{
 		return this.seedBag;
 	}
-	
+
 	@Override
 	public String getInvName()
 	{
@@ -182,5 +182,17 @@ public class InventorySeedBag implements IInventory
 	public int getInventoryStackLimit()
 	{
 		return 64;
+	}
+
+	@Override
+	public boolean func_94042_c()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack)
+	{
+		return false;
 	}
 }

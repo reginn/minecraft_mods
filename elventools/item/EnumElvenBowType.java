@@ -1,5 +1,11 @@
 package rgn.mods.elventools.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public enum EnumElvenBowType
 {
 	/*
@@ -21,6 +27,11 @@ public enum EnumElvenBowType
 	private float baseDamage;
 	private float velocityRatio;
 	private int enchantability;
+
+	@SideOnly(Side.CLIENT)
+	private Icon icon;
+	@SideOnly(Side.CLIENT)
+	private Icon animation[];
 
 	private EnumElvenBowType(int spriteId, int durability, float baseDamage, float velocityRatio, int enchantability)
 	{
@@ -54,5 +65,28 @@ public enum EnumElvenBowType
 	public int getEnchantability()
 	{
 		return this.enchantability;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void createIcon(IconRegister iconRegister)
+	{
+		this.animation = new Icon[3];
+		this.icon = iconRegister.func_94245_a(String.format("rgn/elventools:%s%d", name().toLowerCase(), 0));
+		for (int i = 0; i < 3; ++i)
+		{
+			this.animation[i] = iconRegister.func_94245_a(String.format("rgn/elventools:%s%d", name().toLowerCase(), i + 1));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public Icon getBaseIcon()
+	{
+		return this.icon;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public Icon[] getAnimation()
+	{
+		return this.animation;
 	}
 }

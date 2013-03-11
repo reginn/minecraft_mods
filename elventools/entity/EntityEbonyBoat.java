@@ -3,9 +3,6 @@ package rgn.mods.elventools.entity;
 import java.util.Iterator;
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,6 +13,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.item.ElvenItem;
 
@@ -203,7 +203,7 @@ public class EntityEbonyBoat extends Entity
 		{
 			double var5 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 0) / (double)var1 - 0.125D;
 			double var7 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var4 + 1) / (double)var1 - 0.125D;
-			AxisAlignedBB var9 = AxisAlignedBB.getAABBPool().addOrModifyAABBInPool(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
+			AxisAlignedBB var9 = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, var5, this.boundingBox.minZ, this.boundingBox.maxX, var7, this.boundingBox.maxZ);
 
 			if (this.worldObj.isAABBInMaterial(var9, Material.water))
 			{
@@ -423,12 +423,12 @@ public class EntityEbonyBoat extends Entity
 
 						if (var22 == Block.snow.blockID)
 						{
-							this.worldObj.setBlockWithNotify(var29, var21, var19, 0);
+							this.worldObj.func_94571_i(var29, var21, var19);
 						}
 						else if (var22 == Block.waterlily.blockID)
 						{
 							Block.waterlily.dropBlockAsItemWithChance(this.worldObj, var29, var21, var19, var23, 0.3F, 0);
-							this.worldObj.setBlockWithNotify(var29, var21, var19, 0);
+							this.worldObj.func_94571_i(var29, var21, var19);
 						}
 					}
 				}

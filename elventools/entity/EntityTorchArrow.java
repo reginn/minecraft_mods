@@ -14,12 +14,12 @@ public class EntityTorchArrow extends EntityElvenArrow
 	{
 		super(world);
 	}
-	
+
 	public EntityTorchArrow(World world, double x, double y, double z)
 	{
 		super(world, x, y, z);
 	}
-	
+
 	public EntityTorchArrow(World world, EntityLiving player, float par3)
 	{
 		super(world, player, par3);
@@ -73,8 +73,7 @@ public class EntityTorchArrow extends EntityElvenArrow
 
 		if (block.canPlaceBlockAt(this.worldObj, x, y, z) && this.worldObj.isAirBlock(x, y, z))
 		{
-			this.worldObj.setBlock(x, y, z, 50);
-			this.worldObj.setBlockMetadataWithNotify(x, y, z, meta);
+			this.worldObj.setBlockAndMetadataWithNotify(x, y, z, Block.torchWood.blockID, meta, 3);
 			return true;
 		}
 

@@ -18,7 +18,8 @@ public class ItemDwarvenOreStorage extends ItemBlock
 		return par1;
 	}
 
-	public String getItemNameIS(ItemStack itemstack)
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		String str[] = new String[]
 			{
@@ -32,6 +33,6 @@ public class ItemDwarvenOreStorage extends ItemBlock
 			type = 0;
 		}
 
-		return (new StringBuilder()).append(getItemName()).append(".").append(str[type]).toString();
+		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(str[type]).toString();
 	}
 }

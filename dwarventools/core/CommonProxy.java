@@ -27,7 +27,7 @@ public class CommonProxy implements IGuiHandler
 		return null;
 	}
 
-	public void spawnCustomParticle(World world, EntityPlayer player, Entity entity, int particleId)
+	public void spawnCustomParticle(World world, Entity entity, int particleId)
 	{
 	}
 

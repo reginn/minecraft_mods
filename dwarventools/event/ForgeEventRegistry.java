@@ -1,6 +1,7 @@
 package rgn.mods.dwarventools.event;
 
 import java.util.Set;
+
 import com.google.common.collect.Sets;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -8,15 +9,16 @@ import net.minecraftforge.common.MinecraftForge;
 public class ForgeEventRegistry
 {
 	Set<IForgeEvent> events = Sets.newHashSet();
-	
+
 	public ForgeEventRegistry()
 	{
 		events.add(new SwordDestroyedEvent());
 		events.add(new CriticalStrikeEvent());
 		events.add(new ExecutionerEvent());
 		events.add(new VitalizeEvent());
+		events.add(new LifeStealEvent());
 	}
-	
+
 	public void registerEvent()
 	{
 		for (IForgeEvent event : events)

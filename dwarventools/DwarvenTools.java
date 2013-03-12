@@ -25,7 +25,7 @@ import rgn.mods.dwarventools.network.PacketHandler;
 (
 	modid   = "DwarvenTools",
 	name    = "DwarvenTools",
-	version = "4.0.0pre"
+	version = "4.0.0"
 )
 @NetworkMod
 (

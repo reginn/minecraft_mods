@@ -17,8 +17,6 @@ public class Config
 	public int blockIdBlockDwarvenOreStorage;
 	public int blockIdInfernalFurnace;
 
-	public int blockIdQuestBoard;
-
 	public int itemIdDwarvenShovelObsidian;
 	public int itemIdDwarvenPickaxeObsidian;
 	public int itemIdDwarvenAxeObsidian;
@@ -66,6 +64,7 @@ public class Config
 	public int enchantmentIdExecutioner;
 	public int enchantmentIdCriticalStrike;
 	public int enchantmentIdVitalize;
+	public int enchantmentIdLifeSteal;
 
 	public static int guiIdInfernalFurnace = 0;
 	public static final CreativeTabs tabDwarvenTools = new CreativeTabDwarvenTools("dwarventools");
@@ -128,6 +127,7 @@ public class Config
 			enchantmentIdVitalize       = cfg.get("EnchantmentVitalize",       Configuration.CATEGORY_GENERAL, 10).getInt();
 			enchantmentIdExecutioner    = cfg.get("EnchantmentExecutionerID",  Configuration.CATEGORY_GENERAL, 26).getInt();
 			enchantmentIdCriticalStrike = cfg.get("EnchantmentCriticalStrike", Configuration.CATEGORY_GENERAL, 27).getInt();
+			enchantmentIdLifeSteal      = cfg.get("EnchantmentLifeSteal",      Configuration.CATEGORY_GENERAL, 28).getInt();
 		}
 		catch (Exception e)
 		{

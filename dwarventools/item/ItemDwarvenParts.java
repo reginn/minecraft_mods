@@ -1,6 +1,12 @@
 package rgn.mods.dwarventools.item;
 
+import org.bouncycastle.util.Strings;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDwarvenParts extends Item
 {
@@ -10,8 +16,10 @@ public class ItemDwarvenParts extends Item
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/dwarventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
+
 }

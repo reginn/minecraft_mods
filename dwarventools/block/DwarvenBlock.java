@@ -19,9 +19,9 @@ public class DwarvenBlock
 
 	public static void configure(Config config)
 	{
-		blockInfernalFurnace   = (new BlockInfernalFurnace(config.blockIdInfernalFurnace, 34)).setBlockName("infernalfurnace").setCreativeTab(Config.tabDwarvenTools);
-		blockDwarvenOre        = (new BlockDwarvenOre(config.blockIdBlockDwarvenOre, 1)).setBlockName("blockDwarvenOre").setCreativeTab(Config.tabDwarvenTools);
-		blockDwarvenOreStorage = (new BlockDwarvenOreStorage(config.blockIdBlockDwarvenOreStorage, 16)).setBlockName("blockDwarvenOreStorage").setCreativeTab(Config.tabDwarvenTools);
+		blockInfernalFurnace   = (new BlockInfernalFurnace(config.blockIdInfernalFurnace)).setUnlocalizedName("infernalfurnace").setCreativeTab(Config.tabDwarvenTools);
+		blockDwarvenOre        = (new BlockDwarvenOre(config.blockIdBlockDwarvenOre)).setUnlocalizedName("blockDwarvenOre").setCreativeTab(Config.tabDwarvenTools);
+		blockDwarvenOreStorage = (new BlockDwarvenOreStorage(config.blockIdBlockDwarvenOreStorage)).setUnlocalizedName("blockDwarvenOreStorage").setCreativeTab(Config.tabDwarvenTools);
 
 		GameRegistry.registerBlock(blockDwarvenOre, ItemDwarvenOre.class, "DwarvenOre");
 		GameRegistry.registerBlock(blockDwarvenOreStorage, ItemDwarvenOreStorage.class, "DwarvenOreStorage");

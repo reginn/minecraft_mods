@@ -1,18 +1,23 @@
 package rgn.mods.dwarventools.item;
 
-import java.util.Iterator;
 import java.util.Set;
+
+import org.bouncycastle.util.Strings;
 
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDwarvenTool extends ItemTool
 {
@@ -39,9 +44,10 @@ public class ItemDwarvenTool extends ItemTool
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/dwarventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
 
 	@Override
@@ -103,14 +109,12 @@ public class ItemDwarvenTool extends ItemTool
 			return 0;
 		}
 
-		Iterator iter = targetsSet.iterator();
-		Coord target;
 		int targetBlockId;
 		int targetBlockMetadata;
 		int damage = 0;
-		while(iter.hasNext())
+
+		for (Coord target : targetsSet)
 		{
-			target = (Coord)iter.next();
 			targetBlockId = world.getBlockId(target.x, target.y, target.z);
 			targetBlockMetadata = world.getBlockMetadata(target.x, target.y, target.z);
 
@@ -132,12 +136,11 @@ public class ItemDwarvenTool extends ItemTool
 						Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
 					}
 				}
-
-				world.setBlockWithNotify(target.x, target.y, target.z, 0);
-
+				world.func_94571_i(target.x, target.y, target.z);
 				++damage;
 			}
 		}
+
 		return damage;
 	}
 

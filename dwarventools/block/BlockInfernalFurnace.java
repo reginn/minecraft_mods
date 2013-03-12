@@ -5,13 +5,16 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -29,20 +32,34 @@ public class BlockInfernalFurnace extends BlockContainer
 	private boolean isActive;
 	private static boolean keepFurnaceInventory = false;
 
-	public BlockInfernalFurnace(int blockId, int terrainId)
+	@SideOnly(Side.CLIENT)
+	private Icon topIcon;
+
+	@SideOnly(Side.CLIENT)
+	private Icon sideIcon;
+
+	@SideOnly(Side.CLIENT)
+	private Icon frontIcon;
+
+	@SideOnly(Side.CLIENT)
+	private Icon idleIcon;
+
+	public BlockInfernalFurnace(int blockId)
 	{
 		super(blockId, Material.rock);
-		this.isActive            = false;
-		this.blockIndexInTexture = terrainId;
 		this.setHardness(3.5F);
 		this.setStepSound(soundStoneFootstep);
-		this.setRequiresSelfNotify();
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/dwarventools/blocks.png";
+		this.field_94336_cN = null;
+		this.topIcon   = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_top");
+		this.sideIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_side");
+		this.frontIcon = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_front");
+		this.idleIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_burning");
 	}
 
 	@Override
@@ -101,54 +118,57 @@ public class BlockInfernalFurnace extends BlockContainer
 				dir = 4;
 			}
 
-			world.setBlockMetadataWithNotify(x, y, z, dir & 7);
+			world.setBlockMetadataWithNotify(x, y, z, dir & 7, 2);
 		}
 	}
 
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving)
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving, ItemStack itemstack)
 	{
 		int playerdir = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (playerdir == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 2);
+			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
 		}
 
 		if (playerdir == 1)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 5);
+			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
 		}
 
 		if (playerdir == 2)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 3);
+			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
 		}
 
 		if (playerdir == 3)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, 4);
+			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
 		}
 	}
 
 	@Override
-	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
 	{
-		if (side == 1)
+		if (side == 0 || side == 1)
 		{
-			return this.blockIndexInTexture - 2;
-		}
-		else if (side == 0)
-		{
-			return this.blockIndexInTexture - 2;
+			return this.topIcon;
 		}
 		else
 		{
 			int metadata = world.getBlockMetadata(x, y, z) & 7;
 			int msb = world.getBlockMetadata(x, y, z) >>> 3;
-			TileEntity te = world.getBlockTileEntity(x, y, z);
-			TileEntityInfernalFurnace teif = (TileEntityInfernalFurnace)te;
-			return side != metadata ? this.blockIndexInTexture : (msb == 1 ? this.blockIndexInTexture + 1 : this.blockIndexInTexture - 1);
+			return side != metadata ? this.sideIcon : (msb == 1 ? this.idleIcon : this.frontIcon);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	{
+		return side == 0 ? this.topIcon : (side == 1 ? this.topIcon : ( side == 3 ? this.frontIcon : this.sideIcon));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -193,12 +213,6 @@ public class BlockInfernalFurnace extends BlockContainer
 	}
 
 	@Override
-	public int getBlockTextureFromSide(int par1)
-	{
-		return par1 == 1 ? this.blockIndexInTexture - 2 : (par1 == 0 ? this.blockIndexInTexture - 2 : (par1 == 3 ? this.blockIndexInTexture - 1 : this.blockIndexInTexture));
-	}
-
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 	{
 		if (world.isRemote)
@@ -220,17 +234,16 @@ public class BlockInfernalFurnace extends BlockContainer
 
 	public static void updateFurnaceBlockState(boolean isBurning, World world, int x, int y, int z)
 	{
-		int metadata          = world.getBlockMetadata(x, y, z);
+		int metadata = world.getBlockMetadata(x, y, z);
 
 		if (isBurning)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, metadata + 8);
+			world.setBlockMetadataWithNotify(x, y, z, metadata + 8, 2);
 		}
 		else
 		{
-			world.setBlockMetadataWithNotify(x, y, z, metadata & 7);
+			world.setBlockMetadataWithNotify(x, y, z, metadata & 7, 2);
 		}
-
 	}
 
 	@Override
@@ -276,11 +289,23 @@ public class BlockInfernalFurnace extends BlockContainer
 
 				if (itemstack.hasTagCompound())
 				{
-					entityitem.func_92014_d().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+					entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
 				}
 				world.spawnEntityInWorld(entityitem);
 			}
 		}
+	}
+
+	@Override
+	public boolean func_96468_q_()
+	{
+		return true;
+	}
+
+	@Override
+	public int func_94328_b_(World par1World, int par2, int par3, int par4, int par5)
+	{
+		return Container.func_94526_b((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
 	}
 
 }

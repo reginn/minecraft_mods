@@ -4,17 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
-
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.Player;
 
 import rgn.mods.dwarventools.DwarvenTools;
 
@@ -28,7 +26,7 @@ public class PacketHandler implements IPacketHandler
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int entityId;
 			byte typeId;
-			
+
 			try
 			{
 				entityId = dis.readInt();
@@ -39,16 +37,15 @@ public class PacketHandler implements IPacketHandler
 				e.printStackTrace();
 				return ;
 			}
-			
+
 			World world = DwarvenTools.proxy.getClientWorld();
-			
-			EntityPlayer entityPlayer = (EntityPlayer)player;
+
 			Entity entity = world.getEntityByID(entityId);
-			
-			DwarvenTools.proxy.spawnCustomParticle(world, entityPlayer, entity, typeId);
+
+			DwarvenTools.proxy.spawnCustomParticle(world, entity, typeId);
 		}
 	}
-	
+
 	public static Packet getPacketCustomAnimation(Entity target, int type)
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -56,7 +53,7 @@ public class PacketHandler implements IPacketHandler
 
 		int entityId = target.entityId;
 		int typeId = type;
-		
+
 		try
 		{
 			dos.writeInt(entityId);

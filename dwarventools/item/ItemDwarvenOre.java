@@ -20,7 +20,8 @@ public class ItemDwarvenOre extends ItemBlock
 		return par1;
 	}
 
-	public String getItemNameIS(ItemStack itemstack)
+	@Override
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		String str;
 		if (itemstack.getItemDamage() == 0)
@@ -31,6 +32,6 @@ public class ItemDwarvenOre extends ItemBlock
 		{
 			str = "oreEbony";
 		}
-		return (new StringBuilder()).append(getItemName()).append(".").append(str).toString();
+		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(str).toString();
 	}
 }

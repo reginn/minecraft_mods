@@ -4,21 +4,45 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDwarvenOreStorage extends Block
 {
-	public BlockDwarvenOreStorage(int blockId, int terrainId)
+	@SideOnly(Side.CLIENT)
+	private Icon redstoneIcon;
+
+	@SideOnly(Side.CLIENT)
+	private Icon mithrilIcon;
+
+	@SideOnly(Side.CLIENT)
+	private Icon ebonyIcon;
+
+	public BlockDwarvenOreStorage(int blockId)
 	{
-		super(blockId, terrainId, Material.iron);
+		super(blockId, Material.iron);
 		this.setHardness(2.0F);
 		this.setResistance(10.0F);
 		this.setStepSound(soundMetalFootstep);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void func_94332_a(IconRegister par1IconRegister)
+	{
+		this.redstoneIcon = par1IconRegister.func_94245_a("rgn/dwarventools:blockRedstone");
+		this.mithrilIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockMithril");
+		this.ebonyIcon    = par1IconRegister.func_94245_a("rgn/dwarventools:blockEbony");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
 	{
 		if (blockID == DwarvenBlock.blockDwarvenOreStorage.blockID)
@@ -31,10 +55,12 @@ public class BlockDwarvenOreStorage extends Block
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
 	{
-		return "/rgn/sprites/dwarventools/blocks.png";
+		return meta == 0 ? this.redstoneIcon : meta == 1 ? this.mithrilIcon : this.ebonyIcon;
 	}
+
 
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
@@ -46,12 +72,6 @@ public class BlockDwarvenOreStorage extends Block
 			return 15;
 		}
 		return 0;
-	}
-
-	@Override
-	public int getBlockTextureFromSideAndMetadata(int i, int j)
-	{
-		return this.blockIndexInTexture + j;
 	}
 
 	@Override

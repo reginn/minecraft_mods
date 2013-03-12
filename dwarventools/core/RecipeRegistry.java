@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import rgn.mods.dwarventools.block.DwarvenBlock;
 import rgn.mods.dwarventools.item.DwarvenItem;
@@ -108,9 +108,9 @@ public class RecipeRegistry
 		final String[] axeRecipe     = new String[] { "MM",  "MS",  " S"};
 		final String[] hoeRecipe     = new String[] { "MM",  " S",  " S"};
 		final String[] swordRecipe   = new String[] {  "M",   "M",   "S"};
-		
+
 		// redstone block changes official redstone block in Minecraft 1.5
-		List<ItemStack> materialList = Lists.newArrayList(new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0));
+		List<ItemStack> materialList = Lists.newArrayList(new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(Block.field_94341_cq));
 
 		List<Item[]> itemList = Lists.newArrayList(shovelList, pickaxeList, axeList, hoeList, swordList);
 		List<String[]> recipeList = Lists.newArrayList(shovelRecipe, pickaxeRecipe, axeRecipe, hoeRecipe, swordRecipe);

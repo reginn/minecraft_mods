@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemHoe;
@@ -14,12 +15,14 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
-import rgn.mods.dwarventools.block.BlockInfernalFurnace;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TileEntityInfernalFurnace extends TileEntity implements IInventory, ISidedInventory
+import rgn.mods.dwarventools.block.BlockInfernalFurnace;
+
+public class TileEntityInfernalFurnace extends TileEntity implements IInventory, ISidedInventory, net.minecraftforge.common.ISidedInventory
 {
 	private ItemStack[] furnaceItemStacks = new ItemStack[3];
 	public int furnaceBurnTime     = 0;
@@ -307,7 +310,7 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 			}
 
 			if (item instanceof ItemTool  && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200;
-			if (item instanceof ItemSword && ((ItemSword)item).func_77825_f().equals("WOOD")) return 200;
+			if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
 			if (item instanceof ItemHoe   && ((ItemHoe)  item).func_77842_f().equals("WOOD")) return 200;
 			if (var1 == Item.stick.itemID) return 100;
 			if (var1 == Item.coal.itemID) return 1600;
@@ -337,7 +340,7 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 	{
 	}
 
-	// implements ISidedInventory
+	//-- implements net.minecraftforge.common.ISidedInventory
 	@Override
 	public int getStartInventorySide(ForgeDirection side)
 	{
@@ -357,5 +360,34 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 	{
 		return 1;
 	}
+	//----------
+
+	//-- implements ISidedInventory
+	@Override
+	public int func_94127_c(int i)
+	{
+		return i == 0 ? 2 : (i == 1 ? 0 : 1);
+	}
+
+	@Override
+	public int func_94128_d(int i)
+	{
+		return 1;
+	}
+	//----------
+
+	//-- implements IInventory new methods
+	@Override
+	public boolean func_94042_c()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean func_94041_b(int i, ItemStack itemstack)
+	{
+		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
+	}
+	//----------
 
 }

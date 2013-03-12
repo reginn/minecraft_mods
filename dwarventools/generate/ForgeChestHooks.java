@@ -1,11 +1,9 @@
 package rgn.mods.dwarventools.generate;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.ChestGenHooks;
 
 import rgn.mods.dwarventools.item.DwarvenItem;
@@ -15,9 +13,9 @@ public class ForgeChestHooks
 	private final String STRONGHOLD_CORRIDOR = ChestGenHooks.STRONGHOLD_CORRIDOR;
 	private final String STRONGHOLD_CROSSING = ChestGenHooks.STRONGHOLD_CROSSING;
 	private final String STRONGHOLD_LIBRARY  = ChestGenHooks.STRONGHOLD_LIBRARY;
-	private final String MINESHAFT_CORRIDOR  = ChestGenHooks.MINESHAFT_CORRIDOR;	
+	private final String MINESHAFT_CORRIDOR  = ChestGenHooks.MINESHAFT_CORRIDOR;
 	private final String DUNGEON_CHEST       = ChestGenHooks.DUNGEON_CHEST;
-	
+
 	public void addLoot()
 	{
 		this.addDungeonLoot();
@@ -32,7 +30,7 @@ public class ForgeChestHooks
 			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMax(5);
 			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMin(5);
 		}
-		
+
 		ChestGenHooks.addItem(STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenBrokenSwordMithril), 1, 1, 5));
 		ChestGenHooks.addItem(STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenBrokenSwordEbony),   1, 1, 5));
 
@@ -41,8 +39,8 @@ public class ForgeChestHooks
 
 		ChestGenHooks.addItem(STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenLegsMithril), 1, 1, 5));
 		ChestGenHooks.addItem(STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenLegsMithril), 1, 1, 5));
-		
-		ChestGenHooks.addItem(STRONGHOLD_LIBRARY,  new WeightedRandomChestContent(new ItemStack(Item.field_92053_bW, 1, 0), 1, 1, 100));
+
+		ChestGenHooks.addItem(STRONGHOLD_LIBRARY,  new WeightedRandomChestContent(new ItemStack(Item.enchantedBook, 1, 0), 1, 1, 100));
 
 	}
 
@@ -53,7 +51,7 @@ public class ForgeChestHooks
 			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMax(5);
 			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMin(5);
 		}
-		
+
 		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemMithrilIngot), 1, 4, 20));
 		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemEbonyIngot),   1, 2, 10));
 
@@ -62,8 +60,8 @@ public class ForgeChestHooks
 
 		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenPickaxeMithril), 1, 1, 5));
 		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenPickaxeEbony), 1, 1, 5));
-		
-		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(Item.field_92053_bW, 1, 0), 1, 1, 100));
+
+		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(Item.enchantedBook, 1, 0), 1, 1, 100));
 	}
 
 	public void addDungeonLoot()

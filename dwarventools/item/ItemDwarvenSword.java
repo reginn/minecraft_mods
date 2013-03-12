@@ -1,11 +1,19 @@
 package rgn.mods.dwarventools.item;
 
+import org.bouncycastle.util.Strings;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
 public class ItemDwarvenSword extends ItemSword
 {
@@ -22,9 +30,10 @@ public class ItemDwarvenSword extends ItemSword
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/dwarventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
 
 	@Override
@@ -34,11 +43,13 @@ public class ItemDwarvenSword extends ItemSword
 
 		if (this.toolMaterial == DwarvenItem.enumToolMaterialMithril)
 		{
+			itemstack.addEnchantment(DwarvenEnchantment.enchantmentCriticalStrike, 1);
 			itemstack.addEnchantment(Enchantment.smite,   3);
 			itemstack.addEnchantment(Enchantment.looting, 1);
 		}
 		if (this.toolMaterial == DwarvenItem.enumToolMaterialEbony)
 		{
+			itemstack.addEnchantment(DwarvenEnchantment.enchantmentLifeSteal, 1);
 			itemstack.addEnchantment(Enchantment.sharpness, 3);
 			itemstack.addEnchantment(Enchantment.looting,   2);
 		}

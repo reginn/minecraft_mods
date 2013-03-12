@@ -2,8 +2,6 @@ package rgn.mods.dwarventools.generate;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.FMLLog;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
@@ -11,6 +9,7 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
 import net.minecraftforge.common.ChestGenHooks;
 
 public class WorldGenDungeonsBase extends WorldGenerator
@@ -20,14 +19,14 @@ public class WorldGenDungeonsBase extends WorldGenerator
 	protected String mobType;
 	protected int xRange;
 	protected int zRange;
-	
+
 	protected WorldGenDungeonsBase(String _mobType, int _xRange, int _zRange)
 	{
 		this.mobType = _mobType;
 		this.xRange  = _xRange;
 		this.zRange  = _zRange;
 	}
-	
+
 	@Override
 	public boolean generate(World world, Random random, int xCoord, int yCoord, int zCoord)
 	{
@@ -76,22 +75,22 @@ public class WorldGenDungeonsBase extends WorldGenerator
 						if (x != xCoord - xRange - 1 && y != yCoord - 1 && z != zCoord - zRange - 1 &&
 							x != xCoord + xRange + 1 && y != yCoord + yRange + 1 && z != zCoord + zRange + 1)
 						{
-							world.setBlockWithNotify(x, y, z, 0);
+							world.func_94571_i(x, y, z);
 						}
 						else if (y >= 0 && !world.getBlockMaterial(x, y - 1, z).isSolid())
 						{
-							world.setBlockWithNotify(x, y, z, 0);
+							world.func_94571_i(x, y, z);
 						}
 						else if (world.getBlockMaterial(x, y, z).isSolid())
 						{
 							if (y == yCoord - 1 && random.nextInt(4) != 0)
 							{
-								
+
 								this.setRandomBlock(world, x, y, z);
 							}
 							else
 							{
-								
+
 								this.setBaseBlock(world, x, y, z);
 							}
 						}
@@ -155,12 +154,12 @@ public class WorldGenDungeonsBase extends WorldGenerator
 				}
 			}
 
-			world.setBlockWithNotify(xCoord, yCoord, zCoord, Block.mobSpawner.blockID);
+			world.func_94575_c(xCoord, yCoord, zCoord, Block.mobSpawner.blockID);
 			TileEntityMobSpawner tileEntityMobSpawner = (TileEntityMobSpawner)world.getBlockTileEntity(xCoord, yCoord, zCoord);
-			
+
 			if (tileEntityMobSpawner != null)
 			{
-				tileEntityMobSpawner.setMobID(this.mobType);
+				tileEntityMobSpawner.func_98049_a().func_98272_a(this.mobType);
 			}
 			else
 			{
@@ -174,20 +173,20 @@ public class WorldGenDungeonsBase extends WorldGenerator
 			return false;
 		}
 	}
-	
+
 	protected void setRandomBlock(World world, int x, int y, int z)
 	{
-		world.setBlockWithNotify(x, y, z, Block.stone.blockID);
+		world.func_94575_c(x, y, z, Block.stone.blockID);
 	}
-	
+
 	protected void setBaseBlock(World world, int x, int y, int z)
 	{
-		world.setBlockWithNotify(x, y, z, Block.stone.blockID);
+		world.func_94575_c(x, y, z, Block.stone.blockID);
 	}
-	
+
 	protected void generateChest(World world, int x, int y, int z, Random random)
 	{
-		world.setBlockWithNotify(x, y, z, Block.chest.blockID);
+		world.func_94575_c(x, y, z, Block.chest.blockID);
 		TileEntityChest tileEntityChest = (TileEntityChest)world.getBlockTileEntity(x, y, z);
 
 		if (tileEntityChest != null)

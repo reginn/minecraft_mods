@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 
 import rgn.mods.dwarventools.block.DwarvenBlock;
 import rgn.mods.dwarventools.item.DwarvenItem;
+
 import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry
@@ -64,9 +65,10 @@ public class LocalizationRegistry
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenAxeRedstone,     "Redstone Axe",     "レッドストーンの斧");
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenHoeRedstone,     "Redstone Hoe",     "レッドストーンのクワ");
 		TranslationRegistry.addLocalization(DwarvenItem.itemDwarvenSwordRedstone,   "Redstone Sword",   "レッドストーンの剣");
-		
+
 		TranslationRegistry.addLocalization("enchantment.vitalize",       "Vitalize",        "活性化");
 		TranslationRegistry.addLocalization("enchantment.executioner",    "Executioner",     "処刑人");
 		TranslationRegistry.addLocalization("enchantment.criticalStrike", "Critical Strike", "クリティカルストライク");
+		TranslationRegistry.addLocalization("enchantment.lifeSteal",      "Life Steal",      "ライフスティール");
 	}
 }

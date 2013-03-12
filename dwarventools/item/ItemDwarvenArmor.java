@@ -2,6 +2,9 @@ package rgn.mods.dwarventools.item;
 
 import java.util.Random;
 
+import org.bouncycastle.util.Strings;
+
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
@@ -10,6 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IArmorTextureProvider;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 
@@ -25,9 +31,10 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void func_94581_a(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/dwarventools/items.png";
+		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
 
 	@Override
@@ -37,27 +44,27 @@ public class ItemDwarvenArmor extends ItemArmor implements IArmorTextureProvider
 			itemstack.itemID == DwarvenItem.itemDwarvenPlateMithril.itemID ||
 			itemstack.itemID == DwarvenItem.itemDwarvenBootMithril.itemID)
 		{
-			return "/rgn/sprites/dwarventools/armor/mithril_1.png";
+			return "/mods/rgn/dwarventools/textures/armor/mithril_1.png";
 		}
 
 		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsMithril.itemID)
 		{
-			return "/rgn/sprites/dwarventools/armor/mithril_2.png";
+			return "/mods/rgn/dwarventools/textures/armor/mithril_2.png";
 		}
 
 		if (itemstack.itemID == DwarvenItem.itemDwarvenHelmetEbony.itemID ||
 			itemstack.itemID == DwarvenItem.itemDwarvenPlateEbony.itemID ||
 			itemstack.itemID == DwarvenItem.itemDwarvenBootEbony.itemID)
 		{
-			return "/rgn/sprites/dwarventools/armor/ebony_1.png";
+			return "/mods/rgn/dwarventools/textures/armor/ebony_1.png";
 		}
 
 		if (itemstack.itemID == DwarvenItem.itemDwarvenLegsEbony.itemID)
 		{
-			return "/rgn/sprites/dwarventools/armor/ebony_2.png";
+			return "/mods/rgn/dwarventools/textures/armor/ebony_2.png";
 		}
 
-		return "/rgn/sprites/dwarventools/armor/mithril_1.png";
+		return "/mods/rgn/dwarventools/textures/armor/mithril_1.png";
 	}
 
 	@Override

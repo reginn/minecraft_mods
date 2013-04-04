@@ -2,6 +2,7 @@ package rgn.mods.ozen;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -15,7 +16,7 @@ public class ItemOzen extends ItemBlock
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack)
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		int material = itemstack.getItemDamage() & 7;
 		int type     = itemstack.getItemDamage() >>> 3;
@@ -34,7 +35,7 @@ public class ItemOzen extends ItemBlock
 		String mat = ((BlockOzen)Ozen.blockOzen).names[k];
 		String typ = ((BlockOzen)Ozen.blockOzen).types[l];
 
-		return (new StringBuilder()).append(getItemName()).append(".").append(typ).append(".").append(mat).toString();
+		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(typ).append(".").append(mat).toString();
 	}
 
 	@Override

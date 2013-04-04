@@ -1,28 +1,47 @@
 package rgn.mods.ozen.client;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.ozen.Ozen;
 
 @SideOnly(Side.CLIENT)
 public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 {
-	private int[] textureIndex = new int[]
+	private Icon[] icon = new Icon[]
 		{
-			4, 198, 214, 22, 22, 22, 23
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 0),
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 1),
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 2),
+			Block.blockSteel.getBlockTextureFromSide(0),
+			Block.blockSteel.getBlockTextureFromSide(0),
+			Block.blockSteel.getBlockTextureFromSide(0),
+			Block.blockGold.getBlockTextureFromSide(0)
 		};
+
+	private void refreshIcon()
+	{
+		this.icon[0] = Block.planks.getBlockTextureFromSideAndMetadata(0, 0);
+		this.icon[1] = Block.planks.getBlockTextureFromSideAndMetadata(0, 1);
+		this.icon[2] = Block.planks.getBlockTextureFromSideAndMetadata(0, 2);
+		this.icon[3] = Block.blockSteel.getBlockTextureFromSide(0);
+		this.icon[4] = Block.blockSteel.getBlockTextureFromSide(0);
+		this.icon[5] = Block.blockSteel.getBlockTextureFromSide(0);
+		this.icon[6] = Block.blockGold.getBlockTextureFromSide(0);
+	}
 
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelID == this.getRenderId())
 		{
 			int modelType = metadata >>> 3;
@@ -30,30 +49,31 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 
 			if (modelType == 0)
 			{
-				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F,  2.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F,  2.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,  14.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
+				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F, 1.0F/16.0F, 14.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F,  2.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F,  2.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,  14.0F/16.0F,  0.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  0.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F, 2.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
 			}
 			else if(modelType == 1)
 			{
-				renderInvCuboid(renderer, block,   2.0F/16.0F,  4.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F,  5.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F,  2.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F,  2.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,  14.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.textureIndex[texture]);
+				renderInvCuboid(renderer, block,   2.0F/16.0F,  4.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F,  5.0F/16.0F, 14.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F,  2.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F,  2.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,  14.0F/16.0F,  4.0F/16.0F,  1.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   1.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F, 15.0F/16.0F,  6.0F/16.0F, 15.0F/16.0F,  this.icon[texture]);
 
-				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F, 11.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,  11.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.textureIndex[texture]);
-				renderInvCuboid(renderer, block,  11.0F/16.0F,  0.0F/16.0F, 11.0F/16.0F, 14.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F,  this.textureIndex[texture]);
+				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,   2.0F/16.0F,  0.0F/16.0F, 11.0F/16.0F,  5.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,  11.0F/16.0F,  0.0F/16.0F,  2.0F/16.0F, 14.0F/16.0F,  4.0F/16.0F,  5.0F/16.0F,  this.icon[texture]);
+				renderInvCuboid(renderer, block,  11.0F/16.0F,  0.0F/16.0F, 11.0F/16.0F, 14.0F/16.0F,  4.0F/16.0F, 14.0F/16.0F,  this.icon[texture]);
 			}
 		}
 	}
 
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelId == this.getRenderId())
 		{
 			int modelType = world.getBlockMetadata(x, y, z) >>> 3;
@@ -61,7 +81,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 
 			if (modelType == 0)
 			{
-				renderer.overrideBlockTexture = this.textureIndex[texture];
+				renderer.setOverrideBlockTexture(icon[texture]);
 				int rgb = block.colorMultiplier(world, x, y, z);
 				float r = (float)(rgb >> 16 & 255) / 255.0F;
 				float g = (float)(rgb >>  8 & 255) / 255.0F;
@@ -87,7 +107,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
-				renderer.overrideBlockTexture = -1;
+				renderer.clearOverrideBlockTexture();
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 				renderer.setRenderBoundsFromBlock(block);
 
@@ -95,7 +115,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 			}
 			else if (modelType == 1)
 			{
-				renderer.overrideBlockTexture = this.textureIndex[texture];
+				renderer.overrideBlockTexture = this.icon[texture];
 				int rgb = block.colorMultiplier(world, x, y, z);
 				float r = (float)(rgb >> 16 & 255) / 255.0F;
 				float g = (float)(rgb >>  8 & 255) / 255.0F;
@@ -137,7 +157,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 				renderer.setRenderBoundsFromBlock(block);
 				renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
-				renderer.overrideBlockTexture = -1;
+				renderer.clearOverrideBlockTexture();
 				block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 				renderer.setRenderBoundsFromBlock(block);
 
@@ -157,7 +177,7 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		return Ozen.ozenRenderID;
 	}
 
-	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)
+	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, Icon icon)
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -167,27 +187,27 @@ public class OzenRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

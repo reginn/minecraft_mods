@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -13,9 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,7 +26,7 @@ public class BlockOzen extends BlockContainer
 {
 	public final String[] names = new String[]
 		{
-			"oak", "spruce", "birch", "black", "red", "iron", "gold"
+			"wood", "spruce", "birch", "black", "red", "iron", "gold"
 		};
 
 	public final String[] types = new String[]
@@ -31,25 +34,37 @@ public class BlockOzen extends BlockContainer
 			"oshiki", "ozen",
 		};
 
-	public final int[] textureIndex = new int[]
+	@SideOnly(Side.CLIENT)
+	private Icon[] icons;
+	private String[] textureName = new String[]
 		{
-			4, 198, 214, 22, 22, 22, 23
+			"wood", "wood_spruce", "wood_birch", "blockIron", "blockIron", "blockIron", "blockGold"
 		};
 
 	public BlockOzen(int blockId)
 	{
-		super(blockId, 4, Material.wood);
+		super(blockId, Material.wood);
 		this.blockHardness = 0.3F;
 		this.setCreativeTab(Ozen.tabOzen);
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		return null;
-	}
+	@SideOnly(Side.CLIENT)
 
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
+	 * the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister par1IconRegister)
+	{
+		this.icons = new Icon[textureName.length];
+		for (int i = 0; i < textureName.length; ++i)
+		{
+			this.icons[i] = par1IconRegister.registerIcon(textureName[i]);
+		}
+	}
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
 	{
 		for (int i = 0; i < 7; i++)
@@ -65,16 +80,17 @@ public class BlockOzen extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return this.getBlockTextureFromSideAndMetadata(side, world.getBlockMetadata(x, y, z));
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int meta)
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
 	{
-		this.blockIndexInTexture = this.textureIndex[meta & 7];
-		return this.blockIndexInTexture;
+		this.blockIcon = this.icons[meta & 7];
+		return this.blockIcon;
 	}
 
 	@Override
@@ -120,6 +136,12 @@ public class BlockOzen extends BlockContainer
 	}
 
 	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+	{
+		return null;
+	}
+
+	@Override
 	public int getRenderType()
 	{
 		return Ozen.ozenRenderID;
@@ -156,7 +178,7 @@ public class BlockOzen extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemstack)
 	{
 		int playerdir = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 0x03;
 		byte facing = 0;
@@ -186,10 +208,11 @@ public class BlockOzen extends BlockContainer
 	}
 
 	@Override
-	public void onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
+	public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
 	{
 		super.onBlockEventReceived(world, x, y, z, eventId, eventParam);
 		world.markBlockForUpdate(x, y, z);
+		return true;
 	}
 
 	@Override
@@ -261,7 +284,7 @@ public class BlockOzen extends BlockContainer
 
 				if (itemstack.hasTagCompound())
 				{
-					entityitem.func_92014_d().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+					entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
 				}
 				world.spawnEntityInWorld(entityitem);
 			}

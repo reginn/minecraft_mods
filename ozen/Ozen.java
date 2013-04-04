@@ -4,7 +4,9 @@ import java.util.logging.Level;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
+
 import net.minecraftforge.common.Configuration;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -18,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Ozen",
 	name    = "Ozen",
-	version = "2.2.0"
+	version = "3.0.0"
 )
 @NetworkMod
 (
@@ -68,7 +70,7 @@ public class Ozen
 	{
 		this.ozenRenderID = proxy.getUniqueRenderID();
 
-		blockOzen = (new BlockOzen(blockIdOzen)).setBlockName("blockozen");
+		blockOzen = (new BlockOzen(blockIdOzen)).setUnlocalizedName("blockozen");
 
 		GameRegistry.registerBlock(blockOzen, ItemOzen.class, "Ozen");
 		GameRegistry.registerTileEntity(TileEntityOzen.class, "Ozen");

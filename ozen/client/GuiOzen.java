@@ -1,12 +1,12 @@
 package rgn.mods.ozen.client;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
 
-import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.ozen.ContainerOzen;
 import rgn.mods.ozen.TileEntityOzen;
@@ -35,9 +35,8 @@ public class GuiOzen extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int k = mc.renderEngine.getTexture("/rgn/sprites/ozen/gui/ozen.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(k);
+		mc.renderEngine.bindTexture("/mods/rgn/ozen/textures/gui/ozen.png");
 		int l = width - xSize >> 1;
 		int i1 = height - ySize >> 1;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);

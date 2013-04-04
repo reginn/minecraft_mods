@@ -23,9 +23,14 @@ public class BlockLight extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
+	 * the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = null;
+		this.blockIcon = null;
 	}
 
 	@Override
@@ -70,7 +75,7 @@ public class BlockLight extends Block
 
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.func_94575_c(x, y, z, 0);
+			world.setBlock(x, y, z, 0);
 		}
 		else if ((meta == 3 || meta == 2) && world.isAirBlock(x, y - 1, z))
 		{

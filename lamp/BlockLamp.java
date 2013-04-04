@@ -25,9 +25,14 @@ public class BlockLamp extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
+	 * the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = Block.cauldron.func_94375_b("cauldron_inner");
+		this.blockIcon = Block.cauldron.func_94375_b("cauldron_inner");
 	}
 
 	@Override
@@ -154,20 +159,20 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
+			world.setBlock(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
+			world.setBlock(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 	}
 
@@ -177,29 +182,29 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
+			world.setBlock(x - 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
+			world.setBlock(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 		}
 
 		if (world.isAirBlock(x, y - 1, z) && y - 1 >= 0)
 		{
-			world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+			world.setBlock(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+			world.setBlock(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 
@@ -210,13 +215,13 @@ public class BlockLamp extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+			world.setBlock(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 
@@ -226,35 +231,35 @@ public class BlockLamp extends Block
 
 		if (world.isAirBlock(x - 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x - 1, y, z, Lamp.blockLight.blockID, 8 + meta, 3);
+			world.setBlock(x - 1, y, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			for (; world.isAirBlock(x - 1, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x - 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x - 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 		if (world.isAirBlock(x + 1, y, z))
 		{
-			world.setBlockAndMetadataWithNotify(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
+			world.setBlock(x + 1, y, z, Lamp.blockLight.blockID, meta, 3);
 			for (; world.isAirBlock(x + 1, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x + 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x + 1, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y, z - 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z - 1, Lamp.blockLight.blockID, 4 + meta, 3);
 			for (; world.isAirBlock(x, y - 1, z - 1) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x, y - 1, z - 1, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x, y - 1, z - 1, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 		if (world.isAirBlock(x, y, z + 1))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
+			world.setBlock(x, y, z + 1, Lamp.blockLight.blockID, 4 + meta, 3);
 			for (; world.isAirBlock(x, y - 1, z + 1) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x, y - 1, z + 1, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x, y - 1, z + 1, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
@@ -262,13 +267,13 @@ public class BlockLamp extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.setBlockAndMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+				world.setBlock(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 			}
 		}
 
 		if (world.isAirBlock(x, y + 1, z) && y + 1 <= world.getHeight())
 		{
-			world.setBlockAndMetadataWithNotify(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
+			world.setBlock(x, y + 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 

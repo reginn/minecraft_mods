@@ -22,13 +22,13 @@ import rgn.mods.mabicraft.registry.VillageTradeRegistry;
 (
 	modid   = "MabiCraft",
 	name    = "MabiCraft",
-	version = "3.0.0dev"
+	version = "0.3.0dev"
 )
 @NetworkMod
 (
 	clientSideRequired = true,
 	serverSideRequired = false,
-	channels = { "Bonfire", "Enchanter", "Cookware", "Cookpot", "FishingRod" },
+	channels = { "Bonfire", "Enchanter", "Cookware", "openGui", "FishingRod" },
 	packetHandler = PacketHandler.class
 )
 public class MabiCraft
@@ -68,6 +68,7 @@ public class MabiCraft
 		(new VillageTradeRegistry()).addTradeHandler(this.config);
 		(new LocalizationRegistry()).addLocalization();
 		(new RecipeRegistry()).addRecipe();
+		//QuestBoardManager.instance().registerQuest();
 	}
 
 }

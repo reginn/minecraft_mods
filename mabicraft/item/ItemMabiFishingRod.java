@@ -1,8 +1,10 @@
 package rgn.mods.mabicraft.item;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
@@ -14,6 +16,9 @@ import rgn.mods.mabicraft.network.PacketHandler;
 
 public class ItemMabiFishingRod extends Item
 {
+	@SideOnly(Side.CLIENT)
+	private Icon emptyIcon;
+
 	public ItemMabiFishingRod(int itemId)
 	{
 		super(itemId);
@@ -21,12 +26,22 @@ public class ItemMabiFishingRod extends Item
 		this.setMaxStackSize(1);
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister)
+	{
+		this.iconIndex = par1IconRegister.registerIcon("fishingRod");
+		this.emptyIcon = par1IconRegister.registerIcon("fishingRod_empty");
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isFull3D()
 	{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldRotateAroundWhenRendering()
 	{
@@ -34,11 +49,12 @@ public class ItemMabiFishingRod extends Item
 	}
 
 	@Override
-	public int getIconIndex(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
+	@SideOnly(Side.CLIENT)
+	public Icon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{
 		if (player.fishEntity != null)
 		{
-			return getIconIndex(stack) + 16;
+			return this.emptyIcon;
 		}
 		return getIconIndex(stack);
 	}

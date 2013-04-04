@@ -6,6 +6,6 @@ public class InventoryEnchanter extends InventoryBasic
 {
 	public InventoryEnchanter()
 	{
-		super("Enchanter", 4);
+		super("Enchanter", false, 4);
 	}
 }

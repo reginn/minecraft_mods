@@ -14,6 +14,7 @@ public class ForgeEventRegistry
 	{
 		events.add(new CookingPotEvent());
 		events.add(new EvilScrollDropEvent());
+		events.add(new QuestBoardEvent());
 	}
 
 	public void registerAll()

@@ -35,27 +35,30 @@ public class MabiCraftItem
 	public static Item itemCookingPot;
 
 	public static Item itemMabiFishRod;
+	public static Item itemLRod;
+
+	public static final String TEXTURE_PATH = "/rgn/sprites/mabicraft/items.png";
 
 	public static void configure(Config config)
 	{
-		itemBaseHerb     = (new ItemHerb(config.itemIdBaseHerb     - 256, EnumHerbType.BASE    )).setIconCoord(0, 0).setItemName("baseherb").setCreativeTab(Config.tabMabiCraft);
-		itemManaHerb     = (new ItemHerb(config.itemIdManaHerb     - 256, EnumHerbType.MANA    )).setIconCoord(1, 0).setItemName("manaherb").setCreativeTab(Config.tabMabiCraft);
-		itemBloodyHerb   = (new ItemHerb(config.itemIdBloodyHerb   - 256, EnumHerbType.BLOODY  )).setIconCoord(2, 0).setItemName("bloodyherb").setCreativeTab(Config.tabMabiCraft);
-		itemSunlightHerb = (new ItemHerb(config.itemIdSunlightHerb - 256, EnumHerbType.SUNLIGHT)).setIconCoord(3, 0).setItemName("sunlightherb").setCreativeTab(Config.tabMabiCraft);
-		itemPoisonHerb   = (new ItemHerb(config.itemIdPoisonHerb   - 256, EnumHerbType.POISON  )).setIconCoord(4, 0).setItemName("poisonherb").setCreativeTab(Config.tabMabiCraft);
-		itemIvoryHerb    = (new ItemHerb(config.itemIdIvoryHerb    - 256, EnumHerbType.IVORY   )).setIconCoord(5, 0).setItemName("iboryherb").setCreativeTab(Config.tabMabiCraft);
+		itemBaseHerb     = (new ItemHerb(config.itemIdBaseHerb     - 256, EnumHerbType.BASE    )).setUnlocalizedName("GreenHerb").setCreativeTab(Config.tabMabiCraft);
+		itemManaHerb     = (new ItemHerb(config.itemIdManaHerb     - 256, EnumHerbType.MANA    )).setUnlocalizedName("BlueHerb").setCreativeTab(Config.tabMabiCraft);
+		itemBloodyHerb   = (new ItemHerb(config.itemIdBloodyHerb   - 256, EnumHerbType.BLOODY  )).setUnlocalizedName("RedHerb").setCreativeTab(Config.tabMabiCraft);
+		itemSunlightHerb = (new ItemHerb(config.itemIdSunlightHerb - 256, EnumHerbType.SUNLIGHT)).setUnlocalizedName("YellowHerb").setCreativeTab(Config.tabMabiCraft);
+		itemPoisonHerb   = (new ItemHerb(config.itemIdPoisonHerb   - 256, EnumHerbType.POISON  )).setUnlocalizedName("PurpleHerb").setCreativeTab(Config.tabMabiCraft);
+		itemIvoryHerb    = (new ItemHerb(config.itemIdIvoryHerb    - 256, EnumHerbType.IVORY   )).setUnlocalizedName("IvoryHerb").setCreativeTab(Config.tabMabiCraft);
 
-		itemBlessedPotion = (new ItemMabiCraftParts(config.itemIdBlessedPotion - 256)).setIconCoord(1, 1).setItemName("blessdpotion").setCreativeTab(Config.tabMabiCraft);
-		itemMagicPowder   = (new ItemMabiCraftParts(config.itemIdMagicPowder   - 256)).setIconCoord(0, 1).setItemName("magicpowder").setCreativeTab(Config.tabMabiCraft);
+		itemBlessedPotion = (new ItemMabiCraftParts(config.itemIdBlessedPotion - 256)).setUnlocalizedName("BlessedPotion").setCreativeTab(Config.tabMabiCraft);
+		itemMagicPowder   = (new ItemMabiCraftParts(config.itemIdMagicPowder   - 256)).setUnlocalizedName("MagicPowder").setCreativeTab(Config.tabMabiCraft);
 
-		itemEnchantScroll = (new ItemEnchantScroll(config.itemIdEnchantScroll - 256)).setIconCoord(0, 3).setItemName("enchantscroll");
-		itemBonfireKit    = (new ItemBonfireKit(config.itemIdBonfireKit - 256)).setIconCoord(0, 4).setItemName("bonfirekit").setCreativeTab(Config.tabMabiCraft);
-		itemEvilScroll    = (new ItemEvilScroll(config.itemIdEvilScroll - 256)).setIconCoord(0, 2).setItemName("evilscroll").setCreativeTab(Config.tabMabiCraft);
+		itemEnchantScroll = (new ItemEnchantScroll(config.itemIdEnchantScroll - 256)).setUnlocalizedName("enchantscroll");
+		itemBonfireKit    = (new ItemBonfireKit(config.itemIdBonfireKit - 256)).setUnlocalizedName("bonfirekit").setCreativeTab(Config.tabMabiCraft);
+		itemEvilScroll    = (new ItemEvilScroll(config.itemIdEvilScroll - 256)).setUnlocalizedName("evilscroll").setCreativeTab(Config.tabMabiCraft);
 
-		itemCookingFood   = (new ItemCookingFood(config.itemIdCookingFood - 256)).setIconCoord(0, 6).setItemName("cookingfood").setCreativeTab(Config.tabMabiCraft);
-		itemCookingPot    = (new ItemMabiCraftParts(config.itemIdCookingPot - 256)).setIconCoord(1, 4).setItemName("cookingpot").setCreativeTab(Config.tabMabiCraft);
+		itemCookingFood   = (new ItemCookingFood(config.itemIdCookingFood - 256)).setUnlocalizedName("CookingFood").setCreativeTab(Config.tabMabiCraft);
+		itemCookingPot    = (new ItemMabiCraftParts(config.itemIdCookingPot - 256)).setUnlocalizedName("CookingPot").setCreativeTab(Config.tabMabiCraft);
 
-		itemMabiFishRod   = (new ItemMabiFishingRod(config.itemIdMabiFishRod - 256)).setIconCoord(5, 4).setItemName("mabifishrod").setCreativeTab(Config.tabMabiCraft);
+		itemMabiFishRod   = (new ItemMabiFishingRod(config.itemIdMabiFishRod - 256)).setUnlocalizedName("MabiFishingRod").setCreativeTab(Config.tabMabiCraft);
 
 		OreDictionary.registerOre("milk",  new ItemStack(Item.bucketMilk));
 		OreDictionary.registerOre("cocoa", new ItemStack(Item.dyePowder, 1, 3));

@@ -2,18 +2,52 @@ package rgn.mods.mabicraft.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.mabicraft.MabiCraft;
 import rgn.mods.mabicraft.inventory.EnumGuiID;
 
 public class BlockEnchanter extends Block
 {
-	public BlockEnchanter(int blockId, int terrainId)
+	public BlockEnchanter(int blockId)
 	{
 		super(blockId, Material.wood);
-		this.blockIndexInTexture = terrainId;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
+	 * the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister par1IconRegister)
+	{
+		this.blockIcon = Block.bookShelf.getBlockTextureFromSide(0);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	{
+		if (side == 0)
+		{
+			return Block.planks.getBlockTextureFromSide(0);
+		}
+		else if (side == 1)
+		{
+			return Block.enchantmentTable.getBlockTextureFromSide(1);
+		}
+		else
+		{
+			return Block.bookShelf.getBlockTextureFromSide(2);
+		}
 	}
 
 	@Override
@@ -26,23 +60,6 @@ public class BlockEnchanter extends Block
 	public boolean renderAsNormalBlock()
 	{
 		return false;
-	}
-
-	@Override
-	public int getBlockTextureFromSide(int par1)
-	{
-		if (par1 == 0)
-		{
-			return 4;
-		}
-		else if (par1 == 1)
-		{
-			return 166;
-		}
-		else
-		{
-			return 35;
-		}
 	}
 
 	@Override

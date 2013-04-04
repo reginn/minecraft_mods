@@ -9,7 +9,7 @@ public class InventoryEnchanting extends InventoryBasic
 
 	public InventoryEnchanting(Container container, String name, int slotNum)
 	{
-		super(name, slotNum);
+		super(name, false, slotNum);
 		this.eventHandler = container;
 	}
 

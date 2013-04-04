@@ -50,8 +50,8 @@ public class ContainerCookware extends Container
 		this.player = player;
 		this.playerInventory = player.inventory;
 
-		inventoryInput = new InventoryBasic("cookware", 3);
-		inventoryResult = new InventoryBasic("result", 1);
+		inventoryInput = new InventoryBasic("cookware", false, 3);
+		inventoryResult = new InventoryBasic("result", false, 1);
 
 		addSlotToContainer(new Slot(inventoryInput, 0, 18     , 18));
 		addSlotToContainer(new Slot(inventoryInput, 1, 18 + 36, 18));

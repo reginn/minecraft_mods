@@ -22,7 +22,7 @@ public class CookingFoodDictionary
 	private static List<String>    names = Lists.newArrayList();
 	private static List<ItemStack> items = Lists.newArrayList();
 
-	private static Map<Integer, String> nameMapping = Maps.newHashMap();
+	private static BiMap<Integer, String>                nameMapping = HashBiMap.create();
 	private static Map<Integer, FoodProperty>         foodProperties = Maps.newHashMap();
 	private static ListMultimap<Integer, PotionEffect> potionEffects = ArrayListMultimap.create();
 
@@ -73,6 +73,15 @@ public class CookingFoodDictionary
 			return nameMapping.get(Integer.valueOf(damage));
 		}
 		return null;
+	}
+
+	public static int getDamage(String name)
+	{
+		if (nameMapping.inverse().containsKey(name))
+		{
+			return nameMapping.inverse().get(name).intValue();
+		}
+		return -1;
 	}
 
 	public static List<String> getNames()

@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -55,7 +56,7 @@ public class CookwareRenderingHandler implements ISimpleBlockRenderingHandler
 		return Config.RENDER_TYPE_COOKWARE;
 	}
 
-	private void renderInvCuboid(Tessellator tessellator, RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)
+	private void renderInvCuboid(Tessellator tessellator, RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, Icon textureIndex)
 	{
 		// Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -118,12 +119,12 @@ public class CookwareRenderingHandler implements ISimpleBlockRenderingHandler
 				22, 0.08D, 0.8D, 0.0D, this.degreeToRadian(-45), 0.0D
 			);
 
-		renderer.overrideBlockTexture = 4;
+		renderer.setOverrideBlockTexture(Block.planks.getBlockTextureFromSide(0));
 		block.setBlockBounds(0.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F, 16.0F/16.0F, 14.0F/16.0F, 14.0F/16.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.overrideBlockTexture = -1;
+		renderer.clearOverrideBlockTexture();
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 
@@ -155,12 +156,12 @@ public class CookwareRenderingHandler implements ISimpleBlockRenderingHandler
 				22, 0.08D, 0.8D, 0.0D, 0.0D, this.degreeToRadian(-45)
 			);
 
-		renderer.overrideBlockTexture = 4;
+		renderer.setOverrideBlockTexture(Block.planks.getBlockTextureFromSide(0));
 		block.setBlockBounds(2.0F/16.0F, 12.0F/16.0F, 0.0F/16.0F, 14.0F/16.0F, 14.0F/16.0F, 16.0F/16.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlock(block, x, y, z);
 
-		renderer.overrideBlockTexture = -1;
+		renderer.clearOverrideBlockTexture();
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 	}
@@ -294,7 +295,10 @@ public class CookwareRenderingHandler implements ISimpleBlockRenderingHandler
 			);
 
 		tessellator.draw();
-		this.renderInvCuboid(tessellator, renderer, block, 0.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F, 16.0F/16.0F, 14.0F/16.0F, 14.0F/16.0F, 4);
+		this.renderInvCuboid(
+				tessellator, renderer, block,
+				0.0F/16.0F, 12.0F/16.0F, 2.0F/16.0F, 16.0F/16.0F, 14.0F/16.0F, 14.0F/16.0F,
+				Block.planks.getBlockTextureFromSide(0));
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 	}

@@ -2,6 +2,7 @@ package rgn.mods.mabicraft.registry;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 import com.google.common.collect.BiMap;
@@ -31,34 +32,34 @@ public final class EvilScrollRegistry
 {
 	protected class EvilScrollRegistration
 	{
-		private String name;
-		private int rarity;
-		private int number;
+		private String entityName;
+		private int dropRate;
+		private int numberOfEmerald;
 		private int primaryColor;
 		private int secondaryColor;
 
-		public EvilScrollRegistration(String _name, int _rarity, int _number, int _primaryColor, int _secondaryColor)
+		public EvilScrollRegistration(String _entityName, int _dropRate, int _numberOfEmerald, int _primaryColor, int _secondaryColor)
 		{
-			this.name           = _name;
-			this.rarity         = _rarity;
-			this.number         = _number;
-			this.primaryColor   = _primaryColor;
-			this.secondaryColor = _secondaryColor;
+			this.entityName      = _entityName;
+			this.dropRate        = _dropRate;
+			this.numberOfEmerald = _numberOfEmerald;
+			this.primaryColor    = _primaryColor;
+			this.secondaryColor  = _secondaryColor;
 		}
 
-		public String getName()
+		public String getEntityName()
 		{
-			return this.name;
+			return this.entityName;
 		}
 
-		public int getRarity()
+		public int getDropRate()
 		{
-			return this.rarity;
+			return this.dropRate;
 		}
 
-		public int getNumber()
+		public int getNumberOfEmerald()
 		{
-			return this.number;
+			return this.numberOfEmerald;
 		}
 
 		public int getPrimaryColor()
@@ -72,11 +73,15 @@ public final class EvilScrollRegistry
 		}
 	}
 
+	private Map<Integer, EvilScrollRegistration> evilScrolls = Maps.newHashMap();
+
 	private Map<Class, EvilScrollRegistration> classToRegistrationMapping = Maps.newHashMap();
 	private BiMap<Integer, Class> metadataToClassBiMapping                = HashBiMap.create();
 
 	private List<Class> entityClassList = Lists.newArrayList();
 	private List<Integer> metadataList = Lists.newArrayList();
+
+	private int nextMetadata = 0;
 
 	private static EvilScrollRegistry INSTANCE = new EvilScrollRegistry();
 
@@ -90,23 +95,20 @@ public final class EvilScrollRegistry
 		instance().doRegisterEvilScroll(clazz, rarity, number);
 	}
 
-	private void doRegisterEvilScroll(Class clazz, int rarity, int number)
+	private void doRegisterEvilScroll(Class clazz, int dropRate, int numberOfEmerald)
 	{
 		try
 		{
-			String fieldName = !ObfuscationReflectionHelper.obfuscation ? "classToIDMapping" : "e";
+			String fieldName = ObfuscationReflectionHelper.remapFieldNames("EntityList.class", "classToIDMapping")[0];
 			Map classToIDMapping = ObfuscationReflectionHelper.getPrivateValue(net.minecraft.entity.EntityList.class, null, fieldName);
-			
+
 			int entityTypeID      = ((Integer)classToIDMapping.get(clazz)).intValue();
-			String name           = (String)EntityList.classToStringMapping.get(clazz);
+			String entityName     = (String)EntityList.classToStringMapping.get(clazz);
 			EntityEggInfo eggInfo = (EntityEggInfo)EntityList.entityEggs.get(entityTypeID);
 			int primaryColor      = ((Integer)eggInfo.primaryColor).intValue();
 			int secondaryColor    = ((Integer)eggInfo.secondaryColor).intValue();
 
-			this.classToRegistrationMapping.put(clazz, new EvilScrollRegistration(name, rarity, number, primaryColor, secondaryColor));
-			this.metadataToClassBiMapping.put(Integer.valueOf(entityTypeID), clazz);
-			this.entityClassList.add(clazz);
-			this.metadataList.add(Integer.valueOf(entityTypeID));
+			this.evilScrolls.put(entityTypeID, new EvilScrollRegistration(entityName, dropRate, numberOfEmerald, primaryColor, secondaryColor));
 		}
 		catch (Exception e)
 		{
@@ -114,68 +116,49 @@ public final class EvilScrollRegistry
 		}
 	}
 
-	public static void registerEvilScroll(Class clazz, String name, int metadata, int rarity, int number, int primaryColor, int secondaryColor)
+	public static void registerEvilScroll(String entityName, int dropRete, int numberOfEmerald, int primaryColor, int secondaryColor)
 	{
-		instance().doRegisterEvilScroll(clazz, name, metadata, rarity, number, primaryColor, secondaryColor);
+		instance().doRegisterEvilScroll(entityName, dropRete, numberOfEmerald, primaryColor, secondaryColor);
 	}
 
-	private void doRegisterEvilScroll(Class clazz, String name, int metadata, int rarity, int number, int primaryColor, int secondaryColor)
+	private void doRegisterEvilScroll(String entityName, int dropRate, int numberOfEmerald, int primaryColor, int secondaryColor)
 	{
-		this.classToRegistrationMapping.put(clazz, new EvilScrollRegistration(name, rarity, number, primaryColor, secondaryColor));
-		this.metadataToClassBiMapping.put(Integer.valueOf(metadata), clazz);
-		this.entityClassList.add(clazz);
-		this.metadataList.add(metadata);
+		while(this.evilScrolls.containsKey(this.nextMetadata))
+		{
+			++this.nextMetadata;
+		}
+		this.evilScrolls.put(this.nextMetadata, new EvilScrollRegistration(entityName, dropRate, numberOfEmerald, primaryColor, secondaryColor));
 	}
 
 	// usually interface
 	public int getPrimaryColorFromMetadata(int metadata)
 	{
-		return classToRegistrationMapping.get(metadataToClassBiMapping.get(Integer.valueOf(metadata))).getPrimaryColor();
+		return this.evilScrolls.get(metadata).getPrimaryColor();
 	}
 
 	public int getSecondaryColorFromMetadata(int metadata)
 	{
-		return classToRegistrationMapping.get(metadataToClassBiMapping.get(Integer.valueOf(metadata))).getSecondaryColor();
-	}
-
-	public int getMetadataFromClass(Class clazz)
-	{
-		return metadataToClassBiMapping.inverse().get(clazz);
+		return this.evilScrolls.get(metadata).getSecondaryColor();
 	}
 
 	public String getEntityNameFromMetadata(int metadata)
 	{
-		return classToRegistrationMapping.get(metadataToClassBiMapping.get(Integer.valueOf(metadata))).getName();
+		return this.evilScrolls.get(metadata).getEntityName();
 	}
 
-	public int getNumberFromClass(Class clazz)
+	public int getNumberOfEmeraldFromMetadata(int metadata)
 	{
-		return classToRegistrationMapping.get(clazz).getNumber();
+		return this.evilScrolls.get(metadata).getNumberOfEmerald();
 	}
 
-	public int getRarityFromClass(Class clazz)
+	public int getDropRateFromMetadata(int metadata)
 	{
-		return classToRegistrationMapping.get(clazz).getRarity();
+		return this.evilScrolls.get(metadata).getDropRate();
 	}
 
-	public int getClassListSize()
+	public Set<Integer> getAllMetadata()
 	{
-		return entityClassList.size();
-	}
-
-	public Class getEntityClass(int index)
-	{
-		return entityClassList.get(index);
-	}
-
-	public int getMetadataListSize()
-	{
-		return this.metadataList.size();
-	}
-
-	public int getMetadata(int index)
-	{
-		return this.metadataList.get(index).intValue();
+		return this.evilScrolls.keySet();
 	}
 
 	static

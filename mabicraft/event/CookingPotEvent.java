@@ -32,7 +32,7 @@ public class CookingPotEvent implements IForgeEvent
 			currentEquippedItem.itemID == MabiCraftItem.itemCookingPot.itemID &&
 			blockId == MabiCraftBlock.blockBonfire.blockID)
 		{
-			PacketDispatcher.sendPacketToServer(PacketHandler.getOpenGuiPacket(event.x, event.y, event.z));
+			PacketDispatcher.sendPacketToServer(PacketHandler.getOpenGuiPacket(0, event.x, event.y, event.z));
 			event.setCanceled(true);
 		}
 	}

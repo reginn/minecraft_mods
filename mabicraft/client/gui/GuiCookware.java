@@ -40,10 +40,10 @@ public class GuiCookware extends GuiContainer
 		int i = width  - xSize >> 1;
 		int j = height - ySize >> 1;
 
-		controlList.add(new GuiAddButton(0, i + 14, j + 38, 24, 20 , "Add"));
-		controlList.add(new GuiAddButton(1, i + 50, j + 38, 24, 20 , "Add"));
-		controlList.add(new GuiAddButton(2, i + 86, j + 38, 24, 20 , "Add"));
-		controlList.add(new GuiButton(3, i + 122, j + 50, 40, 20 , "Cook"));
+		this.buttonList.add(new GuiAddButton(0, i + 14, j + 38, 24, 20 , "Add"));
+		this.buttonList.add(new GuiAddButton(1, i + 50, j + 38, 24, 20 , "Add"));
+		this.buttonList.add(new GuiAddButton(2, i + 86, j + 38, 24, 20 , "Add"));
+		this.buttonList.add(new GuiButton(3, i + 122, j + 50, 40, 20 , "Cook"));
 
 	}
 
@@ -57,18 +57,17 @@ public class GuiCookware extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int k = this.mc.renderEngine.getTexture("/rgn/sprites/mabicraft/gui/GUI_Cook.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture(k);
+		this.mc.renderEngine.bindTexture("/mods/rgn/mabicraft/textures/gui/GUI_Cook.png");
 		int l  =  width - xSize >> 1;
 		int i1 = height - ySize >> 1;
 		this.drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
 		int progress = 0;
 
-		for (int idx = 0; idx < controlList.size() - 1; ++idx)
+		for (int idx = 0; idx < this.buttonList.size() - 1; ++idx)
 		{
-			GuiButton button = (GuiButton)controlList.get(idx);
+			GuiButton button = (GuiButton)this.buttonList.get(idx);
 			if (button instanceof GuiAddButton)
 			{
 				progress += this.ticks[idx];
@@ -83,9 +82,9 @@ public class GuiCookware extends GuiContainer
 	{
 		super.updateScreen();
 
-		for (int idx = 0; idx < this.controlList.size() - 1; ++idx)
+		for (int idx = 0; idx < this.buttonList.size() - 1; ++idx)
 		{
-			GuiButton button = (GuiButton)controlList.get(idx);
+			GuiButton button = (GuiButton)this.buttonList.get(idx);
 			if (button instanceof GuiAddButton)
 			{
 				GuiAddButton addButton = (GuiAddButton)button;
@@ -124,9 +123,9 @@ public class GuiCookware extends GuiContainer
 			b = false;
 		}
 
-		for (int idx = 0; idx < this.controlList.size() - 1; ++idx)
+		for (int idx = 0; idx < this.buttonList.size() - 1; ++idx)
 		{
-			GuiButton button = (GuiButton)controlList.get(idx);
+			GuiButton button = (GuiButton)this.buttonList.get(idx);
 			if (button instanceof GuiAddButton)
 			{
 				GuiAddButton addButton = (GuiAddButton)button;

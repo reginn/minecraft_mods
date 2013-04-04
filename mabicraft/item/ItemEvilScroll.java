@@ -2,9 +2,11 @@ package rgn.mods.mabicraft.item;
 
 import java.util.List;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,6 +16,9 @@ import rgn.mods.mabicraft.registry.EvilScrollRegistry;
 
 public class ItemEvilScroll extends Item
 {
+	@SideOnly(Side.CLIENT)
+	private Icon secondaryIcon;
+
 	public ItemEvilScroll(int itemId)
 	{
 		super(itemId);
@@ -22,18 +27,20 @@ public class ItemEvilScroll extends Item
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/mabicraft/items.png";
+		this.iconIndex     = par1IconRegister.registerIcon("rgn/mabicraft:EvilScroll1");
+		this.secondaryIcon = par1IconRegister.registerIcon("rgn/mabicraft:EvilScroll2");
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubItems(int itemID, CreativeTabs creativeTabs, List list)
 	{
-		for (int i = 0; i < EvilScrollRegistry.instance().getMetadataListSize(); i++)
+		for (Integer metadata : EvilScrollRegistry.instance().getAllMetadata())
 		{
-			list.add(new ItemStack(itemID, 1, EvilScrollRegistry.instance().getMetadata(i)));
+			list.add(new ItemStack(itemID, 1, metadata.intValue()));
 		}
 	}
 
@@ -41,7 +48,7 @@ public class ItemEvilScroll extends Item
 	@Override
 	public String getItemDisplayName(ItemStack par1ItemStack)
 	{
-		String var2 = ("" + StatCollector.translateToLocal(this.getItemName() + ".name")).trim();
+		String var2 = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
 		String var3 = EvilScrollRegistry.instance().getEntityNameFromMetadata(par1ItemStack.getItemDamage());
 
 		if (var3 != null)
@@ -71,8 +78,8 @@ public class ItemEvilScroll extends Item
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int getIconFromDamageForRenderPass(int damage, int renderPass)
+	public Icon getIconFromDamageForRenderPass(int damage, int renderPass)
 	{
-		return renderPass > 0 ? super.getIconFromDamageForRenderPass(damage, renderPass) + 1 : super.getIconFromDamageForRenderPass(damage, renderPass);
+		return renderPass > 0 ? this.secondaryIcon : this.iconIndex;
 	}
 }

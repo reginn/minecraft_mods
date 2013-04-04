@@ -23,7 +23,7 @@ public class VillageTradeRegistry
 	{
 		public void manipulateTradesForVillager(EntityVillager villager, MerchantRecipeList recipeList, Random random)
 		{
-
+			/*
 			for (int i = 0; i < EvilScrollRegistry.instance().getClassListSize(); ++i)
 			{
 				recipeList.add(
@@ -33,7 +33,11 @@ public class VillageTradeRegistry
 					)
 				);
 
-			}
+			}*/
+			recipeList.add(
+				new MerchantRecipe(
+					new ItemStack(Item.appleRed),
+					new ItemStack(Item.emerald)));
 		}
 	}
 
@@ -76,14 +80,14 @@ public class VillageTradeRegistry
 
 	public void addTradeHandler(Config config)
 	{
-		int villagerID = config.startVillagerID;
+		int villagerID = config.startVillagerID + 1;
 
 		List<String> textures = Lists.newArrayList
 			(
-				"/rgn/sprites/mabicraft/mob/villager/brotherhood.png",
-				"/rgn/sprites/mabicraft/mob/villager/greatvillager.png",
-				"/rgn/sprites/mabicraft/mob/villager/healer.png",
-				"/rgn/sprites/mabicraft/mob/villager/redvillager.png"
+				//"/rgn/sprites/mabicraft/entity/villager/brotherhood.png",
+				"/rgn/sprites/mabicraft/entity/villager/greatvillager.png",
+				"/rgn/sprites/mabicraft/entity/villager/healer.png",
+				"/rgn/sprites/mabicraft/entity/villager/redvillager.png"
 			);
 
 		for (String texture : textures)
@@ -93,13 +97,13 @@ public class VillageTradeRegistry
 
 		List<VillagerRegistry.IVillageTradeHandler> tradeHandlers = Lists.newArrayList
 			(
-				new EvilScrollTradeHandler(),
+				//new EvilScrollTradeHandler(),
 				new BressedPotionTradeHandler(),
 				new HealerTradeHandler(),
 				new CookingFoodTradeHandler()
 			);
 
-		villagerID = config.startVillagerID;
+		villagerID = config.startVillagerID + 1;
 		for (VillagerRegistry.IVillageTradeHandler tradeHandler : tradeHandlers)
 		{
 			VillagerRegistry.instance().registerVillageTradeHandler(villagerID++, tradeHandler);

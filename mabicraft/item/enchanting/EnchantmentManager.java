@@ -236,7 +236,7 @@ public class EnchantmentManager
 			Enchantment ench = Enchantment.enchantmentsList[entry.getKey().intValue()];
 			if (ench != null)
 			{
-				canEnchant &= ench.func_92037_a(objective);
+				canEnchant &= ench.func_92089_a(objective);
 			}
 		}
 		return canEnchant;

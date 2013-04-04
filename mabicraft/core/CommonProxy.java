@@ -8,9 +8,11 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import rgn.mods.mabicraft.client.gui.GuiBonfire;
 import rgn.mods.mabicraft.client.gui.GuiCookware;
 import rgn.mods.mabicraft.client.gui.GuiEnchanter;
+import rgn.mods.mabicraft.client.gui.GuiQuestBoard;
 import rgn.mods.mabicraft.inventory.ContainerBonfire;
 import rgn.mods.mabicraft.inventory.ContainerCookware;
 import rgn.mods.mabicraft.inventory.ContainerEnchanter;
+import rgn.mods.mabicraft.inventory.ContainerQuestBoard;
 import rgn.mods.mabicraft.inventory.EnumGuiID;
 
 public class CommonProxy implements IGuiHandler
@@ -57,6 +59,10 @@ public class CommonProxy implements IGuiHandler
 		{
 			return new GuiCookware(player, world, x, y, z, 1);
 		}
+		else if (ID == EnumGuiID.QUEST_BOARD.ordinal())
+		{
+			return new GuiQuestBoard(player, world, x, y, z);
+		}
 		return null;
 	}
 
@@ -78,6 +84,10 @@ public class CommonProxy implements IGuiHandler
 		else if (ID == EnumGuiID.COOKING_POT.ordinal())
 		{
 			return new ContainerCookware(player, world, x, y, z, 1);
+		}
+		else if (ID == EnumGuiID.QUEST_BOARD.ordinal())
+		{
+			return new ContainerQuestBoard(player, world, x, y, z);
 		}
 		return null;
 	}

@@ -14,9 +14,9 @@ public class MabiCraftBlock
 
 	public static void configure(Config config)
 	{
-		blockBonfire   = (new BlockBonfire(config.blockIdBonfire,      31)).setBlockName("bonfire");
-		blockEnchanter = (new BlockEnchanter(config.blockIdEnchanter, 166)).setBlockName("enchanter").setCreativeTab(Config.tabMabiCraft);
-		blockCookware  = (new BlockCookware(config.blockIdCookware, 0)).setBlockName("cookware").setCreativeTab(Config.tabMabiCraft);
+		blockBonfire    = (new BlockBonfire(config.blockIdBonfire)).setUnlocalizedName("bonfire");
+		blockEnchanter  = (new BlockEnchanter(config.blockIdEnchanter)).setUnlocalizedName("enchanter").setCreativeTab(Config.tabMabiCraft);
+		blockCookware   = (new BlockCookware(config.blockIdCookware)).setUnlocalizedName("cookware").setCreativeTab(Config.tabMabiCraft);
 
 		GameRegistry.registerBlock(blockBonfire,   "Bonfire");
 		GameRegistry.registerBlock(blockEnchanter, "Enchanter");

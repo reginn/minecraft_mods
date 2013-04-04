@@ -33,7 +33,7 @@ public class GuiEnchanter extends GuiContainer
 		int i = width  - xSize >> 1;
 		int j = height - ySize >> 1;
 
-		controlList.add(new GuiButton(0, i + 62, j + 24, 48, 20 , "Enchant"));
+		this.buttonList.add(new GuiButton(0, i + 62, j + 24, 48, 20 , "Enchant"));
 	}
 
 	@Override
@@ -49,18 +49,17 @@ public class GuiEnchanter extends GuiContainer
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
-		int k = mc.renderEngine.getTexture("/rgn/sprites/mabicraft/gui/GUI_Enchanter.png");
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture(k);
+		mc.renderEngine.bindTexture("/mods/rgn/mabicraft/textures/gui/GUI_Enchanter.png");
 		int l = width - xSize >> 1;
 		int i1 = height - ySize >> 1;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
 
-		int slotBackGound = mc.renderEngine.getTexture("/rgn/sprites/mabicraft/items.png");
-		mc.renderEngine.bindTexture(slotBackGound);
+		mc.renderEngine.bindTexture("/mods/rgn/mabicraft/textures/gui/SlotBackGroundEnchantScroll.png");
+		drawTexturedModalRect(l + 26, i1 + 30, 0, 0, 16, 16);
 
-		drawTexturedModalRect(l + 26, i1 + 30, 224,  0, 16, 16);
-		drawTexturedModalRect(l + 26, i1 + 48, 224, 16, 16, 16);
+		mc.renderEngine.bindTexture("/mods/rgn/mabicraft/textures/gui/SlotBackGroundMagicPowder.png");
+		drawTexturedModalRect(l + 26, i1 + 48, 0, 0, 16, 16);
 	}
 
 	@Override

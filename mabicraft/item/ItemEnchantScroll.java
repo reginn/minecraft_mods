@@ -3,6 +3,7 @@ package rgn.mods.mabicraft.item;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.Icon;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,6 +20,9 @@ public class ItemEnchantScroll extends Item
 {
 	private Random random = new Random();
 
+	@SideOnly(Side.CLIENT)
+	private Icon secondaryIcon;
+
 	public ItemEnchantScroll(int itemId)
 	{
 		super(itemId);
@@ -25,9 +30,11 @@ public class ItemEnchantScroll extends Item
 	}
 
 	@Override
-	public String getTextureFile()
+	@SideOnly(Side.CLIENT)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		return "/rgn/sprites/mabicraft/items.png";
+		this.iconIndex     = par1IconRegister.registerIcon("rgn/mabicraft:EnchantScroll1");
+		this.secondaryIcon = par1IconRegister.registerIcon("rgn/mabicraft:EnchantScroll2");
 	}
 
 	@Override
@@ -111,9 +118,9 @@ public class ItemEnchantScroll extends Item
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public int getIconFromDamageForRenderPass(int damage, int renderPass)
+	public Icon getIconFromDamageForRenderPass(int damage, int renderPass)
 	{
-		return renderPass > 0 ? super.getIconFromDamageForRenderPass(damage, renderPass) + 1 : super.getIconFromDamageForRenderPass(damage, renderPass);
+		return renderPass > 0 ? this.secondaryIcon : this.iconIndex;
 	}
 
 	public void setColorInfoToNBT(ItemStack itemStack)

@@ -16,7 +16,6 @@ public class Config
 {
 	public int blockIdBonfire;
 	public int blockIdEnchanter;
-
 	public int blockIdCookware;
 
 	public int itemIdEnchantScroll;
@@ -38,6 +37,7 @@ public class Config
 	public int itemIdCookingPot;
 
 	public int itemIdMabiFishRod;
+	public int itemIdQuestBoard;
 
 	public int startVillagerID;
 
@@ -53,9 +53,9 @@ public class Config
 		{
 			cfg.load();
 
-			this.blockIdBonfire   = cfg.getBlock("Bonfire",   1900).getInt();
-			this.blockIdEnchanter = cfg.getBlock("Enchanter", 1901).getInt();
-			this.blockIdCookware  = cfg.getBlock("Cookware",  1902).getInt();
+			this.blockIdBonfire    = cfg.getBlock("Bonfire",   1900).getInt();
+			this.blockIdEnchanter  = cfg.getBlock("Enchanter", 1901).getInt();
+			this.blockIdCookware   = cfg.getBlock("Cookware",  1902).getInt();
 
 			this.itemIdEnchantScroll = cfg.getItem("EnchantScroll", 13007).getInt();
 

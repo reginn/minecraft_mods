@@ -62,19 +62,27 @@ public class PacketHandler implements IPacketHandler
 				((ContainerCookware)container).onCraftMatrixChanged(((ContainerCookware)container).inventoryInput);
 			}
 		}
-		else if (packet.channel.equals("Cookpot"))
+		else if (packet.channel.equals("openGui"))
 		{
 			ByteArrayDataInput data = ByteStreams.newDataInput(packet.data);
 
-			int x, y, z;
+			int type, x, y, z;
 			try
 			{
+				type = data.readInt();
 				x = data.readInt();
 				y = data.readInt();
 				z = data.readInt();
 
 				EntityPlayerMP entityPlayer = (EntityPlayerMP)player;
-				entityPlayer.openGui(MabiCraft.instance, EnumGuiID.COOKING_POT.ordinal(), entityPlayer.worldObj, x, y, z);
+				if (type == 0)
+				{
+					entityPlayer.openGui(MabiCraft.instance, EnumGuiID.COOKING_POT.ordinal(), entityPlayer.worldObj, x, y, z);
+				}
+				else if (type == 1)
+				{
+					entityPlayer.openGui(MabiCraft.instance, EnumGuiID.QUEST_BOARD.ordinal(), entityPlayer.worldObj, x, y, z);
+				}
 			}
 			catch (Exception e)
 			{
@@ -155,13 +163,14 @@ public class PacketHandler implements IPacketHandler
 		return packet;
 	}
 
-	public static Packet getOpenGuiPacket(int x, int y, int z)
+	public static Packet getOpenGuiPacket(int type, int x, int y, int z)
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
 
 		try
 		{
+			dos.writeInt(type);
 			dos.writeInt(x);
 			dos.writeInt(y);
 			dos.writeInt(z);
@@ -171,7 +180,7 @@ public class PacketHandler implements IPacketHandler
 			e.printStackTrace();
 		}
 		Packet250CustomPayload packet = new Packet250CustomPayload();
-		packet.channel = "Cookpot";
+		packet.channel = "openGui";
 		packet.data    = bos.toByteArray();
 		packet.length  = bos.size();
 		packet.isChunkDataPacket = true;

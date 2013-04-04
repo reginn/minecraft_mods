@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -16,11 +17,23 @@ import rgn.mods.mabicraft.inventory.EnumGuiID;
 
 public class BlockBonfire extends Block
 {
-	public BlockBonfire(int blockId, int terrainId)
+	public BlockBonfire(int blockId)
 	{
 		super(blockId, Material.fire);
-		this.blockIndexInTexture = terrainId;
 		this.setLightValue(1.0F);
+	}
+
+
+	@Override
+	@SideOnly(Side.CLIENT)
+
+	/**
+	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
+	 * the only chance you get to register icons.
+	 */
+	public void registerIcons(IconRegister par1IconRegister)
+	{
+		this.blockIcon = Block.fire.getBlockTextureFromSide(0);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package rgn.mods.dawnbreaker;
 
 import java.util.Set;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
@@ -34,26 +35,24 @@ public class ForgeEventHooks
 		{
 			return ;
 		}
-
-		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == DawnBreaker.itemDawnBreaker.itemID)
+		
+		if (player.getCurrentEquippedItem() != null &&
+			((EnchantmentHelper.getEnchantments(player.getCurrentEquippedItem())).keySet()).contains(DawnBreaker.enchantmentDawn.effectId))
 		{
 			if (target instanceof EntityMob)
 			{
-				EnumCreatureAttribute attribute = target.getCreatureAttribute();
-
-				if (attribute == EnumCreatureAttribute.UNDEAD)
+				boolean isUndead = target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD;
+				
+				if (!world.isRemote)
 				{
-					if (!world.isRemote)
+					target.setFire(4);
+					if (isUndead && target.getHealth() < DawnBreaker.itemDawnBreaker.getDamageVsEntity(target))
 					{
-						if (target.getHealth() < DawnBreaker.itemDawnBreaker.getDamageVsEntity(target))
-						{
-							double addX = (double)(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * (float)10 * 0.5F);
-							double addZ = (double)( MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * (float)10 * 0.5F);
+						double addX = (double)(-MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0F) * (float)10 * 0.5F);
+						double addZ = (double)( MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0F) * (float)10 * 0.5F);
 
-							target.addVelocity(addX, 0.1D, addZ);
-
-							this.targetSet.add(new Integer(target.entityId));
-						}
+						target.addVelocity(addX, 0.1D, addZ);
+						this.targetSet.add(new Integer(target.entityId));
 					}
 				}
 			}

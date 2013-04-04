@@ -26,9 +26,9 @@ public class BlockRope extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:rope");
+		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:rope");
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class BlockRope extends Block
 	{
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.func_94571_i(x, y, z);
+			world.setBlockToAir(x, y, z);
 		}
 		else if (world.isAirBlock(x, y - 1, z))
 		{
@@ -95,7 +95,7 @@ public class BlockRope extends Block
 	{
 		for (; world.isAirBlock(x, y - 1, z) & y >= 0; y--)
 		{
-			world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
+			world.setBlock(x, y - 1, z, ElvenBlock.blockRope.blockID);
 		}
 	}
 }

@@ -34,6 +34,5 @@ public class EbonyTreeEvent implements IForgeEvent
 				event.setResult(Event.Result.ALLOW);
 			}
 		}
-		event.setResult(Event.Result.DENY);
 	}
 }

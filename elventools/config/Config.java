@@ -21,6 +21,8 @@ public class Config
 	public int blockIdRope;
 	public int blockIdRopeEstablisher;
 
+	public int blockIdEbonyLadder;
+
 
 	public int itemIdLeatherLongbow;
 	public int itemIdCompositeLongbow;
@@ -69,6 +71,8 @@ public class Config
 
 			blockIdRope            = cfg.getBlock("Rope",            1654).getInt();
 			blockIdRopeEstablisher = cfg.getBlock("RopeEstablisher", 1655).getInt();
+
+			blockIdEbonyLadder = cfg.getBlock("EbonyLadder", 1656).getInt();
 
 			itemIdLeatherLongbow   = cfg.getItem("LetherLongbow",    21001).getInt();
 			itemIdCompositeLongbow = cfg.getItem("CompositeLongbow", 21002).getInt();

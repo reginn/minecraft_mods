@@ -25,11 +25,11 @@ public class BlockEbonyLog extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_Side");
-		this.topIcon  = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_top");
-		this.sideIcon = par1IconRegister.func_94245_a("rgn/elventools:ebonyWood_side");
+		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_Side");
+		this.topIcon  = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_top");
+		this.sideIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_side");
 	}
 
 	@Override

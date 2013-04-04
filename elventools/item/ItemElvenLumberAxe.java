@@ -48,9 +48,9 @@ public class ItemElvenLumberAxe extends ItemTool
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:mithrilAxe");
+		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilAxe");
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class ItemElvenLumberAxe extends ItemTool
 			if (!world.isAirBlock(target.x, target.y, target.z)	&& this.isToolEffective(Block.blocksList[targetBlockId], world, x, y, z))
 			{
 				Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
-				world.func_94575_c(target.x, target.y, target.z, 0);
+				world.setBlock(target.x, target.y, target.z, 0);
 
 				++damage;
 			}

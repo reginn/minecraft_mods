@@ -29,9 +29,9 @@ public class BlockRopeEstablisher extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:rope");
+		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:rope");
 	}
 
 	@Override
@@ -77,18 +77,18 @@ public class BlockRopeEstablisher extends Block
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
+				world.setBlock(x, y - 1, z, ElvenBlock.blockRope.blockID);
 				System.out.printf("g()=>%f, k()=>%d, e()=>%f, h()=>%f, a()=>%d, f()=>%f, j()=%d, b()=>%d\n",
-						this.field_94336_cN.func_94206_g(),
-						this.field_94336_cN.func_94208_k(),
-						this.field_94336_cN.func_94209_e(),
-						this.field_94336_cN.func_94210_h(),
-						this.field_94336_cN.func_94211_a(),
-						this.field_94336_cN.func_94212_f(),
-						this.field_94336_cN.func_94213_j(),
-						this.field_94336_cN.func_94216_b());
+						this.blockIcon.getMinV(),
+						this.blockIcon.getSheetHeight(),
+						this.blockIcon.getMinU(),
+						this.blockIcon.getMaxV(),
+						this.blockIcon.getOriginX(),
+						this.blockIcon.getMaxU(),
+						this.blockIcon.getSheetWidth(),
+						this.blockIcon.getOriginY());
 
-				System.out.println(this.field_94336_cN.getClass().getName());
+				System.out.println(this.blockIcon.getClass().getName());
 			}
 		}
 	}
@@ -99,13 +99,13 @@ public class BlockRopeEstablisher extends Block
 		if (world.isAirBlock(x, y + 1, z))
 		{
 			world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ElvenItem.itemRopeEstablisher, 1)));
-			world.func_94571_i(x, y, z);
+			world.setBlockToAir(x, y, z);
 		}
 		else if (world.isAirBlock(x, y - 1, z) && y - 1 >= 0)
 		{
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
-				world.func_94575_c(x, y - 1, z, ElvenBlock.blockRope.blockID);
+				world.setBlock(x, y - 1, z, ElvenBlock.blockRope.blockID);
 			}
 		}
 	}

@@ -14,6 +14,11 @@ import rgn.mods.elventools.item.ItemElvenSeedBag;
 
 public class CommonProxy implements IGuiHandler
 {
+	public int getUniqueRenderType()
+	{
+		return -1;
+	}
+
 	public void registerRenderers()
 	{
 	}

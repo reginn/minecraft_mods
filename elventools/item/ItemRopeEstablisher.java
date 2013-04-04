@@ -21,9 +21,9 @@ public class ItemRopeEstablisher extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:rope");
+		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:rope");
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class ItemRopeEstablisher extends Item
 	{
 		if (playerDir == 0 && isEstablish(world, x, y, z))
 		{
-			world.func_94575_c(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
+			world.setBlock(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			--itemstack.stackSize;
 			return true;
 		}

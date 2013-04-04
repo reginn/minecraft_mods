@@ -24,9 +24,9 @@ public class BlockEbonySapling extends BlockFlower
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:ebonySapling");
+		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonySapling");
 	}
 
 	@Override
@@ -59,11 +59,11 @@ public class BlockEbonySapling extends BlockFlower
 		int var8 = 0;
 		int var9 = 0;
 
-		world.func_94571_i(x, y, z);
+		world.setBlockToAir(x, y, z);
 
 		if (!((WorldGenerator)worldGenObject).generate(world, random, x + var8, y, z + var9))
 		{
-			world.setBlockAndMetadataWithNotify(x, y, z, this.blockID, metadata, 3);
+			world.setBlock(x, y, z, this.blockID, metadata, 3);
 		}
 	}
 

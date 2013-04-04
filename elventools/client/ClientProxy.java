@@ -21,6 +21,12 @@ public class ClientProxy extends CommonProxy
 {
 	ElvenEffectRenderer effectRenderer;
 
+	@Override
+	public int getUniqueRenderType()
+	{
+		return RenderingRegistry.getNextAvailableRenderId();
+	}
+
 	public ClientProxy()
 	{
 		this.effectRenderer = new ElvenEffectRenderer();
@@ -32,6 +38,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityEbonyBoat.class,  new RenderEbonyBoat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityRopeArrow.class,  new RenderElvenArrow());
 		RenderingRegistry.registerEntityRenderingHandler(EntityTorchArrow.class, new RenderElvenArrow());
+		RenderingRegistry.registerBlockHandler(new EbonyLadderRenderingHandler());
 
 	}
 

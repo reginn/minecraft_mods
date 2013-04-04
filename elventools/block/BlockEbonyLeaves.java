@@ -33,9 +33,9 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = par1IconRegister.func_94245_a("rgn/elventools:ebonyLeaves");
+		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyLeaves");
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 	private void removeLeaves(World world, int x, int y, int z)
 	{
 		dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-		world.func_94571_i(x, y, z);
+		world.setBlockToAir(x, y, z);
 	}
 
 	@Override

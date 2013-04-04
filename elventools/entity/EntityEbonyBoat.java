@@ -423,12 +423,12 @@ public class EntityEbonyBoat extends Entity
 
 						if (var22 == Block.snow.blockID)
 						{
-							this.worldObj.func_94571_i(var29, var21, var19);
+							this.worldObj.setBlockToAir(var29, var21, var19);
 						}
 						else if (var22 == Block.waterlily.blockID)
 						{
 							Block.waterlily.dropBlockAsItemWithChance(this.worldObj, var29, var21, var19, var23, 0.3F, 0);
-							this.worldObj.func_94571_i(var29, var21, var19);
+							this.worldObj.setBlockToAir(var29, var21, var19);
 						}
 					}
 				}

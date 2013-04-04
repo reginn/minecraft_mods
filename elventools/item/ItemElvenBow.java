@@ -24,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemElvenBow extends Item
 {
 	@SideOnly(Side.CLIENT)
-	protected Icon[] animation = new Icon[3];
+	protected Icon[] animation;
 
 	protected float   baseDamage;
 	protected float   velocityRatio;
@@ -51,9 +51,10 @@ public class ItemElvenBow extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
 		this.bowType.createIcon(par1IconRegister);
+		this.animation = new Icon[3];
 		this.iconIndex = this.bowType.getBaseIcon();
 		this.animation = this.bowType.getAnimation();
 	}

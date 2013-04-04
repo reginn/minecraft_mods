@@ -41,7 +41,7 @@ public class EntityRopeArrow extends EntityElvenArrow
 
 		if (this.mop.sideHit == 0 && this.worldObj.isAirBlock(x, y - 1, z) && this.isEstablish(x, y, z))
 		{
-			this.worldObj.func_94575_c(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
+			this.worldObj.setBlock(x, y - 1, z, ElvenBlock.blockRopeEstablisher.blockID);
 			return true;
 		}
 

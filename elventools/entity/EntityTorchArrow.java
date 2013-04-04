@@ -73,7 +73,7 @@ public class EntityTorchArrow extends EntityElvenArrow
 
 		if (block.canPlaceBlockAt(this.worldObj, x, y, z) && this.worldObj.isAirBlock(x, y, z))
 		{
-			this.worldObj.setBlockAndMetadataWithNotify(x, y, z, Block.torchWood.blockID, meta, 3);
+			this.worldObj.setBlock(x, y, z, Block.torchWood.blockID, meta, 3);
 			return true;
 		}
 

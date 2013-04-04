@@ -1,8 +1,9 @@
 package rgn.mods.elventools.core;
 
-import rgn.util.TranslationRegistry;
 import rgn.mods.elventools.block.ElvenBlock;
 import rgn.mods.elventools.item.ElvenItem;
+
+import rgn.util.TranslationRegistry;
 
 public class LocalizationRegistry
 {
@@ -26,6 +27,8 @@ public class LocalizationRegistry
 		TranslationRegistry.addLocalization(ElvenBlock.blockRope,            "RopeBlock",              "ロープブロック");
 		TranslationRegistry.addLocalization(ElvenBlock.blockRopeEstablisher, "Rope Establisher Block", "ロープ設置ブロック");
 
+		TranslationRegistry.addLocalization(ElvenBlock.blockEbonyLadder, "Ebony Ladder", "黒檀の梯子");
+
 		TranslationRegistry.addLocalization(ElvenItem.itemEbonyStick, "Ebony Stick", "黒檀の棒");
 		TranslationRegistry.addLocalization(ElvenItem.itemEbonyBoat,  "Ebony Boat",  "黒檀のボート");
 
@@ -40,7 +43,7 @@ public class LocalizationRegistry
 
 		TranslationRegistry.addLocalization(ElvenItem.itemElvenSickle,    "Elven Sickle",     "エルフの草刈り鎌");
 		TranslationRegistry.addLocalization(ElvenItem.itemElvenLumberAxe, "Elven Lumber Axe", "エルフの伐採斧");
-		
+
 		TranslationRegistry.addLocalization(ElvenItem.itemElvenSeedBag, "Elven SeedBag", "種袋");
 	}
 }

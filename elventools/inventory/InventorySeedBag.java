@@ -185,13 +185,22 @@ public class InventorySeedBag implements IInventory
 	}
 
 	@Override
-	public boolean func_94042_c()
+
+	/**
+	 * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
+	 * language. Otherwise it will be used directly.
+	 */
+	public boolean isInvNameLocalized()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack)
+
+	/**
+	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
+	 */
+	public boolean isStackValidForSlot(int i, ItemStack itemstack)
 	{
 		return false;
 	}

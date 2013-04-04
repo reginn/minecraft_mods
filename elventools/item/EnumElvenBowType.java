@@ -71,10 +71,10 @@ public enum EnumElvenBowType
 	public void createIcon(IconRegister iconRegister)
 	{
 		this.animation = new Icon[3];
-		this.icon = iconRegister.func_94245_a(String.format("rgn/elventools:%s%d", name().toLowerCase(), 0));
+		this.icon = iconRegister.registerIcon(String.format("rgn/elventools:%s%d", name().toLowerCase(), 0));
 		for (int i = 0; i < 3; ++i)
 		{
-			this.animation[i] = iconRegister.func_94245_a(String.format("rgn/elventools:%s%d", name().toLowerCase(), i + 1));
+			this.animation[i] = iconRegister.registerIcon(String.format("rgn/elventools:%s%d", name().toLowerCase(), i + 1));
 		}
 	}
 

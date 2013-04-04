@@ -19,9 +19,9 @@ public class ItemElvenParts extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/elventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
+		this.iconIndex = par1IconRegister.registerIcon(String.format("rgn/elventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
 
 }

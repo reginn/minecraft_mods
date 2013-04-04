@@ -2,15 +2,16 @@ package rgn.mods.elventools.core;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.google.common.collect.Lists;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import rgn.mods.elventools.block.ElvenBlock;
 import rgn.mods.elventools.item.ElvenItem;
@@ -59,7 +60,7 @@ public class RecipeRegistry
 					Character.valueOf('G'), Item.ingotGold,
 					Character.valueOf('O'), Block.obsidian
 				});
-		
+
 		GameRegistry.addRecipe(
 			new ShapedOreRecipe(
 				new ItemStack(ElvenItem.itemBoneCompositeBow, 1),
@@ -70,7 +71,7 @@ public class RecipeRegistry
 						Character.valueOf('S'), Item.silk,
 						Character.valueOf('E'), "stickEbony"
 					}));
-		
+
 		GameRegistry.addRecipe(
 			new ShapedOreRecipe(
 				new ItemStack(ElvenItem.itemShadowBow, 1),
@@ -82,7 +83,7 @@ public class RecipeRegistry
 						Character.valueOf('B'), ElvenItem.itemBoneCompositeBow,
 						Character.valueOf('E'), "stickEbony"
 					}));
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(ElvenItem.itemEndBow, 1),
 				new Object[]
@@ -92,7 +93,7 @@ public class RecipeRegistry
 					Character.valueOf('S'), Item.silk,
 					Character.valueOf('B'), ElvenItem.itemShadowBow
 				});
-		
+
 		GameRegistry.addRecipe(
 			new ItemStack(ElvenItem.itemFeatherBow, 1),
 				new Object[]
@@ -103,7 +104,7 @@ public class RecipeRegistry
 					Character.valueOf('G'), Item.ingotGold,
 					Character.valueOf('B'), ElvenItem.itemBoneCompositeBow
 				});
-		
+
 		GameRegistry.addRecipe(
 			new ShapedOreRecipe(
 				new ItemStack(ElvenItem.itemSteelBow, 1),
@@ -115,7 +116,7 @@ public class RecipeRegistry
 						Character.valueOf('B'), ElvenItem.itemCompositeLongbow,
 						Character.valueOf('E'), "stickEbony"
 					}));
-		
+
 		GameRegistry.addRecipe(
 			new ShapedOreRecipe(
 				new ItemStack(ElvenItem.itemElvenBow, 1),
@@ -259,7 +260,7 @@ public class RecipeRegistry
 					Character.valueOf('A'), Item.arrow
 				});
 	}
-	
+
 	private void addRecipeOther()
 	{
 		GameRegistry.addRecipe(
@@ -269,5 +270,15 @@ public class RecipeRegistry
 					" P ", "P P", "PPP",
 					Character.valueOf('P'), Item.paper
 				});
+
+		GameRegistry.addRecipe(
+			new ShapedOreRecipe(
+				new ItemStack(ElvenBlock.blockEbonyLadder, 3),
+				new Object[]
+				{
+					"S S", "SSS", "S S",
+					Character.valueOf('S'), "stickEbony"
+				}));
+
 	}
 }

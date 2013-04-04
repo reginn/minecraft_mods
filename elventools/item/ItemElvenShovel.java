@@ -21,9 +21,9 @@ public class ItemElvenShovel extends ItemSpade
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:mithrilShovel");
+		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilShovel");
 	}
 	@Override
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)

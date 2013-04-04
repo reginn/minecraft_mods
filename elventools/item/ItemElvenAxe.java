@@ -21,9 +21,9 @@ public class ItemElvenAxe extends ItemAxe
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a("rgn/elventools:mithrilaxe");
+		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilaxe");
 	}
 
 	@Override

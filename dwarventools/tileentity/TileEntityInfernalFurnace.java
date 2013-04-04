@@ -363,31 +363,53 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 	//----------
 
 	//-- implements ISidedInventory
+	/*
 	@Override
-	public int func_94127_c(int i)
+	public int getStartInventorySide(int i)
 	{
 		return i == 0 ? 2 : (i == 1 ? 0 : 1);
 	}
 
 	@Override
-	public int func_94128_d(int i)
+	public int getSizeInventorySide(int i)
 	{
 		return 1;
+	}
+	*/
+
+	@Override
+	public int[] getSizeInventorySide(int var1)
+	{
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j)
+	{
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j)
+	{
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
 	}
 	//----------
 
 	//-- implements IInventory new methods
 	@Override
-	public boolean func_94042_c()
+	public boolean isInvNameLocalized()
 	{
 		return false;
 	}
 
 	@Override
-	public boolean func_94041_b(int i, ItemStack itemstack)
+	public boolean isStackValidForSlot(int i, ItemStack itemstack)
 	{
 		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
 	}
 	//----------
-
 }

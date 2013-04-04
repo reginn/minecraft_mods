@@ -30,10 +30,10 @@ public class BlockDwarvenOre extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.mithrilIcon = par1IconRegister.func_94245_a("rgn/dwarventools:mithrilOre");
-		this.ebonyIcon   = par1IconRegister.func_94245_a("rgn/dwarventools:ebonyOre");
+		this.mithrilIcon = par1IconRegister.registerIcon("rgn/dwarventools:mithrilOre");
+		this.ebonyIcon   = par1IconRegister.registerIcon("rgn/dwarventools:ebonyOre");
 	}
 
 	@Override

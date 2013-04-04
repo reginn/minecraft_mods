@@ -45,9 +45,9 @@ public class ItemDwarvenTool extends ItemTool
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94581_a(IconRegister par1IconRegister)
+	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.func_94245_a(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
+		this.iconIndex = par1IconRegister.registerIcon(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class ItemDwarvenTool extends ItemTool
 						Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
 					}
 				}
-				world.func_94571_i(target.x, target.y, target.z);
+				world.setBlockToAir(target.x, target.y, target.z);
 				++damage;
 			}
 		}

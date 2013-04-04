@@ -75,11 +75,11 @@ public class WorldGenDungeonsBase extends WorldGenerator
 						if (x != xCoord - xRange - 1 && y != yCoord - 1 && z != zCoord - zRange - 1 &&
 							x != xCoord + xRange + 1 && y != yCoord + yRange + 1 && z != zCoord + zRange + 1)
 						{
-							world.func_94571_i(x, y, z);
+							world.setBlockToAir(x, y, z);
 						}
 						else if (y >= 0 && !world.getBlockMaterial(x, y - 1, z).isSolid())
 						{
-							world.func_94571_i(x, y, z);
+							world.setBlockToAir(x, y, z);
 						}
 						else if (world.getBlockMaterial(x, y, z).isSolid())
 						{
@@ -154,12 +154,13 @@ public class WorldGenDungeonsBase extends WorldGenerator
 				}
 			}
 
-			world.func_94575_c(xCoord, yCoord, zCoord, Block.mobSpawner.blockID);
+			world.setBlock(xCoord, yCoord, zCoord, Block.mobSpawner.blockID);
 			TileEntityMobSpawner tileEntityMobSpawner = (TileEntityMobSpawner)world.getBlockTileEntity(xCoord, yCoord, zCoord);
 
+			//FMLLog.info(String.format("%s:%d:%d:%d\n", this.mobType, xCoord, yCoord, zCoord));
 			if (tileEntityMobSpawner != null)
 			{
-				tileEntityMobSpawner.func_98049_a().func_98272_a(this.mobType);
+				tileEntityMobSpawner.func_98049_a().setMobID(this.mobType);
 			}
 			else
 			{
@@ -176,17 +177,17 @@ public class WorldGenDungeonsBase extends WorldGenerator
 
 	protected void setRandomBlock(World world, int x, int y, int z)
 	{
-		world.func_94575_c(x, y, z, Block.stone.blockID);
+		world.setBlock(x, y, z, Block.stone.blockID);
 	}
 
 	protected void setBaseBlock(World world, int x, int y, int z)
 	{
-		world.func_94575_c(x, y, z, Block.stone.blockID);
+		world.setBlock(x, y, z, Block.stone.blockID);
 	}
 
 	protected void generateChest(World world, int x, int y, int z, Random random)
 	{
-		world.func_94575_c(x, y, z, Block.chest.blockID);
+		world.setBlock(x, y, z, Block.chest.blockID);
 		TileEntityChest tileEntityChest = (TileEntityChest)world.getBlockTileEntity(x, y, z);
 
 		if (tileEntityChest != null)

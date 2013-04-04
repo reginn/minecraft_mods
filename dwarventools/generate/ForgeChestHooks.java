@@ -25,10 +25,10 @@ public class ForgeChestHooks
 
 	public void addStrongholdLoot()
 	{
-		if (ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).getMax() < 5)
+		if (ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).getMax() < 6)
 		{
-			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMax(5);
-			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMin(5);
+			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMax(6);
+			ChestGenHooks.getInfo(STRONGHOLD_CORRIDOR).setMin(6);
 		}
 
 		ChestGenHooks.addItem(STRONGHOLD_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemDwarvenBrokenSwordMithril), 1, 1, 5));
@@ -46,10 +46,10 @@ public class ForgeChestHooks
 
 	public void addMineshaftLoot()
 	{
-		if (ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).getMax() < 5)
+		if (ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).getMax() < 6)
 		{
-			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMax(5);
-			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMin(5);
+			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMax(6);
+			ChestGenHooks.getInfo(MINESHAFT_CORRIDOR).setMin(6);
 		}
 
 		ChestGenHooks.addItem(MINESHAFT_CORRIDOR, new WeightedRandomChestContent(new ItemStack(DwarvenItem.itemMithrilIngot), 1, 4, 20));
@@ -87,5 +87,6 @@ public class ForgeChestHooks
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.netherStalkSeeds), 1,  4, 20));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.emerald),          1,  4,  5));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.diamond),          1,  2,  5));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.field_94583_ca),   4, 16, 20));
 	}
 }

@@ -12,12 +12,12 @@ public class WorldGenDwarvenStrongholdDungeons extends WorldGenDungeonsBase
 
 	protected void setRandomBlock(World world, int x, int y, int z)
 	{
-		world.setBlockAndMetadataWithNotify(x, y, z, Block.stoneBrick.blockID, world.rand.nextInt(3), 3);
+		world.setBlock(x, y, z, Block.stoneBrick.blockID, world.rand.nextInt(3), 3);
 	}
 
 	protected void setBaseBlock(World world, int x, int y, int z)
 	{
-		world.setBlockAndMetadataWithNotify(x, y, z, Block.stoneBrick.blockID, world.rand.nextInt(3), 3);
+		world.setBlock(x, y, z, Block.stoneBrick.blockID, world.rand.nextInt(3), 3);
 	}
 
 }

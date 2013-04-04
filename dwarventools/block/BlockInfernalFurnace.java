@@ -53,13 +53,13 @@ public class BlockInfernalFurnace extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.field_94336_cN = null;
-		this.topIcon   = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_top");
-		this.sideIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_side");
-		this.frontIcon = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_front");
-		this.idleIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockInfernalFurnace_burning");
+		this.blockIcon = null;
+		this.topIcon   = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_top");
+		this.sideIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_side");
+		this.frontIcon = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_front");
+		this.idleIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_burning");
 	}
 
 	@Override
@@ -297,13 +297,13 @@ public class BlockInfernalFurnace extends BlockContainer
 	}
 
 	@Override
-	public boolean func_96468_q_()
+	public boolean hasComparatorInputOverride()
 	{
 		return true;
 	}
 
 	@Override
-	public int func_94328_b_(World par1World, int par2, int par3, int par4, int par5)
+	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
 	{
 		return Container.func_94526_b((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
 	}

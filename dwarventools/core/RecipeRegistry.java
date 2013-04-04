@@ -61,6 +61,7 @@ public class RecipeRegistry
 
 	private void addRecipeOthers()
 	{
+		/*
 		GameRegistry.addRecipe(
 			new ItemStack(Block.netherBrick, 1),
 				new Object[]
@@ -68,7 +69,7 @@ public class RecipeRegistry
 					"NN","NN",
 					Character.valueOf('N'), Block.netherrack
 				});
-
+		*/
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenBlock.blockInfernalFurnace, 1),
 				new Object[]
@@ -110,7 +111,7 @@ public class RecipeRegistry
 		final String[] swordRecipe   = new String[] {  "M",   "M",   "S"};
 
 		// redstone block changes official redstone block in Minecraft 1.5
-		List<ItemStack> materialList = Lists.newArrayList(new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(Block.field_94341_cq));
+		List<ItemStack> materialList = Lists.newArrayList(new ItemStack(Block.obsidian), new ItemStack(Block.blockLapis), new ItemStack(Block.blockRedstone));
 
 		List<Item[]> itemList = Lists.newArrayList(shovelList, pickaxeList, axeList, hoeList, swordList);
 		List<String[]> recipeList = Lists.newArrayList(shovelRecipe, pickaxeRecipe, axeRecipe, hoeRecipe, swordRecipe);

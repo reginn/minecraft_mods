@@ -34,11 +34,11 @@ public class BlockDwarvenOreStorage extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void func_94332_a(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.redstoneIcon = par1IconRegister.func_94245_a("rgn/dwarventools:blockRedstone");
-		this.mithrilIcon  = par1IconRegister.func_94245_a("rgn/dwarventools:blockMithril");
-		this.ebonyIcon    = par1IconRegister.func_94245_a("rgn/dwarventools:blockEbony");
+		this.redstoneIcon = par1IconRegister.registerIcon("rgn/dwarventools:blockRedstone");
+		this.mithrilIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockMithril");
+		this.ebonyIcon    = par1IconRegister.registerIcon("rgn/dwarventools:blockEbony");
 	}
 
 	@Override

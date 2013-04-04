@@ -25,7 +25,7 @@ import rgn.mods.elventools.network.PacketHandler;
 (
 	modid   = "ElvenTools",
 	name    = "ElvenTools",
-	version = "4.1.0"
+	version = "4.1.1"
 )
 @NetworkMod
 (

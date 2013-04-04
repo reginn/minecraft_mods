@@ -23,7 +23,7 @@ public class ItemElvenAxe extends ItemAxe
 	@SideOnly(Side.CLIENT)
 	public void updateIcons(IconRegister par1IconRegister)
 	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilaxe");
+		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilAxe");
 	}
 
 	@Override

@@ -3,23 +3,26 @@ package rgn.mods.toolrack;
 import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+
 import net.minecraftforge.common.Configuration;
-import rgn.util.TranslationRegistry;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import rgn.util.TranslationRegistry;
 
 @Mod
 (
 	modid   = "Toolrack",
 	name    = "Toolrack",
-	version = "1.0.0"
+	version = "2.0.0"
 )
 @NetworkMod
 (
@@ -40,6 +43,8 @@ public class Toolrack
 	public static final int GUI_ID_TOOLRACK = 1;
 	public static int RENDER_TYPE_TOOLRACK;
 	private int blockIdToolrack;
+
+	public static final CreativeTabs tabToolrack = new CreativeTabToolrack("Toolrack");
 
 	@Mod.PreInit
 	public void preInit(FMLPreInitializationEvent event)
@@ -64,7 +69,7 @@ public class Toolrack
 	public void load(FMLInitializationEvent event)
 	{
 		RENDER_TYPE_TOOLRACK = proxy.getUniqueRenderType();
-		blockToolrack = (new BlockToolrack(blockIdToolrack)).setBlockName("blockToolrack");
+		blockToolrack = (new BlockToolrack(blockIdToolrack)).setUnlocalizedName("blockToolrack").setCreativeTab(tabToolrack);
 		GameRegistry.registerBlock(blockToolrack, ItemToolrack.class, "Toolrack");
 
 		GameRegistry.registerTileEntity(TileEntityToolrack.class, "Toolrack");
@@ -72,13 +77,16 @@ public class Toolrack
 		proxy.registerRenderer();
 		proxy.registerTileEntitySpecialRenderer();
 
-		for (int i = 0; i < BlockToolrack.types.length; ++i)
-		{
-			TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, i), "Toolrack", "ツールラック");
-		}
-		
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 0), "Ork Toolrack",    "オークのツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 1), "Spruce Toolrack", "松のツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 2), "Birch Toolrack",  "白樺のツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 3), "Jungle Toolrack", "ジャングル木のツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 4), "Black Toolrack",  "黒ツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 5), "Red Toolrack",    "赤ツールラック");
+		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 6), "White Toolrack",  "白ツールラック");
+
 		(new RecipeRegistry()).addRecipe();
-			
+
 	}
 
 

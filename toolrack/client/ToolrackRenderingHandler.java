@@ -1,44 +1,66 @@
 package rgn.mods.toolrack.client;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+
 import net.minecraftforge.common.ForgeDirection;
 
-import org.lwjgl.opengl.GL11;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 import rgn.mods.toolrack.TileEntityToolrack;
 import rgn.mods.toolrack.Toolrack;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 {
-	private final int[] textureIndex = new int[]
+	private Icon[] icons = new Icon[]
 		{
-			4, 198, 214, 199, 22, 22, 22
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 0),
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 1),
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 2),
+			Block.planks.getBlockTextureFromSideAndMetadata(0, 3),
+			Block.blockSteel.getBlockTextureFromSide(0),
+			Block.blockSteel.getBlockTextureFromSide(0),
+			Block.blockSteel.getBlockTextureFromSide(0)
 		};
-		
+
+	private void refreshIcon()
+	{
+		icons[0] = Block.planks.getBlockTextureFromSideAndMetadata(0, 0);
+		icons[1] = Block.planks.getBlockTextureFromSideAndMetadata(0, 1);
+		icons[2] = Block.planks.getBlockTextureFromSideAndMetadata(0, 2);
+		icons[3] = Block.planks.getBlockTextureFromSideAndMetadata(0, 3);
+		icons[4] = Block.blockSteel.getBlockTextureFromSide(0);
+		icons[5] = Block.blockSteel.getBlockTextureFromSide(0);
+		icons[6] = Block.blockSteel.getBlockTextureFromSide(0);
+	}
+
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelID == this.getRenderId())
 		{
-			this.renderInvCuboid(renderer, block, 1.0F/16.0F, 4.0F/16.0F, 7.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 8.0F/16.0F, textureIndex[metadata]);
-			this.renderInvCuboid(renderer, block, 1.0F/16.0F, 10.0F/16.0F, 7.0F/16.0F, 15.0F/16.0F, 12.0F/16.0F, 8.0F/16.0F, textureIndex[metadata]);
+			this.renderInvCuboid(renderer, block, 1.0F/16.0F, 4.0F/16.0F, 7.0F/16.0F, 15.0F/16.0F, 6.0F/16.0F, 8.0F/16.0F, icons[metadata]);
+			this.renderInvCuboid(renderer, block, 1.0F/16.0F, 10.0F/16.0F, 7.0F/16.0F, 15.0F/16.0F, 12.0F/16.0F, 8.0F/16.0F, icons[metadata]);
 		}
 	}
 
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelID, RenderBlocks renderer)
 	{
+		this.refreshIcon();
 		if (modelID == this.getRenderId())
-		{	
-			renderer.overrideBlockTexture = textureIndex[world.getBlockMetadata(x, y, z)];
-			
+		{
+			renderer.setOverrideBlockTexture(icons[world.getBlockMetadata(x, y, z) & 7]);
+
 			TileEntityToolrack tileEntityToolrack = (TileEntityToolrack)world.getBlockTileEntity(x, y, z);
 			byte facing = tileEntityToolrack.getFacing();
 
 			ForgeDirection dir = ForgeDirection.getOrientation(facing);
-			
+
 			if (dir == ForgeDirection.EAST)
 			{
 				this.renderToolrackEast(world, x, y, z, block, renderer);
@@ -55,7 +77,8 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 			{
 				this.renderToolrackNorth(world, x, y, z, block, renderer);
 			}
-			renderer.overrideBlockTexture = -1;
+
+			renderer.clearOverrideBlockTexture();
 			return true;
 		}
 		return false;
@@ -88,7 +111,6 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
-		renderer.overrideBlockTexture = -1;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 	}
@@ -99,7 +121,7 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		float r = (float)(rgb >> 16 & 255) / 255.0F;
 		float g = (float)(rgb >>  8 & 255) / 255.0F;
 		float b = (float)(rgb       & 255) / 255.0F;
-				
+
 		block.setBlockBounds(15.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F, 16.0F/16.0F, 6.0F/16.0F, 16.0F/16.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
@@ -108,7 +130,6 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
 
-		renderer.overrideBlockTexture = -1;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		renderer.setRenderBoundsFromBlock(block);
 	}
@@ -119,7 +140,7 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		float r = (float)(rgb >> 16 & 255) / 255.0F;
 		float g = (float)(rgb >>  8 & 255) / 255.0F;
 		float b = (float)(rgb       & 255) / 255.0F;
-		
+
 		block.setBlockBounds(0.0F/16.0F, 4.0F/16.0F, 0.0F/16.0F, 16.0F/16.0F, 6.0F/16.0F, 1.0F/16.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
@@ -138,7 +159,7 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		float r = (float)(rgb >> 16 & 255) / 255.0F;
 		float g = (float)(rgb >>  8 & 255) / 255.0F;
 		float b = (float)(rgb       & 255) / 255.0F;
-				
+
 		block.setBlockBounds(0.0F/16.0F, 4.0F/16.0F, 15.0F/16.0F, 16.0F/16.0F, 6.0F/16.0F, 16.0F/16.0F);
 		renderer.setRenderBoundsFromBlock(block);
 		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, r, g, b);
@@ -151,7 +172,7 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 	}
 
-	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, int textureIndex)
+	private void renderInvCuboid(RenderBlocks renderer, Block block, float minX, float minY, float minZ, float maxX, float maxY, float maxZ, Icon icons)
 	{
 		Tessellator tessellator = Tessellator.instance;
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -161,27 +182,27 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, textureIndex);
+		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

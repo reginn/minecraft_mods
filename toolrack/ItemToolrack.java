@@ -13,14 +13,14 @@ public class ItemToolrack extends ItemBlock
 	}
 
 	@Override
-	public String getItemNameIS(ItemStack itemstack)
+	public String getUnlocalizedName(ItemStack itemstack)
 	{
 		int type = itemstack.getItemDamage();
 		if (type < 0 || type >= BlockToolrack.types.length)
 		{
 			type = 0;
 		}
-		return (new StringBuilder()).append(getItemName()).append(".").append(BlockToolrack.types[type]).toString();
+		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(BlockToolrack.types[type]).toString();
 	}
 
 	@Override

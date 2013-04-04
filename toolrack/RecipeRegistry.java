@@ -33,12 +33,12 @@ public class RecipeRegistry
 					new ItemStack(Toolrack.blockToolrack, 1, i),
 						new Object[]
 							{
-								new ItemStack(Toolrack.blockToolrack, 1, i + j + 4)
+								new ItemStack(Toolrack.blockToolrack, 1, j + 4)
 							});
 						
 				GameRegistry.addRecipe(
 					new ShapelessOreRecipe(
-						new ItemStack(Toolrack.blockToolrack, 1, i + j + 4),
+						new ItemStack(Toolrack.blockToolrack, 1, j + 4),
 							new Object[]
 							{
 								dye[j], new ItemStack(Toolrack.blockToolrack, 1, i)
@@ -46,7 +46,7 @@ public class RecipeRegistry
 				
 				GameRegistry.addRecipe(
 					new ShapelessOreRecipe(
-						new ItemStack(Toolrack.blockToolrack, 4, i + j + 4),
+						new ItemStack(Toolrack.blockToolrack, 4, j + 4),
 							new Object[]
 							{
 								dye[j],
@@ -58,7 +58,7 @@ public class RecipeRegistry
 				
 				GameRegistry.addRecipe(
 					new ShapelessOreRecipe(
-						new ItemStack(Toolrack.blockToolrack, 8, i + j + 4),
+						new ItemStack(Toolrack.blockToolrack, 8, j + 4),
 							new Object[]
 							{
 								dye[j],

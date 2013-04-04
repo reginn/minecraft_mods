@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -23,9 +25,9 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.common.ForgeDirection;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class BlockToolrack extends BlockContainer
 {
@@ -34,19 +36,34 @@ public class BlockToolrack extends BlockContainer
 			"oak", "spruce", "birch", "jungle", "black", "red", "white"
 		};
 
-	public final int[] textureIndex = new int[]
+	private String[] textureName = new String[]
 		{
-			4, 198, 214, 199, 22, 22, 22
+			"wood", "wood_spruce", "wood_birch", "wood_jungle", "blockIron", "blockIron", "blockIron"
 		};
+
+	@SideOnly(Side.CLIENT)
+	private Icon[] icons;
 
 	public BlockToolrack(int blockId)
 	{
-		super(blockId, 4, Material.wood);
+		super(blockId, Material.wood);
 		this.blockHardness = 0.3F;
-		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister)
+	{
+		this.icons = new Icon[textureName.length];
+
+		for (int i = 0; i < textureName.length; ++i)
+		{
+			this.icons[i] = par1IconRegister.registerIcon(textureName[i]);
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
 	{
 		for (int i = 0; i < types.length; i++)
@@ -57,16 +74,16 @@ public class BlockToolrack extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
+	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return this.getBlockTextureFromSideAndMetadata(side, world.getBlockMetadata(x, y, z));
 	}
 
 	@Override
-	public int getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
 	{
-		this.blockIndexInTexture = this.textureIndex[meta];
-		return this.blockIndexInTexture;
+		this.blockIcon = this.icons[meta & 7];
+		return this.blockIcon;
 	}
 
 	@Override
@@ -88,7 +105,7 @@ public class BlockToolrack extends BlockContainer
 			return 0xFFFFFF;
 		}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, int x, int y, int z)
@@ -110,7 +127,7 @@ public class BlockToolrack extends BlockContainer
 			return 0xFFFFFF;
 		}
 	}
-	
+
 	@Override
 	public int getRenderType()
 	{
@@ -134,24 +151,26 @@ public class BlockToolrack extends BlockContainer
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int damageDropped(int damage)
 	{
 		return damage;
 	}
-	
+
 	@Override
-	public void onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
+	public boolean onBlockEventReceived(World world, int x, int y, int z, int eventId, int eventParam)
 	{
 		super.onBlockEventReceived(world, x, y, z, eventId, eventParam);
 		world.markBlockForUpdate(x, y, z);
 		TileEntityToolrack tileEntityToolrack = (TileEntityToolrack)world.getBlockTileEntity(x, y, z);
-		
+
 		if (tileEntityToolrack != null && !world.isRemote)
 		{
 			PacketDispatcher.sendPacketToAllPlayers(tileEntityToolrack.getDescriptionPacket());
+			return true;
 		}
+		return false;
 	}
 
 	@Override
@@ -168,7 +187,7 @@ public class BlockToolrack extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemstack)
 	{
 		int playerDir = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 0x03;
 		byte[] facing = new byte[] {2, 5, 3, 4};
@@ -217,13 +236,13 @@ public class BlockToolrack extends BlockContainer
 			|| world.isBlockSolidOnSide(x    , y, z - 1, ForgeDirection.SOUTH, true)
 			|| world.isBlockSolidOnSide(x    , y, z + 1, ForgeDirection.NORTH, true);
     }
-	
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int neighborBlockId)
 	{
 		TileEntityToolrack tileEntityToolrack = (TileEntityToolrack)world.getBlockTileEntity(x, y, z);
 		ForgeDirection dir = ForgeDirection.getOrientation(tileEntityToolrack.getFacing());
-		
+
 		if (!this.canPlaceBlockAt(world, x, y, z))
 		{
 			boolean isCantStay = false;
@@ -236,11 +255,11 @@ public class BlockToolrack extends BlockContainer
 			{
 				this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
 				this.dropItem(tileEntityToolrack, world, x, y, z);
-				world.setBlockWithNotify(x, y, z, 0);
+				world.setBlockToAir(x, y, z);
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
 	{
@@ -267,7 +286,7 @@ public class BlockToolrack extends BlockContainer
 		world.markBlockForUpdate(x, y, z);
 		return true;
 	}
-	
+
 	private boolean isItem(ItemStack currentItem)
 	{
 		return currentItem.itemID > 255
@@ -275,14 +294,14 @@ public class BlockToolrack extends BlockContainer
 			&& (Item.class).isAssignableFrom(currentItem.getItem().getClass())
 			&& !this.isBlock(currentItem);
 	}
-	
+
 	private boolean isBlock(ItemStack currentItem)
 	{
 		return currentItem.itemID < Block.blocksList.length
 			&& Block.blocksList[currentItem.itemID] != null
 			&& Block.blocksList[currentItem.itemID].blockMaterial != Material.air;
 	}
-	
+
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6)
 	{
@@ -335,7 +354,7 @@ public class BlockToolrack extends BlockContainer
 
 			if (itemstack.hasTagCompound())
 			{
-				entityitem.func_92014_d().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+				entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
 			}
 			world.spawnEntityInWorld(entityitem);
 		}

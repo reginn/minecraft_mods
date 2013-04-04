@@ -2,28 +2,29 @@ package rgn.mods.toolrack.client;
 
 import java.lang.reflect.Method;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeDirection;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.toolrack.TileEntityToolrack;
 
@@ -33,18 +34,19 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 	private Minecraft mc = FMLClientHandler.instance().getClient();
 	private RenderBlocks renderBlocks;
 	private static Method method;
-	
+
 	static
 	{
 		try
 		{
-			String methodName = ObfuscationReflectionHelper.obfuscation ? "a" : "renderItemIn2D";
-			method = 
+			String methodName = ObfuscationReflectionHelper.remapFieldNames("ItemRenderer.class", "renderItemIn2D")[0];
+			method =
 				(net.minecraft.client.renderer.ItemRenderer.class).getDeclaredMethod(
-					methodName, 
+					methodName,
 					new Class[]
 					{
-						net.minecraft.client.renderer.Tessellator.class, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE
+						net.minecraft.client.renderer.Tessellator.class,
+						Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Integer.TYPE, Integer.TYPE, Float.TYPE
 					});
 			method.setAccessible(true);
 		}
@@ -53,7 +55,7 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 			e.printStackTrace();
 		}
 	}
-	
+
 	public TileEntityToolrackRenderer()
 	{
 		renderBlocks = new RenderBlocks();
@@ -92,7 +94,7 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 		GL11.glTranslatef(0.0F, -0.4F, this.isFancyGraphics() ? -0.3F : -0.4F);
 
 		IItemRenderer itemRenderer = MinecraftForgeClient.getItemRenderer(itemstack, IItemRenderer.ItemRenderType.INVENTORY);
-		int iconIndex;
+		Icon icon;
 
 		if (itemRenderer != null)
 		{
@@ -104,30 +106,23 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 			GL11.glPushMatrix();
 			GL11.glScalef(2.0F/3.0F, 2.0F/3.0F, 2.0F/3.0F);
 
-			if (this.isItemBlock(itemstack))
-			{
-				iconIndex = Block.blocksList[itemstack.itemID].blockIndexInTexture;
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(Block.blocksList[itemstack.itemID].getTextureFile()));
-			}
-			else
-			{
-				iconIndex = itemstack.getItem().getIconFromDamage(itemstack.getItemDamage());
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(itemstack.getItem().getTextureFile()));
-			}
+
+			icon = itemstack.getItem().getIconFromDamage(itemstack.getItemDamage());
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/items.png"));
 
 			if (itemstack.getItem().requiresMultipleRenderPasses())
 			{
 				for (int i = 0; i <= 1; i++)
 				{
-					iconIndex = itemstack.getItem().getIconFromDamageForRenderPass(itemstack.getItemDamage(), i);
+					icon = itemstack.getItem().getIconFromDamageForRenderPass(itemstack.getItemDamage(), i);
 					this.renderColor(itemstack, i);
-					this.renderIcon(iconIndex);
+					this.renderIcon(icon);
 				}
 			}
 			else
 			{
 				this.renderColor(itemstack, 0);
-				this.renderIcon(iconIndex);
+				this.renderIcon(icon);
 			}
 
 			GL11.glScalef(3.0F/2.0F, 3.0F/2.0F, 3.0F/2.0F);
@@ -156,25 +151,25 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 	private void renderColor(ItemStack itemstack, int i)
 	{
 		int colorFromDamage = itemstack.getItem().getColorFromItemStack(itemstack, i);
-		float lightingRatio = this.isFancyGraphics() ? 1.5F : 0.6F; 
+		float lightingRatio = this.isFancyGraphics() ? 1.5F : 0.6F;
 		float red   = (float)(colorFromDamage >> 16 & 0xff) / 255.0F;
 		float green = (float)(colorFromDamage >>  8 & 0xff) / 255.0F;
 		float blue  = (float)(colorFromDamage       & 0xff) / 255.0F;
 		GL11.glColor4f(red * lightingRatio, green * lightingRatio, blue * lightingRatio, 1.0F);
 	}
-	
+
 	private boolean isFancyGraphics()
 	{
 		return this.mc.gameSettings.fancyGraphics;
 	}
-		
-	private void renderIcon(int iconIndex)
+
+	private void renderIcon(Icon icon)
 	{
 		Tessellator tessellator = Tessellator.instance;
-		float f3 = (((float)(iconIndex % 16) * 16) +  0.00F) / 256.0F;
-		float f4 = (((float)(iconIndex % 16) * 16) + 15.99F) / 256.0F;
-		float f5 = (((float)(iconIndex / 16) * 16) +  0.00F) / 256.0F;
-		float f6 = (((float)(iconIndex / 16) * 16) + 15.99F) / 256.0F;
+		float f3 = icon.getMinU();
+		float f4 = icon.getMaxU();
+		float f5 = icon.getMinV();
+		float f6 = icon.getMaxV();
 		float f7 = 1.0F;
 		float f8 = 0.5F;
 		float f9 = 0.25F;
@@ -187,10 +182,11 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 			try
 			{
 				method.invoke(
-					RenderManager.instance.itemRenderer, 
+					RenderManager.instance.itemRenderer,
 						new Object[]
 						{
-							tessellator, Float.valueOf(f4), Float.valueOf(f5), Float.valueOf(f3), Float.valueOf(f6), Float.valueOf(0.0625F)
+							tessellator, Float.valueOf(f4), Float.valueOf(f5), Float.valueOf(f3), Float.valueOf(f6),
+							Integer.valueOf(icon.getSheetWidth()), Integer.valueOf(icon.getSheetHeight()), Float.valueOf(0.0625F)
 						});
 			}
 			catch (Exception e)
@@ -215,5 +211,5 @@ public class TileEntityToolrackRenderer extends TileEntitySpecialRenderer
 		}
 	}
 
-	
+
 }

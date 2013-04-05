@@ -2,6 +2,7 @@ package rgn.mods.dwarventools.generate;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenHills;
@@ -43,31 +44,31 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 
 		for (int i = 0; i < 15 * ratio; i++)
 		{
-			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
+			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40) + 10;
-			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
-			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 0, 4)).generate(world, random, x, y, z);
+			int z = chunkZ + random.nextInt(16);
+			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 0, 4, Block.stone.blockID)).generate(world, random, x, y, z);
 		}
 
 		for (int i = 0; i < 4 * ratio; i++)
 		{
-			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
+			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(10) + 15;
-			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
-			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 1, 4)).generate(world, random, x, y, z);
+			int z = chunkZ + random.nextInt(16);
+			(new WorldGenMinable(DwarvenBlock.blockDwarvenOre.blockID, 1, 4, Block.stone.blockID)).generate(world, random, x, y, z);
 		}
 
 		{
-			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
+			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(40);
-			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
+			int z = chunkZ + random.nextInt(16);
 			(new WorldGenDwarvenNetherDungeons()).generate(world, random, x, y, z);
 		}
 
 		{
-			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
+			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(60);
-			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
+			int z = chunkZ + random.nextInt(16);
 			(new WorldGenDwarvenStrongholdDungeons()).generate(world, random, x, y, z);
 		}
 	}
@@ -75,9 +76,9 @@ public class DwarvenWorldGenerator implements IWorldGenerator
 	private void generateNether(World world, Random random, int chunkX, int chunkZ)
 	{
 		{
-			int x = (chunkX - (chunkX % 16)) + random.nextInt(16);
+			int x = chunkX + random.nextInt(16);
 			int y = random.nextInt(60) + 32;
-			int z = (chunkZ - (chunkZ % 16)) + random.nextInt(16);
+			int z = chunkZ + random.nextInt(16);
 			(new WorldGenDwarvenQuartzDungeons()).generate(world, random, x, y, z);
 		}
 	}

@@ -12,8 +12,6 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import net.minecraftforge.common.ChestGenHooks;
 
-import cpw.mods.fml.common.FMLLog;
-
 public class WorldGenDungeonsBase extends WorldGenerator
 {
 	protected final String DUNGEON_CHEST = ChestGenHooks.DUNGEON_CHEST;
@@ -159,7 +157,7 @@ public class WorldGenDungeonsBase extends WorldGenerator
 			world.setBlock(xCoord, yCoord, zCoord, Block.mobSpawner.blockID);
 			TileEntityMobSpawner tileEntityMobSpawner = (TileEntityMobSpawner)world.getBlockTileEntity(xCoord, yCoord, zCoord);
 
-			FMLLog.info(String.format("%s:%d:%d:%d\n", this.mobType, xCoord, yCoord, zCoord));
+			//FMLLog.info(String.format("%s:%d:%d:%d\n", this.mobType, xCoord, yCoord, zCoord));
 			if (tileEntityMobSpawner != null)
 			{
 				tileEntityMobSpawner.func_98049_a().setMobID(this.mobType);

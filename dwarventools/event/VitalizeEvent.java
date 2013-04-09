@@ -1,7 +1,5 @@
 package rgn.mods.dwarventools.event;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +9,8 @@ import net.minecraft.world.World;
 
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 import rgn.mods.dwarventools.enchantment.UniqueEnchantmentHelper;
@@ -25,7 +25,7 @@ public class VitalizeEvent implements IForgeEvent
 		Entity       entity = event.entity;
 		DamageSource source = event.source;
 		int         ammount = event.ammount;
-		World         world = entity.worldObj; 
+		World         world = entity.worldObj;
 
 		if (entity instanceof EntityPlayer && source.getEntity() != null)
 		{
@@ -36,14 +36,14 @@ public class VitalizeEvent implements IForgeEvent
 			{
 				int enchLv = UniqueEnchantmentHelper.getUniqueEnchantmentLv(torso, this.vitalize);
 				enchLv = enchLv > this.vitalize.getMaxLevel() ? this.vitalize.getMaxLevel() : enchLv;
-				
+
 				if (player.getHealth() <= player.getMaxHealth() / 2)
 				{
 					if (world.rand.nextInt(100) < 35 - (enchLv * 5))
-					{	
+					{
 						if (!world.isRemote)
 						{
-							PacketDispatcher.sendPacketToAllPlayers(PacketHandler.getPacketCustomAnimation(player, 2));
+							PacketDispatcher.sendPacketToAllInDimension(PacketHandler.getPacketCustomAnimation(player, 2), player.dimension);
 
 							player.addChatMessage("Vitalize!");
 							player.heal(ammount * (enchLv + 1));

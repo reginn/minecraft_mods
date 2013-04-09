@@ -48,7 +48,7 @@ public class LifeStealEvent implements IForgeEvent
 
 					if (!world.isRemote)
 					{
-						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.getPacketCustomAnimation(player, 3));
+						PacketDispatcher.sendPacketToAllInDimension(PacketHandler.getPacketCustomAnimation(player, 3), player.dimension);
 						player.addChatMessage("Life Steal!");
 						player.heal(absorbAmount);
 					}

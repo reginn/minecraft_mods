@@ -12,7 +12,7 @@ public class DwarvenEffectRenderer
 {
 	public void spawnCustomParticle(World world, Entity entity, int typeId)
 	{
-		if (typeId < 0)
+		if (typeId < 0 || world == null || entity == null)
 		{
 			return ;
 		}

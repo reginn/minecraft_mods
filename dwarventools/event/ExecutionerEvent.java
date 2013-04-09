@@ -1,7 +1,5 @@
 package rgn.mods.dwarventools.event;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 import rgn.mods.dwarventools.enchantment.UniqueEnchantmentHelper;
 import rgn.mods.dwarventools.network.PacketHandler;
@@ -24,7 +24,7 @@ import rgn.mods.dwarventools.network.PacketHandler;
 public class ExecutionerEvent implements IForgeEvent
 {
 	private final Enchantment executioner = DwarvenEnchantment.enchantmentExecutioner;
-	
+
 	@ForgeSubscribe
 	public void doExecution(LivingDropsEvent event)
 	{
@@ -35,7 +35,7 @@ public class ExecutionerEvent implements IForgeEvent
 		World          world = target.worldObj;
 
 		int mobType = this.getMobType(target);
-		
+
 		if (mobType < 0)
 		{
 			return ;
@@ -60,14 +60,14 @@ public class ExecutionerEvent implements IForgeEvent
 								world, target.posX, target.posY, target.posZ,
 								new ItemStack(Item.skull, 1, mobType)
 							));
-						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.getPacketCustomAnimation(target, 1));
+						PacketDispatcher.sendPacketToAllInDimension(PacketHandler.getPacketCustomAnimation(target, 1), target.dimension);
 						player.addChatMessage("Executed!");
 					}
 				}
 			}
 		}
 	}
-	
+
 	private int getMobType(Entity entity)
 	{
 		if (entity instanceof EntitySkeleton)

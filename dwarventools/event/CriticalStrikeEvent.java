@@ -1,7 +1,5 @@
 package rgn.mods.dwarventools.event;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -13,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
 import rgn.mods.dwarventools.enchantment.UniqueEnchantmentHelper;
 import rgn.mods.dwarventools.network.PacketHandler;
@@ -22,7 +22,7 @@ public class CriticalStrikeEvent implements IForgeEvent
 	private final int[]           prob = new int[]{30, 20, 10};
 	private final float[]  damageRatio = new float[]{1.5F, 2.5F, 3.5F};
 	private final Enchantment critical = DwarvenEnchantment.enchantmentCriticalStrike;
-	
+
 	@ForgeSubscribe
 	public void doCriticalStrike(AttackEntityEvent event)
 	{
@@ -41,12 +41,12 @@ public class CriticalStrikeEvent implements IForgeEvent
 				float baseDamage = equippedItem.getItem().getDamageVsEntity(target);
 
 				enchLv = enchLv > this.critical.getMaxLevel() ? this.critical.getMaxLevel() : enchLv;
-				
+
 				if (world.rand.nextInt(100) <= prob[enchLv - 1])
 				{
 					if (!world.isRemote)
 					{
-						PacketDispatcher.sendPacketToAllPlayers(PacketHandler.getPacketCustomAnimation(target, 0));
+						PacketDispatcher.sendPacketToAllInDimension(PacketHandler.getPacketCustomAnimation(target, 0), target.dimension);
 						player.addChatMessage("Critical Strike!");
 						target.attackEntityFrom(DamageSource.causePlayerDamage(player), (int)(baseDamage * damageRatio[enchLv - 1]));
 					}

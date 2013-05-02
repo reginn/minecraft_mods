@@ -23,11 +23,6 @@ public class BlockLight extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
-	 * the only chance you get to register icons.
-	 */
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.blockIcon = null;
@@ -58,6 +53,14 @@ public class BlockLight extends Block
 	}
 
 	@Override
+	public boolean isAirBlock(World world, int x, int y, int z)
+	{
+		int blockId = world.getBlockId(x, y - 1, z);
+		Block block = Block.blocksList[blockId];
+		return blockId == 0 || block == null ? false : block.getTickRandomly();
+	}
+
+	@Override
 	public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float probability, int par7)
 	{
 	}
@@ -75,7 +78,7 @@ public class BlockLight extends Block
 
 		if (!this.canBlockStay(world, x, y, z))
 		{
-			world.setBlock(x, y, z, 0);
+			world.setBlockToAir(x, y, z);
 		}
 		else if ((meta == 3 || meta == 2) && world.isAirBlock(x, y - 1, z))
 		{
@@ -94,7 +97,7 @@ public class BlockLight extends Block
 		int meta = world.getBlockMetadata(x, y, z) & 3;
 		for (; world.isAirBlock(x, y - 1, z) & y >= 0; y--)
 		{
-			world.setBlockMetadataWithNotify(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta);
+			world.setBlock(x, y - 1, z, Lamp.blockLight.blockID, 8 + meta, 3);
 		}
 	}
 

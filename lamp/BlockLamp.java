@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -25,11 +26,6 @@ public class BlockLamp extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
-	 * the only chance you get to register icons.
-	 */
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.blockIcon = Block.cauldron.func_94375_b("cauldron_inner");
@@ -43,6 +39,12 @@ public class BlockLamp extends Block
 		{
 			list.add(new ItemStack(blockID, 1, i));
 		}
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
+	{
+		this.setBlockBounds(4.0F/16.0F, 0.0F/16.0F, 4.0F/16.0F, 12.0F/16.0F, 16.0F/16.0F, 12.0F/16.0F);
 	}
 
 	@Override

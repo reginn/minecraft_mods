@@ -20,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Lamp",
 	name    = "Lamp",
-	version = "4.0.0"
+	version = "4.0.2"
 )
 @NetworkMod
 (

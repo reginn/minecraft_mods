@@ -3,7 +3,6 @@ package rgn.mods.dwarventools.tileentity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -16,15 +15,20 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-import net.minecraftforge.common.ForgeDirection;
-
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.dwarventools.block.BlockInfernalFurnace;
 
-public class TileEntityInfernalFurnace extends TileEntity implements IInventory, ISidedInventory, net.minecraftforge.common.ISidedInventory
+public class TileEntityInfernalFurnace extends TileEntity implements ISidedInventory
 {
+	private static final int[] slots_top = new int[] {0};
+	private static final int[] slots_bottom = new int[] {2, 1};
+	private static final int[] slots_sides = new int[] {1};
+
 	private ItemStack[] furnaceItemStacks = new ItemStack[3];
+
 	public int furnaceBurnTime     = 0;
 	public int currentItemBurnTime = 0;
 	public int furnaceCookTime     = 0;
@@ -74,7 +78,7 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 		par1NBTTagCompound.setTag("Items", itemsTagList);
 	}
 
-	// impelements IInventory
+	// implements IInventory
 	@Override
 	public int getSizeInventory()
 	{
@@ -147,7 +151,13 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 	@Override
 	public String getInvName()
 	{
-		return "container.infernalfurnace";
+		return "container.furnace";
+	}
+
+	@Override
+	public boolean isInvNameLocalized()
+	{
+		return false;
 	}
 
 	@Override
@@ -156,11 +166,36 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 		return 64;
 	}
 
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
+	{
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ?
+			false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+	}
+
+	@Override
+	public void openChest()
+	{
+	}
+
+	@Override
+	public void closeChest()
+	{
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int par1, ItemStack par2ItemStack)
+	{
+		return par1 == 2 ? false : (par1 == 1 ? isItemFuel(par2ItemStack) : true);
+	}
+
+	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int scale)
 	{
 		return this.furnaceCookTime * scale / 100;
 	}
 
+	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int scale)
 	{
 		if (this.currentItemBurnTime == 0)
@@ -311,7 +346,7 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 
 			if (item instanceof ItemTool  && ((ItemTool) item).getToolMaterialName().equals("WOOD")) return 200;
 			if (item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) return 200;
-			if (item instanceof ItemHoe   && ((ItemHoe)  item).func_77842_f().equals("WOOD")) return 200;
+			if (item instanceof ItemHoe   && ((ItemHoe)  item).getMaterialName().equals("WOOD")) return 200;
 			if (var1 == Item.stick.itemID) return 100;
 			if (var1 == Item.coal.itemID) return 1600;
 			if (var1 == Item.bucketLava.itemID) return 20000;
@@ -326,90 +361,23 @@ public class TileEntityInfernalFurnace extends TileEntity implements IInventory,
 		return getItemBurnTime(par0ItemStack) > 0;
 	}
 
-	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer)
-	{
-		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ?
-			false : par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
-	}
-
-	public void openChest()
-	{
-	}
-
-	public void closeChest()
-	{
-	}
-
-	//-- implements net.minecraftforge.common.ISidedInventory
-	@Override
-	public int getStartInventorySide(ForgeDirection side)
-	{
-		if (side == ForgeDirection.DOWN)
-		{
-			return 1;
-		}
-		if (side == ForgeDirection.UP)
-		{
-			return 0;
-		}
-		return 2;
-	}
-
-	@Override
-	public int getSizeInventorySide(ForgeDirection side)
-	{
-		return 1;
-	}
-	//----------
-
 	//-- implements ISidedInventory
-	/*
 	@Override
-	public int getStartInventorySide(int i)
+	public int[] getAccessibleSlotsFromSide(int par1)
 	{
-		return i == 0 ? 2 : (i == 1 ? 0 : 1);
+		return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
 	}
 
 	@Override
-	public int getSizeInventorySide(int i)
+	public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3)
 	{
-		return 1;
-	}
-	*/
-
-	@Override
-	public int[] getSizeInventorySide(int var1)
-	{
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return this.isItemValidForSlot(par1, par2ItemStack);
 	}
 
 	@Override
-	public boolean func_102007_a(int i, ItemStack itemstack, int j)
+	public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3)
 	{
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-
-	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j)
-	{
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-	//----------
-
-	//-- implements IInventory new methods
-	@Override
-	public boolean isInvNameLocalized()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack)
-	{
-		return i == 2 ? false : (i == 1 ? isItemFuel(itemstack) : true);
+		return par3 != 0 || par1 != 1 || par2ItemStack.itemID == Item.bucketEmpty.itemID;
 	}
 	//----------
 }

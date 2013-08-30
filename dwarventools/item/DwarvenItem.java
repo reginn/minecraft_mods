@@ -3,6 +3,11 @@ package rgn.mods.dwarventools.item;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
+import net.minecraft.item.ItemSword;
 
 import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
@@ -67,50 +72,50 @@ public class DwarvenItem
 
 	public static void configure(Config config)
 	{
-		itemIronBar      = (new ItemDwarvenParts(config.itemIdIronBar      - 256)).setUnlocalizedName("ironBar").setCreativeTab(Config.tabDwarvenTools);
-		itemMithrilIngot = (new ItemDwarvenParts(config.itemIdMithrilIngot - 256)).setUnlocalizedName("mithrilIngot").setCreativeTab(Config.tabDwarvenTools);
-		itemEbonyIngot   = (new ItemDwarvenParts(config.itemIdEbonyIngot   - 256)).setUnlocalizedName("ebonyIngot").setCreativeTab(Config.tabDwarvenTools);
+		itemIronBar      = (new Item(config.itemIdIronBar      - 256)).setUnlocalizedName("ironBar").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ironBar");
+		itemMithrilIngot = (new Item(config.itemIdMithrilIngot - 256)).setUnlocalizedName("mithrilIngot").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilIngot");
+		itemEbonyIngot   = (new Item(config.itemIdEbonyIngot   - 256)).setUnlocalizedName("ebonyIngot").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyIngot");
 
-		itemDwarvenShovelObsidian  = (new ItemDwarvenShovel(config.itemIdDwarvenShovelObsidian   - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianShovel").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPickaxeObsidian = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeObsidian - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianPickaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenAxeObsidian     = (new ItemDwarvenAxe(config.itemIdDwarvenAxeObsidian         - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianAxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenHoeObsidian     = (new ItemDwarvenHoe(config.itemIdDwarvenHoeObsidian         - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianHoe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenSwordObsidian   = (new ItemDwarvenSword(config.itemIdDwarvenSwordObsidian     - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianSword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenShovelObsidian  = (new ItemSpade(config.itemIdDwarvenShovelObsidian    - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianShovel").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:obsidianShovel");
+		itemDwarvenPickaxeObsidian = (new ItemPickaxe(config.itemIdDwarvenPickaxeObsidian - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianPickaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:obsidianPickaxe");
+		itemDwarvenAxeObsidian     = (new ItemAxe(config.itemIdDwarvenAxeObsidian         - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianAxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:obsidianAxe");
+		itemDwarvenHoeObsidian     = (new ItemHoe(config.itemIdDwarvenHoeObsidian         - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianHoe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:obsidianHoe");
+		itemDwarvenSwordObsidian   = (new ItemSword(config.itemIdDwarvenSwordObsidian     - 256, enumToolMaterialObsidian)).setUnlocalizedName("obsidianSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:obsidianSword");
 
-		itemDwarvenShovelLapislazuli  = (new ItemDwarvenShovel(config.itemIdDwarvenShovelLapislazuli   - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisShovel").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPickaxeLapislazuli = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeLapislazuli - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisPickaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenAxeLapislazuli     = (new ItemDwarvenAxe(config.itemIdDwarvenAxeLapislazuli         - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisAxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenHoeLapislazuli     = (new ItemDwarvenHoe(config.itemIdDwarvenHoeLapislazuli         - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisHoe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenSwordLapislazuli   = (new ItemDwarvenSword(config.itemIdDwarvenSwordLapislazuli     - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisSword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenShovelLapislazuli  = (new ItemSpade(config.itemIdDwarvenShovelLapislazuli    - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisShovel").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:lapisShovel");
+		itemDwarvenPickaxeLapislazuli = (new ItemPickaxe(config.itemIdDwarvenPickaxeLapislazuli - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisPickaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:lapisPickaxe");
+		itemDwarvenAxeLapislazuli     = (new ItemAxe(config.itemIdDwarvenAxeLapislazuli         - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisAxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:lapisAxe");
+		itemDwarvenHoeLapislazuli     = (new ItemHoe(config.itemIdDwarvenHoeLapislazuli         - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisHoe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:lapisHoe");
+		itemDwarvenSwordLapislazuli   = (new ItemSword(config.itemIdDwarvenSwordLapislazuli     - 256, enumToolMaterialLapislazuli)).setUnlocalizedName("lapisSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:lapisSword");
 
-		itemDwarvenShovelRedstone  = (new ItemDwarvenShovel(config.itemIdDwarvenShovelRedstone   - 256, enumToolMaterialRedstone)).setUnlocalizedName("redShovel").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPickaxeRedstone = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeRedstone - 256, enumToolMaterialRedstone)).setUnlocalizedName("redPickaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenAxeRedstone     = (new ItemDwarvenAxe(config.itemIdDwarvenAxeRedstone         - 256, enumToolMaterialRedstone)).setUnlocalizedName("redAxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenHoeRedstone     = (new ItemDwarvenHoe(config.itemIdDwarvenHoeRedstone         - 256, enumToolMaterialRedstone)).setUnlocalizedName("redHoe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenSwordRedstone   = (new ItemDwarvenSword(config.itemIdDwarvenSwordRedstone     - 256, enumToolMaterialRedstone)).setUnlocalizedName("redSword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenShovelRedstone  = (new ItemSpade(config.itemIdDwarvenShovelRedstone    - 256, enumToolMaterialRedstone)).setUnlocalizedName("redShovel").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:redShovel");
+		itemDwarvenPickaxeRedstone = (new ItemPickaxe(config.itemIdDwarvenPickaxeRedstone - 256, enumToolMaterialRedstone)).setUnlocalizedName("redPickaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:redPickaxe");
+		itemDwarvenAxeRedstone     = (new ItemAxe(config.itemIdDwarvenAxeRedstone         - 256, enumToolMaterialRedstone)).setUnlocalizedName("redAxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:redAxe");
+		itemDwarvenHoeRedstone     = (new ItemHoe(config.itemIdDwarvenHoeRedstone         - 256, enumToolMaterialRedstone)).setUnlocalizedName("redHoe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:redHoe");
+		itemDwarvenSwordRedstone   = (new ItemSword(config.itemIdDwarvenSwordRedstone     - 256, enumToolMaterialRedstone)).setUnlocalizedName("redSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:redSword");
 
-		itemDwarvenBrokenSwordMithril = (new ItemDwarvenParts(config.itemIdDwarvenBrokenSwordMithril - 256)).setUnlocalizedName("mithrilBrokenSword").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenBrokenSwordEbony   = (new ItemDwarvenParts(config.itemIdDwarvenBrokenSwordEbony - 256)).setUnlocalizedName("ebonyBrokenSword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenBrokenSwordMithril = (new Item(config.itemIdDwarvenBrokenSwordMithril - 256)).setUnlocalizedName("mithrilBrokenSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilBrokenSword");
+		itemDwarvenBrokenSwordEbony   = (new Item(config.itemIdDwarvenBrokenSwordEbony   - 256)).setUnlocalizedName("ebonyBrokenSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyBrokenSword");
 
-		itemDwarvenShovelMithril      = (new ItemDwarvenShovel(config.itemIdDwarvenShovelMithril       - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilShovel").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPickaxeMithril     = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeMithril     - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilPickaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenBattleaxeMithril   = (new ItemDwarvenBattleaxe(config.itemIdDwarvenBattleaxeMithril - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilBattleaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenSwordMithril       = (new ItemDwarvenSword(config.itemIdDwarvenSwordMithril         - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilSword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenShovelMithril      = (new ItemDwarvenShovel(config.itemIdDwarvenShovelMithril       - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilShovel").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilShovel");
+		itemDwarvenPickaxeMithril     = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeMithril     - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilPickaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilPickaxe");
+		itemDwarvenBattleaxeMithril   = (new ItemDwarvenBattleaxe(config.itemIdDwarvenBattleaxeMithril - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilBattleaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilBattleaxe");
+		itemDwarvenSwordMithril       = (new ItemDwarvenSword(config.itemIdDwarvenSwordMithril         - 256, enumToolMaterialMithril)).setUnlocalizedName("mithrilSword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilSword");
 
-		itemDwarvenShovelEbony      = (new ItemDwarvenShovel(config.itemIdDwarvenShovelEbony       - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyShovel").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPickaxeEbony     = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeEbony     - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyPickaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenBattleaxeEbony   = (new ItemDwarvenBattleaxe(config.itemIdDwarvenBattleaxeEbony - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyBattleaxe").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenSwordEbony       = (new ItemDwarvenSword(config.itemIdDwarvenSwordEbony         - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonySword").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenShovelEbony      = (new ItemDwarvenShovel(config.itemIdDwarvenShovelEbony       - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyShovel").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyShovel");
+		itemDwarvenPickaxeEbony     = (new ItemDwarvenPickaxe(config.itemIdDwarvenPickaxeEbony     - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyPickaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyPickaxe");
+		itemDwarvenBattleaxeEbony   = (new ItemDwarvenBattleaxe(config.itemIdDwarvenBattleaxeEbony - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonyBattleaxe").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyBattleaxe");
+		itemDwarvenSwordEbony       = (new ItemDwarvenSword(config.itemIdDwarvenSwordEbony         - 256, enumToolMaterialEbony)).setUnlocalizedName("ebonySword").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonySword");
 
-		itemDwarvenHelmetMithril = (new ItemDwarvenArmor(config.itemIdDwarvenHelmetMithril - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 0)).setUnlocalizedName("mithrilHelmet").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPlateMithril  = (new ItemDwarvenArmor(config.itemIdDwarvenPlateMithril  - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 1)).setUnlocalizedName("mithrilPlate").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenLegsMithril   = (new ItemDwarvenArmor(config.itemIdDwarvenLegsMithril   - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 2)).setUnlocalizedName("mithrilLegs").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenBootMithril   = (new ItemDwarvenArmor(config.itemIdDwarvenBootMithril   - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 3)).setUnlocalizedName("mithrilBoot").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenHelmetMithril = (new ItemDwarvenArmor(config.itemIdDwarvenHelmetMithril - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 0)).setUnlocalizedName("mithrilHelmet").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilHelmet");
+		itemDwarvenPlateMithril  = (new ItemDwarvenArmor(config.itemIdDwarvenPlateMithril  - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 1)).setUnlocalizedName("mithrilPlate").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilPlate");
+		itemDwarvenLegsMithril   = (new ItemDwarvenArmor(config.itemIdDwarvenLegsMithril   - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 2)).setUnlocalizedName("mithrilLegs").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilLegs");
+		itemDwarvenBootMithril   = (new ItemDwarvenArmor(config.itemIdDwarvenBootMithril   - 256, enumArmorMaterialMithril, DwarvenTools.proxy.addArmor("MithrilArmor"), 3)).setUnlocalizedName("mithrilBoot").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:mithrilBoot");
 
-		itemDwarvenHelmetEbony = (new ItemDwarvenArmor(config.itemIdDwarvenHelmetEbony - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 0)).setUnlocalizedName("ebonyHelmet").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenPlateEbony  = (new ItemDwarvenArmor(config.itemIdDwarvenPlateEbony  - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 1)).setUnlocalizedName("ebonyPlate").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenLegsEbony   = (new ItemDwarvenArmor(config.itemIdDwarvenLegsEbony   - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 2)).setUnlocalizedName("ebonyLegs").setCreativeTab(Config.tabDwarvenTools);
-		itemDwarvenBootEbony   = (new ItemDwarvenArmor(config.itemIdDwarvenBootEbony   - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 3)).setUnlocalizedName("ebonyBoot").setCreativeTab(Config.tabDwarvenTools);
+		itemDwarvenHelmetEbony = (new ItemDwarvenArmor(config.itemIdDwarvenHelmetEbony - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 0)).setUnlocalizedName("ebonyHelmet").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyHelmet");
+		itemDwarvenPlateEbony  = (new ItemDwarvenArmor(config.itemIdDwarvenPlateEbony  - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 1)).setUnlocalizedName("ebonyPlate").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyPlate");
+		itemDwarvenLegsEbony   = (new ItemDwarvenArmor(config.itemIdDwarvenLegsEbony   - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 2)).setUnlocalizedName("ebonyLegs").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyLegs");
+		itemDwarvenBootEbony   = (new ItemDwarvenArmor(config.itemIdDwarvenBootEbony   - 256, enumArmorMaterialEbony, DwarvenTools.proxy.addArmor("EbonyArmor"), 3)).setUnlocalizedName("ebonyBoot").setCreativeTab(Config.tabDwarvenTools).func_111206_d("rgn.dwarventools:ebonyBoot");
 
 		MinecraftForge.setToolClass(itemDwarvenShovelObsidian,    "shovel", 1);
 		MinecraftForge.setToolClass(itemDwarvenShovelLapislazuli, "shovel", 2);

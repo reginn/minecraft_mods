@@ -61,15 +61,6 @@ public class RecipeRegistry
 
 	private void addRecipeOthers()
 	{
-		/*
-		GameRegistry.addRecipe(
-			new ItemStack(Block.netherBrick, 1),
-				new Object[]
-				{
-					"NN","NN",
-					Character.valueOf('N'), Block.netherrack
-				});
-		*/
 		GameRegistry.addRecipe(
 			new ItemStack(DwarvenBlock.blockInfernalFurnace, 1),
 				new Object[]
@@ -78,16 +69,6 @@ public class RecipeRegistry
 					Character.valueOf('N'), Block.netherBrick
 				});
 
-		// delete recipe, for minecraft 1.5
-		/*
-		GameRegistry.addRecipe(
-			new ItemStack(DwarvenBlock.blockDwarvenOreStorage, 1, 0),
-				new Object[]
-				{
-					"XXX", "XXX", "XXX",
-					Character.valueOf('X'), Item.redstone
-				});
-		*/
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(Item.redstone, 9),
 				 new Object[]

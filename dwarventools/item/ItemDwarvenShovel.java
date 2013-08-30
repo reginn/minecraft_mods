@@ -23,7 +23,7 @@ public class ItemDwarvenShovel extends ItemDwarvenTool
 
 	public boolean canHarvestBlock(Block par1Block)
 	{
-		return ForgeHooks.isToolEffective(new ItemStack(Item.shovelSteel), par1Block, 0);
+		return ForgeHooks.isToolEffective(new ItemStack(Item.shovelIron), par1Block, 0);
 	}
 
 }

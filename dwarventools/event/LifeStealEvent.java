@@ -44,7 +44,7 @@ public class LifeStealEvent implements IForgeEvent
 
 					enchLv = enchLv > this.lifeSteal.getMaxLevel() ? this.lifeSteal.getMaxLevel() : enchLv;
 
-					int absorbAmount = (int)(entityLiving.getMaxHealth() * this.absorbRatio[enchLv - 1]);
+					int absorbAmount = (int)(entityLiving.func_110138_aP() * this.absorbRatio[enchLv - 1]);
 
 					if (!world.isRemote)
 					{

@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -56,10 +56,10 @@ public class BlockInfernalFurnace extends BlockContainer
 	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.blockIcon = null;
-		this.topIcon   = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_top");
-		this.sideIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_side");
-		this.frontIcon = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_front");
-		this.idleIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockInfernalFurnace_burning");
+		this.topIcon   = par1IconRegister.registerIcon("rgn.dwarventools:blockInfernalFurnace_top");
+		this.sideIcon  = par1IconRegister.registerIcon("rgn.dwarventools:blockInfernalFurnace_side");
+		this.frontIcon = par1IconRegister.registerIcon("rgn.dwarventools:blockInfernalFurnace_front");
+		this.idleIcon  = par1IconRegister.registerIcon("rgn.dwarventools:blockInfernalFurnace_burning");
 	}
 
 	@Override
@@ -123,7 +123,7 @@ public class BlockInfernalFurnace extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving entityliving, ItemStack itemstack)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityliving, ItemStack itemstack)
 	{
 		int playerdir = MathHelper.floor_double((double)(entityliving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
@@ -166,7 +166,7 @@ public class BlockInfernalFurnace extends BlockContainer
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		return side == 0 ? this.topIcon : (side == 1 ? this.topIcon : ( side == 3 ? this.frontIcon : this.sideIcon));
 	}
@@ -305,7 +305,7 @@ public class BlockInfernalFurnace extends BlockContainer
 	@Override
 	public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
 	{
-		return Container.func_94526_b((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
+		return Container.calcRedstoneFromInventory((IInventory)par1World.getBlockTileEntity(par2, par3, par4));
 	}
 
 }

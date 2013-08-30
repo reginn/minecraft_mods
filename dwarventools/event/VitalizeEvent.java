@@ -24,7 +24,7 @@ public class VitalizeEvent implements IForgeEvent
 	{
 		Entity       entity = event.entity;
 		DamageSource source = event.source;
-		int         ammount = event.ammount;
+		float       ammount = event.ammount;
 		World         world = entity.worldObj;
 
 		if (entity instanceof EntityPlayer && source.getEntity() != null)
@@ -37,7 +37,7 @@ public class VitalizeEvent implements IForgeEvent
 				int enchLv = UniqueEnchantmentHelper.getUniqueEnchantmentLv(torso, this.vitalize);
 				enchLv = enchLv > this.vitalize.getMaxLevel() ? this.vitalize.getMaxLevel() : enchLv;
 
-				if (player.getHealth() <= player.getMaxHealth() / 2)
+				if (player.func_110143_aJ() <= player.func_110138_aP() / 2)
 				{
 					if (world.rand.nextInt(100) < 35 - (enchLv * 5))
 					{

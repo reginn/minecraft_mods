@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
@@ -16,6 +17,7 @@ import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
 public class GuiInfernalFurnace extends GuiContainer
 {
 	private TileEntityInfernalFurnace furnaceInventory;
+	private static final ResourceLocation INFERNUL_FURNACE_GUI = new ResourceLocation("textures/gui/container/furnace.png");
 
 	public GuiInfernalFurnace(InventoryPlayer par1InventoryPlayer, TileEntityInfernalFurnace par2TileEntityInfernalFurnace)
 	{
@@ -34,7 +36,7 @@ public class GuiInfernalFurnace extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/gui/furnace.png");
+		this.mc.func_110434_K().func_110577_a(INFERNUL_FURNACE_GUI);
 		int var5 = (this.width - this.xSize) / 2;
 		int var6 = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);

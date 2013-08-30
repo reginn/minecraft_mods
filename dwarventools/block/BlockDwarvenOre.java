@@ -32,13 +32,13 @@ public class BlockDwarvenOre extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.mithrilIcon = par1IconRegister.registerIcon("rgn/dwarventools:mithrilOre");
-		this.ebonyIcon   = par1IconRegister.registerIcon("rgn/dwarventools:ebonyOre");
+		this.mithrilIcon = par1IconRegister.registerIcon("rgn.dwarventools:mithrilOre");
+		this.ebonyIcon   = par1IconRegister.registerIcon("rgn.dwarventools:ebonyOre");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		return meta == 0 ? this.mithrilIcon : this.ebonyIcon;
 	}

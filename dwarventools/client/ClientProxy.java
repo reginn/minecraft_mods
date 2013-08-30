@@ -1,16 +1,17 @@
 package rgn.mods.dwarventools.client;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import net.minecraftforge.client.MinecraftForgeClient;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.core.CommonProxy;
+import rgn.mods.dwarventools.tileentity.TileEntityInfernalFurnace;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
@@ -29,13 +30,6 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void registerTextures()
-	{
-		//MinecraftForgeClient.preloadTexture("/rgn/sprites/dwarventools/items.png");
-		//MinecraftForgeClient.preloadTexture("/rgn/sprites/dwarventools/blocks.png");
-	}
-
-	@Override
 	public World getClientWorld()
 	{
 		return FMLClientHandler.instance().getClient().theWorld;
@@ -46,4 +40,16 @@ public class ClientProxy extends CommonProxy
 	{
 		this.effectRenderer.spawnCustomParticle(world, entity, particleId);
 	}
+
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	{
+		TileEntityInfernalFurnace tileentity = (TileEntityInfernalFurnace)world.getBlockTileEntity(x, y, z);
+		if (tileentity != null && ID == Config.guiIdInfernalFurnace)
+		{
+			return (new GuiInfernalFurnace(player.inventory, tileentity));
+		}
+		return null;
+	}
+
 }

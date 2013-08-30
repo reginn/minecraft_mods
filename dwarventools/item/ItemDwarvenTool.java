@@ -2,28 +2,20 @@ package rgn.mods.dwarventools.item;
 
 import java.util.Set;
 
-import org.bouncycastle.util.Strings;
-
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemDwarvenTool extends ItemTool
 {
-	private int rangeLevel;
-
-	public class Coord
+	protected class Coord
 	{
 		int x;
 		int y;
@@ -40,23 +32,15 @@ public class ItemDwarvenTool extends ItemTool
 	protected ItemDwarvenTool(int itemId, int baseDamage, EnumToolMaterial material, Block[] harvestBlocks)
 	{
 		super(itemId, 0, material, harvestBlocks);
-		this.rangeLevel = (material == DwarvenItem.enumToolMaterialMithril ? 1 : (material == DwarvenItem.enumToolMaterialEbony ? 1 : 0));
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon(String.format("rgn/dwarventools:%s", Strings.split(this.getUnlocalizedName(), '.')[1]));
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 		int metadata = world.getBlockMetadata(x, y, z);
 
-		if (this.rangeLevel == 0 || !this.canHarvestBlock(Block.blocksList[blockId]))
+		if (!this.canHarvestBlock(Block.blocksList[blockId]))
 		{
 			return true;
 		}
@@ -70,7 +54,7 @@ public class ItemDwarvenTool extends ItemTool
 		return false;
 	}
 
-	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		int facing = BlockPistonBase.determineOrientation(world, x, y, z, (EntityPlayer)entityliving);
 
@@ -79,7 +63,7 @@ public class ItemDwarvenTool extends ItemTool
 		itemstack.damageItem(sumDamage, entityliving);
 	}
 
-	private int destroy(int facing, World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private int destroy(int facing, World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		Set<Coord> targetsSet;
 

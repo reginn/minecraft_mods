@@ -83,10 +83,10 @@ public class ForgeChestHooks
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.recordWard),    1, 1, 3));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.record11),      1, 1, 3));
 
-		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.lightStoneDust),   4, 32, 30));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.glowstone),        4, 32, 30));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.netherStalkSeeds), 1,  4, 20));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.emerald),          1,  4,  5));
 		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.diamond),          1,  2,  5));
-		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.field_94583_ca),   4, 16, 20));
+		ChestGenHooks.addItem(DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(Item.netherQuartz),   4, 16, 20));
 	}
 }

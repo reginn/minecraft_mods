@@ -38,7 +38,7 @@ public class CriticalStrikeEvent implements IForgeEvent
 				EntityLiving entityLiving = (EntityLiving)target;
 
 				int enchLv = UniqueEnchantmentHelper.getUniqueEnchantmentLv(equippedItem, this.critical);
-				float baseDamage = equippedItem.getItem().getDamageVsEntity(target);
+				float baseDamage = equippedItem.getItem().getDamageVsEntity(target, equippedItem);
 
 				enchLv = enchLv > this.critical.getMaxLevel() ? this.critical.getMaxLevel() : enchLv;
 

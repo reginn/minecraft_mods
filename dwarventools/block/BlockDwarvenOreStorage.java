@@ -36,9 +36,9 @@ public class BlockDwarvenOreStorage extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.redstoneIcon = par1IconRegister.registerIcon("rgn/dwarventools:blockRedstone");
-		this.mithrilIcon  = par1IconRegister.registerIcon("rgn/dwarventools:blockMithril");
-		this.ebonyIcon    = par1IconRegister.registerIcon("rgn/dwarventools:blockEbony");
+		this.redstoneIcon = par1IconRegister.registerIcon("rgn.dwarventools:blockRedstone");
+		this.mithrilIcon  = par1IconRegister.registerIcon("rgn.dwarventools:blockMithril");
+		this.ebonyIcon    = par1IconRegister.registerIcon("rgn.dwarventools:blockEbony");
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BlockDwarvenOreStorage extends Block
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		return meta == 0 ? this.redstoneIcon : meta == 1 ? this.mithrilIcon : this.ebonyIcon;
 	}

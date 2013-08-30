@@ -12,6 +12,7 @@ import rgn.mods.dwarventools.block.DwarvenBlock;
 import rgn.mods.dwarventools.config.Config;
 import rgn.mods.dwarventools.config.OreDictRegistry;
 import rgn.mods.dwarventools.core.CommonProxy;
+import rgn.mods.dwarventools.core.DwarvenCraftingHandler;
 import rgn.mods.dwarventools.core.LocalizationRegistry;
 import rgn.mods.dwarventools.core.RecipeRegistry;
 import rgn.mods.dwarventools.enchantment.DwarvenEnchantment;
@@ -25,7 +26,7 @@ import rgn.mods.dwarventools.network.PacketHandler;
 (
 	modid   = "DwarvenTools",
 	name    = "DwarvenTools",
-	version = "4.1.4"
+	version = "5.0.0"
 )
 @NetworkMod
 (
@@ -44,26 +45,26 @@ public class DwarvenTools
 
 	Config config = new Config();
 
-	@Mod.PreInit
+	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.buildConfiguration(event.getSuggestedConfigurationFile());
-	}
 
-	@Mod.Init
-	public void init(FMLInitializationEvent event)
-	{
 		DwarvenBlock.configure(config);
 		DwarvenItem.configure(config);
 		DwarvenEnchantment.configure(config);
 
 		(new ForgeEventRegistry()).registerEvent();
 
-		proxy.registerTextures();
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 
 		GameRegistry.registerWorldGenerator(new DwarvenWorldGenerator());
+		GameRegistry.registerCraftingHandler(new DwarvenCraftingHandler());
+	}
 
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 		(new OreDictRegistry()).register();
 		(new ForgeChestHooks()).addLoot();
 		(new LocalizationRegistry()).addLocalization();

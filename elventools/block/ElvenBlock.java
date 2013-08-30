@@ -30,12 +30,12 @@ public class ElvenBlock
 		EBONY_LADDER_RENDER_TYPE = ElvenTools.proxy.getUniqueRenderType();
 
 		blockEbonyLog     = (new BlockEbonyLog(config.blockIdEbonyLog        )).setUnlocalizedName("blockEbonyLog").setCreativeTab(Config.tabElvenTools);
-		blockEbonyLeaves  = (new BlockEbonyLeaves(config.blockIdEbonyLeaves  )).setUnlocalizedName("blockEbonyLeaves").setCreativeTab(Config.tabElvenTools);
-		blockEbonySapling = (new BlockEbonySapling(config.blockIdEbonySapling)).setUnlocalizedName("blockEbonySapling").setCreativeTab(Config.tabElvenTools);
-		blockEbonyWood    = (new BlockEbonyWood(config.blockIdEbonyWood      )).setUnlocalizedName("blockEbonyWood").setCreativeTab(Config.tabElvenTools);
+		blockEbonyLeaves  = (new BlockEbonyLeaves(config.blockIdEbonyLeaves  )).setUnlocalizedName("blockEbonyLeaves").setCreativeTab(Config.tabElvenTools).func_111022_d("rgn.elventools:ebonyLeaves");
+		blockEbonySapling = (new BlockEbonySapling(config.blockIdEbonySapling)).setUnlocalizedName("blockEbonySapling").setCreativeTab(Config.tabElvenTools).func_111022_d("rgn.elventools:ebonySapling");
+		blockEbonyWood    = (new BlockEbonyWood(config.blockIdEbonyWood      )).setUnlocalizedName("blockEbonyWood").setCreativeTab(Config.tabElvenTools).func_111022_d("rgn.elventools:ebonyPlank");;
 
-		blockRope            = (new BlockRope(config.blockIdRope)).setUnlocalizedName("blockRope.nouses");
-		blockRopeEstablisher = (new BlockRopeEstablisher(config.blockIdRopeEstablisher)).setUnlocalizedName("blockRopeEstablisher");
+		blockRope            = (new BlockRope(config.blockIdRope)).setUnlocalizedName("blockRope.nouses").func_111022_d("rgn.elventools:rope");
+		blockRopeEstablisher = (new BlockRopeEstablisher(config.blockIdRopeEstablisher)).setUnlocalizedName("blockRopeEstablisher").func_111022_d("rgn.elventools:rope");
 
 		blockEbonyLadder = (new BlockEbonyLadder(config.blockIdEbonyLadder)).setUnlocalizedName("blockEbonyLadder").setCreativeTab(Config.tabElvenTools);
 

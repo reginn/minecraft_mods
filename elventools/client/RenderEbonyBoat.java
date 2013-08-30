@@ -7,12 +7,14 @@ import net.minecraft.client.model.ModelBoat;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 
 import rgn.mods.elventools.entity.EntityEbonyBoat;
 
 public class RenderEbonyBoat extends Render
 {
 	protected ModelBase modelBoat;
+	private static final ResourceLocation EBONY_BOAT_TEXTURE = new ResourceLocation("rgn.elventools", "/textures/model/EbonyBoat.png");
 
 	public RenderEbonyBoat()
 	{
@@ -36,13 +38,25 @@ public class RenderEbonyBoat extends Render
 		float f4 = 0.75F;
 		GL11.glScalef(f4, f4, f4);
 		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
-		loadTexture("/mods/rgn/elventools/textures/model/EbonyBoat.png");
+		this.func_110777_b(entity);
 		GL11.glScalef(-1F, -1F, 1.0F);
 		modelBoat.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 	}
 
-	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
+	protected ResourceLocation func_110781_a(EntityEbonyBoat entityEbonyBoat)
+	{
+		return EBONY_BOAT_TEXTURE;
+	}
+
+	@Override
+	protected ResourceLocation func_110775_a(Entity entity)
+	{
+		return this.func_110781_a((EntityEbonyBoat)entity);
+	}
+
+	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1)
+	{
 		this.renderBoat((EntityEbonyBoat)entity, d, d1, d2, f, f1);
 	}
 }

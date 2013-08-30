@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
@@ -16,6 +17,7 @@ import rgn.mods.elventools.inventory.ContainerSeedBag;
 public class GuiSeedBag extends GuiContainer
 {
 	private EntityPlayer player;
+	private static final ResourceLocation GUI_RESOURCE_LOCATION = new ResourceLocation("textures/gui/container/dispenser.png");
 
 	public GuiSeedBag(World world, EntityPlayer player, ItemStack itemStack)
 	{
@@ -41,7 +43,7 @@ public class GuiSeedBag extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture("/gui/trap.png");
+		mc.func_110434_K().func_110577_a(GUI_RESOURCE_LOCATION);
 		int l = width - xSize >> 1;
 		int i1 = height - ySize >> 1;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);

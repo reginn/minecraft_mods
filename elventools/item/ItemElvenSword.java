@@ -1,6 +1,5 @@
 package rgn.mods.elventools.item;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,12 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemElvenSword extends ItemSword
 {
-	private int   weaponDamage;
+	private float weaponDamage;
 	private final EnumToolMaterial toolMaterial;
 
 	public ItemElvenSword(int itemId, EnumToolMaterial material)
@@ -22,15 +18,8 @@ public class ItemElvenSword extends ItemSword
 		super(itemId, material);
 		this.toolMaterial = material;
 		this.maxStackSize = 1;
-		this.weaponDamage = 4 + material.getDamageVsEntity();
+		this.weaponDamage = 4.0f + material.getDamageVsEntity();
 		this.setMaxDamage(material.getMaxUses());
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilSword");
 	}
 
 	@Override

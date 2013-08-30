@@ -27,14 +27,14 @@ public class BlockEbonyLog extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_Side");
-		this.topIcon  = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_top");
-		this.sideIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyWood_side");
+		this.blockIcon = par1IconRegister.registerIcon("rgn.elventools:ebonyWood_Side");
+		this.topIcon   = par1IconRegister.registerIcon("rgn.elventools:ebonyWood_top");
+		this.sideIcon  = par1IconRegister.registerIcon("rgn.elventools:ebonyWood_side");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int metadata)
+	public Icon getIcon(int side, int metadata)
 	{
 		if (side == 1 || side == 0)
 		{

@@ -3,12 +3,8 @@ package rgn.mods.elventools.block;
 import java.util.Random;
 
 import net.minecraft.block.BlockFlower;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.generate.WorldGenEbonyTree;
 
@@ -23,13 +19,6 @@ public class BlockEbonySapling extends BlockFlower
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonySapling");
-	}
-
-	@Override
 	public void updateTick(World world, int x, int y, int z, Random random)
 	{
 		if (!world.isRemote)
@@ -38,16 +27,7 @@ public class BlockEbonySapling extends BlockFlower
 
 			if (world.getBlockLightValue(x, y + 1, z) >= 9 && random.nextInt(7) == 0)
 			{
-				int metadata = world.getBlockMetadata(x, y, z);
-
-				if ((metadata & 8) == 0)
-				{
-					world.setBlockMetadataWithNotify(x, y, z, metadata | 8, 3);
-				}
-				else
-				{
-					this.growTree(world, x, y, z, random);
-				}
+				this.markOrGrowMarked(world, x, y, z, random);
 			}
 		}
 	}
@@ -67,13 +47,13 @@ public class BlockEbonySapling extends BlockFlower
 		}
 	}
 
-	public void func_96477_c(World world, int x, int y, int z, Random random)
+	public void markOrGrowMarked(World world, int x, int y, int z, Random random)
 	{
 		int metadata = world.getBlockMetadata(x, y, z);
 
 		if ((metadata & 8) == 0)
 		{
-			world.setBlockMetadataWithNotify(x, y, z, metadata | 8, 4);
+			world.setBlockMetadataWithNotify(x, y, z, metadata | 8, 3);
 		}
 		else
 		{

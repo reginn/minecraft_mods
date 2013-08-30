@@ -6,15 +6,11 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.block.ElvenBlock;
 
@@ -47,14 +43,7 @@ public class ItemElvenLumberAxe extends ItemTool
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilAxe");
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 
@@ -72,14 +61,14 @@ public class ItemElvenLumberAxe extends ItemTool
 		return this.toolEffective.contains(block) || block.isWood(world, x, y, z);
 	}
 
-	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		int sumDamage = this.destroy(world, itemstack, blockId, x, y, z, entityliving);
 
 		itemstack.damageItem(sumDamage, entityliving);
 	}
 
-	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		Set<Coord> targetsSet;
 

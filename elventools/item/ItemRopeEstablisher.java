@@ -1,14 +1,10 @@
 package rgn.mods.elventools.item;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.block.ElvenBlock;
 
@@ -17,13 +13,6 @@ public class ItemRopeEstablisher extends Item
 	public ItemRopeEstablisher(int itemId)
 	{
 		super(itemId);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:rope");
 	}
 
 	@Override

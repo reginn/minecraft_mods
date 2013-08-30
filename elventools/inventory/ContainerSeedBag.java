@@ -7,22 +7,18 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import net.minecraftforge.common.IPlantable;
-
-import rgn.mods.elventools.inventory.InventorySeedBag;
-
 public class ContainerSeedBag extends Container
 {
 	public  InventorySeedBag inventorySeedBag;
 	private IInventory inventoryPlayer;
 	private World      world;
-	
+
 	public ContainerSeedBag(World world, EntityPlayer player, ItemStack itemStack)
 	{
 		this.inventorySeedBag = new InventorySeedBag(itemStack);
 		this.inventoryPlayer  = player.inventory;
 		this.world            = world;
-				
+
 		for (int col = 0; col < 3; ++col)
 		{
 			for (int row = 0; row < 3; ++row)
@@ -30,7 +26,7 @@ public class ContainerSeedBag extends Container
 				this.addSlotToContainer(new SlotSeed(this.inventorySeedBag, row + col * 3, 62 + row * 18, 17 + col * 18));
 			}
 		}
-		
+
 		for (int col = 0; col < 3; ++col)
 		{
 			for (int row = 0; row < 9; ++row)
@@ -43,21 +39,21 @@ public class ContainerSeedBag extends Container
 		{
 			this.addSlotToContainer(new Slot(this.inventoryPlayer, row, 8 + row * 18, 142));
 		}
-		
+
 	}
-	
+
 	public void onGuiClosed()
 	{
 		this.inventorySeedBag.closeChest();
 	}
-	
+
 	@Override
-	public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{
-		super.onCraftGuiClosed(par1EntityPlayer);
+		super.onContainerClosed(par1EntityPlayer);
 		this.inventorySeedBag.closeChest();
 	}
-	
+
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
@@ -89,7 +85,7 @@ public class ContainerSeedBag extends Container
 			{
 				return null;
 			}
-			
+
 			if (temp.stackSize == 0)
 			{
 				slot.putStack(null);

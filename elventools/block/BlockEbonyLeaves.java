@@ -6,16 +6,12 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IShearable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 {
@@ -28,14 +24,6 @@ public class BlockEbonyLeaves extends BlockLeavesBase implements IShearable
 		this.setLightOpacity(1);
 		this.setStepSound(soundGrassFootstep);
 		this.setTickRandomly(true);
-	}
-
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:ebonyLeaves");
 	}
 
 	@Override

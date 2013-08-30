@@ -59,26 +59,25 @@ public class ElvenItem
 		itemSteelBow         = (new ItemSteelBow(config.itemIdSteelBow         - 256, EnumElvenBowType.STEEL    )).setChargeSpeedRatio(0.5F).setUnlocalizedName("itemSteelBow").setCreativeTab(Config.tabElvenTools);
 		itemElvenBow         = (new ItemElvishBow(config.itemIdElvenBow        - 256, EnumElvenBowType.ELVEN    )).setChargeSpeedRatio(2.0F).setUnlocalizedName("itemElvenBow").setCreativeTab(Config.tabElvenTools);
 
-		itemEbonyStick = (new ItemElvenParts(config.itemIdEbonyStick - 256)).setUnlocalizedName("itemEbonyStick").setCreativeTab(Config.tabElvenTools);
+		itemEbonyStick = (new Item(config.itemIdEbonyStick - 256)).setUnlocalizedName("itemEbonyStick").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:itemEbonyStick");
+		itemTorchArrow = (new Item(config.itemIdTorchArrow - 256)).setUnlocalizedName("itemTorchArrow").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:itemTorchArrow");
+		itemRopeArrow  = (new Item(config.itemIdRopeArrow  - 256)).setUnlocalizedName("itemRopeArrow").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:itemRopeArrow");
 
-		itemEbonyBoat = (new ItemEbonyBoat(config.itemIdEbonyBoat - 256)).setUnlocalizedName("itemEbonyBoat").setCreativeTab(Config.tabElvenTools);
+		itemEbonyBoat = (new ItemEbonyBoat(config.itemIdEbonyBoat - 256)).setUnlocalizedName("itemEbonyBoat").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:itemEbonyBoat");
 
-		itemTorchArrow = (new ItemElvenParts(config.itemIdTorchArrow  - 256)).setUnlocalizedName("itemTorchArrow").setCreativeTab(Config.tabElvenTools);
-		itemRopeArrow  = (new ItemElvenParts(config.itemIdRopeArrow   - 256)).setUnlocalizedName("itemRopeArrow").setCreativeTab(Config.tabElvenTools);
+		itemRopeEstablisher = (new ItemRopeEstablisher(config.itemIdRopeEstablisher - 256)).setUnlocalizedName("itemRopeEstablisher").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:rope");
 
-		itemRopeEstablisher = (new ItemRopeEstablisher(config.itemIdRopeEstablisher - 256)).setUnlocalizedName("itemRopeEstablisher").setCreativeTab(Config.tabElvenTools);
+		itemElvenShovelMithril  = (new ItemElvenShovel(config.itemIdElvenShovelMithril   - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenShovelMithril").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:mithrilShovel");
+		itemElvenPickaxeMithril = (new ItemElvenPickaxe(config.itemIdElvenPickaxeMithril - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenPickaxeMithril").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:mithrilPickaxe");
+		itemElvenAxeMithril     = (new ItemElvenAxe(config.itemIdElvenAxeMithril         - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenAxeMithril").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:mithrilAxe");
+		itemElvenSwordMithril   = (new ItemElvenSword(config.itemIdElvenSwordMithril     - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenSwordMithril").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:mithrilSword");
 
-		itemElvenShovelMithril  = (new ItemElvenShovel(config.itemIdElvenShovelMithril   - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenShovelMithril").setCreativeTab(Config.tabElvenTools);
-		itemElvenPickaxeMithril = (new ItemElvenPickaxe(config.itemIdElvenPickaxeMithril - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenPickaxeMithril").setCreativeTab(Config.tabElvenTools);
-		itemElvenAxeMithril     = (new ItemElvenAxe(config.itemIdElvenAxeMithril         - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenAxeMithril").setCreativeTab(Config.tabElvenTools);
-		itemElvenSwordMithril   = (new ItemElvenSword(config.itemIdElvenSwordMithril     - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenSwordMithril").setCreativeTab(Config.tabElvenTools);
+		itemElvenSickle    = (new ItemElvenSickle(config.itemIdElvenSickle - 256,       enumToolMaterialMithril)).setUnlocalizedName("itemElvenSickle").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:elvenSickle");
+		itemElvenLumberAxe = (new ItemElvenLumberAxe(config.itemIdElvenLumberAxe - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenLumberAxe").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:mithrilAxe");
 
-		itemElvenSickle    = (new ItemElvenSickle(config.itemIdElvenSickle - 256,       enumToolMaterialMithril)).setUnlocalizedName("itemElvenSickle").setCreativeTab(Config.tabElvenTools);
-		itemElvenLumberAxe = (new ItemElvenLumberAxe(config.itemIdElvenLumberAxe - 256, enumToolMaterialMithril)).setUnlocalizedName("itemElvenLumberAxe").setCreativeTab(Config.tabElvenTools);
+		itemElvenSeedBag = (new ItemElvenSeedBag(config.itemIdElvenSeedBag - 256)).setUnlocalizedName("itemSeedBag").setCreativeTab(Config.tabElvenTools).func_111206_d("rgn.elventools:itemSeedBag");
 
-		itemElvenSeedBag = (new ItemElvenSeedBag(config.itemIdElvenSeedBag - 256)).setUnlocalizedName("itemSeedBag").setCreativeTab(Config.tabElvenTools);
-
-		MinecraftForge.setToolClass(itemElvenShovelMithril, "shovel", 0);
+		MinecraftForge.setToolClass(itemElvenShovelMithril, "shovel",   0);
 		MinecraftForge.setToolClass(itemElvenPickaxeMithril, "pickaxe", 2);
 		MinecraftForge.setToolClass(itemElvenAxeMithril, "axe", 0);
 

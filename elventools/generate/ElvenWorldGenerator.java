@@ -14,7 +14,7 @@ public class ElvenWorldGenerator implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
 	{
-		if (world.getWorldInfo().getDimension() == 0 || world.getWorldInfo().getDimension() > 1)
+		if (world.getWorldInfo().getVanillaDimension() == 0 || world.getWorldInfo().getVanillaDimension() > 1)
 		{
 			this.generateSurface(world, random, chunkX << 4, chunkZ << 4);
 		}

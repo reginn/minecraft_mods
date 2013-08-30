@@ -6,7 +6,6 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -45,13 +44,6 @@ public class ItemElvenSeedBag extends Item
 	{
 		super(itemId);
 		this.setMaxStackSize(1);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:itemSeedBag");
 	}
 
 	@Override

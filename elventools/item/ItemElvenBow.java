@@ -10,6 +10,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
@@ -21,7 +22,7 @@ import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemElvenBow extends Item
+public class ItemElvenBow extends ItemBow
 {
 	@SideOnly(Side.CLIENT)
 	protected Icon[] animation;
@@ -51,11 +52,11 @@ public class ItemElvenBow extends Item
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
+	public void registerIcons(IconRegister par1IconRegister)
 	{
 		this.bowType.createIcon(par1IconRegister);
 		this.animation = new Icon[3];
-		this.iconIndex = this.bowType.getBaseIcon();
+		this.itemIcon  = this.bowType.getBaseIcon();
 		this.animation = this.bowType.getAnimation();
 	}
 

@@ -1,6 +1,5 @@
 package rgn.mods.elventools.item;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,21 +8,11 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemElvenAxe extends ItemAxe
 {
 	public ItemElvenAxe(int itemId, EnumToolMaterial material)
 	{
 		super(itemId, material);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilAxe");
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,9 +15,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import rgn.mods.elventools.entity.EntityEbonyBoat;
 
 public class ItemEbonyBoat extends Item
@@ -28,14 +24,6 @@ public class ItemEbonyBoat extends Item
 		super(itemId);
 		this.maxStackSize = 3;
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:itemEbonyBoat");
-	}
-
 
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
@@ -54,7 +42,7 @@ public class ItemEbonyBoat extends Item
 		float var20 = var14 * var16;
 		double var21 = 5.0D;
 		Vec3 var23 = var13.addVector((double)var18 * var21, (double)var17 * var21, (double)var20 * var21);
-		MovingObjectPosition var24 = par2World.rayTraceBlocks_do(var13, var23, true);
+		MovingObjectPosition var24 = par2World.clip(var13, var23, true);
 
 		if (var24 == null)
 		{

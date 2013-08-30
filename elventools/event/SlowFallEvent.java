@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -24,7 +24,7 @@ public class SlowFallEvent implements IForgeEvent
 	@ForgeSubscribe
 	public void doSlowFall(LivingEvent.LivingUpdateEvent event)
 	{
-		EntityLiving entityLiving = event.entityLiving;
+		EntityLivingBase entityLiving = event.entityLiving;
 
 		if (entityLiving instanceof EntityPlayer)
 		{
@@ -50,7 +50,7 @@ public class SlowFallEvent implements IForgeEvent
 	@ForgeSubscribe
 	public void canceledDamage(LivingFallEvent event)
 	{
-		EntityLiving entityLiving = event.entityLiving;
+		EntityLivingBase entityLiving = event.entityLiving;
 
 		if (this.slowFallEntitySet.contains(entityLiving.entityId))
 		{

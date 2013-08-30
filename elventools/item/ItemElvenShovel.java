@@ -1,6 +1,5 @@
 package rgn.mods.elventools.item;
 
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,9 +8,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class ItemElvenShovel extends ItemSpade
 {
 	public ItemElvenShovel(int itemId, EnumToolMaterial material)
@@ -19,12 +15,6 @@ public class ItemElvenShovel extends ItemSpade
 		super(itemId, material);
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:mithrilShovel");
-	}
 	@Override
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer entityplayer)
 	{

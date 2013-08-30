@@ -1,7 +1,7 @@
 package rgn.mods.elventools.entity;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -21,7 +21,7 @@ public class EntityRopeArrow extends EntityElvenArrow
 		super(world, x, y, z);
 	}
 
-	public EntityRopeArrow(World world, EntityLiving player, float par3)
+	public EntityRopeArrow(World world, EntityLivingBase player, float par3)
 	{
 		super(world, player, par3);
 	}

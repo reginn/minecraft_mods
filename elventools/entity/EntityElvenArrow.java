@@ -3,13 +3,10 @@ package rgn.mods.elventools.entity;
 import java.util.Iterator;
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.common.registry.IThrowableEntity;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,6 +16,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.common.registry.IThrowableEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityElvenArrow extends Entity implements IProjectile, IThrowableEntity
 {
@@ -55,8 +56,8 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 		this.setPosition(x, y, z);
 		this.yOffset = 0.0F;
 	}
-	
-	public EntityElvenArrow(World world, EntityLiving player, float par3)
+
+	public EntityElvenArrow(World world, EntityLivingBase player, float par3)
 	{
 		super(world);
 		this.shootingEntity = player;
@@ -65,7 +66,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 		{
 			this.canBePickedUp = 1;
 		}
-		
+
 		this.setSize(0.5F, 0.5F);
 		this.setLocationAndAngles(player.posX, player.posY + (double)player.getEyeHeight(), player.posZ, player.rotationYaw, player.rotationPitch);
 		this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
@@ -84,7 +85,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 	{
 		this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
 	}
-	
+
 	// implements IProjectile
 	@Override
 	public void setThrowableHeading(double motionX, double motionY, double motionZ, float par7, float par8)
@@ -107,13 +108,13 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 		this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(motionY, (double)var10) * 180.0D / Math.PI);
 		this.ticksInGround = 0;
 	}
-	
+
 	// implements IThrowableEntity
 	public Entity getThrower()
 	{
 		return this.shootingEntity;
 	}
-	
+
 	public void setThrower(Entity entity)
 	{
 		if (entity != null && entity instanceof EntityPlayer)
@@ -121,7 +122,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 			this.shootingEntity = entity;
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int par9)
@@ -334,7 +335,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
 			var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			
+
 			this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
 			for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
@@ -359,7 +360,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 
 			this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
 			this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
-			
+
 			float var23 = 0.99F;
 			var11 = 0.05F;
 
@@ -518,7 +519,7 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 			this.ticksInAir = 0;
 		}
 	}
-	
+
 	protected boolean tryPlaceBlock()
 	{
 		return true;
@@ -528,5 +529,5 @@ public class EntityElvenArrow extends Entity implements IProjectile, IThrowableE
 	{
 		return true;
 	}
-	
+
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -29,9 +29,9 @@ public class BindEvent implements IForgeEvent
 	@ForgeSubscribe
 	public void onBindSet(LivingHurtEvent event)
 	{
-		EntityLiving       target = event.entityLiving;
-		DamageSource damageSource = event.source;
-		World               world = target.worldObj;
+		EntityLivingBase       target = event.entityLiving;
+		DamageSource     damageSource = event.source;
+		World                   world = target.worldObj;
 
 		if (damageSource.getEntity() instanceof EntityPlayer && damageSource.getSourceOfDamage() instanceof EntityArrow)
 		{
@@ -49,7 +49,7 @@ public class BindEvent implements IForgeEvent
 	@ForgeSubscribe
 	public void doBind(LivingEvent.LivingUpdateEvent event)
 	{
-		EntityLiving target = event.entityLiving;
+		EntityLivingBase target = event.entityLiving;
 
 		if (target != null && bindEntityMap.containsKey(target.entityId))
 		{

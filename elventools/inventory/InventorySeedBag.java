@@ -156,15 +156,15 @@ public class InventorySeedBag implements IInventory
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
 		if (this.items[i] != null)
-        {
-            ItemStack is = this.items[i];
-            this.items[i] = null;
-            return is;
-        }
-        else
-        {
-            return null;
-        }
+		{
+			ItemStack is = this.items[i];
+			this.items[i] = null;
+			return is;
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	public ItemStack getSeedBag()
@@ -185,22 +185,13 @@ public class InventorySeedBag implements IInventory
 	}
 
 	@Override
-
-	/**
-	 * If this returns false, the inventory name will be used as an unlocalized name, and translated into the player's
-	 * language. Otherwise it will be used directly.
-	 */
 	public boolean isInvNameLocalized()
 	{
 		return false;
 	}
 
 	@Override
-
-	/**
-	 * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
-	 */
-	public boolean isStackValidForSlot(int i, ItemStack itemstack)
+	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
 		return false;
 	}

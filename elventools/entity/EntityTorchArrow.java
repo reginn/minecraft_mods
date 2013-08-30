@@ -1,7 +1,7 @@
 package rgn.mods.elventools.entity;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -20,7 +20,7 @@ public class EntityTorchArrow extends EntityElvenArrow
 		super(world, x, y, z);
 	}
 
-	public EntityTorchArrow(World world, EntityLiving player, float par3)
+	public EntityTorchArrow(World world, EntityLivingBase player, float par3)
 	{
 		super(world, player, par3);
 	}

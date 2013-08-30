@@ -1,22 +1,17 @@
 package rgn.mods.elventools.item;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 
 import net.minecraftforge.common.IPlantable;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemElvenSickle extends ItemTool
 {
@@ -27,6 +22,7 @@ public class ItemElvenSickle extends ItemTool
 		};
 
 	private Set<Block> toolEffective = Sets.newHashSet(blocksEffectiveAgainst);
+	private Set<Block> ignores = Sets.newHashSet(Block.waterlily);
 
 	public class Coord
 	{
@@ -48,14 +44,7 @@ public class ItemElvenSickle extends ItemTool
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void updateIcons(IconRegister par1IconRegister)
-	{
-		this.iconIndex = par1IconRegister.registerIcon("rgn/elventools:elvenSickle");
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	public boolean onBlockDestroyed(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		itemstack.damageItem(1, entityliving);
 
@@ -73,14 +62,19 @@ public class ItemElvenSickle extends ItemTool
 		return this.toolEffective.contains(block) || block instanceof IPlantable;
 	}
 
-	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private boolean igonoreBlock(Block block)
+	{
+		return this.ignores.contains(block);
+	}
+
+	private void destroyAroundBlock(ItemStack itemstack, World world, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		int sumDamage = this.destroy(world, itemstack, blockId, x, y, z, entityliving);
 
 		itemstack.damageItem(sumDamage, entityliving);
 	}
 
-	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLiving entityliving)
+	private int destroy(World world, ItemStack itemstack, int blockId, int x, int y, int z, EntityLivingBase entityliving)
 	{
 		Set<Coord> targetsSet;
 
@@ -91,30 +85,27 @@ public class ItemElvenSickle extends ItemTool
 			return 0;
 		}
 
-		Iterator iter = targetsSet.iterator();
-		Coord target;
-		int targetBlockId;
-		int targetBlockMetadata;
 		int damage = 0;
-		while(iter.hasNext())
-		{
-			target = (Coord)iter.next();
-			targetBlockId = world.getBlockId(target.x, target.y, target.z);
-			targetBlockMetadata = world.getBlockMetadata(target.x, target.y, target.z);
 
-			if (Block.blocksList[targetBlockId] == Block.bedrock)
+		for (Coord target : targetsSet)
+		{
+			Block block = Block.blocksList[world.getBlockId(target.x, target.y, target.z)];
+			int metadata = world.getBlockMetadata(target.x, target.y, target.z);
+
+			if (block == Block.bedrock)
 			{
 				continue ;
 			}
-
-			if (!world.isAirBlock(target.x, target.y, target.z) && this.isToolEffective(Block.blocksList[targetBlockId]))
+			if (!world.isAirBlock(target.x, target.y, target.z) &&
+				this.isToolEffective(block) &&
+				!this.igonoreBlock(block))
 			{
-				Block.blocksList[targetBlockId].dropBlockAsItemWithChance(world, target.x, target.y, target.z, targetBlockMetadata, 1.0F, 0);
-				world.setBlock(target.x, target.y, target.z, 0);
-
+				block.dropBlockAsItemWithChance(world, target.x, target.y, target.z, metadata, 1.0F, 0);
+				world.setBlockToAir(target.x, target.y, target.z);
 				++damage;
 			}
 		}
+
 		return damage;
 	}
 

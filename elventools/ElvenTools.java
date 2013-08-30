@@ -25,7 +25,7 @@ import rgn.mods.elventools.network.PacketHandler;
 (
 	modid   = "ElvenTools",
 	name    = "ElvenTools",
-	version = "4.1.3"
+	version = "5.0.0"
 )
 @NetworkMod
 (
@@ -44,13 +44,13 @@ public class ElvenTools
 
 	Config config = new Config();
 
-	@Mod.PreInit
+	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		config.buildConfiguration(event.getSuggestedConfigurationFile());
 	}
 
-	@Mod.Init
+	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		ElvenBlock.configure(config);
@@ -69,7 +69,6 @@ public class ElvenTools
 		(new OreDictRegistry()).register();
 		(new RecipeRegistry()).addRecipe();
 		(new LocalizationRegistry()).addLocalization();
-
 	}
 
 

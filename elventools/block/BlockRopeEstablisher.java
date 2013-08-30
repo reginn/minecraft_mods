@@ -4,13 +4,10 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import rgn.mods.elventools.item.ElvenItem;
 
@@ -28,14 +25,7 @@ public class BlockRopeEstablisher extends Block
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister)
-	{
-		this.blockIcon = par1IconRegister.registerIcon("rgn/elventools:rope");
-	}
-
-	@Override
-	public boolean isLadder(World world, int x, int y, int z)
+	public boolean isLadder(World world, int x, int y, int z, EntityLivingBase entity)
 	{
 		return true;
 	}
@@ -78,17 +68,6 @@ public class BlockRopeEstablisher extends Block
 			for (; world.isAirBlock(x, y - 1, z) && y - 1 >= 0; y--)
 			{
 				world.setBlock(x, y - 1, z, ElvenBlock.blockRope.blockID);
-				System.out.printf("g()=>%f, k()=>%d, e()=>%f, h()=>%f, a()=>%d, f()=>%f, j()=%d, b()=>%d\n",
-						this.blockIcon.getMinV(),
-						this.blockIcon.getSheetHeight(),
-						this.blockIcon.getMinU(),
-						this.blockIcon.getMaxV(),
-						this.blockIcon.getOriginX(),
-						this.blockIcon.getMaxU(),
-						this.blockIcon.getSheetWidth(),
-						this.blockIcon.getOriginY());
-
-				System.out.println(this.blockIcon.getClass().getName());
 			}
 		}
 	}

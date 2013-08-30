@@ -2,11 +2,12 @@ package rgn.mods.ozen;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -36,33 +37,28 @@ public class BlockOzen extends BlockContainer
 
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
-	private String[] textureName = new String[]
-		{
-			"wood", "wood_spruce", "wood_birch", "blockIron", "blockIron", "blockIron", "blockGold"
-		};
 
 	public BlockOzen(int blockId)
 	{
 		super(blockId, Material.wood);
 		this.blockHardness = 0.3F;
 		this.setCreativeTab(Ozen.tabOzen);
+		this.icons = new Icon[7];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-
-	/**
-	 * When this method is called, your block should register all the icons it needs with the given IconRegister. This is
-	 * the only chance you get to register icons.
-	 */
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.icons = new Icon[textureName.length];
-		for (int i = 0; i < textureName.length; ++i)
-		{
-			this.icons[i] = par1IconRegister.registerIcon(textureName[i]);
-		}
+		this.icons[0] = Block.planks.getIcon(0, 0);
+		this.icons[1] = Block.planks.getIcon(0, 1);
+		this.icons[2] = Block.planks.getIcon(0, 2);
+		this.icons[3] = Block.blockIron.getBlockTextureFromSide(0);
+		this.icons[4] = Block.blockIron.getBlockTextureFromSide(0);
+		this.icons[5] = Block.blockIron.getBlockTextureFromSide(0);
+		this.icons[6] = Block.blockGold.getBlockTextureFromSide(0);
 	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int blockID, CreativeTabs creativeTabs, List list)
@@ -82,12 +78,12 @@ public class BlockOzen extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess world, int x, int y, int z, int side)
 	{
-		return this.getBlockTextureFromSideAndMetadata(side, world.getBlockMetadata(x, y, z));
+		return this.getIcon(side, world.getBlockMetadata(x, y, z));
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int side, int meta)
+	public Icon getIcon(int side, int meta)
 	{
 		this.blockIcon = this.icons[meta & 7];
 		return this.blockIcon;
@@ -178,7 +174,7 @@ public class BlockOzen extends BlockContainer
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving player, ItemStack itemstack)
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemstack)
 	{
 		int playerdir = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 0x03;
 		byte facing = 0;

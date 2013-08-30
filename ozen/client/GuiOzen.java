@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,6 +17,8 @@ public class GuiOzen extends GuiContainer
 {
 	private IInventory inventory;
 	private TileEntityOzen ozen;
+
+	private final static ResourceLocation GUI_RESOURCE_LOCATION = new ResourceLocation("rgn.ozen", "textures/gui/GUI_ozen.png");
 
 	public GuiOzen(IInventory iinventory, TileEntityOzen tileEntityOzen)
 	{
@@ -36,7 +39,7 @@ public class GuiOzen extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		mc.renderEngine.bindTexture("/mods/rgn/ozen/textures/gui/ozen.png");
+		mc.renderEngine.func_110577_a(GUI_RESOURCE_LOCATION);
 		int l = width - xSize >> 1;
 		int i1 = height - ySize >> 1;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);

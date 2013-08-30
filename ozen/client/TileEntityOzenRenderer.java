@@ -1,22 +1,20 @@
 package rgn.mods.ozen.client;
 
-import java.lang.reflect.Method;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
@@ -25,7 +23,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeDirection;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,28 +33,6 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 {
 	private Minecraft     mc = FMLClientHandler.instance().getClient();
 	private RenderBlocks  blockrender;
-	private static Method method;
-
-	static
-	{
-		try
-		{
-			String methodName = ObfuscationReflectionHelper.remapFieldNames("ItemRenderer.class", new String[]{"renderItemIn2D"})[0];
-			method =
-				(net.minecraft.client.renderer.ItemRenderer.class).getDeclaredMethod(
-					methodName,
-					new Class[]
-					{
-						net.minecraft.client.renderer.Tessellator.class,
-						Float.TYPE, Float.TYPE, Float.TYPE, Float.TYPE, Integer.TYPE, Integer.TYPE, Float.TYPE
-					});
-			method.setAccessible(true);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
 
 	public TileEntityOzenRenderer()
 	{
@@ -134,7 +109,7 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 			}
 			else if (this.isBlock(itemstack))
 			{
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("/terrain.png"));
+				this.func_110628_a(TextureMap.field_110575_b);
 				float blockBias = 0.25F;
 				int renderType = Block.blocksList[itemstack.itemID].getRenderType();
 				if (renderType == 1 || renderType == 19 || renderType == 12 || renderType == 2)
@@ -154,12 +129,12 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 				if (this.isItemBlock(itemstack))
 				{
 					icon = Block.blocksList[itemstack.itemID].getBlockTextureFromSide(0);
-					GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("/terrain.png"));
+					this.func_110628_a(TextureMap.field_110575_b);
 				}
 				else
 				{
 					icon = itemstack.getItem().getIconFromDamage(itemstack.getItemDamage());
-					GL11.glBindTexture(GL11.GL_TEXTURE_2D, ModLoader.getMinecraftInstance().renderEngine.getTexture("/gui/items.png"));
+					this.func_110628_a(TextureMap.field_110576_c);
 				}
 
 				if (itemstack.getItem().requiresMultipleRenderPasses())
@@ -232,20 +207,7 @@ public class TileEntityOzenRenderer extends TileEntitySpecialRenderer
 			GL11.glPushMatrix();
 			GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(-0.5F, -0.3F, 0.03125F);
-			try
-			{
-				method.invoke(
-					RenderManager.instance.itemRenderer,
-						new Object[]
-						{
-							tessellator, Float.valueOf(f4), Float.valueOf(f5), Float.valueOf(f3), Float.valueOf(f6),
-							Integer.valueOf(icon.getSheetWidth()), Integer.valueOf(icon.getSheetHeight()), Float.valueOf(0.0625F)
-						});
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
+			ItemRenderer.renderItemIn2D(tessellator, f4, f5, f3, f6, icon.getOriginX(), icon.getOriginY(), 0.0625F);
 			GL11.glPopMatrix();
 		}
 		else

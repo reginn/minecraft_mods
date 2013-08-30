@@ -28,7 +28,7 @@ public class BlockLamp extends Block
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
-		this.blockIcon = Block.cauldron.func_94375_b("cauldron_inner");
+		this.blockIcon = Block.cauldron.func_94375_b("inner");
 	}
 
 	@Override

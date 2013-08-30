@@ -26,10 +26,10 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 
 	private void refreshIcon()
 	{
-		this.frameIcon   = Block.cauldron.func_94375_b("cauldron_inner");
+		this.frameIcon   = Block.cauldron.func_94375_b("inner");
 		this.torchIcon   = Block.torchWood.getBlockTextureFromSide(0);
 		this.glassIcon   = Block.glass.getBlockTextureFromSide(0);
-		this.steelIcon   = Block.blockSteel.getBlockTextureFromSide(0);
+		this.steelIcon   = Block.blockIron.getBlockTextureFromSide(0);
 		this.goldIcon    = Block.blockGold.getBlockTextureFromSide(0);
 		this.diamondIcon = Block.blockDiamond.getBlockTextureFromSide(0);
 	}
@@ -228,27 +228,27 @@ public class LampRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, icon);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, icon);
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);

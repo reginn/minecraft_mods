@@ -1,17 +1,16 @@
 package rgn.mods.lamp;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
-public class ItemLamp extends ItemBlock
+public class ItemLamp extends ItemBlockWithMetadata
 {
 	private int blockID;
 
-	public ItemLamp(int itemId)
+	public ItemLamp(int itemId, Block block)
 	{
-		super(itemId);
-		setMaxDamage(0);
-		setHasSubtypes(true);
+		super(itemId, block);
 	}
 
 	@Override
@@ -43,12 +42,6 @@ public class ItemLamp extends ItemBlock
 		}
 
 		return (new StringBuilder()).append(this.getUnlocalizedName()).append(".").append(str).toString();
-	}
-
-	@Override
-	public int getMetadata(int par1)
-	{
-		return par1;
 	}
 
 }

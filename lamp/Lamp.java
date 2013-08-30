@@ -20,7 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 (
 	modid   = "Lamp",
 	name    = "Lamp",
-	version = "4.0.2"
+	version = "5.0.0"
 )
 @NetworkMod
 (
@@ -44,7 +44,7 @@ public class Lamp
 
 	public static final CreativeTabs tabLamp = new CreativeTabLamp("lamp");
 
-	@Mod.PreInit
+	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
@@ -65,11 +65,7 @@ public class Lamp
 		{
 			cfg.save();
 		}
-	}
 
-	@Mod.Init
-	public void init(FMLInitializationEvent event)
-	{
 		lampRenderType = proxy.getUniqueRenderType();
 
 		blockLamp  = (new BlockLamp(blockIdLamp)).setUnlocalizedName("blockLamp");
@@ -78,7 +74,11 @@ public class Lamp
 		proxy.registerRenderers();
 		GameRegistry.registerBlock(blockLamp, ItemLamp.class, "blockLamp");
 		GameRegistry.registerBlock(blockLight, "blockLight");
+	}
 
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 		(new RecipeRegistry()).addRecipe();
 		(new LocalizationRegistry()).addLocalization();
 	}

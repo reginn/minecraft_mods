@@ -22,7 +22,7 @@ import rgn.util.TranslationRegistry;
 (
 	modid   = "Toolrack",
 	name    = "Toolrack",
-	version = "2.0.0"
+	version = "3.0.0"
 )
 @NetworkMod
 (
@@ -46,7 +46,7 @@ public class Toolrack
 
 	public static final CreativeTabs tabToolrack = new CreativeTabToolrack("Toolrack");
 
-	@Mod.PreInit
+	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
@@ -63,19 +63,20 @@ public class Toolrack
 		{
 			cfg.save();
 		}
-	}
 
-	@Mod.Init
-	public void load(FMLInitializationEvent event)
-	{
 		RENDER_TYPE_TOOLRACK = proxy.getUniqueRenderType();
 		blockToolrack = (new BlockToolrack(blockIdToolrack)).setUnlocalizedName("blockToolrack").setCreativeTab(tabToolrack);
 		GameRegistry.registerBlock(blockToolrack, ItemToolrack.class, "Toolrack");
+	}
 
-		GameRegistry.registerTileEntity(TileEntityToolrack.class, "Toolrack");
-
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 		proxy.registerRenderer();
 		proxy.registerTileEntitySpecialRenderer();
+		(new RecipeRegistry()).addRecipe();
+
+		GameRegistry.registerTileEntity(TileEntityToolrack.class, "Toolrack");
 
 		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 0), "Ork Toolrack",    "オークのツールラック");
 		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 1), "Spruce Toolrack", "松のツールラック");
@@ -84,8 +85,6 @@ public class Toolrack
 		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 4), "Black Toolrack",  "黒ツールラック");
 		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 5), "Red Toolrack",    "赤ツールラック");
 		TranslationRegistry.addLocalization(new ItemStack(blockToolrack, 1, 6), "White Toolrack",  "白ツールラック");
-
-		(new RecipeRegistry()).addRecipe();
 
 	}
 

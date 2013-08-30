@@ -19,24 +19,24 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 {
 	private Icon[] icons = new Icon[]
 		{
-			Block.planks.getBlockTextureFromSideAndMetadata(0, 0),
-			Block.planks.getBlockTextureFromSideAndMetadata(0, 1),
-			Block.planks.getBlockTextureFromSideAndMetadata(0, 2),
-			Block.planks.getBlockTextureFromSideAndMetadata(0, 3),
-			Block.blockSteel.getBlockTextureFromSide(0),
-			Block.blockSteel.getBlockTextureFromSide(0),
-			Block.blockSteel.getBlockTextureFromSide(0)
+			Block.planks.getIcon(0, 0),
+			Block.planks.getIcon(0, 1),
+			Block.planks.getIcon(0, 2),
+			Block.planks.getIcon(0, 3),
+			Block.blockIron.getBlockTextureFromSide(0),
+			Block.blockIron.getBlockTextureFromSide(0),
+			Block.blockIron.getBlockTextureFromSide(0)
 		};
 
 	private void refreshIcon()
 	{
-		icons[0] = Block.planks.getBlockTextureFromSideAndMetadata(0, 0);
-		icons[1] = Block.planks.getBlockTextureFromSideAndMetadata(0, 1);
-		icons[2] = Block.planks.getBlockTextureFromSideAndMetadata(0, 2);
-		icons[3] = Block.planks.getBlockTextureFromSideAndMetadata(0, 3);
-		icons[4] = Block.blockSteel.getBlockTextureFromSide(0);
-		icons[5] = Block.blockSteel.getBlockTextureFromSide(0);
-		icons[6] = Block.blockSteel.getBlockTextureFromSide(0);
+		icons[0] = Block.planks.getIcon(0, 0);
+		icons[1] = Block.planks.getIcon(0, 1);
+		icons[2] = Block.planks.getIcon(0, 2);
+		icons[3] = Block.planks.getIcon(0, 3);
+		icons[4] = Block.blockIron.getBlockTextureFromSide(0);
+		icons[5] = Block.blockIron.getBlockTextureFromSide(0);
+		icons[6] = Block.blockIron.getBlockTextureFromSide(0);
 	}
 
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
@@ -182,27 +182,27 @@ public class ToolrackRenderingHandler implements ISimpleBlockRenderingHandler
 		renderer.setRenderBoundsFromBlock(block);
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, -1F, 0.0F);
-		renderer.renderBottomFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		renderer.renderTopFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, -1F);
-		renderer.renderEastFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		renderer.renderWestFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(-1F, 0.0F, 0.0F);
-		renderer.renderNorthFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		renderer.renderSouthFace(block, 0.0D, 0.0D, 0.0D, icons);
+		renderer.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, icons);
 		tessellator.draw();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
